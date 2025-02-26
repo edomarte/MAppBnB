@@ -1,0 +1,100 @@
+@model IEnumerable<MAppBnB.Person>
+
+@{
+    ViewData["Title"] = "Index";
+    var documents = ViewData["DocumentList"] as List<Document>;
+
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.birth_place)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.birth_province)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.birth_country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone_prefix)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone_number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleRelation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DocumentID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.birth_place)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.birth_province)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.birth_country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone_prefix)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone_number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleRelation)
+                </td>
+                <td>
+                <td>
+                    @Html.DisplayFor(modelItem => documents.Find(x => x.id == item.DocumentID).SerialNumber)
+                </td>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

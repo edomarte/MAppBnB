@@ -1,0 +1,90 @@
+@model PersonBookingViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Booking.CheckinDateTime" class="control-label"></label>
+                <input asp-for="Booking.CheckinDateTime" class="form-control" />
+                <span asp-validation-for="Booking.CheckinDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.CheckOutDateTime" class="control-label"></label>
+                <input asp-for="Booking.CheckOutDateTime" class="form-control" />
+                <span asp-validation-for="Booking.CheckOutDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.PaymentDate" class="control-label"></label>
+                <input asp-for="Booking.PaymentDate" class="form-control" />
+                <span asp-validation-for="Booking.PaymentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.IsPaid" class="control-label"></label>
+                <input asp-for="Booking.IsPaid" class="form-control" />
+                <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.BookingChannel" class="control-label"></label>
+                <input asp-for="Booking.BookingChannel" class="form-control" />
+                <span asp-validation-for="Booking.BookingChannel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.AccommodationID" class="control-label"></label>
+                <input asp-for="Booking.AccommodationID" class="form-control" />
+                <span asp-validation-for="Booking.AccommodationID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.RoomID" class="control-label"></label>
+                <input asp-for="Booking.RoomID" class="form-control" />
+                <span asp-validation-for="Booking.RoomID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.Price" class="control-label"></label>
+                <input asp-for="Booking.Price" class="form-control" />
+                <span asp-validation-for="Booking.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.Discount" class="control-label"></label>
+                <input asp-for="Booking.Discount" class="form-control" />
+                <span asp-validation-for="Booking.Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    
+    </div>
+    <div class="col-md-4">
+    <p>
+        <label>Title: <input type="text" name="SearchPerson" id="SearchPerson" />Search Guests to Add to the Booking</label>
+        <input type="button" id="sendButton" value="Search Person" />
+        <ul id="ResultList"></ul>
+        <input type="button" id="addSelectedButton" value="Add selected guests to booking" />
+
+    </p>
+    <p>
+        <label>Title: <input type="text" name="SelectedPersons" id="SelectedPersons" />Persons on the Booking</label>
+        <ul id="PersonsOnBookingList"></ul>
+        <input type="button" id="removeSelectedButton" value="Remove selected guests form booking" />
+    </p>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/searchPerson.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

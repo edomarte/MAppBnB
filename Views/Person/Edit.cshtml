@@ -1,0 +1,123 @@
+@model PersonDocumentViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Person</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Person.id" />
+            <div class="form-group">
+                <label asp-for="Person.Name" class="control-label"></label>
+                <input asp-for="Person.Name" class="form-control" />
+                <span asp-validation-for="Person.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.Surname" class="control-label"></label>
+                <input asp-for="Person.Surname" class="form-control" />
+                <span asp-validation-for="Person.Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.BirthDate" class="control-label"></label>
+                <input asp-for="Person.BirthDate" class="form-control" />
+                <span asp-validation-for="Person.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.birth_place" class="control-label"></label>
+                <input asp-for="Person.birth_place" class="form-control" />
+                <span asp-validation-for="Person.birth_place" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.birth_province" class="control-label"></label>
+                <input asp-for="Person.birth_province" class="form-control" />
+                <span asp-validation-for="Person.birth_province" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.birth_country" class="control-label"></label>
+                <input asp-for="Person.birth_country" class="form-control" />
+                <span asp-validation-for="Person.birth_country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.phone_prefix" class="control-label"></label>
+                <input asp-for="Person.phone_prefix" class="form-control" />
+                <span asp-validation-for="Person.phone_prefix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.phone_number" class="control-label"></label>
+                <input asp-for="Person.phone_number" class="form-control" />
+                <span asp-validation-for="Person.phone_number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.email" class="control-label"></label>
+                <input asp-for="Person.email" class="form-control" />
+                <span asp-validation-for="Person.email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.RoleRelation" class="control-label"></label>
+                <input asp-for="Person.RoleRelation" class="form-control" />
+                <span asp-validation-for="Person.RoleRelation" class="text-danger"></span>
+            </div>
+            <p>Documents</p>
+            <input type="hidden" asp-for="Document.id" />
+            <div class="form-group
+            <div class=" form-group">
+                <label asp-for="Document.SerialNumber" class="control-label"></label>
+                <input asp-for="Document.SerialNumber" class="form-control" />
+                <span asp-validation-for="Document.SerialNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Document.IssuedBy" class="control-label"></label>
+                <input asp-for="Document.IssuedBy" class="form-control" />
+                <span asp-validation-for="Document.IssuedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Document.IssuedDate" class="control-label"></label>
+                <input asp-for="Document.IssuedDate" class="form-control" />
+                <span asp-validation-for="Document.IssuedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Document.IssuingCountry" class="control-label"></label>
+                <input asp-for="Document.IssuingCountry" class="form-control" />
+                <span asp-validation-for="Document.IssuingCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PdfCopyPath" class="control-label"></label>
+                <input type="file" accept="application/pdf" asp-for="PdfCopyPath" class="form-control" />
+                <span asp-validation-for="PdfCopyPath" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Document.PdfCopy" class="form-control" />
+            <input type="hidden" asp-for="Document.PersonID" class="form-control" />
+            <div class="form-group">
+                <label>Is PDF copy uploaded?</label>
+                @if (@Model.Document != null && @Model.Document.PdfCopy != null)
+                {
+                    <p>Yes</p>
+                    <a onclick="return confirm('Are you sure you want to delete this document?');" asp-controller="Document" asp-action="DeletePDFCopy" asp-route-id="@Model.Document.id">Delete PDF Copy</a>
+                }
+                else
+                {
+                    <p>No</p>
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

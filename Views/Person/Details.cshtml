@@ -1,0 +1,117 @@
+@model PersonDocumentViewModel
+
+@{
+    ViewData["Title"] = "Details";
+
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Person</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.Surname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.BirthDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.BirthDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.birth_place)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.birth_place)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.birth_province)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.birth_province)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.birth_country)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.birth_country)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.phone_prefix)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.phone_prefix)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.phone_number)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.phone_number)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.RoleRelation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.RoleRelation)
+        </dd>
+        <p>ID Document</p>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document.SerialNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Document.SerialNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document.IssuedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Document.IssuedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document.IssuedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Document.IssuedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document.IssuingCountry)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Document.IssuingCountry)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document.PdfCopy)
+        </dt>
+        <dd class="col-sm-10">
+            @if (@Model.Document != null && @Model.Document.PdfCopy != null)
+            {
+                <a asp-action="DownloadFile" asp-controller="Document" asp-route-id="@Model?.Document.id">Download</a>
+            }
+            else
+            {
+                <p>Document not uploaded.</p>
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Person.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,74 @@
+@model MAppBnB.Booking
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="CheckinDateTime" class="control-label"></label>
+                <input asp-for="CheckinDateTime" class="form-control" />
+                <span asp-validation-for="CheckinDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CheckOutDateTime" class="control-label"></label>
+                <input asp-for="CheckOutDateTime" class="form-control" />
+                <span asp-validation-for="CheckOutDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentDate" class="control-label"></label>
+                <input asp-for="PaymentDate" class="form-control" />
+                <span asp-validation-for="PaymentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsPaid" class="control-label"></label>
+                <input asp-for="IsPaid" class="form-control" />
+                <span asp-validation-for="IsPaid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingChannel" class="control-label"></label>
+                <input asp-for="BookingChannel" class="form-control" />
+                <span asp-validation-for="BookingChannel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccommodationID" class="control-label"></label>
+                <input asp-for="AccommodationID" class="form-control" />
+                <span asp-validation-for="AccommodationID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomID" class="control-label"></label>
+                <input asp-for="RoomID" class="form-control" />
+                <span asp-validation-for="RoomID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discount" class="control-label"></label>
+                <input asp-for="Discount" class="form-control" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
