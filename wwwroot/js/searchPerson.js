@@ -29,27 +29,48 @@ connection.start().then(function () {
 document.getElementById("sendButton").addEventListener("click", function (event) {
     document.getElementById("ResultList").innerHTML = "";
     var personName = document.getElementById("SearchPerson").value;
-    connection.invoke("SearchPerson", personName).catch(function (err) {
+    connection.invoke("SearchPerson", personName,getPersonsInBooking()).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
 });
 
+function getPersonsInBooking(){
+    var list=document.getElementById("PersonsOnBookingList");
+    var persons=list.getElementsByTagName("li");
+    var personIds=[];
+    for (var i = 0; i < persons.length; ++i) {
+        let person = persons[i];
+        let checkbox=person.getElementsByTagName("input")[0];
+        personIds.push(checkbox.id);
+      }
+    return personIds;
+}
+
 document.getElementById("addSelectedButton").addEventListener("click", function (event) {
-    var searchResultChildren=document.getElementById("PersonsOnBookingList").children;
-    searchResultChildren.forEach(child => {
-        if(child.children[0].children[0].checked){ // if checkbox checked, add to the other list
-            /*var li = document.createElement("li");
-            var label = document.createElement("label");
-            label.innerText = child.children[0].children[0].innerText;
-            var hiddenInput = document.createElement("input");
-            hiddenInput.type = "hidden";
-            hiddenInput.name = "PersonIds";
-            hiddenInput.value = child.children[0].children[0].id;
-            label.appendChild(hiddenInput);
-            li.appendChild(label);
-            document.getElementById("PersonsOnBookingList").appendChild(li);*/
-    }});
+    var list=document.getElementById("ResultList");
+    var persons=list.getElementsByTagName("li");
+    for (var i = 0; i < persons.length; ++i) {
+        let person = persons[i];
+        let checkbox=person.getElementsByTagName("input")[0];
+        if(checkbox.checked){
+            document.getElementById("PersonsOnBookingList").appendChild(person);
+        }
+      }
+
+    event.preventDefault();
+});
+
+document.getElementById("removeSelectedButton").addEventListener("click", function (event) {
+    var list=document.getElementById("PersonsOnBookingList");
+    var persons=list.getElementsByTagName("li");
+    for (var i = 0; i < persons.length; ++i) {
+        let person = persons[i];
+        let checkbox=person.getElementsByTagName("input")[0];
+        if(checkbox.checked){
+            document.getElementById("ResultList").appendChild(person);
+        }
+      }
 
     event.preventDefault();
 });
