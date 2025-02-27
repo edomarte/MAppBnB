@@ -46,9 +46,15 @@ namespace MAppBnB.Controllers
         // GET: Booking/Create
         public async Task<IActionResult> Create()
         {
+            var viewModel = new PersonBookingViewModel
+            {
+                Booking = new Booking(),
+                PersonIDs = ""
+            };
+
             var accomodationNames = await _context.Accommodation.ToListAsync();
             ViewData["AccommodationList"] = accomodationNames;
-            return View();
+            return View(viewModel);
         }
 
         // POST: Booking/Create
@@ -56,15 +62,17 @@ namespace MAppBnB.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,CheckinDateTime,CheckOutDateTime,PaymentDate,IsPaid,BookingChannel,AccommodationID,RoomID,Price,Discount")] Booking booking)
+        public IActionResult Create(PersonBookingViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(booking);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //TODO: ADD LOGIC, Implement BookingPerson, ADD BOoking
+                return View(model);
             }
-            return View(booking);
+
+            // Add your logic to handle the valid model here
+            // For now, let's redirect to the Index action
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Booking/Edit/5

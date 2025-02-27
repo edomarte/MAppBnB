@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>7vwvmf4evm</Fingerprint>
-      <Integrity>3RUL70RIBMXB8kMZ6UOrqx2Y9h74SKQk8NAFjpf7hqI=</Integrity>
+      <Fingerprint>4mvtd1dsck</Fingerprint>
+      <Integrity>tBkkYEa4X2W8DLcnhp2FERtDmzLqsKoIqV7A6ZXLDXw=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\getRooms.js'))</OriginalItemSpec>
@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>143xz0lray</Fingerprint>
-      <Integrity>/16YDi/TV/GTFPScKVwUIqoOS+g2xKzRp2Uy2tuqhsQ=</Integrity>
+      <Fingerprint>i1jx570xl8</Fingerprint>
+      <Integrity>WkBCIPGAvhWxirx3D+J1xnzJW2O+fDuXIKRXAJZG4AY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</OriginalItemSpec>
@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>49hvrsqvxt</Fingerprint>
-      <Integrity>6EuF7ZQ7IraO4mAyblsT5rUzaDbApiFXRumXSTfKTGQ=</Integrity>
+      <Fingerprint>cqu3aupeo3</Fingerprint>
+      <Integrity>rK9Zx8UOZ+yR2hZ9Ov8dBexROapvuO2mE9jAx7ZIquA=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\signalr\dist\browser\signalr.js'))</OriginalItemSpec>

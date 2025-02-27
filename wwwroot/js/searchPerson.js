@@ -1,11 +1,11 @@
 "use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/personSearchHub").build();
+var connectionS = new signalR.HubConnectionBuilder().withUrl("/personSearchHub").build();
 
 //Disable the send button until connection is established.
 document.getElementById("sendButton").disabled = true;
 
-connection.on("ResultList", function (persons) {
+connectionS.on("ResultList", function (persons) {
     persons.forEach(person => {
         var li = document.createElement("li");
         var label = document.createElement("label");
@@ -21,7 +21,7 @@ connection.on("ResultList", function (persons) {
     });
 });
 
-connection.start().then(function () {
+connectionS.start().then(function () {
     document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
     return console.error(err.toString());
@@ -30,7 +30,7 @@ connection.start().then(function () {
 document.getElementById("sendButton").addEventListener("click", function (event) {
     document.getElementById("ResultList").innerHTML = "";
     var personName = document.getElementById("SearchPerson").value;
-    connection.invoke("SearchPerson", personName,getPersonsInBooking()).catch(function (err) {
+    connectionS.invoke("SearchPerson", personName,getPersonsInBooking()).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
@@ -74,4 +74,14 @@ document.getElementById("removeSelectedButton").addEventListener("click", functi
       }
 
     event.preventDefault();
+});
+
+document.getElementById("form").addEventListener("submit", function (event) {
+    var list=document.getElementById("PersonsOnBookingList");
+    var persons=list.getElementsByTagName("li");
+    for (var i = 0; i < persons.length; ++i) {
+        let person = persons[i];
+        let checkbox=person.getElementsByTagName("input")[0];
+        document.getElementById("PersonIDs").value+=checkbox.id+",";
+      }
 });

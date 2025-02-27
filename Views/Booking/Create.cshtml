@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" id="form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Booking.CheckinDateTime" class="control-label"></label>
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
-                <select asp-for="Person.RoleRelation" class="form-control" />
+                <select asp-for="Booking.IsPaid" class="form-control">
                     @foreach(var role in Enum.GetValues(typeof(YesNo))){
                         <option value="@role">@role</option>
                     }
@@ -68,6 +68,9 @@
                 <span asp-validation-for="Booking.Discount" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <input type="hidden" asp-for="PersonIDs" class="form-control" id="PersonIDs"/>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -94,8 +97,8 @@
 </div>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/searchPerson.js"></script>
-<script src="~/js/getRooms.js"></script>
+<script src="~/js/getRooms.js" defer></script>
+<script src="~/js/searchPerson.js" defer></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

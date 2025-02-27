@@ -1,10 +1,10 @@
 "use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/roomSelectorHub").build();
+var connectionR = new signalR.HubConnectionBuilder().withUrl("/roomSelectorHub").build();
 
 //Disable the send button until connection is established.
 
-connection.on("RoomsList", function (rooms) {
+connectionR.on("RoomsList", function (rooms) {
     var roomsSelector=document.getElementById("RoomsSelector");
     roomsSelector.innerHTML="";
     rooms.forEach(room => {
@@ -17,13 +17,13 @@ connection.on("RoomsList", function (rooms) {
 
 function updateRoomList(){
     var selectedAccommodation=document.getElementById("AccommodationsList").value;
-    connection.invoke("RoomSelector", selectedAccommodation).catch(function (err) {
+    connectionR.invoke("RoomSelector", selectedAccommodation).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
 }
 
-connection.start().then(function () {
+connectionR.start().then(function () {
     updateRoomList()
 }).catch(function (err) {
     return console.error(err.toString());

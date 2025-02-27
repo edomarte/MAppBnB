@@ -712,7 +712,6 @@ c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\4x86mnoya0-
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\ttbdko8ond-m9qm4tazc0.gz
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\i1qvncvuzf-jjsuc0puko.gz
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\vujyrk3wcz-9vr69e8ynj.gz
-c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\2kv4t9g0ij-143xz0lray.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\appsettings.Development.json
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\appsettings.json
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\libman.json
@@ -1072,3 +1071,5 @@ c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\MAppBnB.pdb
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\MAppBnB.genruntimeconfig.cache
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\ref\MAppBnB.dll
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\o2pr4r91m7-7vwvmf4evm.gz
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\o2pr4r91m7-4mvtd1dsck.gz
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\2kv4t9g0ij-i1jx570xl8.gz
