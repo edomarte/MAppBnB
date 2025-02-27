@@ -44,8 +44,10 @@ namespace MAppBnB.Controllers
         }
 
         // GET: Booking/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var accomodationNames = await _context.Accommodation.ToListAsync();
+            ViewData["AccommodationList"] = accomodationNames;
             return View();
         }
 

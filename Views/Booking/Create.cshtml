@@ -1,7 +1,8 @@
 @model PersonBookingViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create";   
+    var accommodations=ViewData["AccommodationList"] as List<Accommodation>;
 }
 
 <h1>Create</h1>
@@ -29,7 +30,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
-                <input asp-for="Booking.IsPaid" class="form-control" />
+                <select asp-for="Person.RoleRelation" class="form-control" />
+                    @foreach(var role in Enum.GetValues(typeof(YesNo))){
+                        <option value="@role">@role</option>
+                    }
+                </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -39,12 +44,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Booking.AccommodationID" class="control-label"></label>
-                <input asp-for="Booking.AccommodationID" class="form-control" />
+                <select asp-for="Booking.AccommodationID" class="form-control" id="AccommodationsList">
+                    @foreach(var accommodation in accommodations){
+                        <option value=@accommodation.id>@accommodation.Name</option>
+                    }
+                </select>
                 <span asp-validation-for="Booking.AccommodationID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.RoomID" class="control-label"></label>
-                <input asp-for="Booking.RoomID" class="form-control" />
+                <select asp-for="Booking.RoomID" class="form-control" id="RoomsSelector">
+                </select>
                 <span asp-validation-for="Booking.RoomID" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -85,6 +95,7 @@
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/searchPerson.js"></script>
+<script src="~/js/getRooms.js"></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

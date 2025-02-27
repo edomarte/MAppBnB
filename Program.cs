@@ -34,5 +34,6 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 app.MapHub<PersonSearchHub>("/personSearchHub");
+app.MapHub<RoomSelectorHub>("/roomSelectorHub");
 
 app.Run();

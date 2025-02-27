@@ -12,6 +12,7 @@ connection.on("ResultList", function (persons) {
         label.innerText = person.name+", "+person.surname+","+person.birthDate;
         var checkbox = document.createElement("input");
         checkbox.id = person.id;
+        checkbox.name="selectedPersons";
         checkbox.innerText = person.name;
         checkbox.type = "checkbox";
         label.appendChild(checkbox);
