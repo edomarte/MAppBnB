@@ -6,8 +6,8 @@ public class BookingPerson{
     public int id{get; set;}
 
     [Required]
-    public int ?BookingID{get;set;}
+    public int BookingID{get;set;}
     [Required]
-    public int ?PersonID{get;set;}
+    public int PersonID{get;set;}
     
 }

@@ -11,7 +11,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" id="form"><div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Edit" id="form">
+            <input type="hidden" asp-for="Booking.id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Booking.CheckinDateTime" class="control-label"></label>
                 <input asp-for="Booking.CheckinDateTime" class="form-control" />
@@ -70,7 +72,7 @@
                 <input type="hidden" asp-for="PersonIDs" class="form-control" id="PersonIDs"/>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Edit" class="btn btn-primary" />
             </div>
         </form>
     
@@ -88,7 +90,7 @@
         <ul id="PersonsOnBookingList">
             @foreach(var person in Model.PeopleInBooking)
             {
-                <li><input type="checkbox" id="@person.id" value="@($"{person.Name}, {person.Surname}, {person.birth_date}")" ></li>
+                <li><input type="checkbox" id="@person.id" >@($"{person.Name}, {person.Surname}, {person.BirthDate}")</li>
             }
         </ul>
         <input type="button" id="removeSelectedButton" value="Remove selected guests form booking" />

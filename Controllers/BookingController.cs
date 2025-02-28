@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MAppBnB;
 using MAppBnB.Data;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Xml;
 
 namespace MAppBnB.Controllers
 {
@@ -39,6 +41,12 @@ namespace MAppBnB.Controllers
             {
                 return NotFound();
             }
+
+            var peopleOnBooking = await _context.BookingPerson.Where(x => x.BookingID == id).ToListAsync();
+            var detailsPeopleOnBooking = await _context.Person
+                .Where(p => peopleOnBooking.Select(b => b.PersonID).Contains(p.id))
+                .ToListAsync();
+            ViewData["PeopleOnBooking"] = detailsPeopleOnBooking;
 
             return View(booking);
         }
@@ -81,8 +89,9 @@ namespace MAppBnB.Controllers
                         PersonID = int.Parse(personID)
                     };
                     _context.Add(personBooking);
-                    await _context.SaveChangesAsync();
+
                 }
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
 
             }
@@ -102,21 +111,23 @@ namespace MAppBnB.Controllers
             var viewModel = new PersonBookingViewModel
             {
                 Booking = new Booking(),
-                PersonIDs = ""
+                PersonIDs = "",
+                PeopleInBooking = new List<Person>()
             };
 
-            viewModel.Booking=await _context.Booking.FirstOrDefaultAsync(x => x.id == id);
+            viewModel.Booking = await _context.Booking.FirstOrDefaultAsync(x => x.id == id);
             var bookingPersons = await _context.BookingPerson.Where(x => x.BookingID == id).ToListAsync();
             foreach (var bookingPerson in bookingPersons)
             {
-                viewModel.PeopleInBooking.Append(await _context.Person.FirstOrDefaultAsync(x => x.id == bookingPerson.PersonID));
+                var person = await _context.Person.FirstOrDefaultAsync(x => x.id == bookingPerson.PersonID);
+                viewModel.PeopleInBooking.Add(person);
             }
 
             if (viewModel == null)
             {
                 return NotFound();
             }
-            
+
             var accomodationNames = await _context.Accommodation.ToListAsync();
             ViewData["AccommodationList"] = accomodationNames;
             return View(viewModel);
@@ -127,9 +138,9 @@ namespace MAppBnB.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,CheckinDateTime,CheckOutDateTime,PaymentDate,IsPaid,BookingChannel,AccommodationID,RoomID,Price,Discount")] Booking booking)
+        public async Task<IActionResult> Edit(int id, PersonBookingViewModel model)
         {
-            if (id != booking.id)
+            if (id != model.Booking.id)
             {
                 return NotFound();
             }
@@ -138,12 +149,39 @@ namespace MAppBnB.Controllers
             {
                 try
                 {
-                    _context.Update(booking);
+                    _context.Update(model.Booking);
                     await _context.SaveChangesAsync();
+
+                    // TODO: find a linq way to extract only the ids in the string that are not already in the model.
+                    //var currentbookingPersons = await _context.BookingPerson.Where(x => x.BookingID == model.Booking.id).ToListAsync(); 
+
+                    var bpInList=new List<BookingPerson>();
+                    foreach (var personID in model.PersonIDs.Split(","))
+                    {
+                        if (personID == "") continue;
+
+                        var personBooking = new BookingPerson
+                        {
+                            BookingID = model.Booking.id,
+                            PersonID = int.Parse(personID)
+                        };
+                        bpInList.Add(personBooking);
+
+                        if (!_context.BookingPerson.Any(x => x.BookingID == model.Booking.id && x.PersonID == int.Parse(personID)))
+                        {
+                            _context.BookingPerson.Add(personBooking);
+                        }
+
+                    }
+                    var allPersonInBooking=_context.BookingPerson.Where(x=>x.BookingID==id).ToList();
+                    var bp2beDeleted=allPersonInBooking.Except(bpInList, new BookingPersonComparer()).ToList();
+                    _context.BookingPerson.RemoveRange(bp2beDeleted);
+                    await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookingExists(booking.id))
+                    if (!BookingExists(model.Booking.id))
                     {
                         return NotFound();
                     }
@@ -154,7 +192,7 @@ namespace MAppBnB.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(booking);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Booking/Delete/5
@@ -172,6 +210,12 @@ namespace MAppBnB.Controllers
                 return NotFound();
             }
 
+            var peopleOnBooking = await _context.BookingPerson.Where(x => x.BookingID == id).ToListAsync();
+            var detailsPeopleOnBooking = await _context.Person
+                .Where(p => peopleOnBooking.Select(b => b.PersonID).Contains(p.id))
+                .ToListAsync();
+            ViewData["PeopleOnBooking"] = detailsPeopleOnBooking;
+
             return View(booking);
         }
 
@@ -185,6 +229,8 @@ namespace MAppBnB.Controllers
             {
                 _context.Booking.Remove(booking);
             }
+
+            _context.BookingPerson.RemoveRange(_context.BookingPerson.Where(x => x.BookingID == id));
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

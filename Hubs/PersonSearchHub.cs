@@ -30,21 +30,4 @@ namespace SignalRChat.Hubs
             await Clients.All.SendAsync("ResultList", personsL);
         }
     }
-
-    public class PersonComparer : IEqualityComparer<Person>
-{
-        public bool Equals(Person? x, Person? y)
-        {
-            if (Object.ReferenceEquals(x, y)) return true;
-            if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null)) return false;
-            return x.id==y.id;
-        }
-
-        public int GetHashCode([DisallowNull] Person person)
-        {
-
-        int hashPersonId = person.id == null ? 0 : person.id.GetHashCode();
-        return hashPersonId;
-        }
-    }
 }
