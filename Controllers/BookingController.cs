@@ -62,17 +62,33 @@ namespace MAppBnB.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PersonBookingViewModel model)
+        public async Task<IActionResult> CreateAsync(PersonBookingViewModel model)
         {
             if (ModelState.IsValid)
             {
-                //TODO: ADD LOGIC, Implement BookingPerson, ADD BOoking
-                return View(model);
+                _context.Add(model.Booking);
+                await _context.SaveChangesAsync();
+                var booking = await _context.Booking.FirstOrDefaultAsync(x => x.CheckinDateTime == model.Booking.CheckinDateTime && x.RoomID == model.Booking.RoomID);
+
+
+                foreach (var personID in model.PersonIDs.Split(","))
+                {
+                    if (personID == "") continue;
+
+                    var personBooking = new BookingPerson
+                    {
+                        BookingID = booking.id,
+                        PersonID = int.Parse(personID)
+                    };
+                    _context.Add(personBooking);
+                    await _context.SaveChangesAsync();
+                }
+                return RedirectToAction(nameof(Index));
+
             }
 
-            // Add your logic to handle the valid model here
-            // For now, let's redirect to the Index action
             return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Booking/Edit/5
@@ -83,12 +99,27 @@ namespace MAppBnB.Controllers
                 return NotFound();
             }
 
-            var booking = await _context.Booking.FindAsync(id);
-            if (booking == null)
+            var viewModel = new PersonBookingViewModel
+            {
+                Booking = new Booking(),
+                PersonIDs = ""
+            };
+
+            viewModel.Booking=await _context.Booking.FirstOrDefaultAsync(x => x.id == id);
+            var bookingPersons = await _context.BookingPerson.Where(x => x.BookingID == id).ToListAsync();
+            foreach (var bookingPerson in bookingPersons)
+            {
+                viewModel.PeopleInBooking.Append(await _context.Person.FirstOrDefaultAsync(x => x.id == bookingPerson.PersonID));
+            }
+
+            if (viewModel == null)
             {
                 return NotFound();
             }
-            return View(booking);
+            
+            var accomodationNames = await _context.Accommodation.ToListAsync();
+            ViewData["AccommodationList"] = accomodationNames;
+            return View(viewModel);
         }
 
         // POST: Booking/Edit/5

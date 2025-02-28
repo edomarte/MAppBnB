@@ -8012,11 +8012,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
+      "projectUniqueName": "C:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
       "projectName": "MAppBnB",
-      "projectPath": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
+      "projectPath": "C:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
       "packagesPath": "C:\\Users\\edoma\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\",
+      "outputPath": "C:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\edoma\\AppData\\Roaming\\NuGet\\NuGet.Config"
