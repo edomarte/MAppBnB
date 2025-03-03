@@ -1073,3 +1073,7 @@ c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\o2pr4r91m7-
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\o2pr4r91m7-4mvtd1dsck.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\2kv4t9g0ij-i1jx570xl8.gz
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\2kv4t9g0ij-v486xewcpi.gz
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentFormat.OpenXml.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentFormat.OpenXml.Framework.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\System.IO.Packaging.dll
+C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\x86lmv01z0-n2afecgmtf.gz

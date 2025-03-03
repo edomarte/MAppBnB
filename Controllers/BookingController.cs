@@ -240,5 +240,7 @@ namespace MAppBnB.Controllers
         {
             return _context.Booking.Any(e => e.id == id);
         }
+
+        
     }
 }

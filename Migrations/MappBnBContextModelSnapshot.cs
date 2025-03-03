@@ -158,6 +158,9 @@ namespace MAppBnB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int?>("DocumentType")
+                        .HasColumnType("int");
+
                     b.Property<string>("IssuedBy")
                         .HasColumnType("nvarchar(max)");
 
