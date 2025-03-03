@@ -36,17 +36,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-tBkkYEa4X2W8DLcnhp2FERtDmzLqsKoIqV7A6ZXLDXw="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1103"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022tBkkYEa4X2W8DLcnhp2FERtDmzLqsKoIqV7A6ZXLDXw=\u0022"},{"Name":"Last-Modified","Value":"Thu, 27 Feb 2025 19:38:58 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/searchPerson.i1jx570xl8.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"i1jx570xl8"},{"Name":"integrity","Value":"sha256-WkBCIPGAvhWxirx3D\u002BJ1xnzJW2O\u002BfDuXIKRXAJZG4AY="},{"Name":"label","Value":"_content/MAppBnB/js/searchPerson.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3268"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022WkBCIPGAvhWxirx3D\u002BJ1xnzJW2O\u002BfDuXIKRXAJZG4AY=\u0022"},{"Name":"Last-Modified","Value":"Thu, 27 Feb 2025 20:19:17 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/searchPerson.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-WkBCIPGAvhWxirx3D\u002BJ1xnzJW2O\u002BfDuXIKRXAJZG4AY="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3268"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022WkBCIPGAvhWxirx3D\u002BJ1xnzJW2O\u002BfDuXIKRXAJZG4AY=\u0022"},{"Name":"Last-Modified","Value":"Thu, 27 Feb 2025 20:19:17 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ryflBGtD6RVZxvWWN4\u002Bl9ymZVcLLFf/5Fm86IxvYleg="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3292"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022ryflBGtD6RVZxvWWN4\u002Bl9ymZVcLLFf/5Fm86IxvYleg=\u0022"},{"Name":"Last-Modified","Value":"Sat, 01 Mar 2025 14:53:29 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/searchPerson.v486xewcpi.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"v486xewcpi"},{"Name":"integrity","Value":"sha256-ryflBGtD6RVZxvWWN4\u002Bl9ymZVcLLFf/5Fm86IxvYleg="},{"Name":"label","Value":"_content/MAppBnB/js/searchPerson.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3292"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022ryflBGtD6RVZxvWWN4\u002Bl9ymZVcLLFf/5Fm86IxvYleg=\u0022"},{"Name":"Last-Modified","Value":"Sat, 01 Mar 2025 14:53:29 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/signalr/dist/browser/signalr.cqu3aupeo3.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\signalr\dist\browser\signalr.js'))</AssetFile>

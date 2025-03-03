@@ -31,13 +31,13 @@ public class Accommodation
     public string? UnitApartment { get; set; }
     [DataType(DataType.Text)]
     [RegularExpression(@"^\+(?:[\d]{2,3})$")]
-    public string? phone_prefix { get; set; }
+    public string? PhonePrefix { get; set; }
 
     //[RegularExpression(@"[\d]")]
     [DataType(DataType.PhoneNumber)]
-    public string? phone_number { get; set; }
+    public string? PhoneNumber { get; set; }
     [DataType(DataType.EmailAddress)]
-    public string? email { get; set; }
+    public string? Email { get; set; }
     [DataType(DataType.Text)]
     public string? Website { get; set; }
     [DataType(DataType.Text)]

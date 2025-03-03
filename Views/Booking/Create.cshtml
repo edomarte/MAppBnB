@@ -39,7 +39,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Booking.BookingChannel" class="control-label"></label>
-                <input asp-for="Booking.BookingChannel" class="form-control" />
+                <select asp-for="Booking.BookingChannel" class="form-control">
+                    @foreach(var channel in Enum.GetValues(typeof(BookingChannel))){
+                        <option value="@channel">@channel</option>
+                    }
+                </select>
                 <span asp-validation-for="Booking.BookingChannel" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -79,7 +83,7 @@
     <div class="col-md-4">
     <p>
         <label>Search Guests to Add to the Booking: <input type="text" name="SearchPerson" id="SearchPerson" /></label>
-        <input type="button" id="sendButton" value="Search Person" />
+        <input type="button" id="searchPersonButton" value="Search Person" />
         <ul id="ResultList"></ul>
         <input type="button" id="addSelectedButton" value="Add selected guests to booking" />
 

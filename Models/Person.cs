@@ -18,24 +18,24 @@ public class Person
     public DateOnly? BirthDate { get; set; }
     [Required]
     [Display(Name = "Birth Place")]
-    public string? birth_place { get; set; }
+    public string? BirthPlace { get; set; }
     [Required]
     [Display(Name = "Birth Province")]
-    public string? birth_province { get; set; }
+    public string? BirthProvince { get; set; }
     [Required]
     [Display(Name = "Birth Country")]
-    public string? birth_country { get; set; }
+    public string? BirthCountry { get; set; }
     [DataType(DataType.Text)]
     [RegularExpression(@"^\+(?:[\d]{2,3})$")]
     [Display(Name = "Phone Prefix")]
-    public string? phone_prefix { get; set; }
+    public string? PhonePrefix { get; set; }
 
     //[RegularExpression(@"[\d]")]
     [DataType(DataType.PhoneNumber)]
     [Display(Name = "Phone Number")]
-    public string? phone_number { get; set; }
+    public string? PhoneNumber { get; set; }
     [DataType(DataType.EmailAddress)]
-    public string? email { get; set; }
+    public string? Email { get; set; }
     [Required]
     [Display(Name = "Role/Relation")]
     public RoleRelation? RoleRelation { get; set; }

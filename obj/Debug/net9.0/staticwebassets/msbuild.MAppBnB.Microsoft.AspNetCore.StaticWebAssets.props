@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>i1jx570xl8</Fingerprint>
-      <Integrity>WkBCIPGAvhWxirx3D+J1xnzJW2O+fDuXIKRXAJZG4AY=</Integrity>
+      <Fingerprint>v486xewcpi</Fingerprint>
+      <Integrity>ryflBGtD6RVZxvWWN4+l9ymZVcLLFf/5Fm86IxvYleg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</OriginalItemSpec>

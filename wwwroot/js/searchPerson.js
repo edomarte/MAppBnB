@@ -3,7 +3,7 @@
 var connectionS = new signalR.HubConnectionBuilder().withUrl("/personSearchHub").build();
 
 //Disable the send button until connection is established.
-document.getElementById("sendButton").disabled = true;
+document.getElementById("searchPersonButton").disabled = true;
 
 connectionS.on("ResultList", function (persons) {
     persons.forEach(person => {
@@ -22,12 +22,12 @@ connectionS.on("ResultList", function (persons) {
 });
 
 connectionS.start().then(function () {
-    document.getElementById("sendButton").disabled = false;
+    document.getElementById("searchPersonButton").disabled = false;
 }).catch(function (err) {
     return console.error(err.toString());
 });
 
-document.getElementById("sendButton").addEventListener("click", function (event) {
+document.getElementById("searchPersonButton").addEventListener("click", function (event) {
     document.getElementById("ResultList").innerHTML = "";
     var personName = document.getElementById("SearchPerson").value;
     connectionS.invoke("SearchPerson", personName,getPersonsInBooking()).catch(function (err) {

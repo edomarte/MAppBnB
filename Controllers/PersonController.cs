@@ -192,7 +192,7 @@ namespace MAppBnB.Controllers
             {
                 return NotFound();
             }
-
+            // TODO: Show document details
             return View(person);
         }
 
@@ -206,6 +206,8 @@ namespace MAppBnB.Controllers
             {
                 _context.Person.Remove(person);
             }
+
+            //TODO: Delete document
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
