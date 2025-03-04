@@ -1,10 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
 using MAppBnB;
-using MAppBnB.Controllers;
 using MAppBnB.Data;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using NuGet.Common;
 
 
 namespace SignalRChat.Hubs
@@ -21,53 +17,38 @@ namespace SignalRChat.Hubs
 
         public Accommodation GetAccommodationDetails(string accommodationID)
         {
-            var details = _context.Accommodation.Where(x => x.id == int.Parse(accommodationID)).ToList();            
+            var details = _context.Accommodation.Where(x => x.id == int.Parse(accommodationID)).ToList();
             return details[0];
         }
 
         public Person GetPersonDetails(string personID)
         {
-            var details = _context.Person.Where(x => x.id == int.Parse(personID)).ToList();            
+            var details = _context.Person.Where(x => x.id == int.Parse(personID)).ToList();
             return details[0];
         }
 
         public Document GetDocumentDetails(Person person)
         {
-            var details = _context.Document.Where(x => x.id == person.DocumentID).ToList();            
+            var details = _context.Document.Where(x => x.id == person.DocumentID).ToList();
             return details[0];
         }
 
         public Booking GetBookingDetails(string bookingID)
         {
-            var details = _context.Booking.Where(x => x.id == int.Parse(bookingID)).ToList();            
+            var details = _context.Booking.Where(x => x.id == int.Parse(bookingID)).ToList();
             return details[0];
         }
 
-        public Task<IActionResult> CreateContract(string mainPersonID, string accommodationID, string bookingId)
+        public async Task CreateContract(string mainPersonID, string accommodationID, string bookingId)
         {
-           Person mainPerson=GetPersonDetails(mainPersonID); 
-           Accommodation accommodation=GetAccommodationDetails(accommodationID);
-           string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, GetBookingDetails(bookingId));
-           return DownloadGeneratedDocument(contractPath);
+            Person mainPerson = GetPersonDetails(mainPersonID);
+            Accommodation accommodation = GetAccommodationDetails(accommodationID);
+            string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, GetBookingDetails(bookingId));
+            byte[] file = await File.ReadAllBytesAsync(contractPath);
+            string base64String = Convert.ToBase64String(file);
+
+            await Clients.All.SendAsync("ContractFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+
         }
-
-        // GenerateDocuments/DowloadFile
-        public async Task<IActionResult> DownloadGeneratedDocument(string? filePath)
-        {
-            var file = System.IO.File.ReadAllBytes(filePath);
-            return FileHelper.GetFileResult(file, "application/word", filePath.Substring(filePath.LastIndexOf("\\") + 1));
-        }
-    }
-
-}
-
-public static class FileHelper
-{
-    public static FileContentResult GetFileResult(byte[] fileContents, string contentType, string fileName)
-    {
-        return new FileContentResult(fileContents, contentType)
-        {
-            FileDownloadName = fileName
-        };
     }
 }

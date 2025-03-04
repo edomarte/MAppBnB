@@ -28,3 +28,22 @@ document.getElementById("generateContract").addEventListener("click", function (
 
     event.preventDefault();
 });
+
+connectionD.on("ContractFile", (fileName, base64Data) => {
+    // Convert Base64 to Blob
+    const byteCharacters = atob(base64Data);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const fileBlob = new Blob([byteArray], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+
+    // Create Download Link
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(fileBlob);
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
