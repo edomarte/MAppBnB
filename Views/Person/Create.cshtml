@@ -66,6 +66,15 @@
                 </select>
                 <span asp-validation-for="Person.RoleRelation" class="text-danger"></span>
             </div>
+             <div class="form-group">
+                <label asp-for="Document.DocumentType" class="control-label"></label>
+                <select asp-for="Document.DocumentType" class="form-control" />
+                    @foreach(var type in Enum.GetValues(typeof(DocumentTypes))){
+                        <option value="@type">@type</option>
+                    }
+                </select>
+                <span asp-validation-for="Document.DocumentType" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Document.SerialNumber" class="control-label"></label>
                 <input asp-for="Document.SerialNumber" class="form-control" />

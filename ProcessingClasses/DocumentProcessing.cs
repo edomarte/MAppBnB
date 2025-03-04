@@ -2,18 +2,14 @@ using System.Data;
 using DocumentFormat.OpenXml.Office.CustomUI;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using MAppBnB;
 using Microsoft.AspNetCore.Mvc;
 
 public class DocumentProcessing
 {
     static DataTable contractDt;
-    DocumentProcessing()
-    {
-        contractDt = new DataTable();
-        addFieldstoContractDt();
-    }
-
-    private void addFieldstoContractDt()
+   
+    private static void addFieldstoContractDt()
     {
         contractDt.Columns.Add("Name");
         contractDt.Columns.Add("Surname");
@@ -39,9 +35,10 @@ public class DocumentProcessing
         contractDt.Columns.Add("Address");
     }
 
-    public static string GenerateContract(string contractParams, string bookingId)
+    public static string GenerateContract(Person mainPerson, MAppBnB.Document document, Accommodation accommodation, Booking booking)
     {
-        DataRow dr=addRowToContractDt(contractParams);
+        DataRow dr = addRowToContractDt(mainPerson, document, accommodation, booking);
+        string bookingId = booking.id.ToString();
 
         string contractPath = "..\\DocumentTemplates\\Contract" + bookingId + ".docx";
 
@@ -71,14 +68,36 @@ public class DocumentProcessing
         return contractPath;
     }
 
-    private static DataRow addRowToContractDt(string contractParams)
+    private static DataRow addRowToContractDt(Person mainPerson, MAppBnB.Document document, Accommodation accommodation, Booking booking)
     {
+        //TODO: contractDT empty?
+        contractDt = new DataTable();
+        addFieldstoContractDt();
         DataRow dr = contractDt.NewRow();
-        string[] parameters = contractParams.Split(";");
-        for (int i = 0; i < parameters.Length; i++)
-        {
-            dr[i] = parameters[i];
-        }
+
+        dr["Name"] = mainPerson.Name;
+        dr["Surname"] = mainPerson.Surname;
+        dr["BirthPlace"] = mainPerson.BirthPlace;
+        dr["BirthProvince"] = mainPerson.BirthProvince;
+        dr["BirthDate"] = mainPerson.BirthDate;
+        dr["DocumentType"] = document.DocumentType;
+        dr["SerialNumber"] = document.SerialNumber;
+        dr["IssuedBy"] = document.IssuedBy;
+        dr["IssuedDate"] = document.IssuedDate;
+        //dr["CodFisc"];
+        dr["PhonePrefix"] = mainPerson.PhonePrefix;
+        dr["PhoneNumber"] = mainPerson.PhoneNumber;
+        dr["Email"] = mainPerson.Email;
+        dr["Price"] = booking.Price - booking.Discount;
+        //dr["PriceInLetters"];
+        dr["PaymentDate"] = booking.PaymentDate;
+        dr["BookingNightsNum"] =(DateTime.Parse(booking.CheckOutDateTime).Date-DateTime.Parse(booking.CheckinDateTime).Date).TotalDays;
+        dr["CheckinDate"] = booking.CheckinDateTime.Substring(0,booking.CheckinDateTime.IndexOf("T"));
+        dr["CheckoutDate"] = booking.CheckOutDateTime.Substring(0,booking.CheckOutDateTime.IndexOf("T"));
+        dr["ContractDate"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
+        dr["City"] = accommodation.City;
+        dr["Address"] = accommodation.Address;
+
         contractDt.Rows.Add(dr);
         return dr;
     }

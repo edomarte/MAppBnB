@@ -6,7 +6,7 @@ public class Document
 {
     public int? id { get; set; }
 
-    public int? DocumentType { get; set; }
+    public DocumentTypes? DocumentType { get; set; }
 
 
     [StringLength(30, MinimumLength = 1)]

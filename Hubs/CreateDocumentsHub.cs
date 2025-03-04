@@ -31,9 +31,9 @@ namespace SignalRChat.Hubs
             return details[0];
         }
 
-        public Document GetDocumentDetails(string documentID)
+        public Document GetDocumentDetails(Person person)
         {
-            var details = _context.Document.Where(x => x.id == int.Parse(documentID)).ToList();            
+            var details = _context.Document.Where(x => x.id == person.DocumentID).ToList();            
             return details[0];
         }
 
@@ -46,20 +46,12 @@ namespace SignalRChat.Hubs
         public Task<IActionResult> CreateContract(string mainPersonID, string accommodationID, string bookingId)
         {
            Person mainPerson=GetPersonDetails(mainPersonID); 
-           Accommodation accopmmodation=GetAccommodationDetails(accommodationID);
-           string contractPath = DocumentProcessing.GenerateContract("contractParams", bookingId);
+           Accommodation accommodation=GetAccommodationDetails(accommodationID);
+           string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, GetBookingDetails(bookingId));
            return DownloadGeneratedDocument(contractPath);
         }
 
-        private string createContractDetailsString(Person mainPerson, Document document, Accommodation accommodation, Booking booking)
-        {
-            string contractDetailsString="";
-            //TODO: sistemare la stringa sotto
-            //contractDetailsString+=mainPerson.Name+","+mainPerson.Surname+","+mainPerson.BirthPlace+","+mainPerson.BirthProvince+","+mainPerson.BirthDate+","+document.DocumentType+","+document.SerialNumber+","+document.IssuedBy+","+document.IssuedDate+","+mainPerson.PhonePrefix+","+mainPerson.PhoneNumber+","+mainPerson.Email+","+(booking.Price-booking.Discount)+","+booking.PaymentDate+","+(booking.CheckOutDateTime-booking.CheckinDateTime)+","+booking.CheckinDateTime+","+booking.CheckOutDateTime+","+System.DateTime.Today.ToString("dd/MM/yyyy")+","+accommodation.Address+","+accommodation.City;
-            return "Contract details";
-        }
-
-        // GET: GenerateDocuments/DowloadFile
+        // GenerateDocuments/DowloadFile
         public async Task<IActionResult> DownloadGeneratedDocument(string? filePath)
         {
             var file = System.IO.File.ReadAllBytes(filePath);

@@ -158,7 +158,7 @@ namespace MAppBnB.Controllers
                         {
                             _context.Update(model.Document);
                             await _context.SaveChangesAsync();
-                        }
+                        }   
                     _context.Update(model.Person);
                     await _context.SaveChangesAsync();
                 }

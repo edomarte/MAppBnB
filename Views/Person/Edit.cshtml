@@ -13,6 +13,7 @@
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Person.id" />
+            <input type="hidden" asp-for="Person.DocumentID" />
             <div class="form-group">
                 <label asp-for="Person.Name" class="control-label"></label>
                 <input asp-for="Person.Name" class="form-control" />
@@ -69,8 +70,16 @@
             </div>
             <p>Documents</p>
             <input type="hidden" asp-for="Document.id" />
-            <div class="form-group
-            <div class=" form-group">
+            <div class="form-group">
+                <label asp-for="Document.DocumentType" class="control-label"></label>
+                <select asp-for="Document.DocumentType" class="form-control" />
+                    @foreach(var type in Enum.GetValues(typeof(DocumentTypes))){
+                        <option value="@type">@type</option>
+                    }
+                </select>
+                <span asp-validation-for="Document.DocumentType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Document.SerialNumber" class="control-label"></label>
                 <input asp-for="Document.SerialNumber" class="form-control" />
                 <span asp-validation-for="Document.SerialNumber" class="text-danger"></span>

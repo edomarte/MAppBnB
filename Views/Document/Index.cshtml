@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.DocumentType)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.SerialNumber)
             </th>
             <th>
@@ -33,6 +36,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DocumentType)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SerialNumber)
             </td>
