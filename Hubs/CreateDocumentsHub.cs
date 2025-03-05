@@ -88,5 +88,15 @@ namespace SignalRChat.Hubs
             await Clients.All.SendAsync("PreCheckinFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
+
+        public async Task CreateContractPDF(string bookingId)
+        {
+            string contractPath = DocumentProcessing.GenerateContractPDF(bookingId);
+            byte[] file = await File.ReadAllBytesAsync(contractPath);
+            string base64String = Convert.ToBase64String(file);
+
+            await Clients.All.SendAsync("ContractPDFFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+
+        }
     }
 }

@@ -124,3 +124,33 @@ connectionD.on("PreCheckinFile", (fileName, base64Data) => {
     link.click();
     document.body.removeChild(link);
 });
+
+document.getElementById("generateContractPDF").addEventListener("click", function (event) {
+       
+    var bookingID=document.getElementById("bookingID").value;
+   
+    connectionD.invoke("CreateContractPDF", bookingID).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    event.preventDefault();
+});
+
+connectionD.on("ContractPDFFile", (fileName, base64Data) => {
+    // Convert Base64 to Blob
+    const byteCharacters = atob(base64Data);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const fileBlob = new Blob([byteArray], { type: "application/pdf" });
+
+    // Create Download Link
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(fileBlob);
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});

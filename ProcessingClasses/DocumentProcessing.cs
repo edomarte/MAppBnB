@@ -1,9 +1,7 @@
 using System.Data;
-using DocumentFormat.OpenXml.Office.CustomUI;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using MAppBnB;
-using Microsoft.AspNetCore.Mvc;
 
 public class DocumentProcessing
 {
@@ -103,6 +101,14 @@ public class DocumentProcessing
         return dr;
     }
 
+    public static string GenerateContractPDF(string bookingId)
+    {
+        string contractPath = "..\\DocumentTemplates\\Contract" + bookingId + ".docx";
+        string pdfPath = "..\\DocumentTemplates\\Contract" + bookingId + ".pdf";
+        MigraDocPDF.ConvertWordToPdf(contractPath,pdfPath);
+        return pdfPath;
+    }
+
     public static string GenerateBookingDetails(List<Person> persons, Booking booking, Room room)
     {
         DataRow dr = addRowTobookingDetailsDt(persons, booking, room);
@@ -136,7 +142,7 @@ public class DocumentProcessing
         return bookingDetailsPath;
     }
 
-    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking,Room room)
+    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking, Room room)
     {
         bookingDetailsDt = new DataTable();
         addFieldstoBookingDetailsDt();
@@ -145,7 +151,7 @@ public class DocumentProcessing
         dr["Name"] = persons[0].Name;
         dr["Surname"] = persons[0].Surname;
         //dr["BookingDate"] = booking.BookingDate;
-        dr["Channel"] = ((BookingChannel) int.Parse(booking.BookingChannel)).ToString();
+        dr["Channel"] = ((BookingChannel)int.Parse(booking.BookingChannel)).ToString();
         dr["PhonePrefix"] = persons[0].PhonePrefix;
         dr["PhoneNumber"] = persons[0].PhoneNumber;
         dr["Room"] = room.Name;
@@ -240,7 +246,7 @@ public class DocumentProcessing
         return preCheckinPath;
     }
 
-private static DataRow addRowToPreCheckinDt(Person mainPerson, Accommodation accommodation, Booking booking)
+    private static DataRow addRowToPreCheckinDt(Person mainPerson, Accommodation accommodation, Booking booking)
     {
         preCheckinDt = new DataTable();
         addFieldstoPreCheckinDt();

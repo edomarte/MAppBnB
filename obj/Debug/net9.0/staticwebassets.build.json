@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eW8ovGCgRKErX69qVuK5HDcQv2B1UsT3SLf4Jc/dvpU=",
+  "Hash": "W0DG/EjwDwXw2mqwuAJ0FfB20Zgmgl2a4vJBngvDSM0=",
   "Source": "MAppBnB",
   "BasePath": "_content/MAppBnB",
   "Mode": "Default",
@@ -1403,12 +1403,12 @@
       "OriginalItemSpec": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-r2zqrfz342.gz",
+      "Identity": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-bqbj3aq3nw.gz",
       "SourceId": "MAppBnB",
       "SourceType": "Discovered",
       "ContentRoot": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/MAppBnB",
-      "RelativePath": "js/documentCreation#[.{fingerprint=r2zqrfz342}]?.js.gz",
+      "RelativePath": "js/documentCreation#[.{fingerprint=bqbj3aq3nw}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1417,8 +1417,8 @@
       "RelatedAsset": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\wwwroot\\js\\documentCreation.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "1dbf7vk3bf",
-      "Integrity": "RSp3FHxqKoErtu6ArWt/5AyBzdIT9j6gPkgNZKSoiUg=",
+      "Fingerprint": "wn8oh81tel",
+      "Integrity": "3GKoQPuuKqssRowvd0co740Row4qA+PKD02SBqCgMvc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\wwwroot\\js\\documentCreation.js"
@@ -1543,8 +1543,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "r2zqrfz342",
-      "Integrity": "E7ucbcYMjLUkqQwTFri85Hd8WQdz3IfhBpwI36GCvr0=",
+      "Fingerprint": "bqbj3aq3nw",
+      "Integrity": "I22OdzUudHdwKDhEKJ89SYT2I8VaTVv0Ht4Vp175uck=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\documentCreation.js"
@@ -3492,13 +3492,13 @@
       ]
     },
     {
-      "Route": "js/documentCreation.js",
-      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-r2zqrfz342.gz",
+      "Route": "js/documentCreation.bqbj3aq3nw.js",
+      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-bqbj3aq3nw.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001119820829"
+          "Quality": "0.001077586207"
         }
       ],
       "ResponseHeaders": [
@@ -3508,19 +3508,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "892"
+          "Value": "927"
         },
         {
           "Name": "ETag",
-          "Value": "\"RSp3FHxqKoErtu6ArWt/5AyBzdIT9j6gPkgNZKSoiUg=\""
+          "Value": "\"3GKoQPuuKqssRowvd0co740Row4qA+PKD02SBqCgMvc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 11:22:09 GMT"
+          "Value": "Wed, 05 Mar 2025 14:38:24 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -3536,18 +3536,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"E7ucbcYMjLUkqQwTFri85Hd8WQdz3IfhBpwI36GCvr0=\""
+          "Value": "W/\"I22OdzUudHdwKDhEKJ89SYT2I8VaTVv0Ht4Vp175uck=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "bqbj3aq3nw"
+        },
+        {
+          "Name": "label",
+          "Value": "js/documentCreation.js"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-E7ucbcYMjLUkqQwTFri85Hd8WQdz3IfhBpwI36GCvr0="
+          "Value": "sha256-I22OdzUudHdwKDhEKJ89SYT2I8VaTVv0Ht4Vp175uck="
         }
       ]
     },
     {
-      "Route": "js/documentCreation.js",
+      "Route": "js/documentCreation.bqbj3aq3nw.js",
       "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\wwwroot\\js\\documentCreation.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3557,7 +3565,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4621"
+          "Value": "5666"
         },
         {
           "Name": "Content-Type",
@@ -3565,121 +3573,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"E7ucbcYMjLUkqQwTFri85Hd8WQdz3IfhBpwI36GCvr0=\""
+          "Value": "\"I22OdzUudHdwKDhEKJ89SYT2I8VaTVv0Ht4Vp175uck=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 11:22:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-E7ucbcYMjLUkqQwTFri85Hd8WQdz3IfhBpwI36GCvr0="
-        }
-      ]
-    },
-    {
-      "Route": "js/documentCreation.js.gz",
-      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-r2zqrfz342.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "892"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"RSp3FHxqKoErtu6ArWt/5AyBzdIT9j6gPkgNZKSoiUg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 11:22:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-RSp3FHxqKoErtu6ArWt/5AyBzdIT9j6gPkgNZKSoiUg="
-        }
-      ]
-    },
-    {
-      "Route": "js/documentCreation.r2zqrfz342.js",
-      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-r2zqrfz342.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.001119820829"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "892"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"RSp3FHxqKoErtu6ArWt/5AyBzdIT9j6gPkgNZKSoiUg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 11:22:09 GMT"
+          "Value": "Wed, 05 Mar 2025 14:38:24 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"E7ucbcYMjLUkqQwTFri85Hd8WQdz3IfhBpwI36GCvr0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "r2zqrfz342"
+          "Value": "bqbj3aq3nw"
         },
         {
           "Name": "label",
@@ -3687,13 +3595,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-E7ucbcYMjLUkqQwTFri85Hd8WQdz3IfhBpwI36GCvr0="
+          "Value": "sha256-I22OdzUudHdwKDhEKJ89SYT2I8VaTVv0Ht4Vp175uck="
         }
       ]
     },
     {
-      "Route": "js/documentCreation.r2zqrfz342.js",
-      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\wwwroot\\js\\documentCreation.js",
+      "Route": "js/documentCreation.bqbj3aq3nw.js.gz",
+      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-bqbj3aq3nw.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3702,7 +3610,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4621"
+          "Value": "927"
         },
         {
           "Name": "Content-Type",
@@ -3710,56 +3618,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"E7ucbcYMjLUkqQwTFri85Hd8WQdz3IfhBpwI36GCvr0=\""
+          "Value": "\"3GKoQPuuKqssRowvd0co740Row4qA+PKD02SBqCgMvc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 11:22:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "r2zqrfz342"
-        },
-        {
-          "Name": "label",
-          "Value": "js/documentCreation.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-E7ucbcYMjLUkqQwTFri85Hd8WQdz3IfhBpwI36GCvr0="
-        }
-      ]
-    },
-    {
-      "Route": "js/documentCreation.r2zqrfz342.js.gz",
-      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-r2zqrfz342.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "892"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"RSp3FHxqKoErtu6ArWt/5AyBzdIT9j6gPkgNZKSoiUg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 11:22:09 GMT"
+          "Value": "Wed, 05 Mar 2025 14:38:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3777,7 +3640,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "r2zqrfz342"
+          "Value": "bqbj3aq3nw"
         },
         {
           "Name": "label",
@@ -3785,7 +3648,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-RSp3FHxqKoErtu6ArWt/5AyBzdIT9j6gPkgNZKSoiUg="
+          "Value": "sha256-3GKoQPuuKqssRowvd0co740Row4qA+PKD02SBqCgMvc="
+        }
+      ]
+    },
+    {
+      "Route": "js/documentCreation.js",
+      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-bqbj3aq3nw.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001077586207"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "927"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3GKoQPuuKqssRowvd0co740Row4qA+PKD02SBqCgMvc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Mar 2025 14:38:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"I22OdzUudHdwKDhEKJ89SYT2I8VaTVv0Ht4Vp175uck=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-I22OdzUudHdwKDhEKJ89SYT2I8VaTVv0Ht4Vp175uck="
+        }
+      ]
+    },
+    {
+      "Route": "js/documentCreation.js",
+      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\wwwroot\\js\\documentCreation.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5666"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"I22OdzUudHdwKDhEKJ89SYT2I8VaTVv0Ht4Vp175uck=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Mar 2025 14:38:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-I22OdzUudHdwKDhEKJ89SYT2I8VaTVv0Ht4Vp175uck="
+        }
+      ]
+    },
+    {
+      "Route": "js/documentCreation.js.gz",
+      "AssetFile": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\x86lmv01z0-bqbj3aq3nw.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "927"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3GKoQPuuKqssRowvd0co740Row4qA+PKD02SBqCgMvc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Mar 2025 14:38:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-3GKoQPuuKqssRowvd0co740Row4qA+PKD02SBqCgMvc="
         }
       ]
     },
