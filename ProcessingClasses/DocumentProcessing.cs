@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 public class DocumentProcessing
 {
     static DataTable contractDt;
-   
+    static DataTable bookingDetailsDt;
+    static DataTable preCheckinDt;
+
     private static void addFieldstoContractDt()
     {
         contractDt.Columns.Add("Name");
@@ -70,7 +72,6 @@ public class DocumentProcessing
 
     private static DataRow addRowToContractDt(Person mainPerson, MAppBnB.Document document, Accommodation accommodation, Booking booking)
     {
-        //TODO: contractDT empty?
         contractDt = new DataTable();
         addFieldstoContractDt();
         DataRow dr = contractDt.NewRow();
@@ -91,9 +92,9 @@ public class DocumentProcessing
         dr["Price"] = booking.Price - booking.Discount;
         //dr["PriceInLetters"];
         dr["PaymentDate"] = booking.PaymentDate;
-        dr["BookingNightsNum"] =(DateTime.Parse(booking.CheckOutDateTime).Date-DateTime.Parse(booking.CheckinDateTime).Date).TotalDays;
-        dr["CheckinDate"] = booking.CheckinDateTime.Substring(0,booking.CheckinDateTime.IndexOf("T"));
-        dr["CheckoutDate"] = booking.CheckOutDateTime.Substring(0,booking.CheckOutDateTime.IndexOf("T"));
+        dr["BookingNightsNum"] = (DateTime.Parse(booking.CheckOutDateTime).Date - DateTime.Parse(booking.CheckinDateTime).Date).TotalDays;
+        dr["CheckinDate"] = booking.CheckinDateTime.Substring(0, booking.CheckinDateTime.IndexOf("T"));
+        dr["CheckoutDate"] = booking.CheckOutDateTime.Substring(0, booking.CheckOutDateTime.IndexOf("T"));
         dr["ContractDate"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
         dr["City"] = accommodation.City;
         dr["Address"] = accommodation.Address;
@@ -102,15 +103,165 @@ public class DocumentProcessing
         return dr;
     }
 
-    public void GenerateCustomerProfile()
+    public static string GenerateBookingDetails(List<Person> persons, Booking booking, Room room)
     {
+        DataRow dr = addRowTobookingDetailsDt(persons, booking, room);
+        string bookingId = booking.id.ToString();
 
+        string bookingDetailsPath = "..\\DocumentTemplates\\BookingDetails" + bookingId + ".docx";
+
+        File.Copy("..\\DocumentTemplates\\BookingDetailsTemplate.docx", "..\\DocumentTemplates\\BookingDetails" + bookingId + ".docx", true);
+        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\DocumentTemplates\\BookingDetails" + bookingId + ".docx", true))
+        {
+
+            if (doc is null)
+            {
+                throw new ArgumentNullException(nameof(doc));
+            }
+
+            // Assign a reference to the existing document body.
+            var mainDocumentPart = doc.MainDocumentPart.Document.Descendants<Text>().Where(t => t.Text.Contains("«")).ToList();
+
+            foreach (Text placeholder in mainDocumentPart)
+            {
+                string columnName = placeholder.Text.Replace("«", "").Replace("»", "");
+                if (bookingDetailsDt.Columns.Contains(columnName))
+                {
+                    placeholder.Text = dr[columnName].ToString();
+                }
+            }
+
+            doc.Save();
+        }
+        return bookingDetailsPath;
     }
 
-    public void GeneratePreCheckIn()
+    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking,Room room)
     {
+        bookingDetailsDt = new DataTable();
+        addFieldstoBookingDetailsDt();
+        DataRow dr = bookingDetailsDt.NewRow();
 
+        dr["Name"] = persons[0].Name;
+        dr["Surname"] = persons[0].Surname;
+        //dr["BookingDate"] = booking.BookingDate;
+        dr["Channel"] = ((BookingChannel) int.Parse(booking.BookingChannel)).ToString();
+        dr["PhonePrefix"] = persons[0].PhonePrefix;
+        dr["PhoneNumber"] = persons[0].PhoneNumber;
+        dr["Room"] = room.Name;
+        dr["CheckinDate"] = booking.CheckinDateTime;
+        dr["CheckOutDate"] = booking.CheckOutDateTime;
+        dr["Price"] = booking.Price - booking.Discount;
+        //dr["CleaningFee"] = TODO: where? Booking or Accommodation?;
+        //dr["TownFee"] = TODO: where? Booking or Accommodation?;
+        //dr["OTAFee"] = TODO: where? Booking or Accommodation?;
+        dr["MainGuest"] = persons[0].Name + " " + persons[0].Surname;
+        if (persons.Count > 1)
+        {
+            dr["Guest1"] = persons[1].Name + " " + persons[1].Surname;
+            if (persons.Count > 2)
+            {
+                dr["Guest2"] = persons[2].Name + " " + persons[2].Surname;
+                if (persons.Count > 3)
+                {
+                    dr["Guest3"] = persons[3].Name + " " + persons[3].Surname;
+                    if (persons.Count > 4)
+                    {
+                        dr["Guest4"] = persons[4].Name + " " + persons[4].Surname;
+                    }
+                }
+            }
+        }
+        //dr["Sent2Police"] = TODO: in Booking;
+        //dr["Sent2Region"] = TODO: in Booking;
+        //dr["Sent2Town"] = TODO: in Booking;
+        //dr["ContractPrinted"] = TODO: in Booking;
+
+        bookingDetailsDt.Rows.Add(dr);
+        return dr;
     }
 
+    private static void addFieldstoBookingDetailsDt()
+    {
+        bookingDetailsDt.Columns.Add("Name");
+        bookingDetailsDt.Columns.Add("Surname");
+        bookingDetailsDt.Columns.Add("BookingDate");
+        bookingDetailsDt.Columns.Add("Channel");
+        bookingDetailsDt.Columns.Add("PhonePrefix");
+        bookingDetailsDt.Columns.Add("PhoneNumber");
+        bookingDetailsDt.Columns.Add("Room");
+        bookingDetailsDt.Columns.Add("CheckinDate");
+        bookingDetailsDt.Columns.Add("CheckOutDate");
+        bookingDetailsDt.Columns.Add("Price");
+        bookingDetailsDt.Columns.Add("CleaningFee");
+        bookingDetailsDt.Columns.Add("TownFee");
+        bookingDetailsDt.Columns.Add("OTAFee");
+        bookingDetailsDt.Columns.Add("MainGuest");
+        bookingDetailsDt.Columns.Add("Guest1");
+        bookingDetailsDt.Columns.Add("Guest2");
+        bookingDetailsDt.Columns.Add("Guest3");
+        bookingDetailsDt.Columns.Add("Guest4");
+        bookingDetailsDt.Columns.Add("Sent2Police");
+        bookingDetailsDt.Columns.Add("Sent2Region");
+        bookingDetailsDt.Columns.Add("Sent2Town");
+        bookingDetailsDt.Columns.Add("ContractPrinted");
+    }
 
+    public static string GeneratePreCheckIn(Person mainPerson, Accommodation accommodation, Booking booking)
+    {
+        DataRow dr = addRowToPreCheckinDt(mainPerson, accommodation, booking);
+        string bookingId = booking.id.ToString();
+
+        string preCheckinPath = "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
+
+        File.Copy("..\\DocumentTemplates\\Pre-CheckinTemplate.docx", "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx", true);
+        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx", true))
+        {
+
+            if (doc is null)
+            {
+                throw new ArgumentNullException(nameof(doc));
+            }
+
+            // Assign a reference to the existing document body.
+            var mainDocumentPart = doc.MainDocumentPart.Document.Descendants<Text>().Where(t => t.Text.Contains("«")).ToList();
+
+            foreach (Text placeholder in mainDocumentPart)
+            {
+                string columnName = placeholder.Text.Replace("«", "").Replace("»", "");
+                if (preCheckinDt.Columns.Contains(columnName))
+                {
+                    placeholder.Text = dr[columnName].ToString();
+                }
+            }
+
+            doc.Save();
+        }
+        return preCheckinPath;
+    }
+
+private static DataRow addRowToPreCheckinDt(Person mainPerson, Accommodation accommodation, Booking booking)
+    {
+        preCheckinDt = new DataTable();
+        addFieldstoPreCheckinDt();
+        DataRow dr = preCheckinDt.NewRow();
+
+        dr["Name"] = mainPerson.Name;
+        dr["AccommodationName"] = accommodation.Name;
+        dr["City"] = accommodation.City;
+        dr["AccommodationWebsite"] = accommodation.Website;
+        dr["CheckinDate"] = booking.CheckinDateTime.Substring(0, booking.CheckinDateTime.IndexOf("T"));
+
+        preCheckinDt.Rows.Add(dr);
+        return dr;
+    }
+
+    private static void addFieldstoPreCheckinDt()
+    {
+        preCheckinDt.Columns.Add("Name");
+        preCheckinDt.Columns.Add("AccommodationName");
+        preCheckinDt.Columns.Add("City");
+        preCheckinDt.Columns.Add("CheckinDate");
+        preCheckinDt.Columns.Add("AccommodationWebsite");
+    }
 }
