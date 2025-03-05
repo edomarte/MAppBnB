@@ -13,7 +13,7 @@ public class MigraDocPDF
     {
         var doc = new MigraDoc.DocumentObjectModel.Document();
         var section = doc.AddSection();
-        section.PageSetup.PageFormat=PageFormat.A4; //A4 page
+        section.PageSetup.PageFormat = PageFormat.A4; //A4 page
 
 
         using (var wordDoc = WordprocessingDocument.Open(docPath, false))
@@ -28,8 +28,12 @@ public class MigraDocPDF
 
                 foreach (var run in para.Elements<Run>())
                 {
-                    var text = migraPara.AddFormattedText(run.InnerText.Trim());
-                    ApplyTextFormatting(run, text);
+                    if (!run.InnerText.Contains("MERGEFIELD"))
+                    {
+                        var text = migraPara.AddFormattedText(run.InnerText);
+                        ApplyTextFormatting(run, text);
+                    }
+
                 }
             }
         }
@@ -44,113 +48,113 @@ public class MigraDocPDF
         return doc;
     }
 
-static void ApplyPageSetup(WordprocessingDocument wordDoc, Section section)
-{
-    // Set margins to 1 inch by default, or use the values from Word if available
-    var margins = wordDoc.MainDocumentPart.Document.Body.GetFirstChild<SectionProperties>()?.GetFirstChild<PageMargin>();
-    if (margins != null)
+    static void ApplyPageSetup(WordprocessingDocument wordDoc, Section section)
     {
-        section.PageSetup.LeftMargin = Unit.FromPoint(margins.Left/20);
-        section.PageSetup.RightMargin = Unit.FromPoint(margins.Right/20);
-        section.PageSetup.TopMargin = Unit.FromPoint(margins.Top/20);
-        section.PageSetup.BottomMargin = Unit.FromPoint(margins.Bottom/20);
+        // Set margins to 1 inch by default, or use the values from Word if available
+        var margins = wordDoc.MainDocumentPart.Document.Body.GetFirstChild<SectionProperties>()?.GetFirstChild<PageMargin>();
+        if (margins != null)
+        {
+            section.PageSetup.LeftMargin = Unit.FromPoint(margins.Left / 20);
+            section.PageSetup.RightMargin = Unit.FromPoint(margins.Right / 20);
+            section.PageSetup.TopMargin = Unit.FromPoint(margins.Top / 20);
+            section.PageSetup.BottomMargin = Unit.FromPoint(margins.Bottom / 20);
+        }
+        else
+        {
+            section.PageSetup.LeftMargin = Unit.FromInch(1);   // Default 1 inch margin
+            section.PageSetup.RightMargin = Unit.FromInch(1);  // Default 1 inch margin
+            section.PageSetup.TopMargin = Unit.FromInch(1);    // Default 1 inch margin
+            section.PageSetup.BottomMargin = Unit.FromInch(1); // Default 1 inch margin
+        }
     }
-    else
+
+    static void ApplyParagraphFormatting(DocumentFormat.OpenXml.Wordprocessing.Paragraph para, MigraDoc.DocumentObjectModel.Paragraph migraPara, Section section)
     {
-        section.PageSetup.LeftMargin = Unit.FromInch(1);   // Default 1 inch margin
-        section.PageSetup.RightMargin = Unit.FromInch(1);  // Default 1 inch margin
-        section.PageSetup.TopMargin = Unit.FromInch(1);    // Default 1 inch margin
-        section.PageSetup.BottomMargin = Unit.FromInch(1); // Default 1 inch margin
-    }
-}
-
-static void ApplyParagraphFormatting(DocumentFormat.OpenXml.Wordprocessing.Paragraph para, MigraDoc.DocumentObjectModel.Paragraph migraPara, Section section)
-{
-    var props = para.ParagraphProperties;
-    if (props != null)
-    {
-        // Apply justification (alignments)
-        if (props.Justification != null)
+        var props = para.ParagraphProperties;
+        if (props != null)
         {
-            if (props.Justification.Val.Value == JustificationValues.Center)
+            // Apply justification (alignments)
+            if (props.Justification != null)
             {
-                migraPara.Format.Alignment = ParagraphAlignment.Center;
-            }
-            else if (props.Justification.Val.Value == JustificationValues.Right)
-            {
-                migraPara.Format.Alignment = ParagraphAlignment.Right;
-            }
-            else if (props.Justification.Val.Value == JustificationValues.Both)
-            {
-                migraPara.Format.Alignment = ParagraphAlignment.Justify;
-            }
-            else
-            {
-                migraPara.Format.Alignment = ParagraphAlignment.Left;
-            }
-            
-        }
-
-        // Apply spacing (before, after, and line spacing)
-        if (props.SpacingBetweenLines != null)
-        {
-            migraPara.Format.SpaceBefore = Unit.FromPoint(props.SpacingBetweenLines.Before != null ? Convert.ToDouble(props.SpacingBetweenLines.Before) : 0);
-            migraPara.Format.SpaceAfter = Unit.FromPoint(props.SpacingBetweenLines.After != null ? Convert.ToDouble(props.SpacingBetweenLines.After) : 0);
-            migraPara.Format.LineSpacing = Unit.FromPoint(props.SpacingBetweenLines.Line != null ? Convert.ToDouble(props.SpacingBetweenLines.Line) : 0);
-        }
-
-        // Apply indentation (respect page width and margins)
-        if (props.Indentation != null)
-        {
-            double leftIndent = props.Indentation.Left != null ? Convert.ToDouble(props.Indentation.Left) : 0;
-            double rightIndent = props.Indentation.Right != null ? Convert.ToDouble(props.Indentation.Right) : 0;
-            double firstLineIndent = props.Indentation.FirstLine != null ? Convert.ToDouble(props.Indentation.FirstLine) : 0;
-
-            // Ensure the left indent doesn't exceed the available space (page width - margins)
-            migraPara.Format.LeftIndent = Unit.FromPoint(leftIndent);  
-            migraPara.Format.RightIndent = Unit.FromPoint(rightIndent);
-            migraPara.Format.FirstLineIndent = Unit.FromPoint(firstLineIndent);
-        }
-
-        // Apply tab stops
-        if (props.Tabs != null)
-        {
-            foreach (var tab in props.Tabs.Elements<DocumentFormat.OpenXml.Wordprocessing.TabStop>())
-            {
-                TabAlignment align;
-                if (tab.Val == TabStopValues.Center)
+                if (props.Justification.Val.Value == JustificationValues.Center)
                 {
-                    align = TabAlignment.Center;
+                    migraPara.Format.Alignment = ParagraphAlignment.Center;
                 }
-                else if (tab.Val == TabStopValues.Right)
+                else if (props.Justification.Val.Value == JustificationValues.Right)
                 {
-                    align = TabAlignment.Right;
+                    migraPara.Format.Alignment = ParagraphAlignment.Right;
+                }
+                else if (props.Justification.Val.Value == JustificationValues.Both)
+                {
+                    migraPara.Format.Alignment = ParagraphAlignment.Justify;
                 }
                 else
                 {
-                    align = TabAlignment.Left;
+                    migraPara.Format.Alignment = ParagraphAlignment.Left;
                 }
-                migraPara.Format.TabStops.AddTabStop(Unit.FromPoint(tab.Position), align);
+
             }
-        }
 
-        // Apply shading (background color)
-        if (props.Shading != null && !string.IsNullOrEmpty(props.Shading.Fill))
-        {
-            migraPara.Format.Shading.Color = ConvertHexToColor(props.Shading.Fill);
-        }
-
-        // Apply paragraph borders
-        if (props.ParagraphBorders != null)
-        {
-            var border = props.ParagraphBorders.TopBorder;
-            if (border != null && border.Color != null)
+            // Apply spacing (before, after, and line spacing)
+            if (props.SpacingBetweenLines != null)
             {
-                migraPara.Format.Borders.Top.Color = ConvertHexToColor(border.Color);
+                migraPara.Format.SpaceBefore = Unit.FromPoint(props.SpacingBetweenLines.Before != null ? Convert.ToDouble(props.SpacingBetweenLines.Before) : 0);
+                migraPara.Format.SpaceAfter = Unit.FromPoint(props.SpacingBetweenLines.After != null ? Convert.ToDouble(props.SpacingBetweenLines.After) : 0);
+                migraPara.Format.LineSpacing = Unit.FromPoint(props.SpacingBetweenLines.Line != null ? Convert.ToDouble(props.SpacingBetweenLines.Line) : 0);
+            }
+
+            // Apply indentation (respect page width and margins)
+            if (props.Indentation != null)
+            {
+                double leftIndent = props.Indentation.Left != null ? Convert.ToDouble(props.Indentation.Left) : 0;
+                double rightIndent = props.Indentation.Right != null ? Convert.ToDouble(props.Indentation.Right) : 0;
+                double firstLineIndent = props.Indentation.FirstLine != null ? Convert.ToDouble(props.Indentation.FirstLine) : 0;
+
+                // Ensure the left indent doesn't exceed the available space (page width - margins)
+                migraPara.Format.LeftIndent = Unit.FromPoint(0);
+                migraPara.Format.RightIndent = Unit.FromPoint(0);
+                migraPara.Format.FirstLineIndent = Unit.FromPoint(firstLineIndent);
+            }
+
+            // Apply tab stops
+            if (props.Tabs != null)
+            {
+                foreach (var tab in props.Tabs.Elements<DocumentFormat.OpenXml.Wordprocessing.TabStop>())
+                {
+                    TabAlignment align;
+                    if (tab.Val == TabStopValues.Center)
+                    {
+                        align = TabAlignment.Center;
+                    }
+                    else if (tab.Val == TabStopValues.Right)
+                    {
+                        align = TabAlignment.Right;
+                    }
+                    else
+                    {
+                        align = TabAlignment.Left;
+                    }
+                    migraPara.Format.TabStops.AddTabStop(Unit.FromPoint(tab.Position), align);
+                }
+            }
+
+            // Apply shading (background color)
+            if (props.Shading != null && !string.IsNullOrEmpty(props.Shading.Fill))
+            {
+                migraPara.Format.Shading.Color = ConvertHexToColor(props.Shading.Fill);
+            }
+
+            // Apply paragraph borders
+            if (props.ParagraphBorders != null)
+            {
+                var border = props.ParagraphBorders.TopBorder;
+                if (border != null && border.Color != null)
+                {
+                    migraPara.Format.Borders.Top.Color = ConvertHexToColor(border.Color);
+                }
             }
         }
     }
-}
 
 
 

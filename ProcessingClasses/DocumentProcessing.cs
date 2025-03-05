@@ -54,6 +54,8 @@ public class DocumentProcessing
             // Assign a reference to the existing document body.
             var mainDocumentPart = doc.MainDocumentPart.Document.Descendants<Text>().Where(t => t.Text.Contains("«")).ToList();
 
+
+    
             foreach (Text placeholder in mainDocumentPart)
             {
                 string columnName = placeholder.Text.Replace("«", "").Replace("»", "");
@@ -62,6 +64,7 @@ public class DocumentProcessing
                     placeholder.Text = dr[columnName].ToString();
                 }
             }
+
 
             doc.Save();
         }
@@ -158,8 +161,8 @@ public class DocumentProcessing
         dr["CheckinDate"] = booking.CheckinDateTime;
         dr["CheckOutDate"] = booking.CheckOutDateTime;
         dr["Price"] = booking.Price - booking.Discount;
-        //dr["CleaningFee"] = TODO: where? Booking or Accommodation?;
-        //dr["TownFee"] = TODO: where? Booking or Accommodation?;
+        //dr["CleaningFee"] = TODO: where? Accommodation?;
+        //dr["TownFee"] = TODO: Accommodation?;
         //dr["OTAFee"] = TODO: where? Booking or Accommodation?;
         dr["MainGuest"] = persons[0].Name + " " + persons[0].Surname;
         if (persons.Count > 1)
