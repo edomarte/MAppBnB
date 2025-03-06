@@ -1093,7 +1093,6 @@ c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\de\MigraDoc.Re
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\de\MigraDoc.RtfRendering.resources.dll
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\de\PdfSharp.Charting.resources.dll
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\de\PdfSharp.resources.dll
-c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\x86lmv01z0-bqbj3aq3nw.gz
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\MigraDoc.DocumentObjectModel.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\MigraDoc.Rendering.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\MigraDoc.RtfRendering.dll
@@ -1109,3 +1108,4 @@ c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\de\MigraDoc.RtfRenderi
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\de\PdfSharp.Charting.resources.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\de\PdfSharp.resources.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\x86lmv01z0-bqbj3aq3nw.gz
+c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\x86lmv01z0-8wxgu3qlw2.gz

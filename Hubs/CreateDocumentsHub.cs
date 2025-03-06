@@ -60,7 +60,7 @@ namespace SignalRChat.Hubs
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("ContractFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            await Clients.All.SendAsync("WordFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
 
@@ -73,7 +73,7 @@ namespace SignalRChat.Hubs
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("BookingDetailsFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            await Clients.All.SendAsync("WordFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
 
@@ -85,7 +85,7 @@ namespace SignalRChat.Hubs
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("PreCheckinFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            await Clients.All.SendAsync("WordFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
 
@@ -95,7 +95,17 @@ namespace SignalRChat.Hubs
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("ContractPDFFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            await Clients.All.SendAsync("PDFFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+
+        }
+
+        public async Task CreatePreCheckinPDF(string bookingId)
+        {
+            string contractPath = DocumentProcessing.GeneratePreCheckinPDF(bookingId);
+            byte[] file = await File.ReadAllBytesAsync(contractPath);
+            string base64String = Convert.ToBase64String(file);
+
+            await Clients.All.SendAsync("PDFFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
     }

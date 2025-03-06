@@ -106,9 +106,17 @@ public class DocumentProcessing
 
     public static string GenerateContractPDF(string bookingId)
     {
-        string contractPath = "..\\DocumentTemplates\\Contract" + bookingId + ".docx";
+        string docPath = "..\\DocumentTemplates\\Contract" + bookingId + ".docx";
         string pdfPath = "..\\DocumentTemplates\\Contract" + bookingId + ".pdf";
-        MigraDocPDF.ConvertWordToPdf(contractPath,pdfPath);
+        MigraDocPDF.ConvertWordToPdf(docPath,pdfPath);
+        return pdfPath;
+    }
+
+        public static string GeneratePreCheckinPDF(string bookingId)
+    {
+        string docPath = "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
+        string pdfPath = "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".pdf";
+        MigraDocPDF.ConvertWordToPdf(docPath,pdfPath);
         return pdfPath;
     }
 
