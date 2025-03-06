@@ -26,25 +26,6 @@ document.getElementById("generateContract").addEventListener("click", function (
     event.preventDefault();
 });
 
-connectionD.on("WordFile", (fileName, base64Data) => {
-    // Convert Base64 to Blob
-    const byteCharacters = atob(base64Data);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    const fileBlob = new Blob([byteArray], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
-
-    // Create Download Link
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(fileBlob);
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-});
-
 document.getElementById("generateBookingDetails").addEventListener("click", function (event) {
        
     var list=document.getElementById("PersonsOnBookingList");
@@ -56,12 +37,12 @@ document.getElementById("generateBookingDetails").addEventListener("click", func
         personsIDs.push(checkbox.id);
       }
   
-    //var accommodationID=document.getElementById("AccommodationsList").value;
+    var accommodationID=document.getElementById("AccommodationsList").value;
 
     var bookingID=document.getElementById("bookingID").value;
    
 
-    connectionD.invoke("CreateBookingDetails", personsIDs,bookingID).catch(function (err) {
+    connectionD.invoke("CreateBookingDetails", personsIDs, accommodationID, bookingID).catch(function (err) {
         return console.error(err.toString());
     });
 
@@ -109,7 +90,12 @@ document.getElementById("generatePreCheckinPDF").addEventListener("click", funct
     event.preventDefault();
 });
 
-connectionD.on("PDFFile", (fileName, base64Data) => {
+connectionD.on("DownloadFile", (fileName, base64Data) => {
+    var type=""
+    if(fileName.substring(fileName.lastIndexOf("."))==".docx")
+        type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    else
+        type="application/pdf"
     // Convert Base64 to Blob
     const byteCharacters = atob(base64Data);
     const byteNumbers = new Array(byteCharacters.length);
@@ -117,7 +103,7 @@ connectionD.on("PDFFile", (fileName, base64Data) => {
         byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
     const byteArray = new Uint8Array(byteNumbers);
-    const fileBlob = new Blob([byteArray], { type: "application/pdf" });
+    const fileBlob = new Blob([byteArray], { type: type });
 
     // Create Download Link
     const link = document.createElement("a");

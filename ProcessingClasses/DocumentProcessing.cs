@@ -120,9 +120,9 @@ public class DocumentProcessing
         return pdfPath;
     }
 
-    public static string GenerateBookingDetails(List<Person> persons, Booking booking, Room room)
+    public static string GenerateBookingDetails(List<Person> persons, Booking booking, Accommodation accommodation, Room room,BookingChannel channel)
     {
-        DataRow dr = addRowTobookingDetailsDt(persons, booking, room);
+        DataRow dr = addRowTobookingDetailsDt(persons, booking, accommodation, room,channel);
         string bookingId = booking.id.ToString();
 
         string bookingDetailsPath = "..\\DocumentTemplates\\BookingDetails" + bookingId + ".docx";
@@ -153,7 +153,7 @@ public class DocumentProcessing
         return bookingDetailsPath;
     }
 
-    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking, Room room)
+    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking, Accommodation accommodation, Room room,BookingChannel channel)
     {
         bookingDetailsDt = new DataTable();
         addFieldstoBookingDetailsDt();
@@ -161,17 +161,17 @@ public class DocumentProcessing
 
         dr["Name"] = persons[0].Name;
         dr["Surname"] = persons[0].Surname;
-        //dr["BookingDate"] = booking.BookingDate;
-        dr["Channel"] = ((BookingChannel)int.Parse(booking.BookingChannel)).ToString();
+        dr["BookingDate"] = booking.BookingDate;
+        dr["Channel"] = channel.Name;
         dr["PhonePrefix"] = persons[0].PhonePrefix;
         dr["PhoneNumber"] = persons[0].PhoneNumber;
         dr["Room"] = room.Name;
         dr["CheckinDate"] = booking.CheckinDateTime;
         dr["CheckOutDate"] = booking.CheckOutDateTime;
         dr["Price"] = booking.Price - booking.Discount;
-        //dr["CleaningFee"] = TODO: where? Accommodation?;
-        //dr["TownFee"] = TODO: Accommodation?;
-        //dr["OTAFee"] = TODO: where? Booking or Accommodation?;
+        dr["CleaningFee"] = accommodation.CleaningFee;
+        dr["TownFee"] = accommodation.TownFee;
+        dr["OTAFee"] = (booking.Price - booking.Discount)*channel.Fee;
         dr["MainGuest"] = persons[0].Name + " " + persons[0].Surname;
         if (persons.Count > 1)
         {
@@ -189,10 +189,10 @@ public class DocumentProcessing
                 }
             }
         }
-        //dr["Sent2Police"] = TODO: in Booking;
-        //dr["Sent2Region"] = TODO: in Booking;
-        //dr["Sent2Town"] = TODO: in Booking;
-        //dr["ContractPrinted"] = TODO: in Booking;
+        dr["Sent2Police"] = booking.Sent2Police;
+        dr["Sent2Region"] = booking.Sent2Region;
+        dr["Sent2Town"] = booking.Sent2Town;
+        dr["ContractPrinted"] = booking.ContractPrinted;
 
         bookingDetailsDt.Rows.Add(dr);
         return dr;

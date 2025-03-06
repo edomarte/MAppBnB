@@ -46,4 +46,12 @@ public class Accommodation
     [DataType(DataType.Text)]
     [Required]
     public string? CIR { get; set; }
+    [Required]
+    public decimal? CleaningFee { get; set; }
+    [DataType(DataType.Text)]
+    [Required]
+    public string? TownFee { get; set; }
+    [DataType(DataType.Text)]
+    [Required]
+    public string ?ContractPrinted{get;set;}
 }

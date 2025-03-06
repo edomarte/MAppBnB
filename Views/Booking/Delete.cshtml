@@ -13,6 +13,12 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CheckinDateTime)
         </dt>
         <dd class="col-sm-10">
@@ -37,10 +43,10 @@
             @Html.DisplayFor(model => model.IsPaid)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BookingChannel)
+            @Html.DisplayNameFor(model => model.ChannelID)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BookingChannel)
+            @Html.DisplayFor(model => model.ChannelID)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.AccommodationID)
@@ -65,6 +71,24 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Discount)
+        </dd> 
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sent2Police)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sent2Police)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sent2Region)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sent2Region)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sent2Town)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sent2Town)
         </dd>
         <dt class="col-sm-2">
             People on Booking

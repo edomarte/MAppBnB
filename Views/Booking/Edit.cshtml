@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
     var accommodations=ViewData["AccommodationList"] as List<Accommodation>;
+    var channels=ViewData["ChannelList"] as List<BookingChannel>;
 }
 
 <h1>Edit</h1>
@@ -14,6 +15,11 @@
         <form asp-action="Edit" id="form">
             <input type="hidden" asp-for="Booking.id" id="bookingID"/>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Booking.BookingDate" class="control-label"></label>
+                <input asp-for="Booking.BookingDate" class="form-control" />
+                <span asp-validation-for="Booking.BookingDate" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Booking.CheckinDateTime" class="control-label"></label>
                 <input asp-for="Booking.CheckinDateTime" class="form-control" />
@@ -32,16 +38,16 @@
             <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
                 <select asp-for="Booking.IsPaid" class="form-control">
-                    @foreach(var role in Enum.GetValues(typeof(YesNo))){
-                        <option value="@role">@role</option>
+                   @foreach(var channel in channels){
+                        <option value="@channel.id">@channel.Name</option>
                     }
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.BookingChannel" class="control-label"></label>
-                <input asp-for="Booking.BookingChannel" class="form-control" />
-                <span asp-validation-for="Booking.BookingChannel" class="text-danger"></span>
+                <label asp-for="Booking.ChannelID" class="control-label"></label>
+                <input asp-for="Booking.ChannelID" class="form-control" />
+                <span asp-validation-for="Booking.ChannelID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.AccommodationID" class="control-label"></label>
@@ -67,6 +73,33 @@
                 <label asp-for="Booking.Discount" class="control-label"></label>
                 <input asp-for="Booking.Discount" class="form-control" />
                 <span asp-validation-for="Booking.Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.Sent2Police" class="control-label"></label>
+                <select asp-for="Booking.Sent2Police" class="form-control">
+                    @foreach(var role in Enum.GetValues(typeof(YesNo))){
+                        <option value="@role">@role</option>
+                    }
+                </select>
+                <span asp-validation-for="Booking.Sent2Police" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.Sent2Region" class="control-label"></label>
+                <select asp-for="Booking.Sent2Region" class="form-control">
+                    @foreach(var role in Enum.GetValues(typeof(YesNo))){
+                        <option value="@role">@role</option>
+                    }
+                </select>
+                <span asp-validation-for="Booking.Sent2Region" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.Sent2Town" class="control-label"></label>
+                <select asp-for="Booking.Sent2Town" class="form-control">
+                    @foreach(var role in Enum.GetValues(typeof(YesNo))){
+                        <option value="@role">@role</option>
+                    }
+                </select>
+                <span asp-validation-for="Booking.Sent2Town" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="hidden" asp-for="PersonIDs" class="form-control" id="PersonIDs"/>
