@@ -5,7 +5,7 @@
 namespace MAppBnB.Migrations
 {
     /// <inheritdoc />
-    public partial class BookingChannel : Migration
+    public partial class AddBookChannel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

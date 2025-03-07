@@ -100,7 +100,7 @@ namespace MAppBnB.Migrations
                     b.Property<int>("AccommodationID")
                         .HasColumnType("int");
 
-                    b.Property<string>("BookingChannel")
+                    b.Property<string>("BookChannel")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

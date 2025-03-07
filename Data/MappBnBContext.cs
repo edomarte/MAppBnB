@@ -20,6 +20,6 @@ namespace MAppBnB.Data
         public DbSet<MAppBnB.Document> Document { get; set; } = default!;
         public DbSet<MAppBnB.Person> Person { get; set; } = default!;
         public DbSet<MAppBnB.BookingPerson> BookingPerson { get; set; } = default!;
-        public DbSet<MAppBnB.BookingChannel> BookingChannel { get; set; } = default!;
+        public DbSet<MAppBnB.BookChannel> BookChannel { get; set; } = default!;
     }
 }

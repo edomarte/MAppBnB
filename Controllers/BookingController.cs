@@ -62,7 +62,7 @@ namespace MAppBnB.Controllers
 
             var accomodationNames = await _context.Accommodation.ToListAsync();
             ViewData["AccommodationList"] = accomodationNames;
-            var channels = await _context.BookingChannel.ToListAsync();
+            var channels = await _context.BookChannel.ToListAsync();
             ViewData["ChannelList"] = channels;
             return View(viewModel);
         }
@@ -132,7 +132,7 @@ namespace MAppBnB.Controllers
 
             var accomodationNames = await _context.Accommodation.ToListAsync();
             ViewData["AccommodationList"] = accomodationNames;
-            var channels = await _context.BookingChannel.ToListAsync();
+            var channels = await _context.BookChannel.ToListAsync();
             ViewData["ChannelList"] = channels;
             return View(viewModel);
         }

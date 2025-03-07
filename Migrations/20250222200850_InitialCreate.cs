@@ -47,7 +47,7 @@ namespace MAppBnB.Migrations
                     CheckOutDateTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaymentDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsPaid = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BookingChannel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BookChannel = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AccommodationID = table.Column<int>(type: "int", nullable: false),
                     RoomID = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),

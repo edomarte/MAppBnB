@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
     var accommodations=ViewData["AccommodationList"] as List<Accommodation>;
-    var channels=ViewData["ChannelList"] as List<BookingChannel>;
+    //var channels=ViewData["ChannelList"] as List<BookChannel>;
 }
 
 <h1>Edit</h1>
@@ -34,15 +34,6 @@
                 <label asp-for="Booking.PaymentDate" class="control-label"></label>
                 <input asp-for="Booking.PaymentDate" class="form-control" />
                 <span asp-validation-for="Booking.PaymentDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Booking.IsPaid" class="control-label"></label>
-                <select asp-for="Booking.IsPaid" class="form-control">
-                   @foreach(var channel in channels){
-                        <option value="@channel.id">@channel.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.ChannelID" class="control-label"></label>

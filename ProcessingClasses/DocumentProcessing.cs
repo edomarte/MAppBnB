@@ -3,6 +3,7 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using MAppBnB;
 
+
 public class DocumentProcessing
 {
     static DataTable contractDt;
@@ -120,7 +121,7 @@ public class DocumentProcessing
         return pdfPath;
     }
 
-    public static string GenerateBookingDetails(List<Person> persons, Booking booking, Accommodation accommodation, Room room,BookingChannel channel)
+    public static string GenerateBookingDetails(List<Person> persons, Booking booking, Accommodation accommodation, Room room,BookChannel channel)
     {
         DataRow dr = addRowTobookingDetailsDt(persons, booking, accommodation, room,channel);
         string bookingId = booking.id.ToString();
@@ -153,7 +154,7 @@ public class DocumentProcessing
         return bookingDetailsPath;
     }
 
-    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking, Accommodation accommodation, Room room,BookingChannel channel)
+    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking, Accommodation accommodation, Room room,BookChannel channel)
     {
         bookingDetailsDt = new DataTable();
         addFieldstoBookingDetailsDt();
