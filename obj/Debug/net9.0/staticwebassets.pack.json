@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\js\\documentCreation.js"
     },
     {
+      "Id": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentTransmission.js",
+      "PackagePath": "staticwebassets\\js\\documentTransmission.js"
+    },
+    {
       "Id": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\getRooms.js",
       "PackagePath": "staticwebassets\\js\\getRooms.js"
     },

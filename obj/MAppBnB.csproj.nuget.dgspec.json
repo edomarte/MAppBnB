@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj": {}
+    "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj": {
+    "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
+        "projectUniqueName": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
         "projectName": "MAppBnB",
-        "projectPath": "C:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
+        "projectPath": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
         "packagesPath": "C:\\Users\\edoma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\",
+        "outputPath": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\edoma\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -75,6 +75,10 @@
             "PDFsharp-MigraDoc": {
               "target": "Package",
               "version": "[6.1.1, )"
+            },
+            "brevo_csharp": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [

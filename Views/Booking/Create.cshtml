@@ -1,9 +1,9 @@
 @model PersonBookingViewModel
 
 @{
-    ViewData["Title"] = "Create";   
-    var accommodations=ViewData["AccommodationList"] as List<Accommodation>;
-    var channels=ViewData["ChannelList"] as List<BookingChannel>;
+    ViewData["Title"] = "Create";
+    var accommodations = ViewData["AccommodationList"] as List<Accommodation>;
+    var channels = ViewData["ChannelList"] as List<BookChannel>;
 }
 
 <h1>Create</h1>
@@ -37,8 +37,9 @@
             <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
                 <select asp-for="Booking.IsPaid" class="form-control">
-                    @foreach(var role in Enum.GetValues(typeof(YesNo))){
-                        <option value="@role">@role</option>
+                    @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
+                    {
+                        <option value="@((int)role)">@role</option>
                     }
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
@@ -46,16 +47,18 @@
             <div class="form-group">
                 <label asp-for="Booking.ChannelID" class="control-label"></label>
                 <select asp-for="Booking.ChannelID" class="form-control">
-                    @foreach(var channel in channels){
+                    @foreach (var channel in channels)
+                    {
                         <option value="@channel.id">@channel.Name</option>
                     }
                 </select>
-                <span asp-validation-for="Booking.ChannelID" class="text-danger"></span>
+                <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.AccommodationID" class="control-label"></label>
                 <select asp-for="Booking.AccommodationID" class="form-control" id="AccommodationsList">
-                    @foreach(var accommodation in accommodations){
+                    @foreach (var accommodation in accommodations)
+                    {
                         <option value=@accommodation.id>@accommodation.Name</option>
                     }
                 </select>
@@ -78,27 +81,32 @@
                 <span asp-validation-for="Booking.Discount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="hidden" asp-for="PersonIDs" class="form-control" id="PersonIDs"/>
+                <input type="hidden" asp-for="PersonIDs" class="form-control" id="PersonIDs" />
+                <input type="hidden" asp-for="Booking.Sent2Police" class="form-control" id="PersonIDs" value=0 />
+                <input type="hidden" asp-for="Booking.Sent2Region" class="form-control" id="PersonIDs" value=0 />
+                <input type="hidden" asp-for="Booking.Sent2Town" class="form-control" id="PersonIDs" value=0 />
+                <input type="hidden" asp-for="Booking.ContractPrinted" class="form-control" id="PersonIDs" value=0 />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
-    
+
     </div>
     <div class="col-md-4">
-    <p>
-        <label>Search Guests to Add to the Booking: <input type="text" name="SearchPerson" id="SearchPerson" /></label>
-        <input type="button" id="searchPersonButton" value="Search Person" />
+        <p>
+            <label>Search Guests to Add to the Booking: <input type="text" name="SearchPerson"
+                    id="SearchPerson" /></label>
+            <input type="button" id="searchPersonButton" value="Search Person" />
         <ul id="ResultList"></ul>
         <input type="button" id="addSelectedButton" value="Add selected guests to booking" />
 
-    </p>
-    <p>
-        <label>Persons on the Booking</label>
+        </p>
+        <p>
+            <label>Persons on the Booking</label>
         <ul id="PersonsOnBookingList"></ul>
         <input type="button" id="removeSelectedButton" value="Remove selected guests form booking" />
-    </p>
+        </p>
     </div>
 </div>
 
@@ -110,5 +118,7 @@
 <script src="~/js/getRooms.js" defer></script>
 <script src="~/js/searchPerson.js" defer></script>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

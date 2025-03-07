@@ -82,9 +82,8 @@ namespace MAppBnB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TownFee")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("TownFee")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UnitApartment")
                         .HasColumnType("nvarchar(max)");
@@ -95,6 +94,27 @@ namespace MAppBnB.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Accommodation");
+                });
+
+            modelBuilder.Entity("MAppBnB.BookChannel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<decimal>("Fee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("BookChannel");
                 });
 
             modelBuilder.Entity("MAppBnB.Booking", b =>
@@ -154,26 +174,6 @@ namespace MAppBnB.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Booking");
-                });
-
-            modelBuilder.Entity("MAppBnB.BookingChannel", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<decimal>("Fee")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("BookingChannel");
                 });
 
             modelBuilder.Entity("MAppBnB.BookingPerson", b =>

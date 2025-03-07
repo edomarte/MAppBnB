@@ -52,9 +52,9 @@ namespace SignalRChat.Hubs
             return room[0];
         }
 
-        public BookingChannel GetChannelDetails(int? channelId)
+        public BookChannel GetChannelDetails(int? channelId)
         {
-            var channel = _context.BookingChannel.Where(x => x.id == channelId).ToList();
+            var channel = _context.BookChannel.Where(x => x.id == channelId).ToList();
             return channel[0];
         }
 

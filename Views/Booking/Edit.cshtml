@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
     var accommodations=ViewData["AccommodationList"] as List<Accommodation>;
-    var channels=ViewData["ChannelList"] as List<BookingChannel>;
+    var channels=ViewData["ChannelList"] as List<BookChannel>;
 }
 
 <h1>Edit</h1>
@@ -38,16 +38,22 @@
             <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
                 <select asp-for="Booking.IsPaid" class="form-control">
-                   @foreach(var channel in channels){
-                        <option value="@channel.id">@channel.Name</option>
+                    @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
+                    {
+                        <option value="@((int)role)">@role</option>
                     }
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.ChannelID" class="control-label"></label>
-                <input asp-for="Booking.ChannelID" class="form-control" />
-                <span asp-validation-for="Booking.ChannelID" class="text-danger"></span>
+                <select asp-for="Booking.ChannelID" class="form-control">
+                    @foreach (var channel in channels)
+                    {
+                        <option value="@channel.id">@channel.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.AccommodationID" class="control-label"></label>
@@ -77,8 +83,9 @@
             <div class="form-group">
                 <label asp-for="Booking.Sent2Police" class="control-label"></label>
                 <select asp-for="Booking.Sent2Police" class="form-control">
-                    @foreach(var role in Enum.GetValues(typeof(YesNo))){
-                        <option value="@role">@role</option>
+                    @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
+                    {
+                        <option value="@((int)role)">@role</option>
                     }
                 </select>
                 <span asp-validation-for="Booking.Sent2Police" class="text-danger"></span>
@@ -86,8 +93,9 @@
             <div class="form-group">
                 <label asp-for="Booking.Sent2Region" class="control-label"></label>
                 <select asp-for="Booking.Sent2Region" class="form-control">
-                    @foreach(var role in Enum.GetValues(typeof(YesNo))){
-                        <option value="@role">@role</option>
+                    @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
+                    {
+                        <option value="@((int)role)">@role</option>
                     }
                 </select>
                 <span asp-validation-for="Booking.Sent2Region" class="text-danger"></span>
@@ -95,11 +103,22 @@
             <div class="form-group">
                 <label asp-for="Booking.Sent2Town" class="control-label"></label>
                 <select asp-for="Booking.Sent2Town" class="form-control">
-                    @foreach(var role in Enum.GetValues(typeof(YesNo))){
-                        <option value="@role">@role</option>
+                   @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
+                    {
+                        <option value="@((int)role)">@role</option>
                     }
                 </select>
                 <span asp-validation-for="Booking.Sent2Town" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.ContractPrinted" class="control-label"></label>
+                <select asp-for="Booking.ContractPrinted" class="form-control">
+                   @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
+                    {
+                        <option value="@((int)role)">@role</option>
+                    }
+                </select>
+                <span asp-validation-for="Booking.ContractPrinted" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="hidden" asp-for="PersonIDs" class="form-control" id="PersonIDs"/>
@@ -145,6 +164,9 @@
     <p>
         <input type="button" id="generatePreCheckinPDF" value="Generate Pre-Checkin PDF" />
     </p>
+    <p>
+        <input type="button" id="TransmitToTown" value="Send Documents to Town" />
+    </p>
 </div>
 
 <div>
@@ -155,6 +177,7 @@
 <script src="~/js/getRooms.js" defer></script>
 <script src="~/js/searchPerson.js" defer></script>
 <script src="~/js/documentCreation.js" defer></script>
+<script src="~/js/documentTransmission.js" defer></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

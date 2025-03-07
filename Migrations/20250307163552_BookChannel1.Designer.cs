@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAppBnB.Migrations
 {
     [DbContext(typeof(MappBnBContext))]
-    [Migration("20250306185649_BookingChannel")]
-    partial class BookingChannel
+    [Migration("20250307163552_BookChannel1")]
+    partial class BookChannel1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,13 @@ namespace MAppBnB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("CleaningFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ContractPrinted")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -78,6 +85,9 @@ namespace MAppBnB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("TownFee")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("UnitApartment")
                         .HasColumnType("nvarchar(max)");
 
@@ -87,6 +97,27 @@ namespace MAppBnB.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Accommodation");
+                });
+
+            modelBuilder.Entity("MAppBnB.BookChannel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<decimal>("Fee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("BookChannel");
                 });
 
             modelBuilder.Entity("MAppBnB.Booking", b =>
@@ -100,9 +131,12 @@ namespace MAppBnB.Migrations
                     b.Property<int>("AccommodationID")
                         .HasColumnType("int");
 
-                    b.Property<string>("BookingChannel")
+                    b.Property<string>("BookingDate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ChannelID")
+                        .HasColumnType("int");
 
                     b.Property<string>("CheckOutDateTime")
                         .IsRequired()
@@ -112,12 +146,14 @@ namespace MAppBnB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ContractPrinted")
+                        .HasColumnType("int");
+
                     b.Property<int>("Discount")
                         .HasColumnType("int");
 
-                    b.Property<string>("IsPaid")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IsPaid")
+                        .HasColumnType("int");
 
                     b.Property<string>("PaymentDate")
                         .IsRequired()
@@ -127,6 +163,15 @@ namespace MAppBnB.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("RoomID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sent2Police")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sent2Region")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sent2Town")
                         .HasColumnType("int");
 
                     b.HasKey("id");

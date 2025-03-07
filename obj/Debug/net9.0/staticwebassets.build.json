@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "g/s6gL/vdtUWc89M6McCz8fOhzEjk1PPQ5sUyP9WP1o=",
+  "Hash": "MF8RmEWrksY6ChHYygrRB4S+2ZT4z6lZnkrCjEybhKw=",
   "Source": "MAppBnB",
   "BasePath": "_content/MAppBnB",
   "Mode": "Default",
@@ -36,6 +36,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-ceciveib9c.gz",
+      "SourceId": "MAppBnB",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MAppBnB",
+      "RelativePath": "js/documentTransmission#[.{fingerprint=ceciveib9c}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentTransmission.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "090avpfw1i",
+      "Integrity": "xJIefHzS4M1AhyVM1dCEL3QDrGmLysj2xkCbkV3GwZA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentTransmission.js"
     },
     {
       "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\2kv4t9g0ij-v486xewcpi.gz",
@@ -1548,6 +1569,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\documentCreation.js"
+    },
+    {
+      "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentTransmission.js",
+      "SourceId": "MAppBnB",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\",
+      "BasePath": "_content/MAppBnB",
+      "RelativePath": "js/documentTransmission#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ceciveib9c",
+      "Integrity": "vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\documentTransmission.js"
     },
     {
       "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\getRooms.js",
@@ -3786,6 +3828,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-9Q5l3uwgJNwqqGHy5U8siPHufoQBYUe54vQqCEjlvIw="
+        }
+      ]
+    },
+    {
+      "Route": "js/documentTransmission.ceciveib9c.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-ceciveib9c.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002450980392"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "407"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xJIefHzS4M1AhyVM1dCEL3QDrGmLysj2xkCbkV3GwZA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 20:25:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ceciveib9c"
+        },
+        {
+          "Name": "label",
+          "Value": "js/documentTransmission.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw="
+        }
+      ]
+    },
+    {
+      "Route": "js/documentTransmission.ceciveib9c.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentTransmission.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "841"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 20:25:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ceciveib9c"
+        },
+        {
+          "Name": "label",
+          "Value": "js/documentTransmission.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw="
+        }
+      ]
+    },
+    {
+      "Route": "js/documentTransmission.ceciveib9c.js.gz",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-ceciveib9c.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "407"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xJIefHzS4M1AhyVM1dCEL3QDrGmLysj2xkCbkV3GwZA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 20:25:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ceciveib9c"
+        },
+        {
+          "Name": "label",
+          "Value": "js/documentTransmission.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xJIefHzS4M1AhyVM1dCEL3QDrGmLysj2xkCbkV3GwZA="
+        }
+      ]
+    },
+    {
+      "Route": "js/documentTransmission.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-ceciveib9c.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002450980392"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "407"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xJIefHzS4M1AhyVM1dCEL3QDrGmLysj2xkCbkV3GwZA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 20:25:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw="
+        }
+      ]
+    },
+    {
+      "Route": "js/documentTransmission.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentTransmission.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "841"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 20:25:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw="
+        }
+      ]
+    },
+    {
+      "Route": "js/documentTransmission.js.gz",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-ceciveib9c.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "407"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xJIefHzS4M1AhyVM1dCEL3QDrGmLysj2xkCbkV3GwZA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 20:25:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xJIefHzS4M1AhyVM1dCEL3QDrGmLysj2xkCbkV3GwZA="
         }
       ]
     },

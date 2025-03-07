@@ -1,4 +1,4 @@
 public enum YesNo{
-    Yes,
-    No
+    No=0,
+    Yes=1
 }
