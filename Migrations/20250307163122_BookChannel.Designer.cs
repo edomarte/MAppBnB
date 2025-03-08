@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAppBnB.Migrations
 {
     [DbContext(typeof(MappBnBContext))]
+<<<<<<<< HEAD:Migrations/20250307163122_BookChannel.Designer.cs
     [Migration("20250307163122_BookChannel")]
     partial class BookChannel
+========
+    [Migration("20250307105254_AddBookChannel")]
+    partial class AddBookChannel
+>>>>>>>> 3585d287e58e65249e86a8d8e4f25333c08dcad8:Migrations/20250307105254_AddBookChannel.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

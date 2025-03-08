@@ -1109,6 +1109,7 @@ c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\de\PdfSharp.Charting.r
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\de\PdfSharp.resources.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\x86lmv01z0-98t39orfpl.gz
 C:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\x86lmv01z0-98t39orfpl.gz
+<<<<<<< HEAD
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\1kv0l3t7ot-ceciveib9c.gz
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\brevo_csharp.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\FubarCoder.RestSharp.Portable.Core.dll
@@ -1147,3 +1148,5 @@ c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\zh-Hans\System.Service
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\zh-Hant\System.ServiceModel.Primitives.resources.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\MAppBnB.MvcApplicationPartsAssemblyInfo.cs
+=======
+>>>>>>> 3585d287e58e65249e86a8d8e4f25333c08dcad8
