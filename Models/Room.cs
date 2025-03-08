@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace MAppBnB;
 
@@ -16,5 +17,6 @@ public class Room{
     public int ?AccommodationId{get;set;}
     [Required]
     [DataType(DataType.Currency)]
-    public int ?BasicPrice{get;set;}
+    [Precision(18,2)]
+    public decimal ?BasicPrice{get;set;}
 }

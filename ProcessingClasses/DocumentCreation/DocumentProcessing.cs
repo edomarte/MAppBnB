@@ -94,9 +94,10 @@ public class DocumentProcessing
         dr["Price"] = booking.Price - booking.Discount;
         //dr["PriceInLetters"];
         dr["PaymentDate"] = booking.PaymentDate;
-        dr["BookingNightsNum"] = (DateTime.Parse(booking.CheckOutDateTime).Date - DateTime.Parse(booking.CheckinDateTime).Date).TotalDays;
+        //TODO
+        /*dr["BookingNightsNum"] = (DateTime.Parse(booking.CheckOutDateTime).Date - DateTime.Parse(booking.CheckinDateTime).Date).TotalDays;
         dr["CheckinDate"] = booking.CheckinDateTime.Substring(0, booking.CheckinDateTime.IndexOf("T"));
-        dr["CheckoutDate"] = booking.CheckOutDateTime.Substring(0, booking.CheckOutDateTime.IndexOf("T"));
+        dr["CheckoutDate"] = booking.CheckOutDateTime.Substring(0, booking.CheckOutDateTime.IndexOf("T"));*/
         dr["ContractDate"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
         dr["City"] = accommodation.City;
         dr["Address"] = accommodation.Address;
@@ -268,7 +269,8 @@ public class DocumentProcessing
         dr["AccommodationName"] = accommodation.Name;
         dr["City"] = accommodation.City;
         dr["AccommodationWebsite"] = accommodation.Website;
-        dr["CheckinDate"] = booking.CheckinDateTime.Substring(0, booking.CheckinDateTime.IndexOf("T"));
+        //TODO
+        //dr["CheckinDate"] = booking.CheckinDateTime.Substring(0, booking.CheckinDateTime.IndexOf("T"));
 
         preCheckinDt.Rows.Add(dr);
         return dr;

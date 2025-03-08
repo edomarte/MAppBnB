@@ -2,8 +2,8 @@
 
 @{
     ViewData["Title"] = "Edit";
-    var accommodations=ViewData["AccommodationList"] as List<Accommodation>;
-    var channels=ViewData["ChannelList"] as List<BookChannel>;
+    var accommodations = ViewData["AccommodationList"] as List<Accommodation>;
+    var channels = ViewData["ChannelList"] as List<BookChannel>;
 }
 
 <h1>Edit</h1>
@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit" id="form">
-            <input type="hidden" asp-for="Booking.id" id="bookingID"/>
+            <input type="hidden" asp-for="Booking.id" id="bookingID" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Booking.BookingDate" class="control-label"></label>
@@ -38,10 +38,8 @@
             <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
                 <select asp-for="Booking.IsPaid" class="form-control">
-                    @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
-                    {
-                        <option value="@((int)role)">@role</option>
-                    }
+                    <option value=@false>No</option>
+                    <option value=@true>Yes</option>
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
@@ -58,7 +56,8 @@
             <div class="form-group">
                 <label asp-for="Booking.AccommodationID" class="control-label"></label>
                 <select asp-for="Booking.AccommodationID" class="form-control" id="AccommodationsList">
-                    @foreach(var accommodation in accommodations){
+                    @foreach (var accommodation in accommodations)
+                    {
                         <option value=@accommodation.id>@accommodation.Name</option>
                     }
                 </select>
@@ -83,101 +82,96 @@
             <div class="form-group">
                 <label asp-for="Booking.Sent2Police" class="control-label"></label>
                 <select asp-for="Booking.Sent2Police" class="form-control">
-                    @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
-                    {
-                        <option value="@((int)role)">@role</option>
-                    }
+                    <option value=@false>No</option>
+                    <option value=@true>Yes</option>
                 </select>
                 <span asp-validation-for="Booking.Sent2Police" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.Sent2Region" class="control-label"></label>
                 <select asp-for="Booking.Sent2Region" class="form-control">
-                    @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
-                    {
-                        <option value="@((int)role)">@role</option>
-                    }
+                    <option value=@false>No</option>
+                    <option value=@true>Yes</option>
                 </select>
                 <span asp-validation-for="Booking.Sent2Region" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.Sent2Town" class="control-label"></label>
                 <select asp-for="Booking.Sent2Town" class="form-control">
-                   @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
-                    {
-                        <option value="@((int)role)">@role</option>
-                    }
+                    <option value=@false>No</option>
+                    <option value=@true>Yes</option>
                 </select>
                 <span asp-validation-for="Booking.Sent2Town" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.ContractPrinted" class="control-label"></label>
                 <select asp-for="Booking.ContractPrinted" class="form-control">
-                   @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
-                    {
-                        <option value="@((int)role)">@role</option>
-                    }
+                    <option value=@false>No</option>
+                    <option value=@true>Yes</option>
                 </select>
                 <span asp-validation-for="Booking.ContractPrinted" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="hidden" asp-for="PersonIDs" class="form-control" id="PersonIDs"/>
+                <input type="hidden" asp-for="PersonIDs" class="form-control" id="PersonIDs" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Edit" class="btn btn-primary" />
             </div>
         </form>
-    
+
     </div>
     <div class="col-md-4">
-    <p>
-        <label>Search Guests to Add to the Booking: <input type="text" name="SearchPerson" id="SearchPerson" /></label>
-        <input type="button" id="searchPersonButton" value="Search Person" />
+        <p>
+            <label>Search Guests to Add to the Booking: <input type="text" name="SearchPerson"
+                    id="SearchPerson" /></label>
+            <input type="button" id="searchPersonButton" value="Search Person" />
         <ul id="ResultList"></ul>
         <input type="button" id="addSelectedButton" value="Add selected guests to booking" />
 
-    </p>
-    <p>
-        <label>Persons on the Booking</label>
+        </p>
+        <p>
+            <label>Persons on the Booking</label>
         <ul id="PersonsOnBookingList">
-            @foreach(var person in Model.PeopleInBooking)
+            @foreach (var person in Model.PeopleInBooking)
             {
-                <li><input type="checkbox" id="@person.id" >@($"{person.Name}, {person.Surname}, {person.BirthDate}")</li>
+                <li><input type="checkbox" id="@person.id">@($"{person.Name}, {person.Surname}, {person.BirthDate}")</li>
             }
         </ul>
         <input type="button" id="removeSelectedButton" value="Remove selected guests form booking" />
-    </p>
+        </p>
     </div>
     <div class="col-md-4">
-    <p>
-        <input type="button" id="generateContract" value="Generate Contract" />
-    </p>
-    <p>
-        <input type="button" id="generateBookingDetails" value="Generate Booking Details Sheet" />
-    </p>
-    <p>
-        <input type="button" id="generatePreCheckin" value="Generate Pre-Checkin Sheet" />
-    </p>
-    <p>
-        <input type="button" id="generateContractPDF" value="Generate Contract PDF" />
-    </p>
-    <p>
-        <input type="button" id="generatePreCheckinPDF" value="Generate Pre-Checkin PDF" />
-    </p>
-    <p>
-        <input type="button" id="TransmitToTown" value="Send Documents to Town" />
-    </p>
-</div>
+        <p>
+            <input type="button" id="generateContract" value="Generate Contract" />
+        </p>
+        <p>
+            <input type="button" id="generateBookingDetails" value="Generate Booking Details Sheet" />
+        </p>
+        <p>
+            <input type="button" id="generatePreCheckin" value="Generate Pre-Checkin Sheet" />
+        </p>
+        <p>
+            <input type="button" id="generateContractPDF" value="Generate Contract PDF" />
+        </p>
+        <p>
+            <input type="button" id="generatePreCheckinPDF" value="Generate Pre-Checkin PDF" />
+        </p>
+        <p>
+            <input type="button" id="TransmitToTown" value="Send Documents to Town" />
+        </p>
+    </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/getRooms.js" defer></script>
-<script src="~/js/searchPerson.js" defer></script>
-<script src="~/js/documentCreation.js" defer></script>
-<script src="~/js/documentTransmission.js" defer></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/getRooms.js" defer></script>
+    <script src="~/js/searchPerson.js" defer></script>
+    <script src="~/js/documentCreation.js" defer></script>
+    <script src="~/js/documentTransmission.js" defer></script>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

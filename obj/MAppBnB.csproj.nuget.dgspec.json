@@ -79,6 +79,10 @@
             "brevo_csharp": {
               "target": "Package",
               "version": "[1.0.0, )"
+            },
+            "soapcore": {
+              "target": "Package",
+              "version": "[1.2.0, )"
             }
           },
           "imports": [

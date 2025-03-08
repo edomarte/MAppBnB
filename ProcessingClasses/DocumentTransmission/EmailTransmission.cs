@@ -22,18 +22,18 @@ public class EmailTransmission
         + "Please see attached copy of the document." + "\n"
         + "Kind regards";
 
-        SendEmail("edomarte@gmail.com", message, document.PdfCopy);
+        SendEmail("edomarte@gmail.com", message, document.PdfCopy, "Booking Documents");
     }
 
-    private static void SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64)
+    private static void SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64, string subject)
     {
         Configuration.Default.ApiKey.Add("api-key", "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");
 
         var apiInstance = new TransactionalEmailsApi();
         var sendSmtpEmail = new SendSmtpEmail(
             sender: new SendSmtpEmailSender(email: "edomarte@gmail.com", name: "MAppBnB"),
-            to: new List<SendSmtpEmailTo> { new SendSmtpEmailTo(email: "edomarte@live.it", name: "Tester") },
-            subject: "Subject",
+            to: new List<SendSmtpEmailTo> { new SendSmtpEmailTo(email: emailRecipient, name: "Town") },
+            subject: subject,
             htmlContent: "<html><body><h1>Email Body</h1></body></html>",
             attachment: new List<SendSmtpEmailAttachment>{
                 new SendSmtpEmailAttachment(content: attachmentBase64,

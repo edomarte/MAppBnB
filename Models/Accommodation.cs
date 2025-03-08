@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace MAppBnB;
 
@@ -47,8 +48,11 @@ public class Accommodation
     [Required]
     public string? CIR { get; set; }
     [Required]
+    [Precision(18, 2)]
+    [DataType(DataType.Currency)]
     public decimal? CleaningFee { get; set; }
-    [DataType(DataType.Text)]
+    [DataType(DataType.Currency)]
     [Required]
+    [Precision(18, 2)]
     public decimal? TownFee { get; set; }
 }

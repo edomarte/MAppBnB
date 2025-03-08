@@ -37,10 +37,8 @@
             <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
                 <select asp-for="Booking.IsPaid" class="form-control">
-                    @foreach (YesNo role in Enum.GetValues(typeof(YesNo)))
-                    {
-                        <option value="@((int)role)">@role</option>
-                    }
+                        <option value=@false>No</option>
+                        <option value=@true>Yes</option>
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
@@ -82,10 +80,10 @@
             </div>
             <div class="form-group">
                 <input type="hidden" asp-for="PersonIDs" class="form-control" id="PersonIDs" />
-                <input type="hidden" asp-for="Booking.Sent2Police" class="form-control" id="PersonIDs" value=0 />
-                <input type="hidden" asp-for="Booking.Sent2Region" class="form-control" id="PersonIDs" value=0 />
-                <input type="hidden" asp-for="Booking.Sent2Town" class="form-control" id="PersonIDs" value=0 />
-                <input type="hidden" asp-for="Booking.ContractPrinted" class="form-control" id="PersonIDs" value=0 />
+                <input type="hidden" asp-for="Booking.Sent2Police" class="form-control" id="PersonIDs" value=false />
+                <input type="hidden" asp-for="Booking.Sent2Region" class="form-control" id="PersonIDs" value=false />
+                <input type="hidden" asp-for="Booking.Sent2Town" class="form-control" id="PersonIDs" value=false />
+                <input type="hidden" asp-for="Booking.ContractPrinted" class="form-control" id="PersonIDs" value=false />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

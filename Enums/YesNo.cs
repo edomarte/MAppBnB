@@ -1,4 +1,4 @@
-public enum YesNo{
-    No=0,
-    Yes=1
+public static class YesNo{
+    public const bool No = false;
+    public const bool Yes = true;
 }

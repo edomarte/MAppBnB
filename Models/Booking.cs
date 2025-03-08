@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace MAppBnB;
 
@@ -8,19 +9,19 @@ public class Booking
 
     [DataType(DataType.Date)]
     [Required]
-    public string? BookingDate { get; set; }
+    public DateOnly? BookingDate { get; set; }
     [DataType(DataType.DateTime)]
     [Required]
-    public string? CheckinDateTime { get; set; }
+    public DateTime? CheckinDateTime { get; set; }
     [DataType(DataType.DateTime)]
     [Required]
-    public string? CheckOutDateTime { get; set; }
+    public DateTime? CheckOutDateTime { get; set; }
     [DataType(DataType.Date)]
     [Required]
-    public string? PaymentDate { get; set; }
+    public DateOnly? PaymentDate { get; set; }
     [DataType(DataType.Text)]
     [Required]
-    public int? IsPaid { get; set; }
+    public bool? IsPaid { get; set; }
     [DataType(DataType.Text)]
     [Required]
     public int? ChannelID { get; set; }
@@ -29,20 +30,23 @@ public class Booking
     [Required]
     public int? RoomID { get; set; }
     [Required]
+    [Precision(18,2)]
     [DataType(DataType.Currency)]
-    public int? Price { get; set; }
+    public decimal? Price { get; set; }
     [Required]
-    public int? Discount { get; set; }
+    [Precision(18,2)]
+    [DataType(DataType.Currency)]
+    public decimal? Discount { get; set; }
     [DataType(DataType.Text)]
     [Required]
-    public int? Sent2Police { get; set; }
+    public bool? Sent2Police { get; set; }
     [DataType(DataType.Text)]
     [Required]
-    public int? Sent2Region { get; set; }
+    public bool? Sent2Region { get; set; }
     [DataType(DataType.Text)]
     [Required]
-    public int? Sent2Town { get; set; }
+    public bool? Sent2Town { get; set; }
     [DataType(DataType.Text)]
     [Required]
-    public int? ContractPrinted { get; set; }
+    public bool? ContractPrinted { get; set; }
 }

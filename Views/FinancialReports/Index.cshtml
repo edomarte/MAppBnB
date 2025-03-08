@@ -1,0 +1,89 @@
+@model FinancialReportsDetailsViewModel
+@using MAppBnB.Models
+
+@{
+    ViewData["Title"] = "Index";
+    var accommodations = ViewData["AccommodationList"] as List<Accommodation>;
+}
+
+<h1>Financial Reports</h1>
+
+<form method="post" asp-action="Index" id="form">
+    <div class="form-group">
+        <label asp-for="AccommodationID" class="control-label"></label>
+        <select asp-for="AccommodationID" class="form-control" id="AccommodationsList">
+            @foreach (var accommodation in accommodations)
+            {
+                <option value=@accommodation.id>@accommodation.Name</option>
+            }
+        </select>
+        <span asp-validation-for="AccommodationID" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateFrom" class="control-label"></label>
+        <input asp-for="DateFrom" class="form-control">
+        <span asp-validation-for="DateFrom" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateTo" class="control-label"></label>
+        <input asp-for="DateTo" class="form-control">
+        <span asp-validation-for="DateTo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Get Recap" class="btn btn-primary" />
+    </div>
+</form>
+<p></p>
+<div>
+    <h4>Financial Reports</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Channel Name
+                </th>
+                <th>
+                    Total Booked Nights
+                </th>
+                <th>
+                    Total Bookings
+                </th>
+                <th>
+                    Gross Revenue
+                </th>
+                <th>
+                    After Fee Revenue
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@Model.FinancialsByChannels != null)
+            {
+                @foreach (var channel in @Model.FinancialsByChannels)
+                {
+                    <tr>
+                        <td>
+                            @channel.ChannelName
+                        </td>
+                        <td>
+                            @channel.TotBookings
+                        </td>
+                        <td>
+                            @channel.TotNights
+                        </td>
+                        <td>
+                            @channel.GrossRevenue
+                        </td>
+                        <td>
+                            @channel.NetRevenue
+                        </td>
+                    </tr>
+                }
+            }
+    </tbody>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
