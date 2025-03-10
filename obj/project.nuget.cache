@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "QJsmZD/mMIE=",
   "success": true,
   "projectFilePath": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
-=======
-  "dgSpecHash": "ZTGBMMBDymo=",
-  "success": true,
-  "projectFilePath": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
->>>>>>> 3585d287e58e65249e86a8d8e4f25333c08dcad8
   "expectedPackageFiles": [
     "C:\\Users\\edoma\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\edoma\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

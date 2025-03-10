@@ -2,13 +2,8 @@
 
 @{
     ViewData["Title"] = "Edit";
-<<<<<<< HEAD
     var accommodations = ViewData["AccommodationList"] as List<Accommodation>;
     var channels = ViewData["ChannelList"] as List<BookChannel>;
-=======
-    var accommodations=ViewData["AccommodationList"] as List<Accommodation>;
-    //var channels=ViewData["ChannelList"] as List<BookChannel>;
->>>>>>> 3585d287e58e65249e86a8d8e4f25333c08dcad8
 }
 
 <h1>Edit</h1>
@@ -41,7 +36,6 @@
                 <span asp-validation-for="Booking.PaymentDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-<<<<<<< HEAD
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
                 <select asp-for="Booking.IsPaid" class="form-control">
                     <option value=@false>No</option>
@@ -58,11 +52,6 @@
                     }
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
-=======
-                <label asp-for="Booking.ChannelID" class="control-label"></label>
-                <input asp-for="Booking.ChannelID" class="form-control" />
-                <span asp-validation-for="Booking.ChannelID" class="text-danger"></span>
->>>>>>> 3585d287e58e65249e86a8d8e4f25333c08dcad8
             </div>
             <div class="form-group">
                 <label asp-for="Booking.AccommodationID" class="control-label"></label>
