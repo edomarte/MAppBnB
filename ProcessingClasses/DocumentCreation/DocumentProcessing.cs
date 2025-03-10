@@ -1,5 +1,6 @@
 using System.Data;
 using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using MAppBnB;
 
@@ -53,11 +54,11 @@ public class DocumentProcessing
             }
 
             // Assign a reference to the existing document body.
-            var mainDocumentPart = doc.MainDocumentPart.Document.Descendants<Text>().Where(t => t.Text.Contains("«")).ToList();
+            var mainDocumentPart = doc.MainDocumentPart.Document.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>().Where(t => t.Text.Contains("«")).ToList();
 
 
-    
-            foreach (Text placeholder in mainDocumentPart)
+
+            foreach (DocumentFormat.OpenXml.Wordprocessing.Text placeholder in mainDocumentPart)
             {
                 string columnName = placeholder.Text.Replace("«", "").Replace("»", "");
                 if (contractDt.Columns.Contains(columnName))
@@ -110,21 +111,21 @@ public class DocumentProcessing
     {
         string docPath = "..\\DocumentTemplates\\Contract" + bookingId + ".docx";
         string pdfPath = "..\\DocumentTemplates\\Contract" + bookingId + ".pdf";
-        MigraDocPDF.ConvertWordToPdf(docPath,pdfPath);
+        MigraDocPDF.ConvertWordToPdf(docPath, pdfPath);
         return pdfPath;
     }
 
-        public static string GeneratePreCheckinPDF(string bookingId)
+    public static string GeneratePreCheckinPDF(string bookingId)
     {
         string docPath = "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
         string pdfPath = "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".pdf";
-        MigraDocPDF.ConvertWordToPdf(docPath,pdfPath);
+        MigraDocPDF.ConvertWordToPdf(docPath, pdfPath);
         return pdfPath;
     }
 
-    public static string GenerateBookingDetails(List<Person> persons, Booking booking, Accommodation accommodation, Room room,BookChannel channel)
+    public static string GenerateBookingDetails(List<Person> persons, Booking booking, Accommodation accommodation, Room room, BookChannel channel)
     {
-        DataRow dr = addRowTobookingDetailsDt(persons, booking, accommodation, room,channel);
+        DataRow dr = addRowTobookingDetailsDt(persons, booking, accommodation, room, channel);
         string bookingId = booking.id.ToString();
 
         string bookingDetailsPath = "..\\DocumentTemplates\\BookingDetails" + bookingId + ".docx";
@@ -139,9 +140,9 @@ public class DocumentProcessing
             }
 
             // Assign a reference to the existing document body.
-            var mainDocumentPart = doc.MainDocumentPart.Document.Descendants<Text>().Where(t => t.Text.Contains("«")).ToList();
+            var mainDocumentPart = doc.MainDocumentPart.Document.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>().Where(t => t.Text.Contains("«")).ToList();
 
-            foreach (Text placeholder in mainDocumentPart)
+            foreach (DocumentFormat.OpenXml.Wordprocessing.Text placeholder in mainDocumentPart)
             {
                 string columnName = placeholder.Text.Replace("«", "").Replace("»", "");
                 if (bookingDetailsDt.Columns.Contains(columnName))
@@ -155,7 +156,7 @@ public class DocumentProcessing
         return bookingDetailsPath;
     }
 
-    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking, Accommodation accommodation, Room room,BookChannel channel)
+    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking, Accommodation accommodation, Room room, BookChannel channel)
     {
         bookingDetailsDt = new DataTable();
         addFieldstoBookingDetailsDt();
@@ -173,7 +174,7 @@ public class DocumentProcessing
         dr["Price"] = booking.Price - booking.Discount;
         dr["CleaningFee"] = accommodation.CleaningFee;
         dr["TownFee"] = accommodation.TownFee;
-        dr["OTAFee"] = (booking.Price - booking.Discount)*channel.Fee;
+        dr["OTAFee"] = (booking.Price - booking.Discount) * channel.Fee;
         dr["MainGuest"] = persons[0].Name + " " + persons[0].Surname;
         if (persons.Count > 1)
         {
@@ -243,9 +244,9 @@ public class DocumentProcessing
             }
 
             // Assign a reference to the existing document body.
-            var mainDocumentPart = doc.MainDocumentPart.Document.Descendants<Text>().Where(t => t.Text.Contains("«")).ToList();
+            var mainDocumentPart = doc.MainDocumentPart.Document.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>().Where(t => t.Text.Contains("«")).ToList();
 
-            foreach (Text placeholder in mainDocumentPart)
+            foreach (DocumentFormat.OpenXml.Wordprocessing.Text placeholder in mainDocumentPart)
             {
                 string columnName = placeholder.Text.Replace("«", "").Replace("»", "");
                 if (preCheckinDt.Columns.Contains(columnName))
@@ -283,5 +284,75 @@ public class DocumentProcessing
         preCheckinDt.Columns.Add("City");
         preCheckinDt.Columns.Add("CheckinDate");
         preCheckinDt.Columns.Add("AccommodationWebsite");
+    }
+
+    public static string GenerateExcelFinancialReport(List<Booking> bookings) //TODO: Channel name, accommodation name, datefrom, dateto
+    {
+
+        string contractPath = "..\\DocumentTemplates\\Report" + 1 + ".xlsx"; //TODO: add Channel name, accommodation name, datefrom, dateto to path
+
+        File.Copy("..\\DocumentTemplates\\Report.xlsx", "..\\DocumentTemplates\\Report" + 1 + ".xlsx", true);
+        using (SpreadsheetDocument doc = SpreadsheetDocument.Open("..\\DocumentTemplates\\Report" + 1 + ".xlsx", true))
+        {
+
+            if (doc is null)
+            {
+                throw new ArgumentNullException(nameof(doc));
+            }
+            WorkbookPart workbookPart = doc.WorkbookPart;
+            Sheet sheet = workbookPart.Workbook.Sheets.GetFirstChild<Sheet>();
+
+            if (sheet != null)
+            {
+                WorksheetPart worksheetPart = (WorksheetPart)workbookPart.GetPartById(sheet.Id);
+                SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+
+                if (sheetData != null)
+                {
+                    foreach (Booking b in bookings)
+                    {
+                        Row row = new Row();
+                        //TODO: completare sotto
+                        row.Append(
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.CheckinDateTime?.ToString("yyyy-MM-dd") ?? string.Empty) },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Ospite") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Camera") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Importo per notte") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#notti") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#ospiti") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#ospiti esenti") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("notti imponibili") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Sconto%") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Importo Sconto") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo Scontato") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Extra") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo scontato + extra (commissioni)") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Imposta soggiorno") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo scontato + extra") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("IVA vendite") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Commissione") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Commissione Bancaria") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale commissioni") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("IVA su commissioni") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale costi") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale netto lordo cedolare") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Cedolare secca") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale netto") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Fattura costi") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("ID Pagamento") },
+                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Data incasso") }
+
+                        );
+
+                        sheetData.Append(row); // Append to sheetData, NOT sheet
+                    }
+
+                    worksheetPart.Worksheet.Save();
+                }
+            }
+            doc.Save();
+        }
+        return contractPath;
     }
 }

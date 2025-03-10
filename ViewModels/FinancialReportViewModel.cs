@@ -15,6 +15,7 @@ public class FinancialReportsDetailsViewModel
 
 public class FinancialsByChannel
 {
+    public int? id { get; set; }
     [DataType(DataType.Text)]
     public string? ChannelName { get; set; }
     public int? TotBookings { get; set; }

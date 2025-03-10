@@ -30,7 +30,7 @@ namespace MAppBnB.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(FinancialReportsDetailsViewModel fr)
         {
-             var accomodationName = await _context.Accommodation.ToListAsync();
+            var accomodationName = await _context.Accommodation.ToListAsync();
             ViewData["AccommodationList"] = accomodationName;
 
             if (fr != null)
@@ -47,7 +47,7 @@ namespace MAppBnB.Controllers
                 // First, fetch the necessary data into memory
                 var bookings = _context.Booking
                                  .Join(_context.BookChannel, b => b.ChannelID, bc => bc.id, (b, bc) => new { b, bc })
-                                 .Where(x => x.b.AccommodationID == 1
+                                 .Where(x => x.b.AccommodationID == fr.AccommodationID
                                             && x.b.CheckinDateTime > fr.DateFrom
                                             && x.b.CheckinDateTime < fr.DateTo)
                                  .ToList(); // Fetches data into memory
@@ -76,6 +76,7 @@ namespace MAppBnB.Controllers
                 foreach (var chanl in result)
                 {
                     FinancialsByChannel fbc = new FinancialsByChannel();
+                    fbc.id = _context.BookChannel.FirstOrDefault(x => x.id == chanl.ChannelID).id;
                     fbc.ChannelName = _context.BookChannel.FirstOrDefault(x => x.id == chanl.ChannelID).Name;
                     fbc.TotNights = Convert.ToInt32(chanl.NightsBooked);
                     fbc.TotBookings = chanl.TotalBookings;
@@ -88,5 +89,13 @@ namespace MAppBnB.Controllers
             return View(fr);
         }
 
+        // GET: FinancialReport/DowloadFile
+        public async Task<IActionResult> DownloadFile(int? id)
+        {
+            //TODO:
+            var document = await _context.Document.FirstOrDefaultAsync(m => m.id == id);
+
+            return File(document.PdfCopy, "application/pdf", document.SerialNumber + ".pdf");
+        }
     }
 }

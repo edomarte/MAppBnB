@@ -103,10 +103,7 @@ namespace MAppBnB.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<decimal>("Fee")
-<<<<<<< HEAD
                         .HasPrecision(18, 2)
-=======
->>>>>>> 3585d287e58e65249e86a8d8e4f25333c08dcad8
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")

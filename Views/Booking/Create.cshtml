@@ -1,15 +1,9 @@
 @model PersonBookingViewModel
 
 @{
-<<<<<<< HEAD
     ViewData["Title"] = "Create";
     var accommodations = ViewData["AccommodationList"] as List<Accommodation>;
     var channels = ViewData["ChannelList"] as List<BookChannel>;
-=======
-    ViewData["Title"] = "Create";   
-    var accommodations=ViewData["AccommodationList"] as List<Accommodation>;
-    //var channels=ViewData["ChannelList"] as List<BookChannel>;
->>>>>>> 3585d287e58e65249e86a8d8e4f25333c08dcad8
 }
 
 <h1>Create</h1>
@@ -48,7 +42,6 @@
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
-<<<<<<< HEAD
             <div class="form-group">
                 <label asp-for="Booking.ChannelID" class="control-label"></label>
                 <select asp-for="Booking.ChannelID" class="form-control">
@@ -59,9 +52,6 @@
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
-=======
-            
->>>>>>> 3585d287e58e65249e86a8d8e4f25333c08dcad8
             <div class="form-group">
                 <label asp-for="Booking.AccommodationID" class="control-label"></label>
                 <select asp-for="Booking.AccommodationID" class="form-control" id="AccommodationsList">

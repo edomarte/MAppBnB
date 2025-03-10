@@ -3,7 +3,7 @@ using MAppBnB.Data;
 using Microsoft.AspNetCore.SignalR;
 
 
-namespace SignalRChat.Hubs
+namespace SignalRChat.Hubs //TODO: Change namespace
 {
     public class CreateDocumentsHub : Hub
     {
@@ -79,7 +79,7 @@ namespace SignalRChat.Hubs
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("WordFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
 
@@ -91,7 +91,7 @@ namespace SignalRChat.Hubs
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("WordFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
 
@@ -111,7 +111,29 @@ namespace SignalRChat.Hubs
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("PDFFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+
+        }
+
+        private List<Booking> GetBookingsForReport(string accommodationID,string channelID,string dateFrom,string dateTo){
+            // First, fetch the necessary data into memory
+                return _context.Booking
+                                 .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
+                                            && x.ChannelID== Convert.ToInt32(channelID)
+                                            && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
+                                            && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
+                                 .ToList(); // Fetches data into memory
+        }
+
+        public async Task CreateReportExcel(string accommodationID,string channelID,string dateFrom,string dateTo)
+        {
+            List<Booking> bookings = GetBookingsForReport(accommodationID,channelID,dateFrom,dateTo);
+            string contractPath = DocumentProcessing.GenerateExcelFinancialReport(bookings);
+
+            byte[] file = await File.ReadAllBytesAsync(contractPath);
+            string base64String = Convert.ToBase64String(file);
+
+            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
     }
