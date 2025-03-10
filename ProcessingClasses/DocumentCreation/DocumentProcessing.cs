@@ -311,41 +311,7 @@ public class DocumentProcessing
                 {
                     foreach (Booking b in bookings)
                     {
-                        Row row = new Row();
-                        //TODO: completare sotto
-                        row.Append(
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.CheckinDateTime?.ToString("yyyy-MM-dd") ?? string.Empty) },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Ospite") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Camera") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Importo per notte") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#notti") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#ospiti") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#ospiti esenti") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("notti imponibili") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Sconto%") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Importo Sconto") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo Scontato") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Extra") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo scontato + extra (commissioni)") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Imposta soggiorno") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo scontato + extra") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("IVA vendite") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Commissione") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Commissione Bancaria") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale commissioni") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("IVA su commissioni") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale costi") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale netto lordo cedolare") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Cedolare secca") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale netto") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Fattura costi") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("ID Pagamento") },
-                            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Data incasso") }
-
-                        );
-
-                        sheetData.Append(row); // Append to sheetData, NOT sheet
+                        sheetData.Append(addFieldsToRow(b)); 
                     }
 
                     worksheetPart.Worksheet.Save();
@@ -355,4 +321,43 @@ public class DocumentProcessing
         }
         return contractPath;
     }
+
+    private static Row addFieldsToRow(Booking b) //TODO: other objects needed
+    {
+        Row row = new Row();
+        //TODO: completare sotto
+        row.Append(
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.CheckinDateTime?.ToString("yyyy-MM-dd") ?? string.Empty) },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Ospite") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Camera") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Importo per notte") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#notti") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#ospiti") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#ospiti esenti") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("notti imponibili") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Sconto%") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Importo Sconto") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo Scontato") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Extra") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo scontato + extra (commissioni)") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Imposta soggiorno") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo scontato + extra") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("IVA vendite") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Commissione") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Commissione Bancaria") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale commissioni") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("IVA su commissioni") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale costi") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale netto lordo cedolare") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Cedolare secca") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale netto") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Fattura costi") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("ID Pagamento") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Data incasso") }
+
+        );
+        return row;
+    }
+
 }
