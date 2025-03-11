@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using MAppBnB.Data;
 using SignalRChat.Hubs;
 
@@ -37,5 +36,6 @@ app.MapHub<PersonSearchHub>("/personSearchHub");
 app.MapHub<RoomSelectorHub>("/roomSelectorHub");
 app.MapHub<CreateDocumentsHub>("/createDocumentsHub");
 app.MapHub<DocumentTransmissionHub>("/docsTransmissionHub");
+app.MapHub<CalendarHub>("/calendarHub");
 
 app.Run();

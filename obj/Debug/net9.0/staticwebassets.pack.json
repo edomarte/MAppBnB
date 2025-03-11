@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\calendar.js",
+      "PackagePath": "staticwebassets\\js\\calendar.js"
+    },
+    {
       "Id": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentCreation.js",
       "PackagePath": "staticwebassets\\js\\documentCreation.js"
     },

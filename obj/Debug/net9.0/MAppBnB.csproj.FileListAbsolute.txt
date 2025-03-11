@@ -1151,3 +1151,13 @@ C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\MAppBnB.pdb
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\MAppBnB.genruntimeconfig.cache
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\ref\MAppBnB.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\le22icaqyj-uxghk2w4fo.gz
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-kkh2aawtof.gz

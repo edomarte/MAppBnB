@@ -1,8 +1,54 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    var accommodations = ViewData["AccommodationList"] as List<Accommodation>;
+
+    DateTime firstDayOfTheMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+    string formattedDate = DateTime.Now.ToString("yyyy-MM");
+    DateTime startDate = firstDayOfTheMonth.AddDays(-(int)firstDayOfTheMonth.DayOfWeek);
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <select id="AccommodationsList">
+    @foreach (var accommodation in accommodations)
+    {
+        <option value=@accommodation.id>@accommodation.Name</option>
+    }
+    </select>
+    <input type="month" id="monthYearPicker" value="@formattedDate">
+
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr id>
+                @for (int i = 0; i < 42; i++)
+                {
+                    DateTime date = startDate.AddDays(i);
+
+                    if (i % 7 == 0 && i > 0)
+                    {
+                        @Html.Raw("</tr><tr>")
+                        // Corrected row handling
+                    }
+
+                    <td id="@date.DayOfYear">@date.Day</td>
+                    // Correctly placed within the loop
+                }
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/calendar.js" defer></script>

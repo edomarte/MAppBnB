@@ -897,6 +897,304 @@
       ]
     },
     {
+      "Route": "js/calendar.js",
+      "AssetFile": "js/calendar.js.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001404494382"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "711"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A="
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.js",
+      "AssetFile": "js/calendar.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1987"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A="
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.js.gz",
+      "AssetFile": "js/calendar.js.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "711"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc="
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.kkh2aawtof.js",
+      "AssetFile": "js/calendar.js.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001404494382"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "711"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kkh2aawtof"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A="
+        },
+        {
+          "Name": "label",
+          "Value": "js/calendar.js"
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.kkh2aawtof.js",
+      "AssetFile": "js/calendar.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1987"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kkh2aawtof"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A="
+        },
+        {
+          "Name": "label",
+          "Value": "js/calendar.js"
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.kkh2aawtof.js.gz",
+      "AssetFile": "js/calendar.js.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "711"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kkh2aawtof"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc="
+        },
+        {
+          "Name": "label",
+          "Value": "js/calendar.js.gz"
+        }
+      ]
+    },
+    {
       "Route": "js/documentCreation.98t39orfpl.js",
       "AssetFile": "js/documentCreation.js.gz",
       "Selectors": [

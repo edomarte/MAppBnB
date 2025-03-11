@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AXgz0/UatN9pLOq8yfDRJ6J7RJfmVA3o6RR7pkE4fQU=",
+  "Hash": "vd9iPVIeFrgAANoSqBHviYOGeEP2r2QjatCWA5SEh34=",
   "Source": "MAppBnB",
   "BasePath": "_content/MAppBnB",
   "Mode": "Default",
@@ -794,6 +794,27 @@
       "OriginalItemSpec": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
+      "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\hxhlsgt62l-kkh2aawtof.gz",
+      "SourceId": "MAppBnB",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MAppBnB",
+      "RelativePath": "js/calendar#[.{fingerprint=kkh2aawtof}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\calendar.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "np2j35dawu",
+      "Integrity": "e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\calendar.js"
+    },
+    {
       "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\i1qvncvuzf-jjsuc0puko.gz",
       "SourceId": "MAppBnB",
       "SourceType": "Discovered",
@@ -1569,6 +1590,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\calendar.js",
+      "SourceId": "MAppBnB",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\",
+      "BasePath": "_content/MAppBnB",
+      "RelativePath": "js/calendar#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "kkh2aawtof",
+      "Integrity": "dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\calendar.js"
     },
     {
       "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentCreation.js",
@@ -3572,6 +3614,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0="
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\hxhlsgt62l-kkh2aawtof.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001404494382"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "711"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A="
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\calendar.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1987"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A="
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.js.gz",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\hxhlsgt62l-kkh2aawtof.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "711"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc="
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.kkh2aawtof.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\hxhlsgt62l-kkh2aawtof.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001404494382"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "711"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kkh2aawtof"
+        },
+        {
+          "Name": "label",
+          "Value": "js/calendar.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A="
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.kkh2aawtof.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\calendar.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1987"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kkh2aawtof"
+        },
+        {
+          "Name": "label",
+          "Value": "js/calendar.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A="
+        }
+      ]
+    },
+    {
+      "Route": "js/calendar.kkh2aawtof.js.gz",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\hxhlsgt62l-kkh2aawtof.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "711"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 21:05:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kkh2aawtof"
+        },
+        {
+          "Name": "label",
+          "Value": "js/calendar.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-e/tp7MX9CQRvxlfGA1DPrttxJgw34uLRE3CBXhKm4zc="
         }
       ]
     },

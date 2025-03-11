@@ -1,20 +1,31 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MAppBnB.Models;
+using MAppBnB.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MAppBnB.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly MappBnBContext _context;
+
+    public HomeController(MappBnBContext context)
+    {
+        _context = context;
+    }
+
+    /*private readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-    }
+    }*/
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
+        var accomodationName = await _context.Accommodation.ToListAsync();
+        ViewData["AccommodationList"] = accomodationName;
         return View();
     }
 
