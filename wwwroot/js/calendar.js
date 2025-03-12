@@ -9,7 +9,7 @@ var lastDayOnCalendar;
 connectionCL.on("UpdateCalendar", function (bookings) {
     console.log("Raw bookings data:", bookings);
     bookings.forEach(booking => {
-        
+
 
         var first = 0;
         if (firstDayOnCalendar - booking.checkinDay > 0)
@@ -23,9 +23,9 @@ connectionCL.on("UpdateCalendar", function (bookings) {
         else
             last = booking.checkoutDay;
 
-        for(let i=first;i<(last+1);i++){
+        for (let i = first; i < (last + 1); i++) {
             let option = document.createElement("p");
-        option.innerHTML = booking.id;
+            option.innerHTML = booking.id;
             document.getElementById(i).appendChild(option);
         }
     });
@@ -55,24 +55,33 @@ document.getElementById("AccommodationsList").addEventListener("change", functio
 });
 
 document.getElementById("monthYearPicker").addEventListener("change", function (event) {
-    $("p").remove();
-    $("#calendarTable tbody").empty();
-
-    var startDate=new Date($("#monthYearPicker").val())
-    for (let i = 0; i < 42; i++)
-        {
-            var date = startDate+i;// TODO: incrementare il giorno della data
-
-            if (i % 7 == 0 && i > 0)
-            {
-                $("#calendarTable tbody").appendChild("</tr><tr>")
-                
-                // Corrected row handling
-            }
-
-            //<td id="@date.DayOfYear">@date.Day</td>
-            // Correctly placed within the loop
+    let $tbody = $("#tbody");
+    $tbody.empty(); // Clear previous content
+    
+    let firstDayOfTheMonth = new Date($("#monthYearPicker").val());
+    let startDate = new Date(firstDayOfTheMonth);
+    startDate.setDate(firstDayOfTheMonth.getDate() - firstDayOfTheMonth.getDay());
+    
+    let $currentRow;
+    
+    for (let i = 0; i < 42; i++) {
+        if (i % 7 === 0) {
+            $currentRow = $("<tr>");
+            $tbody.append($currentRow);
         }
+        
+        let dayOfYear = Math.ceil((startDate - new Date(startDate.getFullYear(), 0, 0)) / 86400000);
+        
+        let $cell = $("<td>")
+            .attr("id", dayOfYear)
+            .text(startDate.getDate());
+        
+        $currentRow.append($cell);
+        
+        startDate.setDate(startDate.getDate() + 1);
+    
+    }
+
     // do the same as in index.html (get list of days from datetime given the selected month-year)
     updateCalendar()
 });

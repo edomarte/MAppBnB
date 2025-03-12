@@ -1160,7 +1160,6 @@ c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.L
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
 c:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
-c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-kkh2aawtof.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\brevo_csharp.dll
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\FubarCoder.RestSharp.Portable.Core.dll
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\FubarCoder.RestSharp.Portable.HttpClient.dll
@@ -1210,3 +1209,4 @@ c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\MAppBnB.MvcApp
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\1kv0l3t7ot-ceciveib9c.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\le22icaqyj-uxghk2w4fo.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-5a31g93fi3.gz
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-g558le34mu.gz
