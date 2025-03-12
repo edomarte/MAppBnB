@@ -86,7 +86,7 @@ namespace MAppBnB.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Name,Address,PostCode,City,Province,Country,Floor,UnitApartment,phone_prefix,phone_number,email,Website,CIN,CIR")] Accommodation accommodation)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Name,Address,PostCode,City,Province,Country,Floor,UnitApartment,phone_prefix,phone_number,email,Website,CIN,CIR,CleaningFee,TownFee")] Accommodation accommodation)
         {
             if (id != accommodation.id)
             {

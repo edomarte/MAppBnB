@@ -25,16 +25,32 @@ namespace MAppBnB.Migrations
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Floor = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UnitApartment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    phone_prefix = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    phone_number = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhonePrefix = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CIN = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CIR = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CIR = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CleaningFee = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    TownFee = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accommodation", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookChannel",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Fee = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookChannel", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,15 +59,20 @@ namespace MAppBnB.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CheckinDateTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CheckOutDateTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsPaid = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BookChannel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BookingDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    CheckinDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CheckOutDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PaymentDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    IsPaid = table.Column<bool>(type: "bit", nullable: false),
+                    ChannelID = table.Column<int>(type: "int", nullable: false),
                     AccommodationID = table.Column<int>(type: "int", nullable: false),
                     RoomID = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<int>(type: "int", nullable: false),
-                    Discount = table.Column<int>(type: "int", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Discount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Sent2Police = table.Column<bool>(type: "bit", nullable: false),
+                    Sent2Region = table.Column<bool>(type: "bit", nullable: false),
+                    Sent2Town = table.Column<bool>(type: "bit", nullable: false),
+                    ContractPrinted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,11 +99,13 @@ namespace MAppBnB.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SerialNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    IssuedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IssuedDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    IssuingCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PdfCopy = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    DocumentType = table.Column<int>(type: "int", nullable: true),
+                    SerialNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    IssuedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IssuedDate = table.Column<DateOnly>(type: "date", nullable: true),
+                    IssuingCountry = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PdfCopy = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PersonID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,12 +121,12 @@ namespace MAppBnB.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    birth_place = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    birth_province = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    birth_country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    phone_prefix = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    phone_number = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthProvince = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhonePrefix = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoleRelation = table.Column<int>(type: "int", nullable: false),
                     DocumentID = table.Column<int>(type: "int", nullable: true)
                 },
@@ -121,7 +144,7 @@ namespace MAppBnB.Migrations
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     AccommodationId = table.Column<int>(type: "int", nullable: false),
-                    BasicPrice = table.Column<int>(type: "int", nullable: false)
+                    BasicPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,6 +157,9 @@ namespace MAppBnB.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Accommodation");
+
+            migrationBuilder.DropTable(
+                name: "BookChannel");
 
             migrationBuilder.DropTable(
                 name: "Booking");

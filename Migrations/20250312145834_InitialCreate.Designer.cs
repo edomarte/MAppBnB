@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAppBnB.Migrations
 {
     [DbContext(typeof(MappBnBContext))]
-    [Migration("20250304135408_UpdatedModel")]
-    partial class UpdatedModel
+    [Migration("20250312145834_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,10 @@ namespace MAppBnB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("CleaningFee")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -78,6 +82,10 @@ namespace MAppBnB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("TownFee")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("UnitApartment")
                         .HasColumnType("nvarchar(max)");
 
@@ -87,6 +95,28 @@ namespace MAppBnB.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Accommodation");
+                });
+
+            modelBuilder.Entity("MAppBnB.BookChannel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<decimal>("Fee")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("BookChannel");
                 });
 
             modelBuilder.Entity("MAppBnB.Booking", b =>
@@ -100,34 +130,46 @@ namespace MAppBnB.Migrations
                     b.Property<int>("AccommodationID")
                         .HasColumnType("int");
 
-                    b.Property<string>("BookChannel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateOnly>("BookingDate")
+                        .HasColumnType("date");
 
-                    b.Property<string>("CheckOutDateTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CheckinDateTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Discount")
+                    b.Property<int>("ChannelID")
                         .HasColumnType("int");
 
-                    b.Property<string>("IsPaid")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CheckOutDateTime")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CheckinDateTime")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<bool>("ContractPrinted")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Discount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<DateOnly>("PaymentDate")
+                        .HasColumnType("date");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("RoomID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Sent2Police")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Sent2Region")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Sent2Town")
+                        .HasColumnType("bit");
 
                     b.HasKey("id");
 
@@ -250,8 +292,9 @@ namespace MAppBnB.Migrations
                     b.Property<int>("AccommodationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BasicPrice")
-                        .HasColumnType("int");
+                    b.Property<decimal>("BasicPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Capacity")
                         .HasColumnType("int");

@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>kkh2aawtof</Fingerprint>
-      <Integrity>dLfvwGske4cd9qj9QsoPiPDJyIzl8bCaA+DzJlRM30A=</Integrity>
+      <Fingerprint>5a31g93fi3</Fingerprint>
+      <Integrity>I3U0nuZ64ZmSJtAm3QGH83q4xt6224Nw9CA/bm2OmyY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\calendar.js'))</OriginalItemSpec>
@@ -156,8 +156,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>cqu3aupeo3</Fingerprint>
-      <Integrity>rK9Zx8UOZ+yR2hZ9Ov8dBexROapvuO2mE9jAx7ZIquA=</Integrity>
+      <Fingerprint>49hvrsqvxt</Fingerprint>
+      <Integrity>6EuF7ZQ7IraO4mAyblsT5rUzaDbApiFXRumXSTfKTGQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\signalr\dist\browser\signalr.js'))</OriginalItemSpec>

@@ -56,7 +56,23 @@ document.getElementById("AccommodationsList").addEventListener("change", functio
 
 document.getElementById("monthYearPicker").addEventListener("change", function (event) {
     $("p").remove();
-    //TODO: remove all tr from tbody
+    $("#calendarTable tbody").empty();
+
+    var startDate=new Date($("#monthYearPicker").val())
+    for (let i = 0; i < 42; i++)
+        {
+            var date = startDate+i;// TODO: incrementare il giorno della data
+
+            if (i % 7 == 0 && i > 0)
+            {
+                $("#calendarTable tbody").appendChild("</tr><tr>")
+                
+                // Corrected row handling
+            }
+
+            //<td id="@date.DayOfYear">@date.Day</td>
+            // Correctly placed within the loop
+        }
     // do the same as in index.html (get list of days from datetime given the selected month-year)
     updateCalendar()
 });
