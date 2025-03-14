@@ -4,6 +4,7 @@ using MAppBnB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAppBnB.Migrations
 {
     [DbContext(typeof(MappBnBContext))]
-    partial class MappBnBContextModelSnapshot : ModelSnapshot
+    [Migration("20250314134641_AddAlloggiatiWebTables")]
+    partial class AddAlloggiatiWebTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,70 +228,6 @@ namespace MAppBnB.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Document");
-                });
-
-            modelBuilder.Entity("MAppBnB.Models.Comuni", b =>
-                {
-                    b.Property<string>("Codice")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DataFineVal")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Descrizione")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Provincia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Codice");
-
-                    b.ToTable("Comuni");
-                });
-
-            modelBuilder.Entity("MAppBnB.Models.Stati", b =>
-                {
-                    b.Property<string>("Codice")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DataFineVal")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Descrizione")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Provincia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Codice");
-
-                    b.ToTable("Stati");
-                });
-
-            modelBuilder.Entity("MAppBnB.Models.TipoAlloggiato", b =>
-                {
-                    b.Property<string>("Codice")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Descrizione")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Codice");
-
-                    b.ToTable("TipoAlloggiato");
-                });
-
-            modelBuilder.Entity("MAppBnB.Models.TipoDocumento", b =>
-                {
-                    b.Property<string>("Codice")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Descrizione")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Codice");
-
-                    b.ToTable("TipoDocumento");
                 });
 
             modelBuilder.Entity("MAppBnB.Person", b =>

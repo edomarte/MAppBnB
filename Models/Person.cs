@@ -16,6 +16,7 @@ public class Person
     [DataType(DataType.Date)]
     [Display(Name = "Birth Date")]
     public DateOnly? BirthDate { get; set; }
+    public int? Sex { get; set; }
     [Required]
     [Display(Name = "Birth Place")]
     public string? BirthPlace { get; set; }
@@ -40,6 +41,6 @@ public class Person
     [Display(Name = "Role/Relation")]
     public RoleRelation? RoleRelation { get; set; }
     [Display(Name = "Document Serial Number")]
-    public int?DocumentID{get;set;}
+    public int? DocumentID { get; set; }
 
 }

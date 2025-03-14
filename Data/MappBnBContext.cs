@@ -21,5 +21,9 @@ namespace MAppBnB.Data
         public DbSet<MAppBnB.Person> Person { get; set; } = default!;
         public DbSet<MAppBnB.BookingPerson> BookingPerson { get; set; } = default!;
         public DbSet<MAppBnB.BookChannel> BookChannel { get; set; } = default!;
+        public DbSet<MAppBnB.Models.Comuni> Comuni { get; set; } = default!;
+        public DbSet<MAppBnB.Models.Stati> Stati { get; set; } = default!;
+        public DbSet<MAppBnB.Models.TipoAlloggiato> TipoAlloggiato { get; set; } = default!;
+        public DbSet<MAppBnB.Models.TipoDocumento> TipoDocumento { get; set; } = default!;
     }
 }
