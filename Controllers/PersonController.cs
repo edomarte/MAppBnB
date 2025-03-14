@@ -62,6 +62,11 @@ namespace MAppBnB.Controllers
                 Document = new Document()
             };
 
+            ViewData["Stati"] = _context.Stati.ToList();
+            ViewData["Comuni"] = _context.Comuni.ToList();
+            ViewData["TipoAlloggiato"] = _context.TipoAlloggiato.ToList();
+            ViewData["TipoDocumento"] = _context.TipoDocumento.ToList();
+
             return View(viewModel);
         }
 
@@ -94,7 +99,7 @@ namespace MAppBnB.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(model);
+            return RedirectToAction(nameof(Create));
         }
 
         // GET: Person/Edit/5
@@ -117,6 +122,12 @@ namespace MAppBnB.Controllers
                 Person = person,
                 Document = document
             };
+
+            ViewData["Stati"] = _context.Stati.ToList();
+            ViewData["Comuni"] = _context.Comuni.ToList();
+            ViewData["TipoAlloggiato"] = _context.TipoAlloggiato.ToList();
+            ViewData["TipoDocumento"] = _context.TipoDocumento.ToList();
+
             return View(viewModel);
         }
 
@@ -158,7 +169,7 @@ namespace MAppBnB.Controllers
                         {
                             _context.Update(model.Document);
                             await _context.SaveChangesAsync();
-                        }   
+                        }
                     _context.Update(model.Person);
                     await _context.SaveChangesAsync();
                 }
@@ -175,6 +186,11 @@ namespace MAppBnB.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            
+            ViewData["Stati"] = _context.Stati.ToList();
+            ViewData["Comuni"] = _context.Comuni.ToList();
+            ViewData["TipoAlloggiato"] = _context.TipoAlloggiato.ToList();
+            ViewData["TipoDocumento"] = _context.TipoDocumento.ToList();
             return View(model);
         }
 

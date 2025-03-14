@@ -37,5 +37,5 @@ app.MapHub<RoomSelectorHub>("/roomSelectorHub");
 app.MapHub<CreateDocumentsHub>("/createDocumentsHub");
 app.MapHub<DocumentTransmissionHub>("/docsTransmissionHub");
 app.MapHub<CalendarHub>("/calendarHub");
-
+app.MapHub<CountryProvincePlaceSelectorHub>("/countryProvincePlaceSelectorHub");
 app.Run();

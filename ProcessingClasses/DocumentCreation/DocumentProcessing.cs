@@ -86,8 +86,6 @@ public class DocumentProcessing
         dr["BirthDate"] = mainPerson.BirthDate;
         dr["DocumentType"] = document.DocumentType;
         dr["SerialNumber"] = document.SerialNumber;
-        dr["IssuedBy"] = document.IssuedBy;
-        dr["IssuedDate"] = document.IssuedDate;
         //dr["CodFisc"];
         dr["PhonePrefix"] = mainPerson.PhonePrefix;
         dr["PhoneNumber"] = mainPerson.PhoneNumber;

@@ -2,12 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MAppBnB.Models;
 
-public class Stati
+public class Province
 {
     [Key]
     public string? Codice { get; set; }
     public string? Descrizione { get; set; }
-    public string? Provincia { get; set; }
-    public string? DataFineVal { get; set; }
 
 }

@@ -16,8 +16,6 @@ public class EmailTransmission
         + "Booking from " + booking.CheckinDateTime + " to " + booking.CheckOutDateTime + "\n"
         + "Document type: " + document.DocumentType + "\n"
         + "Document number: " + document.SerialNumber + "\n"
-        + "Document issue date: " + document.IssuedDate + "\n"
-        + "Document issued by: " + document.IssuedBy + "\n"
         + "Document from: " + document.IssuingCountry + "\n"
         + "Please see attached copy of the document." + "\n"
         + "Kind regards";

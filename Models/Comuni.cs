@@ -9,5 +9,5 @@ public class Comuni
 
     public string? Descrizione { get; set; }
     public string? Provincia { get; set; }
-    public DateTime DataFineVal { get; set; }
+    public string? DataFineVal { get; set; }
 }

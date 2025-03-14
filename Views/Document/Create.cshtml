@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    var tipiDocumento = ViewData["TipoDocumento"] as List<TipoDocumento>;
 }
 
 <h1>Create</h1>
@@ -14,10 +15,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="DocumentType" class="control-label"></label>
-                <select asp-for="DocumentType" class="form-control" />
-                    @foreach(var type in Enum.GetValues(typeof(DocumentTypes))){
-                        <option value="@type">@type</option>
-                    }
+                <select asp-for="DocumentType" class="form-control">
+                @foreach (var docType in tipiDocumento)
+                {
+                    <option value="@docType.Codice">@docType.Descrizione</option>
+                }
                 </select>
                 <span asp-validation-for="DocumentType" class="text-danger"></span>
             </div>
@@ -25,16 +27,6 @@
                 <label asp-for="SerialNumber" class="control-label"></label>
                 <input asp-for="SerialNumber" class="form-control" />
                 <span asp-validation-for="SerialNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IssuedBy" class="control-label"></label>
-                <input asp-for="IssuedBy" class="form-control" />
-                <span asp-validation-for="IssuedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IssuedDate" class="control-label"></label>
-                <input asp-for="IssuedDate" class="form-control" />
-                <span asp-validation-for="IssuedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IssuingCountry" class="control-label"></label>
@@ -58,5 +50,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

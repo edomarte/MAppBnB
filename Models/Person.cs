@@ -39,7 +39,7 @@ public class Person
     public string? Email { get; set; }
     [Required]
     [Display(Name = "Role/Relation")]
-    public RoleRelation? RoleRelation { get; set; }
+    public string? RoleRelation { get; set; }
     [Display(Name = "Document Serial Number")]
     public int? DocumentID { get; set; }
 

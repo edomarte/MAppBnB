@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.Person.Surname)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.Sex)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.Sex)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Person.BirthDate)
         </dt>
         <dd class="col-sm-10">
@@ -82,18 +88,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Document.SerialNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Document.IssuedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Document.IssuedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Document.IssuedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Document.IssuedDate)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Document.IssuingCountry)
