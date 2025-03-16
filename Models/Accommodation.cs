@@ -55,4 +55,7 @@ public class Accommodation
     [Required]
     [Precision(18, 2)]
     public decimal? TownFee { get; set; }
+    [DataType(DataType.Text)]
+    [Range(0,6)]
+    public string? AWIDAppartamento { get; set; }
 }

@@ -2,10 +2,6 @@
 
 @{
     ViewData["Title"] = "Edit";
-    var tipiDocumento = ViewData["TipoDocumento"] as List<TipoDocumento>;
-    var stati = ViewData["Stati"] as List<Stati>;
-    var comuni = ViewData["Comuni"] as List<Comuni>;
-    var tipiAlloggiato = ViewData["TipoAlloggiato"] as List<TipoAlloggiato>;
 }
 
 <h1>Edit</h1>
@@ -47,7 +43,7 @@
             <div class="form-group">
                 <label asp-for="Person.BirthCountry" class="control-label"></label>
                 <select asp-for="Person.BirthCountry" class="form-control" id="countrySelector">
-                    @foreach (var stato in stati)
+                    @foreach (var stato in ViewBag.Stati)
                     {
                         <option value=@stato.Codice>@stato.Descrizione</option>
                     }
@@ -82,9 +78,12 @@
             <div class="form-group">
                 <label asp-for="Person.RoleRelation" class="control-label"></label>
                 <select asp-for="Person.RoleRelation" class="form-control">
-                    @foreach (var guestType in tipiAlloggiato)
+                    @foreach (var guestType in ViewBag.TipoAlloggiato)
                     {
-                        <option value="@guestType.Codice">@guestType.Descrizione</option>
+                        @if (!guestType.Codice.Equals("Host"))
+                        {
+                            <option value="@guestType.Codice">@guestType.Descrizione</option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="Person.RoleRelation" class="text-danger"></span>
@@ -92,7 +91,7 @@
             <div class="form-group">
                 <label asp-for="Document.DocumentType" class="control-label"></label>
                 <select asp-for="Document.DocumentType" class="form-control">
-                    @foreach (var docType in tipiDocumento)
+                    @foreach (var docType in ViewBag.TipoDocumento)
                     {
                         <option value="@docType.Codice">@docType.Descrizione</option>
                     }
@@ -106,14 +105,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Document.IssuingCountry" class="control-label"></label>
-                <select asp-for="Document.IssuingCountry" class="form-control">
-                    @foreach (var stato in stati)
+                <select asp-for="Document.IssuingCountry" class="form-control" id="selectorIssuingCountry">
+                    @foreach (var stato in ViewBag.Stati)
                     {
                         <option value=@stato.Codice>@stato.Descrizione</option>
-                    }
-                    @foreach (var comune in comuni)
-                    {
-                        <option value=@comune.Codice>@comune.Descrizione</option>
                     }
                 </select>
                 <span asp-validation-for="Document.IssuingCountry" class="text-danger"></span>
@@ -138,6 +133,7 @@
                     <p>No</p>
                 }
             </div>
+            <input type="hidden" asp-for="Document.id" class="form-control" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

@@ -4,6 +4,7 @@ using MAppBnB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAppBnB.Migrations
 {
     [DbContext(typeof(MappBnBContext))]
-    partial class MappBnBContextModelSnapshot : ModelSnapshot
+    [Migration("20250315214036_Configuration")]
+    partial class Configuration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +34,7 @@ namespace MAppBnB.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("AWIDAppartamento")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Address")
@@ -263,8 +267,8 @@ namespace MAppBnB.Migrations
                     b.Property<int?>("DocumentID")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("IsGestioneAppartamenti")
-                        .HasColumnType("bit");
+                    b.Property<string>("GestioneAppartamentiID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PersonID")
                         .HasColumnType("int");

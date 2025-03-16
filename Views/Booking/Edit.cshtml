@@ -2,8 +2,6 @@
 
 @{
     ViewData["Title"] = "Edit";
-    var accommodations = ViewData["AccommodationList"] as List<Accommodation>;
-    var channels = ViewData["ChannelList"] as List<BookChannel>;
 }
 
 <h1>Edit</h1>
@@ -46,7 +44,7 @@
             <div class="form-group">
                 <label asp-for="Booking.ChannelID" class="control-label"></label>
                 <select asp-for="Booking.ChannelID" class="form-control">
-                    @foreach (var channel in channels)
+                    @foreach (var channel in ViewBag.ChannelList)
                     {
                         <option value="@channel.id">@channel.Name</option>
                     }
@@ -56,7 +54,7 @@
             <div class="form-group">
                 <label asp-for="Booking.AccommodationID" class="control-label"></label>
                 <select asp-for="Booking.AccommodationID" class="form-control" id="AccommodationsList">
-                    @foreach (var accommodation in accommodations)
+                    @foreach (var accommodation in ViewBag.AccommodationList)
                     {
                         <option value=@accommodation.id>@accommodation.Name</option>
                     }
@@ -158,6 +156,9 @@
         </p>
         <p>
             <input type="button" id="TransmitToTown" value="Send Documents to Town" />
+        </p>
+        <p>
+            <input type="button" id="TransmitToRegionPolice" value="Send Documents to Region/Police" />
         </p>
     </div>
 

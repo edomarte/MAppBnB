@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Details";
-    var accommodation = ViewData["Accommodation"] as Accommodation;
 }
 
 <h1>Details</h1>
@@ -27,7 +26,10 @@
             @Html.DisplayNameFor(model => model.AccommodationId)
         </dt>
         <dd class="col-sm-10">
-            @accommodation.Name
+            @if (ViewBag.AccommodationList.Capacity>0)
+            {
+                @ViewBag.AccommodationList.Name
+            }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BasicPrice)

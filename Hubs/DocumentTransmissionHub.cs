@@ -33,12 +33,29 @@ namespace SignalRChat.Hubs
             return booking[0];
         }
 
-        public async Task SendToTown(string bookingID, string personID)
+        public List<Person> GetPersonsDetails(string[] personsID)
+        {
+            int[]personsIDInt=Array.ConvertAll(personsID, s => int.Parse(s));
+
+
+            var persons = _context.Person.Where(x => personsIDInt.Contains(x.id)).ToList();
+            return persons;
+        }
+
+                public async Task SendToTown(string bookingID, string personID)
         {
             var booking = _context.Booking.Where(x => x.id == int.Parse(bookingID)).ToList();
             Person mainPerson=GetPersonDetails(personID);
             EmailTransmission.SendDocsToTown(GetBookingDetails(bookingID),mainPerson,GetDocumentDetails(mainPerson));
             await Clients.All.SendAsync("TransmissionResult", "");
+        }
+
+        public async Task SendToRegionPolice(string bookingID, string[] personID)
+        {
+            var booking = _context.Booking.Where(x => x.id == int.Parse(bookingID)).ToList();
+            List<Person> persons=GetPersonsDetails(personID);
+            SOAPTransmission.SendDocsToRegionPolice(GetBookingDetails(bookingID),persons,GetDocumentDetails(persons.First()));
+            await Clients.All.SendAsync("TransmissionResult", ""); //TODO: transmission message
         }
     }
 }

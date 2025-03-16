@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Create";
-    var tipiDocumento = ViewData["TipoDocumento"] as List<TipoDocumento>;
 }
 
 <h1>Create</h1>
@@ -16,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="DocumentType" class="control-label"></label>
                 <select asp-for="DocumentType" class="form-control">
-                @foreach (var docType in tipiDocumento)
+                @foreach (var docType in ViewBag.TipoDocumento)
                 {
                     <option value="@docType.Codice">@docType.Descrizione</option>
                 }

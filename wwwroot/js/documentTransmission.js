@@ -24,3 +24,19 @@ document.getElementById("TransmitToTown").addEventListener("click", function (ev
     });
     event.preventDefault();
 });
+
+document.getElementById("TransmitToRegionPolice").addEventListener("click", function (event) {
+    var bookingID=document.getElementById("bookingID").value;
+
+    var list=document.getElementById("PersonsOnBookingList");
+    var persons=list.getElementsByTagName("li");
+    var personsIds={};
+    persons.forEach(person => {
+        personsIds.Push(person.getElementsByTagName("input").id)
+    });
+
+    connectionT.invoke("SendToRegionPolice", bookingID, personsIds).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});

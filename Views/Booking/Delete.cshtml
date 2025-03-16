@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Delete";
-    var peopleOnBooking = ViewData["PeopleOnBooking"] as List<Person>;
 }
 
 <h1>Delete</h1>
@@ -95,7 +94,7 @@
         </dt>
         <dd class="col-sm-10">
             <ul>
-                @foreach (var person in peopleOnBooking)
+                @foreach (var person in ViewBag.PeopleOnBooking)
                 {
                     <li>@($"{person.Name}, {person.Surname}, {person.BirthDate}")</li>
                 }

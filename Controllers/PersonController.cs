@@ -22,8 +22,7 @@ namespace MAppBnB.Controllers
         // GET: Person
         public async Task<IActionResult> Index()
         {
-            var documents = await _context.Document.ToListAsync();
-            ViewData["DocumentList"] = documents;
+            ViewData["DocumentList"] = await _context.Document.ToListAsync();
             return View(await _context.Person.ToListAsync());
         }
 
@@ -62,10 +61,9 @@ namespace MAppBnB.Controllers
                 Document = new Document()
             };
 
-            ViewData["Stati"] = _context.Stati.ToList();
-            ViewData["Comuni"] = _context.Comuni.ToList();
-            ViewData["TipoAlloggiato"] = _context.TipoAlloggiato.ToList();
-            ViewData["TipoDocumento"] = _context.TipoDocumento.ToList();
+            ViewBag.Stati = _context.Stati.ToList();
+            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.ToList();
+            ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
 
             return View(viewModel);
         }
@@ -123,10 +121,9 @@ namespace MAppBnB.Controllers
                 Document = document
             };
 
-            ViewData["Stati"] = _context.Stati.ToList();
-            ViewData["Comuni"] = _context.Comuni.ToList();
-            ViewData["TipoAlloggiato"] = _context.TipoAlloggiato.ToList();
-            ViewData["TipoDocumento"] = _context.TipoDocumento.ToList();
+            ViewBag.Stati = _context.Stati.ToList();
+            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.ToList();
+            ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
 
             return View(viewModel);
         }
@@ -186,11 +183,10 @@ namespace MAppBnB.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            
-            ViewData["Stati"] = _context.Stati.ToList();
-            ViewData["Comuni"] = _context.Comuni.ToList();
-            ViewData["TipoAlloggiato"] = _context.TipoAlloggiato.ToList();
-            ViewData["TipoDocumento"] = _context.TipoDocumento.ToList();
+
+            ViewBag.Stati = _context.Stati.ToList();
+            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.ToList();
+            ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
             return View(model);
         }
 

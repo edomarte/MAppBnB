@@ -36,17 +36,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-FCnZjM5ImxAE8V/SG\u002BbkD/1zQhi/Gnell/ZqSyFDSkA="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2901"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022FCnZjM5ImxAE8V/SG\u002BbkD/1zQhi/Gnell/ZqSyFDSkA=\u0022"},{"Name":"Last-Modified","Value":"Wed, 12 Mar 2025 19:46:38 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/countryProvincePlaceSelector.1qxn93shsx.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"1qxn93shsx"},{"Name":"integrity","Value":"sha256-eZ9PSZgweZVxDvHR5sGkg\u002ByhK/Ws0frUXbkYmhji9V4="},{"Name":"label","Value":"_content/MAppBnB/js/countryProvincePlaceSelector.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3804"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022eZ9PSZgweZVxDvHR5sGkg\u002ByhK/Ws0frUXbkYmhji9V4=\u0022"},{"Name":"Last-Modified","Value":"Sun, 16 Mar 2025 20:02:12 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/countryProvincePlaceSelector.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-DD0f8GNjD9W07PxUl0exSk\u002BclfehvLKByf3wb4Bti0g="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3625"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022DD0f8GNjD9W07PxUl0exSk\u002BclfehvLKByf3wb4Bti0g=\u0022"},{"Name":"Last-Modified","Value":"Fri, 14 Mar 2025 22:06:27 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/countryProvincePlaceSelector.wxz875c4ci.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"wxz875c4ci"},{"Name":"integrity","Value":"sha256-DD0f8GNjD9W07PxUl0exSk\u002BclfehvLKByf3wb4Bti0g="},{"Name":"label","Value":"_content/MAppBnB/js/countryProvincePlaceSelector.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3625"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022DD0f8GNjD9W07PxUl0exSk\u002BclfehvLKByf3wb4Bti0g=\u0022"},{"Name":"Last-Modified","Value":"Fri, 14 Mar 2025 22:06:27 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-eZ9PSZgweZVxDvHR5sGkg\u002ByhK/Ws0frUXbkYmhji9V4="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3804"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022eZ9PSZgweZVxDvHR5sGkg\u002ByhK/Ws0frUXbkYmhji9V4=\u0022"},{"Name":"Last-Modified","Value":"Sun, 16 Mar 2025 20:02:12 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/documentCreation.98t39orfpl.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\documentCreation.js'))</AssetFile>
@@ -60,17 +60,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-R9BdP6DfxhK592jVkice1YioRpyd6cX2RHY3BBCxY2A="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3951"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022R9BdP6DfxhK592jVkice1YioRpyd6cX2RHY3BBCxY2A=\u0022"},{"Name":"Last-Modified","Value":"Thu, 06 Mar 2025 19:26:19 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/documentTransmission.ceciveib9c.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\documentTransmission.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"ceciveib9c"},{"Name":"integrity","Value":"sha256-vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw="},{"Name":"label","Value":"_content/MAppBnB/js/documentTransmission.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"841"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw=\u0022"},{"Name":"Last-Modified","Value":"Fri, 07 Mar 2025 20:25:11 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/documentTransmission.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\documentTransmission.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"841"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022vJleKsDssKPycKi69GflVmDktWRHORqzzb8XyELzsqw=\u0022"},{"Name":"Last-Modified","Value":"Fri, 07 Mar 2025 20:25:11 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1433"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc=\u0022"},{"Name":"Last-Modified","Value":"Sat, 15 Mar 2025 19:25:00 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/documentTransmission.smagplz0v4.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\documentTransmission.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"smagplz0v4"},{"Name":"integrity","Value":"sha256-LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc="},{"Name":"label","Value":"_content/MAppBnB/js/documentTransmission.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1433"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc=\u0022"},{"Name":"Last-Modified","Value":"Sat, 15 Mar 2025 19:25:00 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/getRooms.4mvtd1dsck.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\getRooms.js'))</AssetFile>

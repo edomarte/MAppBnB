@@ -1,10 +1,10 @@
 using System.Data;
 using System.Threading.Tasks;
 using AlloggiatiService;
+using MAppBnB;
 
 public class SOAPTransmission
 {
-
     public async Task<bool> SendBookingToSOAP(string username, string password, string wskey, List<string> bookings, int accommodationId)
     {
 
@@ -43,5 +43,15 @@ public class SOAPTransmission
         }
 
         return true;
+    }
+
+    internal static void SendDocsToRegionPolice(Booking booking, List<Person> persons, Document document)
+    {
+        List<string> soapString= prepareSOAPstring(booking,persons,document);
+    }
+
+    internal static List<string> prepareSOAPstring(Booking booking, List<Person> persons, Document document)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -54,6 +54,7 @@ namespace MAppBnB.Controllers
         // GET: Document/Create
         public IActionResult Create()
         {
+            
             return View();
         }
 

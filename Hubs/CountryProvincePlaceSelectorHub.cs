@@ -26,6 +26,12 @@ namespace SignalRChat.Hubs
             await Clients.All.SendAsync("TownsList", towns);
         }
 
+        public async Task GetAllTowns()
+        {
+            var towns = _context.Comuni.ToList();
+            await Clients.All.SendAsync("AllTownsList", towns);
+        }
+
         public async Task GetTown(string codice)
         {
             var town = _context.Comuni.FirstOrDefault(x => x.Codice.Equals(codice));

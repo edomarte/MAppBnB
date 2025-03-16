@@ -1,15 +1,17 @@
-@model PersonDocumentViewModel
+@model PersonDocumentConfigViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
-<h1>Create</h1>
 
-<h4>Person</h4>
+<h1>Edit</h1>
+
+<h4>Host Configuration</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Configuration.PersonID" class="form-control" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Person.Name" class="control-label"></label>
@@ -24,7 +26,6 @@
             <div class="form-group">
                 <label asp-for="Person.Sex" class="control-label"></label>
                 <select asp-for="Person.Sex" class="form-control">
-
                     @foreach (var sex in Enum.GetValues(typeof(Sex)))
                     {
                         <option value="@((int)sex)">@sex</option>
@@ -49,12 +50,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="Person.BirthProvince" class="control-label"></label>
-                <select asp-for="Person.BirthProvince" class="form-control" id="provinceSelector"></select>
+                <select asp-for="Person.BirthProvince" class="form-control" id="provinceSelector">
+                    @if (ViewBag.BirthProvince != null)
+                    {
+                        <option value="@ViewBag.BirthProvince.Codice">@ViewBag.BirthProvince.Descrizione</option>
+                    }
+                </select>
                 <span asp-validation-for="Person.BirthProvince" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Person.BirthPlace" class="control-label"></label>
-                <select asp-for="Person.BirthPlace" class="form-control" id="placeSelector"></select>
+                <select asp-for="Person.BirthPlace" class="form-control" id="placeSelector">
+                    @if (ViewBag.BirthPlace != null)
+                    {
+                        <option value="@ViewBag.BirthPlace.Codice">@ViewBag.BirthPlace.Descrizione</option>
+                    }
+                </select>
                 <span asp-validation-for="Person.BirthPlace" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -75,13 +86,7 @@
             <div class="form-group">
                 <label asp-for="Person.RoleRelation" class="control-label"></label>
                 <select asp-for="Person.RoleRelation" class="form-control">
-                    @foreach (var guestType in ViewBag.TipoAlloggiato)
-                    {
-                        @if (!guestType.Codice.Equals("x"))
-                        {
-                            <option value="@guestType.Codice">@guestType.Descrizione</option>
-                        }
-                    }
+                    <option value="@ViewBag.TipoAlloggiato[0].Codice">@ViewBag.TipoAlloggiato[0].Descrizione</option>
                 </select>
                 <span asp-validation-for="Person.RoleRelation" class="text-danger"></span>
             </div>
@@ -107,27 +112,47 @@
                     {
                         <option value=@stato.Codice>@stato.Descrizione</option>
                     }
+
                 </select>
                 <span asp-validation-for="Document.IssuingCountry" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="Document.PersonID" class="form-control" />
+            <input type="hidden" asp-for="Configuration.DocumentID" class="form-control" />
+
             <div class="form-group">
-                <label asp-for="PdfCopyPath" class="control-label"></label>
-                <input type="file" accept="application/pdf" asp-for="PdfCopyPath" class="form-control" />
-                <span asp-validation-for="PdfCopyPath" class="text-danger"></span>
+                <label asp-for="Configuration.AlloggiatiWebUsername" class="control-label"></label>
+                <input asp-for="Configuration.AlloggiatiWebUsername" class="form-control" />
+                <span asp-validation-for="Configuration.AlloggiatiWebUsername" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Configuration.AlloggiatiWebPassword" class="control-label"></label>
+                <input asp-for="Configuration.AlloggiatiWebPassword" class="form-control" />
+                <span asp-validation-for="Configuration.AlloggiatiWebPassword" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Configuration.AlloggiatiWebWSKey" class="control-label"></label>
+                <input asp-for="Configuration.AlloggiatiWebWSKey" class="form-control" />
+                <span asp-validation-for="Configuration.AlloggiatiWebWSKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Configuration.IsGestioneAppartamenti" class="control-label"></label>
+                <select asp-for="Configuration.IsGestioneAppartamenti" class="form-control">
+                    <option value=@false>No</option>
+                    <option value=@true>Yes</option>
+                </select>
+                <span asp-validation-for="Configuration.IsGestioneAppartamenti" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="Configuration.id" class="form-control" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
         </form>
-
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/countryProvincePlaceSelector.js" defer></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/countryProvincePlaceSelector.js" defer></script>
 
 @section Scripts {
     @{

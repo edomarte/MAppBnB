@@ -26,6 +26,7 @@ namespace MAppBnB.Data
         public DbSet<MAppBnB.Models.TipoAlloggiato> TipoAlloggiato { get; set; } = default!;
         public DbSet<MAppBnB.Models.TipoDocumento> TipoDocumento { get; set; } = default!;
         public DbSet<MAppBnB.Models.Province> Province { get; set; } = default!;
+        public DbSet<MAppBnB.Models.Configuration> Configuration { get; set; } = default!;
 
     }
 }

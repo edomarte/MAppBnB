@@ -19,8 +19,11 @@ namespace SignalRChat.Hubs
 
         public async Task RoomSelector(string AccommodationID)
         {
-            var rooms = _context.Room.Where(x => x.AccommodationId == int.Parse(AccommodationID)).ToList();            
-            await Clients.All.SendAsync("RoomsList", rooms);
+            if (!AccommodationID.Equals("") && AccommodationID != null)
+            {
+                var rooms = _context.Room.Where(x => x.AccommodationId == int.Parse(AccommodationID)).ToList();
+                await Clients.All.SendAsync("RoomsList", rooms);
+            }
         }
     }
 

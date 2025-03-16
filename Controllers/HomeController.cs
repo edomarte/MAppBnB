@@ -24,8 +24,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var accomodationName = await _context.Accommodation.ToListAsync();
-        ViewData["AccommodationList"] = accomodationName;
+        ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
         return View();
     }
 

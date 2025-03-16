@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Edit";
-    var accommodations = ViewData["AccommodationList"] as List<Accommodation>;
 }
 
 <h1>Edit</h1>
@@ -27,9 +26,12 @@
             <div class="form-group">
                 <label asp-for="AccommodationId" class="control-label"></label>
                 <select asp-for="AccommodationId" class="form-control">
-                    @foreach (var accommodation in accommodations)
+                    @if (ViewBag.AccommodationLists != null)
                     {
-                        <option value=@accommodation.id>@accommodation.Name</option>
+                        @foreach (var accommodation in ViewBag.AccommodationLists)
+                        {
+                            <option value="@accommodation.id">@accommodation.Name</option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="AccommodationId" class="text-danger"></span>

@@ -46,7 +46,7 @@ namespace MAppBnB.Controllers
             var detailsPeopleOnBooking = await _context.Person
                 .Where(p => peopleOnBooking.Select(b => b.PersonID).Contains(p.id))
                 .ToListAsync();
-            ViewData["PeopleOnBooking"] = detailsPeopleOnBooking;
+            ViewBag.PeopleOnBooking = detailsPeopleOnBooking;
 
             return View(booking);
         }
@@ -60,10 +60,8 @@ namespace MAppBnB.Controllers
                 PersonIDs = ""
             };
 
-            var accomodationNames = await _context.Accommodation.ToListAsync();
-            ViewData["AccommodationList"] = accomodationNames;
-            var channels = await _context.BookChannel.ToListAsync();
-            ViewData["ChannelList"] = channels;
+            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+            ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
             return View(viewModel);
         }
 
@@ -130,10 +128,8 @@ namespace MAppBnB.Controllers
                 return NotFound();
             }
 
-            var accomodationNames = await _context.Accommodation.ToListAsync();
-            ViewData["AccommodationList"] = accomodationNames;
-            var channels = await _context.BookChannel.ToListAsync();
-            ViewData["ChannelList"] = channels;
+            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+            ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
             return View(viewModel);
         }
 
@@ -218,7 +214,7 @@ namespace MAppBnB.Controllers
             var detailsPeopleOnBooking = await _context.Person
                 .Where(p => peopleOnBooking.Select(b => b.PersonID).Contains(p.id))
                 .ToListAsync();
-            ViewData["PeopleOnBooking"] = detailsPeopleOnBooking;
+            ViewBag.PeopleOnBooking = detailsPeopleOnBooking;
 
             return View(booking);
         }

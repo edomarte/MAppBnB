@@ -5,6 +5,7 @@ using MAppBnB.Data;
 using System.Threading.Channels;
 using PdfSharp.Snippets;
 using DocumentFormat.OpenXml.Math;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MAppBnB.Controllers
 {
@@ -21,17 +22,25 @@ namespace MAppBnB.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var accomodationName = await _context.Accommodation.ToListAsync();
-            ViewData["AccommodationList"] = accomodationName;
+            if (!_context.Accommodation.IsNullOrEmpty())
+            {
+                ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+            }
             return View(new FinancialReportsDetailsViewModel());
         }
 
         // POST: FinancialReports/Details/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(FinancialReportsDetailsViewModel fr)
         {
-            var accomodationName = await _context.Accommodation.ToListAsync();
-            ViewData["AccommodationList"] = accomodationName;
+            if (!_context.Accommodation.IsNullOrEmpty())
+            {
+                ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+
+            }
+            //TODO: sistemare quando non ci sono accommodations ancora
+
 
             if (fr != null)
             {
@@ -41,8 +50,6 @@ namespace MAppBnB.Controllers
                 {
                     return NotFound();
                 }
-
-
 
                 // First, fetch the necessary data into memory
                 var bookings = _context.Booking

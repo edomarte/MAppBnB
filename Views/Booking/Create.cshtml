@@ -2,8 +2,6 @@
 
 @{
     ViewData["Title"] = "Create";
-    var accommodations = ViewData["AccommodationList"] as List<Accommodation>;
-    var channels = ViewData["ChannelList"] as List<BookChannel>;
 }
 
 <h1>Create</h1>
@@ -37,17 +35,20 @@
             <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
                 <select asp-for="Booking.IsPaid" class="form-control">
-                        <option value=@false>No</option>
-                        <option value=@true>Yes</option>
+                    <option value=@false>No</option>
+                    <option value=@true>Yes</option>
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.ChannelID" class="control-label"></label>
                 <select asp-for="Booking.ChannelID" class="form-control">
-                    @foreach (var channel in channels)
+                    @if (ViewBag.ChannelList != null)
                     {
-                        <option value="@channel.id">@channel.Name</option>
+                        @foreach (var channel in ViewBag.ChannelList)
+                        {
+                            <option value="@channel.id">@channel.Name</option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
@@ -55,9 +56,12 @@
             <div class="form-group">
                 <label asp-for="Booking.AccommodationID" class="control-label"></label>
                 <select asp-for="Booking.AccommodationID" class="form-control" id="AccommodationsList">
-                    @foreach (var accommodation in accommodations)
+                    @if (ViewBag.AccommodationList != null)
                     {
-                        <option value=@accommodation.id>@accommodation.Name</option>
+                        @foreach (var accommodation in ViewBag.AccommodationList)
+                        {
+                            <option value=@accommodation.id>@accommodation.Name</option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="Booking.AccommodationID" class="text-danger"></span>
@@ -83,7 +87,8 @@
                 <input type="hidden" asp-for="Booking.Sent2Police" class="form-control" id="PersonIDs" value=false />
                 <input type="hidden" asp-for="Booking.Sent2Region" class="form-control" id="PersonIDs" value=false />
                 <input type="hidden" asp-for="Booking.Sent2Town" class="form-control" id="PersonIDs" value=false />
-                <input type="hidden" asp-for="Booking.ContractPrinted" class="form-control" id="PersonIDs" value=false />
+                <input type="hidden" asp-for="Booking.ContractPrinted" class="form-control" id="PersonIDs"
+                    value=false />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

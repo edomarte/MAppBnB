@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MAppBnB;
 using MAppBnB.Data;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MAppBnB.Controllers
 {
@@ -22,8 +23,7 @@ namespace MAppBnB.Controllers
         // GET: Room
         public async Task<IActionResult> Index()
         {
-            var accomodationNames = await _context.Accommodation.ToListAsync();
-            ViewData["AccommodationList"] = accomodationNames;
+            ViewData["AccommodationList"] = await _context.Accommodation.ToListAsync();
             return View(await _context.Room.ToListAsync());
         }
 
@@ -42,8 +42,8 @@ namespace MAppBnB.Controllers
                 return NotFound();
             }
 
-            var accomodationName = await _context.Accommodation.FirstOrDefaultAsync(x => x.id == room.AccommodationId);
-            ViewData["Accommodation"] = accomodationName;
+            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+
 
             return View(room);
         }
@@ -51,8 +51,8 @@ namespace MAppBnB.Controllers
         // GET: Room/Create
         public async Task<IActionResult> Create()
         {
-            var accomodationNames = await _context.Accommodation.ToListAsync();
-            ViewData["AccommodationList"] = accomodationNames;
+            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+
             return View();
         }
 
@@ -80,8 +80,8 @@ namespace MAppBnB.Controllers
                 return NotFound();
             }
 
-            var accomodationNames = await _context.Accommodation.ToListAsync();
-            ViewData["AccommodationList"] = accomodationNames;
+            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+
 
             var room = await _context.Room.FindAsync(id);
             if (room == null)
@@ -140,9 +140,8 @@ namespace MAppBnB.Controllers
             {
                 return NotFound();
             }
-            
-            var accomodationName = await _context.Accommodation.FirstOrDefaultAsync(x => x.id == room.AccommodationId);
-            ViewData["Accommodation"] = accomodationName;
+
+            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
 
             return View(room);
         }

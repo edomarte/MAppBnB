@@ -54,6 +54,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.CIR)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TownFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CleaningFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AWIDAppartamento)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -101,6 +110,15 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CIR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AWIDAppartamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TownFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CleaningFee)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

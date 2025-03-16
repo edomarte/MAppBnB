@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Create";
-    var accommodations=ViewData["AccommodationList"] as List<Accommodation>;
 }
 
 <h1>Create</h1>
@@ -26,8 +25,12 @@
             <div class="form-group">
                 <label asp-for="AccommodationId" class="control-label"></label>
                 <select asp-for="AccommodationId" class="form-control">
-                    @foreach(var accommodation in accommodations){
-                        <option value=@accommodation.id>@accommodation.Name</option>
+                    @if (ViewBag.AccommodationList != null)
+                    {
+                        @foreach (var accommodation in ViewBag.AccommodationList)
+                        {
+                            <option value=@accommodation.id>@accommodation.Name</option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="AccommodationId" class="text-danger"></span>
@@ -49,5 +52,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
