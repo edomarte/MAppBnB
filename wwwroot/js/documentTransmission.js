@@ -30,10 +30,13 @@ document.getElementById("TransmitToRegionPolice").addEventListener("click", func
 
     var list=document.getElementById("PersonsOnBookingList");
     var persons=list.getElementsByTagName("li");
-    var personsIds={};
-    persons.forEach(person => {
-        personsIds.Push(person.getElementsByTagName("input").id)
-    });
+    var personsIds=[]
+    for(const person of Array.from(persons)) {
+        let input = person.getElementsByTagName("input")[0]; // Get the first input inside <li>
+        if (input) {
+            personsIds.push(input.id); // Push input ID to array
+        }
+    }
 
     connectionT.invoke("SendToRegionPolice", bookingID, personsIds).catch(function (err) {
         return console.error(err.toString());

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "77M4TViG3jd3s2gwbupZcao2WHqWSAADsQ6ETFTC8Ig=",
+  "Hash": "2/7VF2QBgTiA6KT+0RFmIcxfF39aldcpCZHxC5jHsMA=",
   "Source": "MAppBnB",
   "BasePath": "_content/MAppBnB",
   "Mode": "Default",
@@ -38,12 +38,12 @@
       "OriginalItemSpec": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-smagplz0v4.gz",
+      "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-kj9nzq11q3.gz",
       "SourceId": "MAppBnB",
       "SourceType": "Discovered",
       "ContentRoot": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/MAppBnB",
-      "RelativePath": "js/documentTransmission#[.{fingerprint=smagplz0v4}]?.js.gz",
+      "RelativePath": "js/documentTransmission#[.{fingerprint=kj9nzq11q3}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -52,8 +52,8 @@
       "RelatedAsset": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentTransmission.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "xif64jrs16",
-      "Integrity": "GfQTKIvfgHsxGC1O3WlvIm6nQ/E7dHRSQGrzAlhVriI=",
+      "Fingerprint": "0bsk2zxk6j",
+      "Integrity": "TIpWBj+R6SEDQtBY5n9MhQrvblrNnSezEd/9IWW+fV8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentTransmission.js"
@@ -962,12 +962,12 @@
       "OriginalItemSpec": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-1qxn93shsx.gz",
+      "Identity": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-xic47lkoos.gz",
       "SourceId": "MAppBnB",
       "SourceType": "Discovered",
       "ContentRoot": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/MAppBnB",
-      "RelativePath": "js/countryProvincePlaceSelector#[.{fingerprint=1qxn93shsx}]?.js.gz",
+      "RelativePath": "js/countryProvincePlaceSelector#[.{fingerprint=xic47lkoos}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -976,8 +976,8 @@
       "RelatedAsset": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\countryProvincePlaceSelector.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "dubfhw7899",
-      "Integrity": "tYrbw9nMzQ9Pv6XUamSWRiidtd2IjzEWCoAKnZKZ7/k=",
+      "Fingerprint": "n3wcahzirx",
+      "Integrity": "ffQCoYuZQH6eremXq6fq4Kxvpt3Rr4gZSDHUS8fRwhQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\countryProvincePlaceSelector.js"
@@ -1648,8 +1648,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "1qxn93shsx",
-      "Integrity": "eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4=",
+      "Fingerprint": "xic47lkoos",
+      "Integrity": "l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\countryProvincePlaceSelector.js"
@@ -1690,8 +1690,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "smagplz0v4",
-      "Integrity": "LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc=",
+      "Fingerprint": "kj9nzq11q3",
+      "Integrity": "EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\documentTransmission.js"
@@ -3958,13 +3958,13 @@
       ]
     },
     {
-      "Route": "js/countryProvincePlaceSelector.1qxn93shsx.js",
-      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-1qxn93shsx.gz",
+      "Route": "js/countryProvincePlaceSelector.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-xic47lkoos.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001172332943"
+          "Quality": "0.001230012300"
         }
       ],
       "ResponseHeaders": [
@@ -3974,19 +3974,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "852"
+          "Value": "812"
         },
         {
           "Name": "ETag",
-          "Value": "\"tYrbw9nMzQ9Pv6XUamSWRiidtd2IjzEWCoAKnZKZ7/k=\""
+          "Value": "\"ffQCoYuZQH6eremXq6fq4Kxvpt3Rr4gZSDHUS8fRwhQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 20:02:12 GMT"
+          "Value": "Mon, 17 Mar 2025 12:52:13 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -4002,26 +4002,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4=\""
+          "Value": "W/\"l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "1qxn93shsx"
-        },
-        {
-          "Name": "label",
-          "Value": "js/countryProvincePlaceSelector.js"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4="
+          "Value": "sha256-l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4="
         }
       ]
     },
     {
-      "Route": "js/countryProvincePlaceSelector.1qxn93shsx.js",
+      "Route": "js/countryProvincePlaceSelector.js",
       "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\countryProvincePlaceSelector.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4031,7 +4023,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3804"
+          "Value": "3656"
         },
         {
           "Name": "Content-Type",
@@ -4039,11 +4031,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4=\""
+          "Value": "\"l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 20:02:12 GMT"
+          "Value": "Mon, 17 Mar 2025 12:52:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4="
+        }
+      ]
+    },
+    {
+      "Route": "js/countryProvincePlaceSelector.js.gz",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-xic47lkoos.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "812"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ffQCoYuZQH6eremXq6fq4Kxvpt3Rr4gZSDHUS8fRwhQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 17 Mar 2025 12:52:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ffQCoYuZQH6eremXq6fq4Kxvpt3Rr4gZSDHUS8fRwhQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/countryProvincePlaceSelector.xic47lkoos.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-xic47lkoos.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001230012300"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "812"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ffQCoYuZQH6eremXq6fq4Kxvpt3Rr4gZSDHUS8fRwhQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 17 Mar 2025 12:52:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xic47lkoos"
+        },
+        {
+          "Name": "label",
+          "Value": "js/countryProvincePlaceSelector.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4="
+        }
+      ]
+    },
+    {
+      "Route": "js/countryProvincePlaceSelector.xic47lkoos.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\countryProvincePlaceSelector.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3656"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 17 Mar 2025 12:52:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4053,7 +4190,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "1qxn93shsx"
+          "Value": "xic47lkoos"
         },
         {
           "Name": "label",
@@ -4061,13 +4198,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4="
+          "Value": "sha256-l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4="
         }
       ]
     },
     {
-      "Route": "js/countryProvincePlaceSelector.1qxn93shsx.js.gz",
-      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-1qxn93shsx.gz",
+      "Route": "js/countryProvincePlaceSelector.xic47lkoos.js.gz",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-xic47lkoos.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4076,7 +4213,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "852"
+          "Value": "812"
         },
         {
           "Name": "Content-Type",
@@ -4084,11 +4221,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"tYrbw9nMzQ9Pv6XUamSWRiidtd2IjzEWCoAKnZKZ7/k=\""
+          "Value": "\"ffQCoYuZQH6eremXq6fq4Kxvpt3Rr4gZSDHUS8fRwhQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 20:02:12 GMT"
+          "Value": "Mon, 17 Mar 2025 12:52:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4106,7 +4243,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "1qxn93shsx"
+          "Value": "xic47lkoos"
         },
         {
           "Name": "label",
@@ -4114,144 +4251,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-tYrbw9nMzQ9Pv6XUamSWRiidtd2IjzEWCoAKnZKZ7/k="
-        }
-      ]
-    },
-    {
-      "Route": "js/countryProvincePlaceSelector.js",
-      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-1qxn93shsx.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.001172332943"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "852"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"tYrbw9nMzQ9Pv6XUamSWRiidtd2IjzEWCoAKnZKZ7/k=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 20:02:12 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4="
-        }
-      ]
-    },
-    {
-      "Route": "js/countryProvincePlaceSelector.js",
-      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\countryProvincePlaceSelector.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "3804"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 20:02:12 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4="
-        }
-      ]
-    },
-    {
-      "Route": "js/countryProvincePlaceSelector.js.gz",
-      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\m7utyh9kxb-1qxn93shsx.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "852"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"tYrbw9nMzQ9Pv6XUamSWRiidtd2IjzEWCoAKnZKZ7/k=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 20:02:12 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-tYrbw9nMzQ9Pv6XUamSWRiidtd2IjzEWCoAKnZKZ7/k="
+          "Value": "sha256-ffQCoYuZQH6eremXq6fq4Kxvpt3Rr4gZSDHUS8fRwhQ="
         }
       ]
     },
@@ -4555,12 +4555,12 @@
     },
     {
       "Route": "js/documentTransmission.js",
-      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-smagplz0v4.gz",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-kj9nzq11q3.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.002127659574"
+          "Quality": "0.001869158879"
         }
       ],
       "ResponseHeaders": [
@@ -4570,15 +4570,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "469"
+          "Value": "534"
         },
         {
           "Name": "ETag",
-          "Value": "\"GfQTKIvfgHsxGC1O3WlvIm6nQ/E7dHRSQGrzAlhVriI=\""
+          "Value": "\"TIpWBj+R6SEDQtBY5n9MhQrvblrNnSezEd/9IWW+fV8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 15 Mar 2025 19:25:00 GMT"
+          "Value": "Mon, 17 Mar 2025 13:05:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4598,13 +4598,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc=\""
+          "Value": "W/\"EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc="
+          "Value": "sha256-EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw="
         }
       ]
     },
@@ -4619,7 +4619,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1433"
+          "Value": "1575"
         },
         {
           "Name": "Content-Type",
@@ -4627,11 +4627,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc=\""
+          "Value": "\"EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 15 Mar 2025 19:25:00 GMT"
+          "Value": "Mon, 17 Mar 2025 13:05:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4641,13 +4641,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc="
+          "Value": "sha256-EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw="
         }
       ]
     },
     {
       "Route": "js/documentTransmission.js.gz",
-      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-smagplz0v4.gz",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-kj9nzq11q3.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4656,7 +4656,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "469"
+          "Value": "534"
         },
         {
           "Name": "Content-Type",
@@ -4664,11 +4664,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"GfQTKIvfgHsxGC1O3WlvIm6nQ/E7dHRSQGrzAlhVriI=\""
+          "Value": "\"TIpWBj+R6SEDQtBY5n9MhQrvblrNnSezEd/9IWW+fV8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 15 Mar 2025 19:25:00 GMT"
+          "Value": "Mon, 17 Mar 2025 13:05:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4686,18 +4686,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-GfQTKIvfgHsxGC1O3WlvIm6nQ/E7dHRSQGrzAlhVriI="
+          "Value": "sha256-TIpWBj+R6SEDQtBY5n9MhQrvblrNnSezEd/9IWW+fV8="
         }
       ]
     },
     {
-      "Route": "js/documentTransmission.smagplz0v4.js",
-      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-smagplz0v4.gz",
+      "Route": "js/documentTransmission.kj9nzq11q3.js",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-kj9nzq11q3.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.002127659574"
+          "Quality": "0.001869158879"
         }
       ],
       "ResponseHeaders": [
@@ -4707,15 +4707,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "469"
+          "Value": "534"
         },
         {
           "Name": "ETag",
-          "Value": "\"GfQTKIvfgHsxGC1O3WlvIm6nQ/E7dHRSQGrzAlhVriI=\""
+          "Value": "\"TIpWBj+R6SEDQtBY5n9MhQrvblrNnSezEd/9IWW+fV8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 15 Mar 2025 19:25:00 GMT"
+          "Value": "Mon, 17 Mar 2025 13:05:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4735,13 +4735,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc=\""
+          "Value": "W/\"EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "smagplz0v4"
+          "Value": "kj9nzq11q3"
         },
         {
           "Name": "label",
@@ -4749,12 +4749,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc="
+          "Value": "sha256-EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw="
         }
       ]
     },
     {
-      "Route": "js/documentTransmission.smagplz0v4.js",
+      "Route": "js/documentTransmission.kj9nzq11q3.js",
       "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\wwwroot\\js\\documentTransmission.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4764,7 +4764,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1433"
+          "Value": "1575"
         },
         {
           "Name": "Content-Type",
@@ -4772,11 +4772,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc=\""
+          "Value": "\"EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 15 Mar 2025 19:25:00 GMT"
+          "Value": "Mon, 17 Mar 2025 13:05:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4786,7 +4786,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "smagplz0v4"
+          "Value": "kj9nzq11q3"
         },
         {
           "Name": "label",
@@ -4794,13 +4794,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc="
+          "Value": "sha256-EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw="
         }
       ]
     },
     {
-      "Route": "js/documentTransmission.smagplz0v4.js.gz",
-      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-smagplz0v4.gz",
+      "Route": "js/documentTransmission.kj9nzq11q3.js.gz",
+      "AssetFile": "c:\\Users\\edoma\\Documents\\MAppBnB\\MAppBnB\\obj\\Debug\\net9.0\\compressed\\1kv0l3t7ot-kj9nzq11q3.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4809,7 +4809,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "469"
+          "Value": "534"
         },
         {
           "Name": "Content-Type",
@@ -4817,11 +4817,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"GfQTKIvfgHsxGC1O3WlvIm6nQ/E7dHRSQGrzAlhVriI=\""
+          "Value": "\"TIpWBj+R6SEDQtBY5n9MhQrvblrNnSezEd/9IWW+fV8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 15 Mar 2025 19:25:00 GMT"
+          "Value": "Mon, 17 Mar 2025 13:05:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4839,7 +4839,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "smagplz0v4"
+          "Value": "kj9nzq11q3"
         },
         {
           "Name": "label",
@@ -4847,7 +4847,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-GfQTKIvfgHsxGC1O3WlvIm6nQ/E7dHRSQGrzAlhVriI="
+          "Value": "sha256-TIpWBj+R6SEDQtBY5n9MhQrvblrNnSezEd/9IWW+fV8="
         }
       ]
     },
@@ -24030,7 +24030,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24083,7 +24083,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24120,7 +24120,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24167,7 +24167,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24220,7 +24220,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24257,7 +24257,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24304,7 +24304,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24365,7 +24365,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24410,7 +24410,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24465,7 +24465,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24526,7 +24526,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -24571,7 +24571,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 18:39:38 GMT"
+          "Value": "Mon, 17 Mar 2025 15:30:38 GMT"
         },
         {
           "Name": "Cache-Control",

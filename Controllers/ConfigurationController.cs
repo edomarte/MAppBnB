@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MAppBnB;
 using MAppBnB.Data;
 using Configuration = MAppBnB.Models.Configuration;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace MAppBnB.Controllers
 {
@@ -20,11 +21,12 @@ namespace MAppBnB.Controllers
             _context = context;
         }
 
-        // GET: Configuration/Edit/5
-        public async Task<IActionResult> Edit()
+        // GET: Configuration/Index/5
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            ViewBag.Stati=_context.Stati.ToList();
-            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.Where(x=>x.Codice.Equals("Host")).ToList();
+            ViewBag.Stati = _context.Stati.ToList();
+            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.Where(x => x.Codice.Equals("Host")).ToList();
             ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
 
             //Only one configuration; row manually added to the database Configuration table
@@ -58,7 +60,7 @@ namespace MAppBnB.Controllers
                 }
 
                 viewModel.Person = person;
-                
+
                 // Pass province stored
                 var birthProvince = _context.Province
                 .Where(p => p.Codice == person.BirthProvince)
@@ -77,25 +79,25 @@ namespace MAppBnB.Controllers
             return View(viewModel);
         }
 
-        // POST: Person/Edit/5
+        // POST: Person/Index/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(PersonDocumentConfigViewModel model)
+        public async Task<IActionResult> Index(PersonDocumentConfigViewModel model)
         {
-//TODO BirthPlace and BirthProvince are null;
+            //TODO BirthPlace and BirthProvince are null;
             if (ModelState.IsValid)
             {
                 try
-                {                  
+                {
                     if (model.Configuration.PersonID == null)
-                    {   
+                    {
                         // Add person to db and immediately get it to have its id.
                         _context.Add(model.Person);
                         await _context.SaveChangesAsync();
-                        model.Person = await _context.Person.OrderBy(x=>x.id).LastAsync();
-                        model.Configuration.PersonID=model.Person.id;
+                        model.Person = await _context.Person.OrderBy(x => x.id).LastAsync();
+                        model.Configuration.PersonID = model.Person.id;
                     }
                     else
                     {
@@ -111,7 +113,7 @@ namespace MAppBnB.Controllers
                             await _context.SaveChangesAsync();
                             var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
                             model.Person.DocumentID = document.id;
-                            model.Configuration.DocumentID=document.id;
+                            model.Configuration.DocumentID = document.id;
                         }
                         else
                         {
@@ -132,11 +134,11 @@ namespace MAppBnB.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Edit));
+                return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Stati=_context.Stati.ToList();
-            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.Where(x=>x.Codice.Equals("Host")).ToList();
+            ViewBag.Stati = _context.Stati.ToList();
+            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.Where(x => x.Codice.Equals("Host")).ToList();
             ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
             return View(model);
         }

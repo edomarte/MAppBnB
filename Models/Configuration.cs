@@ -9,11 +9,11 @@ public class Configuration
     public int? PersonID{get;set;}
     public int? DocumentID { get; set; }
     [DataType(DataType.Text)]
-    public string? AlloggiatiWebUsername { get; set; }
+    public string? AlloggiatiWebUsername { get; set; } // Username to be adequately handled for future deployment (Hashing, etc.)
     [DataType(DataType.Password)]
-    public string? AlloggiatiWebPassword { get; set; }
+    public string? AlloggiatiWebPassword { get; set; } // Password to be adequately handled for future deployment (Hashing, etc.)
     [DataType(DataType.Text)]
-    public string? AlloggiatiWebWSKey { get; set; }
+    public string? AlloggiatiWebWSKey { get; set; } // WebWSKey to be adequately handled for future deployment (Hashing, etc.)
     [Display(Name ="ID Appartamenti AlloggiatiWeb")]
-    public bool? IsGestioneAppartamenti { get; set; }
+    public bool IsGestioneAppartamenti { get; set; }
 }

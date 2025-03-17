@@ -12,12 +12,13 @@ document.getElementById("countrySelector").addEventListener("change", function (
 
     $("#provinceSelector").empty();
     $("#placeSelector").empty();
-    $("#provinceSelector").prop('disabled', true);
-    $("#placeSelector").prop('disabled', true);
 
     if ($("#countrySelector").val() != "100000100") {//If not Italia --> province and place are Estero (Foreign)
         $("#provinceSelector").append(new Option("ES", "ES"));
         $("#placeSelector").append(new Option("ES", "ES"));
+        
+        $("#provinceSelector option[value='ES']").prop("selected", true);
+        $("#placeSelector option[value='ES']").prop("selected", true);
     } else {
         connection.invoke("GetProvinces").catch(function (err) {
             return console.error(err.toString());
@@ -52,12 +53,12 @@ document.getElementById("provinceSelector").addEventListener("change", function 
 connection.start().then(function () {
 
     // No info in configuration yet
-    if ($("#hiddenBirthProvince").val() == "" || $("#hiddenBirthProvince").val() == undefined) {
+    if ($("#hiddenBirthProvince").val() == "ES" || $("#hiddenBirthProvince").val() == undefined|| $("#hiddenBirthProvince").val() == "") {
         // Default to ES (Afghanistan)
-        $("#provinceSelector").append(new Option("ES", "ES"));
-        $("#placeSelector").append(new Option("ES", "ES"));
-        $("#provinceSelector").prop('disabled', true);
-        $("#placeSelector").prop('disabled', true);
+        $("#provinceSelector").append(new Option("Estero", "ES"));
+        $("#placeSelector").append(new Option("Estero", "ES"));
+        $("#provinceSelector option[value='ES']").prop("selected", true);
+        $("#placeSelector option[value='ES']").prop("selected", true);
     } else {
         connection.invoke("GetProvinces").catch(function (err) {
             return console.error(err.toString());
@@ -66,13 +67,11 @@ connection.start().then(function () {
             $("#provinceSelector option[value='" + hbp + "']").prop("selected", true);
         })
 
-
         connection.invoke("GetTowns", $("#hiddenBirthProvince").val()).catch(function (err) {
             return console.error(err.toString());
         }).then(function () {
             let hbp = $("#hiddenBirthPlace").val();
             $("#placeSelector option[value='" + hbp + "']").prop("selected", true);
-
 
         })
     }
@@ -97,10 +96,4 @@ connection.on("AllTownsList", function (towns) {
     towns.forEach(town => {
         $("#selectorIssuingCountry").append(new Option(town.descrizione, town.codice));
     });
-    $("#placeSelector").prop('disabled', false);
-});
-
-document.querySelector("form").addEventListener("submit", function() {
-    console.log(document.querySelector("[name='Person.BirthPlace']").value);
-    console.log(document.querySelector("[name='Person.BirthProvince']").value);
 });

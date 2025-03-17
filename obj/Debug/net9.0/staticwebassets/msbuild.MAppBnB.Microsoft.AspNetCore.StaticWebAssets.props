@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>1qxn93shsx</Fingerprint>
-      <Integrity>eZ9PSZgweZVxDvHR5sGkg+yhK/Ws0frUXbkYmhji9V4=</Integrity>
+      <Fingerprint>xic47lkoos</Fingerprint>
+      <Integrity>l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</OriginalItemSpec>
@@ -102,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>smagplz0v4</Fingerprint>
-      <Integrity>LAk2DEBxoMjZVZ1uZ/ye1NHx4r/KbDDGqQSX3YulUkc=</Integrity>
+      <Fingerprint>kj9nzq11q3</Fingerprint>
+      <Integrity>EIv5nWIPiy1WaiGOdcGYr264NItIB/9dhkVqbyZzAxw=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\documentTransmission.js'))</OriginalItemSpec>

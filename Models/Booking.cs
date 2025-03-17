@@ -26,7 +26,7 @@ public class Booking
     [Required]
     public int? ChannelID { get; set; }
     [Required]
-    public int? AccommodationID { get; set; }
+    public int AccommodationID { get; set; }
     [Required]
     public int? RoomID { get; set; }
     [Required]

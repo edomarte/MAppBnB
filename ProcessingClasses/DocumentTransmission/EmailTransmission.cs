@@ -10,7 +10,7 @@ using System.Diagnostics;
 public class EmailTransmission
 {
     static string message;
-    public static void SendDocsToTown(Booking booking, Person mainPerson, Document document)
+    public static string SendDocsToTown(Booking booking, Person mainPerson, Document document)
     {
         message = "Main person on booking: " + mainPerson.Name + " " + mainPerson.Surname + "\n"
         + "Booking from " + booking.CheckinDateTime + " to " + booking.CheckOutDateTime + "\n"
@@ -20,10 +20,10 @@ public class EmailTransmission
         + "Please see attached copy of the document." + "\n"
         + "Kind regards";
 
-        SendEmail("edomarte@gmail.com", message, document.PdfCopy, "Booking Documents");
+        return SendEmail("edomarte@gmail.com", message, document.PdfCopy, "Booking Documents");
     }
 
-    private static void SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64, string subject)
+    private static string SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64, string subject)
     {
         Configuration.Default.ApiKey.Add("api-key", ""); // Latest is on github repository secret
 
@@ -36,18 +36,18 @@ public class EmailTransmission
             attachment: new List<SendSmtpEmailAttachment>{
                 new SendSmtpEmailAttachment(content: attachmentBase64,
                 name: "Document.pdf"
-)}
+            )}
 
         );
 
         try
         {
             var result = apiInstance.SendTransacEmail(sendSmtpEmail);
-            Console.WriteLine(result.ToString());
+            return result.ToString();
         }
         catch (Exception e)
         {
-            Console.WriteLine("Exception when calling TransactionalEmailsApi.SendTransacEmail: " + e.Message);
+            return "Exception when calling TransactionalEmailsApi.SendTransacEmail: " + e.Message;
         }
     }
 

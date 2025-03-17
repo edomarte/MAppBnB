@@ -42,5 +42,7 @@ public class Person
     public string? RoleRelation { get; set; }
     [Display(Name = "Document Serial Number")]
     public int? DocumentID { get; set; }
+    [Required]
+    public string? Citizenship{get;set;}
 
 }
