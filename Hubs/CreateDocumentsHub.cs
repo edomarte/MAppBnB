@@ -1,6 +1,9 @@
+using System.Configuration;
+using DocumentFormat.OpenXml.Math;
 using MAppBnB;
 using MAppBnB.Data;
 using Microsoft.AspNetCore.SignalR;
+using Configuration = MAppBnB.Models.Configuration;
 
 
 namespace SignalRChat.Hubs //TODO: Change namespace
@@ -25,6 +28,18 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             var person = _context.Person.Where(x => x.id == int.Parse(personID)).ToList();
             return person[0];
+        }
+
+        public List<Person> GetMainPersons(List<Booking> bookings)
+        {
+            List<int> bookingIds = bookings.Select(b => b.id).ToList();
+            var query = from p in _context.Person
+                        join bp in _context.BookingPerson on p.id equals bp.PersonID
+                        where bookingIds.Contains(bp.BookingID)
+                        select p;
+
+            //var mainPersons = _context.Person.Where(x => x.id == _context.BookingPerson.Where(y => bookings)).ToList();
+            return null;//TODO
         }
 
         public List<Person> GetPersonsDetails(string[] personIDs)
@@ -52,6 +67,17 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             return room[0];
         }
 
+        public BookChannel GetChannelDetails(string? channelId)
+        {
+            var channel = _context.BookChannel.Where(x => x.id == Convert.ToInt32(channelId)).ToList();
+            return channel[0];
+        }
+
+        public Configuration GetConfiguration()
+        {
+            var configurations = _context.Configuration.ToList();
+            return configurations[0];
+        }
         public BookChannel GetChannelDetails(int? channelId)
         {
             var channel = _context.BookChannel.Where(x => x.id == channelId).ToList();
@@ -115,20 +141,21 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         }
 
-        private List<Booking> GetBookingsForReport(string accommodationID,string channelID,string dateFrom,string dateTo){
+        private List<Booking> GetBookingsForReport(string accommodationID, string channelID, string dateFrom, string dateTo)
+        {
             // First, fetch the necessary data into memory
-                return _context.Booking
-                                 .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
-                                            && x.ChannelID== Convert.ToInt32(channelID)
-                                            && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
-                                            && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
-                                 .ToList(); // Fetches data into memory
+            return _context.Booking
+                             .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
+                                        && x.ChannelID == Convert.ToInt32(channelID)
+                                        && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
+                                        && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
+                             .ToList(); // Fetches data into memory
         }
 
-        public async Task CreateReportExcel(string accommodationID,string channelID,string dateFrom,string dateTo)
+        public async Task CreateReportExcel(string accommodationID, string channelID, string dateFrom, string dateTo)
         {
-            List<Booking> bookings = GetBookingsForReport(accommodationID,channelID,dateFrom,dateTo);
-            string contractPath = DocumentProcessing.GenerateExcelFinancialReport(bookings);
+            List<Booking> bookings = GetBookingsForReport(accommodationID, channelID, dateFrom, dateTo);
+            string contractPath = "";//TODO:DocumentProcessing.GenerateExcelFinancialReport(bookings, GetChannelDetails(channelID), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration());
 
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);

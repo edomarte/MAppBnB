@@ -1,8 +1,10 @@
 using System.Data;
+using System.Threading.Channels;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using MAppBnB;
+using Configuration = MAppBnB.Models.Configuration;
 
 
 public class DocumentProcessing
@@ -284,13 +286,13 @@ public class DocumentProcessing
         preCheckinDt.Columns.Add("AccommodationWebsite");
     }
 
-    public static string GenerateExcelFinancialReport(List<Booking> bookings) //TODO: Channel name, accommodation name, datefrom, dateto
+    public static string GenerateExcelFinancialReport(List<Booking> bookings, BookChannel channel, List<Person> mainPersons, List<Room> rooms, Accommodation accommodation, string dateFrom, string dateTo, Configuration configuration, List<int> guestsNums) 
     {
+        string fileName = accommodation.Name + "_" + channel.Name + "_" + dateFrom + "_" + dateTo;
+        string reportPath = "..\\DocumentTemplates\\Report_" + fileName + ".xlsx"; //TODO: add Channel name, accommodation name, datefrom, dateto to path
 
-        string contractPath = "..\\DocumentTemplates\\Report" + 1 + ".xlsx"; //TODO: add Channel name, accommodation name, datefrom, dateto to path
-
-        File.Copy("..\\DocumentTemplates\\Report.xlsx", "..\\DocumentTemplates\\Report" + 1 + ".xlsx", true);
-        using (SpreadsheetDocument doc = SpreadsheetDocument.Open("..\\DocumentTemplates\\Report" + 1 + ".xlsx", true))
+        File.Copy("..\\DocumentTemplates\\Report.xlsx", "..\\DocumentTemplates\\" + reportPath, true);
+        using (SpreadsheetDocument doc = SpreadsheetDocument.Open("..\\DocumentTemplates\\" + reportPath, true))
         {
 
             if (doc is null)
@@ -307,52 +309,139 @@ public class DocumentProcessing
 
                 if (sheetData != null)
                 {
-                    foreach (Booking b in bookings)
+                    Row firstRow = sheetData.Elements<Row>().FirstOrDefault(r => r.RowIndex == 0);
+                    firstRow = addCellsToHeaderRow(firstRow, accommodation, channel, configuration);
+                    for (int i=0; i<bookings.Count;i++)
                     {
-                        sheetData.Append(addFieldsToRow(b)); 
+                        sheetData.Append(addCellsToRow(firstRow,bookings[i],guestsNums[i],mainPersons[i],rooms[i],accommodation));
                     }
-                    //TODO: somma ultima riga dove serve
+
+                    addLastSumCellsToRow(bookings.Count);
                     worksheetPart.Worksheet.Save();
                 }
             }
             doc.Save();
         }
-        return contractPath;
+        return reportPath;
     }
 
-    private static Row addFieldsToRow(Booking b) //TODO: other objects needed
+    private static Row addCellsToHeaderRow(Row firstRow, Accommodation accommodation, BookChannel channel, Configuration configuration)
+    {
+        Cell cellTownFee = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "O1");
+        Cell cellIVAVendite = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "Q1");
+        Cell cellChannelFee = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "R1");
+        Cell cellCommissioneBancaria = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "S1");
+        Cell cellIVACommissioni = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "U1");
+        Cell cellCedolareSecca = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "X1");
+
+        cellTownFee.CellValue = new CellValue(accommodation.TownFee.Value);
+        cellIVAVendite.CellValue = new CellValue(configuration.IVAVendite);
+        cellChannelFee.CellValue = new CellValue(channel.Fee.Value);
+        cellCommissioneBancaria.CellValue = new CellValue(configuration.CommissioneBancaria);
+        cellIVACommissioni.CellValue = new CellValue(configuration.IVACommissioni);
+        cellCedolareSecca.CellValue = new CellValue(configuration.CedolareSecca);
+        /*
+            firstRow.Append(
+                   new Cell() { CellReference="O1", DataType = CellValues.Number, CellValue = new CellValue(accommodation.TownFee.Value)},
+                   new Cell() { CellReference="Q1", DataType = CellValues.Number, CellValue = new CellValue(configuration.IVAVendite)},
+                   new Cell() { CellReference="R1", DataType = CellValues.Number, CellValue = new CellValue(channel.Fee.Value)},
+                   new Cell() { CellReference="S1", DataType = CellValues.Number, CellValue = new CellValue(configuration.CommissioneBancaria)},
+                   new Cell() { CellReference="U1", DataType = CellValues.Number, CellValue = new CellValue(configuration.IVACommissioni)},
+                   new Cell() { CellReference="X1", DataType = CellValues.Number, CellValue = new CellValue(configuration.CedolareSecca)}
+                );*/
+        return firstRow;
+    }
+
+    private static Row addCellsToRow(Row header, Booking b, int guestsNum, Person mainPerson, Room room, Accommodation accommodation) //TODO: other objects needed
     {
         Row row = new Row();
+        double nightsNum = (b.CheckOutDateTime.Value.Date - b.CheckinDateTime.Value.Date).TotalDays;
+        double grossLessDiscount = Convert.ToDouble(b.Price.Value - b.Discount.Value + accommodation.CleaningFee.Value);
+        double TownFee = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "O1").CellValue);
+        double ivaVendite = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "Q1").CellValue);
+        double ivaCommissioni = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "U1").CellValue);
+        double channelFee = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "R1").CellValue);
+        double bankCommission = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "S1").CellValue);
+        double fixedTax = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "X1").CellValue);//Cedolare secca
+
+        double totalFees = (channelFee * nightsNum) + (bankCommission * grossLessDiscount);
+        double ivaCommissioniValue = totalFees * ivaCommissioni;
+        double ivaVenditeValue = grossLessDiscount * ivaVendite;
+        double grossTotalPlusExtra = grossLessDiscount + Convert.ToDouble(accommodation.CleaningFee.Value);
+        double netBeforeFixedTax=grossTotalPlusExtra - (totalFees + ivaCommissioniValue);
+        double fixedTaxValue = (grossTotalPlusExtra - ivaVenditeValue) * fixedTax;
+
         //TODO: completare sotto
         row.Append(
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.CheckinDateTime?.ToString("yyyy-MM-dd") ?? string.Empty) },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Ospite") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Camera") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Importo per notte") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#notti") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#ospiti") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("#ospiti esenti") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("notti imponibili") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Sconto%") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Importo Sconto") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo Scontato") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Extra") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo scontato + extra (commissioni)") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Imposta soggiorno") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Lordo scontato + extra") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("IVA vendite") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Commissione") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Commissione Bancaria") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale commissioni") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("IVA su commissioni") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale costi") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale netto lordo cedolare") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Cedolare secca") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Totale netto") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Fattura costi") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.CheckinDateTime.Value.Date.ToString("dd-MM-yyyy") ?? string.Empty) },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue($"{mainPerson.Name} {mainPerson.Surname}") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue(room.Name) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(Convert.ToDouble(b.Price - b.Discount) / nightsNum) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(nightsNum) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(guestsNum) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue("#ospiti esenti") },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(nightsNum) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(b.Price.Value) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(b.Discount.Value / b.Price.Value) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(b.Discount.Value) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(b.Price.Value - b.Discount.Value) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(accommodation.CleaningFee.Value) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(grossTotalPlusExtra) },//"Lordo scontato + extra (commissioni)"
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(nightsNum * TownFee) },//Tassa di soggiorno
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(grossLessDiscount) },//Lordo scontato + extra
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(ivaVenditeValue) },//IVA vendite
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(channelFee * nightsNum) },//Commissione
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(bankCommission * grossLessDiscount) }, //Commissione Bancaria
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(totalFees) }, //Totale commissioni
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(ivaCommissioniValue) },//IVA su commissioni
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(totalFees + ivaCommissioniValue) },//Totale Costi
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(netBeforeFixedTax) },//Totale netto lordo cedolare
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(fixedTaxValue) },//Cedolare secca
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(netBeforeFixedTax-fixedTaxValue) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue("Fattura costi") },
             new Cell() { DataType = CellValues.String, CellValue = new CellValue("ID Pagamento") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue("Data incasso") }
+            new Cell() { DataType = CellValues.Date, CellValue = new CellValue(Convert.ToDateTime(b.PaymentDate.Value).Date.ToString("dd-MM-yyyy")) }
+
+        );
+        return row;
+    }
+
+    private static Row addLastSumCellsToRow(int lastRowIndex)
+    {
+        Row row = new Row();
+
+
+        row.Append(
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("") },
+
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(D3:D{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(E3:E{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(F3:F{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(G3:G{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(H3:H{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(I3:I{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(J3:J{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(K3:K{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(L3:L{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(M3:M{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(N3:N{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(O3:O{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(P3:P{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(Q3:Q{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(R3:R{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(S3:S{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(T3:T{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(U3:U{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(V3:V{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(W3:W{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(X3:X{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(Y3:Y{lastRowIndex})" } },
+            new Cell() { DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(Z3:Z{lastRowIndex})" } },
+
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("") },
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue("") }
 
         );
         return row;
