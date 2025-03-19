@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using MAppBnB.Data;
 using SignalRChat.Hubs;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MappBnBContext>(options =>
@@ -9,6 +11,10 @@ builder.Services.AddDbContext<MappBnBContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
+
+// Imposta la cultura globale come InvariantCulture
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 var app = builder.Build();
 

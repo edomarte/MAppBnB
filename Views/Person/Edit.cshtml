@@ -90,7 +90,7 @@
                 <select asp-for="Person.RoleRelation" class="form-control">
                     @foreach (var guestType in ViewBag.TipoAlloggiato)
                     {
-                        @if (!guestType.Codice.Equals("Host"))
+                        @if (!guestType.Codice.Equals(99))
                         {
                             <option value="@guestType.Codice">@guestType.Descrizione</option>
                         }

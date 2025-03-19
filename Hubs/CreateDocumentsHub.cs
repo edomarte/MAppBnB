@@ -38,8 +38,8 @@ namespace SignalRChat.Hubs //TODO: Change namespace
           bp => bp.PersonID,
           p => p.id,
           (bp, p) => new { bp, p })
-    .Where(joined => bookingIds.Contains(joined.bp.BookingID) && 
-                     Convert.ToInt32(joined.p.RoleRelation) >= 16 && 
+    .Where(joined => bookingIds.Contains(joined.bp.BookingID) &&
+                     Convert.ToInt32(joined.p.RoleRelation) >= 16 &&
                      Convert.ToInt32(joined.p.RoleRelation) <= 18)
     .Select(joined => joined.p)  // Selects the Person entity
     .ToList(); // Change Host in tipoalloggiato in a number
@@ -51,7 +51,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             List<int> bookingIds = bookings.Select(b => b.id).ToList();
             List<int> guestsPerBooking = _context.BookingPerson
-                                        .Where(bp=>bookingIds.Contains(bp.id))
+                                        .Where(bp => bookingIds.Contains(bp.BookingID))
                                         .GroupBy(bp => bp.BookingID)
                                         .Select(g => g.Count())
                                         .ToList();
@@ -62,9 +62,14 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         public List<Room> GetRooms(List<Booking> bookings)
         {
             List<int> roomIds = bookings.Select(b => b.RoomID).ToList();
-            List<Room> mainPersonList = _context.Room.Where(r => roomIds.Contains(r.id)).ToList();
+            List<Room> roomsList = roomIds
+                        .Join(_context.Room,
+                            id => id,
+                            room => room.id,
+                            (id, room) => room)
+                        .ToList();
 
-            return mainPersonList;
+            return roomsList;
         }
 
 
