@@ -50,22 +50,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Person.BirthProvince" class="control-label"></label>
-                <select asp-for="Person.BirthProvince" class="form-control" id="provinceSelector">
-                    @if (ViewBag.BirthProvince != null)
-                    {
-                        <option value="@ViewBag.BirthProvince.Codice">@ViewBag.BirthProvince.Descrizione</option>
-                    }
-                </select>
+                <select asp-for="Person.BirthProvince" class="form-control" id="provinceSelector"></select>
                 <span asp-validation-for="Person.BirthProvince" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Person.BirthPlace" class="control-label"></label>
-                <select asp-for="Person.BirthPlace" class="form-control" id="placeSelector">
-                    @if (ViewBag.BirthPlace != null)
-                    {
-                        <option value="@ViewBag.BirthPlace.Codice">@ViewBag.BirthPlace.Descrizione</option>
-                    }
-                </select>
+                <select asp-for="Person.BirthPlace" class="form-control" id="placeSelector"></select>
                 <span asp-validation-for="Person.BirthPlace" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -138,6 +128,11 @@
                 <label asp-for="Configuration.IVACommissioni" class="control-label"></label>
                 <input asp-for="Configuration.IVACommissioni" class="form-control" />
                 <span asp-validation-for="Configuration.IVACommissioni" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Configuration.CedolareSecca" class="control-label"></label>
+                <input asp-for="Configuration.CedolareSecca" class="form-control" />
+                <span asp-validation-for="Configuration.CedolareSecca" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Configuration.CommissioneBancaria" class="control-label"></label>

@@ -32,15 +32,41 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         public List<Person> GetMainPersons(List<Booking> bookings)
         {
-            List<int> bookingIds = bookings.Select(b => b.id).ToList();
-            var query = from p in _context.Person
-                        join bp in _context.BookingPerson on p.id equals bp.PersonID
-                        where bookingIds.Contains(bp.BookingID)
-                        select p;
+            List<int> bookingIds = bookings.Select(b => b.id).ToList(); //Just the first one for each booking
+            List<Person> mainPersonList = _context.BookingPerson
+    .Join(_context.Person,
+          bp => bp.PersonID,
+          p => p.id,
+          (bp, p) => new { bp, p })
+    .Where(joined => bookingIds.Contains(joined.bp.BookingID) && 
+                     Convert.ToInt32(joined.p.RoleRelation) >= 16 && 
+                     Convert.ToInt32(joined.p.RoleRelation) <= 18)
+    .Select(joined => joined.p)  // Selects the Person entity
+    .ToList(); // Change Host in tipoalloggiato in a number
 
-            //var mainPersons = _context.Person.Where(x => x.id == _context.BookingPerson.Where(y => bookings)).ToList();
-            return null;//TODO
+            return mainPersonList;
         }
+
+        public List<int> GetGuestNums(List<Booking> bookings)
+        {
+            List<int> bookingIds = bookings.Select(b => b.id).ToList();
+            List<int> guestsPerBooking = _context.BookingPerson
+                                        .Where(bp=>bookingIds.Contains(bp.id))
+                                        .GroupBy(bp => bp.BookingID)
+                                        .Select(g => g.Count())
+                                        .ToList();
+
+            return guestsPerBooking;
+        }
+
+        public List<Room> GetRooms(List<Booking> bookings)
+        {
+            List<int> roomIds = bookings.Select(b => b.RoomID).ToList();
+            List<Room> mainPersonList = _context.Room.Where(r => roomIds.Contains(r.id)).ToList();
+
+            return mainPersonList;
+        }
+
 
         public List<Person> GetPersonsDetails(string[] personIDs)
         {
@@ -67,7 +93,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             return room[0];
         }
 
-        public BookChannel GetChannelDetails(string? channelId)
+        public BookChannel GetChannelDetailsS(string? channelId)
         {
             var channel = _context.BookChannel.Where(x => x.id == Convert.ToInt32(channelId)).ToList();
             return channel[0];
@@ -155,7 +181,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         public async Task CreateReportExcel(string accommodationID, string channelID, string dateFrom, string dateTo)
         {
             List<Booking> bookings = GetBookingsForReport(accommodationID, channelID, dateFrom, dateTo);
-            string contractPath = "";//TODO:DocumentProcessing.GenerateExcelFinancialReport(bookings, GetChannelDetails(channelID), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration());
+            string contractPath = DocumentProcessing.GenerateExcelFinancialReport(bookings, GetChannelDetailsS(channelID), GetMainPersons(bookings), GetRooms(bookings), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration(), GetGuestNums(bookings));
 
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
@@ -165,3 +191,5 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         }
     }
 }
+
+//TODO: what happens when  same person book two different times with two different roles?6

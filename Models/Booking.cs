@@ -28,7 +28,7 @@ public class Booking
     [Required]
     public int AccommodationID { get; set; }
     [Required]
-    public int? RoomID { get; set; }
+    public int RoomID { get; set; }
     [Required]
     [Precision(18,2)]
     [DataType(DataType.Currency)]
