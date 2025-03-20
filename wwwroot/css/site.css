@@ -29,3 +29,26 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+#calendarTable {
+  margin: 20px auto; /* Centers the table */
+  border-collapse: collapse;
+  width: auto; /* Keeps the width flexible */
+}
+
+#calendarTable th, 
+#calendarTable td {
+    width: 50px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    border: 2px solid black;
+    padding: 0;
+    position: relative; /* Enables absolute positioning inside */
+    vertical-align: top; /* Ensures content is aligned to the top */
+}
+
+.dayPlaceholder {
+    position: absolute; /* Positions the placeholder */
+    top: 2px; /* Sticks it to the top */
+    left: 2px; /* Aligns it slightly from the left */
+    font-weight: bold;
+}

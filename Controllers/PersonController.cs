@@ -122,6 +122,7 @@ namespace MAppBnB.Controllers
             };
 
             ViewBag.Stati = _context.Stati.ToList();
+            
             ViewBag.TipoAlloggiato = _context.TipoAlloggiato.ToList();
             ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
 

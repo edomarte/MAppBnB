@@ -186,6 +186,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         public async Task CreateReportExcel(string accommodationID, string channelID, string dateFrom, string dateTo)
         {
             List<Booking> bookings = GetBookingsForReport(accommodationID, channelID, dateFrom, dateTo);
+            //TODO: ensure the various arrays are linked (the first booking to its correspondent main person and room and number of guests)
             string contractPath = DocumentProcessing.GenerateExcelFinancialReport(bookings, GetChannelDetailsS(channelID), GetMainPersons(bookings), GetRooms(bookings), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration(), GetGuestNums(bookings));
 
             byte[] file = await File.ReadAllBytesAsync(contractPath);

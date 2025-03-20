@@ -19,11 +19,38 @@ namespace SignalRChat.Hubs
 
         private List<CalendarUpdateElement> getCalendarUpdateElements(List<Booking> bookings){
             List<CalendarUpdateElement> lcue= new List<CalendarUpdateElement>();
+
             foreach(Booking b in bookings){
-                lcue.Add(new CalendarUpdateElement(b.id, b.CheckinDateTime.Value.DayOfYear,b.CheckOutDateTime.Value.DayOfYear));
+                lcue.Add(new CalendarUpdateElement(b.id, b.CheckinDateTime.Value.DayOfYear,b.CheckOutDateTime.Value.DayOfYear, GetRoom(b), GetMainPerson(b)));
             }
             return lcue;
         }
+
+         public Person GetMainPerson(Booking booking)
+        {
+            int bookingId = booking.id; //Just the first one for each booking
+            Person mainPerson = _context.BookingPerson
+    .Join(_context.Person,
+          bp => bp.PersonID,
+          p => p.id,
+          (bp, p) => new { bp, p })
+    .Where(joined => bookingId==joined.bp.BookingID &&
+                     Convert.ToInt32(joined.p.RoleRelation) >= 16 &&
+                     Convert.ToInt32(joined.p.RoleRelation) <= 18)
+    .Select(joined => joined.p)  // Selects the Person entity
+    .ToList()[0]; // Change Host in tipoalloggiato in a number
+
+            return mainPerson;
+        }
+
+        public Room GetRoom(Booking booking)
+        {
+            int roomId = booking.RoomID;
+            Room room = _context.Room.FirstOrDefault(x=>x.id==roomId);
+
+            return room;
+        }
+
 
         public async Task GetBookingsInMonth(string accommodationId, string monthYear)
         {
@@ -51,11 +78,15 @@ public class CalendarUpdateElement {
     public int Id {get;set;}
     public int CheckinDay {get;set;}
     public int CheckoutDay{get;set;}
+    public Room Room{get;set;}
+    public Person MainPerson{get;set;}
 
-    public CalendarUpdateElement(int id, int checkinDay, int checkoutDay)
+    public CalendarUpdateElement(int id, int checkinDay, int checkoutDay, Room room, Person mainPerson)
     {
-        this.Id = id;
-        this.CheckinDay = checkinDay;
-        this.CheckoutDay = checkoutDay;
+        Id = id;
+        CheckinDay = checkinDay;
+        CheckoutDay = checkoutDay;
+        Room=room;
+        MainPerson = mainPerson;
     }
 }

@@ -286,7 +286,7 @@ public class DocumentProcessing
         preCheckinDt.Columns.Add("AccommodationWebsite");
     }
 
-    public static string GenerateExcelFinancialReport(List<Booking> bookings, BookChannel channel, List<Person> mainPersons, List<Room> rooms, Accommodation accommodation, string dateFrom, string dateTo, Configuration configuration, List<int> guestsNums) 
+    public static string GenerateExcelFinancialReport(List<Booking> bookings, BookChannel channel, List<Person> mainPersons, List<Room> rooms, Accommodation accommodation, string dateFrom, string dateTo, Configuration configuration, List<int> guestsNums)
     {
         string fileName = accommodation.Name + "_" + channel.Name + "_" + dateFrom + "_" + dateTo;
         string reportPath = "..\\DocumentTemplates\\Report_" + fileName + ".xlsx";
@@ -311,12 +311,12 @@ public class DocumentProcessing
                 {
                     Row firstRow = sheetData.Elements<Row>().FirstOrDefault(r => r.RowIndex == 1);
                     firstRow = addCellsToHeaderRow(firstRow, accommodation, channel, configuration);
-                    for (int i=0; i<bookings.Count;i++)
+                    for (int i = 0; i < bookings.Count; i++)
                     {
-                        sheetData.Append(addCellsToRow(firstRow,bookings[i],guestsNums[i],mainPersons[i],rooms[i],accommodation));
+                        sheetData.Append(addCellsToRow(firstRow, bookings[i], guestsNums[i], mainPersons[i], rooms[i], accommodation));
                     }
 
-                    sheetData.Append(addLastSumCellsToRow(3+bookings.Count-1)); // skip the header (3 rows) and select only the data rows
+                    sheetData.Append(addLastSumCellsToRow(3 + bookings.Count - 1)); // skip the header (3 rows) and select only the data rows
                     worksheetPart.Worksheet.Save();
                 }
             }
@@ -327,6 +327,8 @@ public class DocumentProcessing
 
     private static Row addCellsToHeaderRow(Row firstRow, Accommodation accommodation, BookChannel channel, Configuration configuration)
     {
+        Cell channelName = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "A1");
+        Cell accommodationName = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "B1");
         Cell cellTownFee = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "O1");
         Cell cellIVAVendite = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "Q1");
         Cell cellChannelFee = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "R1");
@@ -334,13 +336,15 @@ public class DocumentProcessing
         Cell cellIVACommissioni = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "U1");
         Cell cellCedolareSecca = firstRow.Elements<Cell>().FirstOrDefault(c => c.CellReference == "X1");
 
-         cellTownFee.CellValue = new CellValue(accommodation.TownFee.Value);
-         cellIVAVendite.CellValue = new CellValue(configuration.IVAVendite);
-         cellChannelFee.CellValue = new CellValue(channel.Fee.Value);
-         cellCommissioneBancaria.CellValue = new CellValue(configuration.CommissioneBancaria);
-         cellIVACommissioni.CellValue = new CellValue(configuration.IVACommissioni);
-         cellCedolareSecca.CellValue = new CellValue(configuration.CedolareSecca);
-        
+        channelName.CellValue = new CellValue(channel.Name);
+        accommodationName.CellValue = new CellValue(accommodation.Name);
+        cellTownFee.CellValue = new CellValue(accommodation.TownFee.Value);
+        cellIVAVendite.CellValue = new CellValue(configuration.IVAVendite);
+        cellChannelFee.CellValue = new CellValue(channel.Fee.Value);
+        cellCommissioneBancaria.CellValue = new CellValue(configuration.CommissioneBancaria);
+        cellIVACommissioni.CellValue = new CellValue(configuration.IVACommissioni);
+        cellCedolareSecca.CellValue = new CellValue(configuration.CedolareSecca);
+
         return firstRow;
     }
 
@@ -360,7 +364,7 @@ public class DocumentProcessing
         double ivaCommissioniValue = totalFees * ivaCommissioni;
         double ivaVenditeValue = grossLessDiscount * ivaVendite;
         double grossTotalPlusExtra = grossLessDiscount + Convert.ToDouble(accommodation.CleaningFee.Value);
-        double netBeforeFixedTax=grossTotalPlusExtra - (totalFees + ivaCommissioniValue);
+        double netBeforeFixedTax = grossTotalPlusExtra - (totalFees + ivaCommissioniValue);
         double fixedTaxValue = (grossTotalPlusExtra - ivaVenditeValue) * fixedTax;
 
         //TODO: completare sotto
@@ -389,7 +393,7 @@ public class DocumentProcessing
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(totalFees + ivaCommissioniValue) },//Totale Costi
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(netBeforeFixedTax) },//Totale netto lordo cedolare
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(fixedTaxValue) },//Cedolare secca
-            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(netBeforeFixedTax-fixedTaxValue) },
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue(netBeforeFixedTax - fixedTaxValue) },
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue("Fattura costi") },
             new Cell() { DataType = CellValues.String, CellValue = new CellValue("ID Pagamento") },
             new Cell() { DataType = CellValues.Date, CellValue = new CellValue(b.PaymentDate.Value.ToString("dd-MM-yyyy")) }
@@ -405,29 +409,29 @@ public class DocumentProcessing
 
         row.Append(
 
-            new Cell() { CellReference=$"D{lastRowIndex+1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(D3:D{lastRowIndex})" } },
-            new Cell() { CellReference=$"E{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(E3:E{lastRowIndex})" } },
-            new Cell() { CellReference=$"F{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(F3:F{lastRowIndex})" } },
-            new Cell() { CellReference=$"G{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(G3:G{lastRowIndex})" } },
-            new Cell() { CellReference=$"H{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(H3:H{lastRowIndex})" } },
-            new Cell() { CellReference=$"I{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(I3:I{lastRowIndex})" } },
-            new Cell() { CellReference=$"J{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(J3:J{lastRowIndex})" } },
-            new Cell() { CellReference=$"K{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(K3:K{lastRowIndex})" } },
-            new Cell() { CellReference=$"L{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(L3:L{lastRowIndex})" } },
-            new Cell() { CellReference=$"M{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(M3:M{lastRowIndex})" } },
-            new Cell() { CellReference=$"N{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(N3:N{lastRowIndex})" } },
-            new Cell() { CellReference=$"O{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(O3:O{lastRowIndex})" } },
-            new Cell() { CellReference=$"P{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(P3:P{lastRowIndex})" } },
-            new Cell() { CellReference=$"Q{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(Q3:Q{lastRowIndex})" } },
-            new Cell() { CellReference=$"R{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(R3:R{lastRowIndex})" } },
-            new Cell() { CellReference=$"S{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(S3:S{lastRowIndex})" } },
-            new Cell() { CellReference=$"T{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(T3:T{lastRowIndex})" } },
-            new Cell() { CellReference=$"U{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(U3:U{lastRowIndex})" } },
-            new Cell() { CellReference=$"V{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(V3:V{lastRowIndex})" } },
-            new Cell() { CellReference=$"W{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(W3:W{lastRowIndex})" } },
-            new Cell() { CellReference=$"X{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(X3:X{lastRowIndex})" } },
-            new Cell() { CellReference=$"Y{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(Y3:Y{lastRowIndex})" } },
-            new Cell() { CellReference=$"Z{lastRowIndex+1}",DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(Z3:Z{lastRowIndex})" } }
+            new Cell() { CellReference = $"D{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(D3:D{lastRowIndex})" } },
+            new Cell() { CellReference = $"E{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(E3:E{lastRowIndex})" } },
+            new Cell() { CellReference = $"F{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(F3:F{lastRowIndex})" } },
+            new Cell() { CellReference = $"G{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(G3:G{lastRowIndex})" } },
+            new Cell() { CellReference = $"H{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(H3:H{lastRowIndex})" } },
+            new Cell() { CellReference = $"I{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(I3:I{lastRowIndex})" } },
+            new Cell() { CellReference = $"J{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(J3:J{lastRowIndex})" } },
+            new Cell() { CellReference = $"K{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(K3:K{lastRowIndex})" } },
+            new Cell() { CellReference = $"L{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(L3:L{lastRowIndex})" } },
+            new Cell() { CellReference = $"M{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(M3:M{lastRowIndex})" } },
+            new Cell() { CellReference = $"N{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(N3:N{lastRowIndex})" } },
+            new Cell() { CellReference = $"O{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(O3:O{lastRowIndex})" } },
+            new Cell() { CellReference = $"P{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(P3:P{lastRowIndex})" } },
+            new Cell() { CellReference = $"Q{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(Q3:Q{lastRowIndex})" } },
+            new Cell() { CellReference = $"R{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(R3:R{lastRowIndex})" } },
+            new Cell() { CellReference = $"S{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(S3:S{lastRowIndex})" } },
+            new Cell() { CellReference = $"T{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(T3:T{lastRowIndex})" } },
+            new Cell() { CellReference = $"U{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(U3:U{lastRowIndex})" } },
+            new Cell() { CellReference = $"V{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(V3:V{lastRowIndex})" } },
+            new Cell() { CellReference = $"W{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(W3:W{lastRowIndex})" } },
+            new Cell() { CellReference = $"X{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(X3:X{lastRowIndex})" } },
+            new Cell() { CellReference = $"Y{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(Y3:Y{lastRowIndex})" } },
+            new Cell() { CellReference = $"Z{lastRowIndex + 1}", DataType = CellValues.Number, CellFormula = new CellFormula() { Text = $"SUM(Z3:Z{lastRowIndex})" } }
 
         );
         return row;

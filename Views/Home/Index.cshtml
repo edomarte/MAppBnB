@@ -40,11 +40,9 @@
                     if (i % 7 == 0 && i > 0)
                     {
                         @Html.Raw("</tr><tr>")
-                        // Corrected row handling
                     }
 
-                    <td id="@date.DayOfYear">@date.Day</td>
-                    // Correctly placed within the loop
+                    <td id="@date.DayOfYear"><span class="dayPlaceholder">@date.Day</span><br></td>
                 }
             </tr>
         </tbody>

@@ -7,7 +7,6 @@ var lastDayOnCalendar;
 //Disable the send button until connection is established.
 
 connectionCL.on("UpdateCalendar", function (bookings) {
-    console.log("Raw bookings data:", bookings);
     bookings.forEach(booking => {
 
 
@@ -25,7 +24,7 @@ connectionCL.on("UpdateCalendar", function (bookings) {
 
         for (let i = first; i < (last + 1); i++) {
             let option = document.createElement("p");
-            option.innerHTML = booking.id;
+            option.innerHTML = booking.room.name + " - " + booking.mainPerson.name + " " + booking.mainPerson.surname;
             document.getElementById(i).appendChild(option);
         }
     });
@@ -57,30 +56,38 @@ document.getElementById("AccommodationsList").addEventListener("change", functio
 document.getElementById("monthYearPicker").addEventListener("change", function (event) {
     let $tbody = $("#tbody");
     $tbody.empty(); // Clear previous content
-    
+
     let firstDayOfTheMonth = new Date($("#monthYearPicker").val());
     let startDate = new Date(firstDayOfTheMonth);
     startDate.setDate(firstDayOfTheMonth.getDate() - firstDayOfTheMonth.getDay());
-    
+
     let $currentRow;
-    
+
     for (let i = 0; i < 42; i++) {
         if (i % 7 === 0) {
             $currentRow = $("<tr>");
             $tbody.append($currentRow);
         }
-        
-        let dayOfYear = Math.ceil((startDate - new Date(startDate.getFullYear(), 0, 0)) / 86400000);
-        
+
+        let dayOfYear = Math.floor((startDate - new Date(startDate.getFullYear(), 0, 0)) / 86400000);
+
         let $cell = $("<td>")
             .attr("id", dayOfYear)
+
+        let day = $("<span>")
+            .attr("class", "dayPlaceholder")
             .text(startDate.getDate());
-        
+
+        $cell.append(day)
+        $cell.append($("<br>"))
+
         $currentRow.append($cell);
-        
+
         startDate.setDate(startDate.getDate() + 1);
-    
+
     }
+    firstDayOnCalendar = document.getElementById("tbody").firstElementChild.firstElementChild.id * 1;
+    lastDayOnCalendar = firstDayOnCalendar + 41;
 
     // do the same as in index.html (get list of days from datetime given the selected month-year)
     updateCalendar()

@@ -632,7 +632,6 @@ c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\MAppBnB.source
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\scopedcss\bundle\MAppBnB.styles.css
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\scopedcss\projectbundle\MAppBnB.bundle.scp.css
-c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\hlvuidnl8f-b9sayid5wm.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\fvvv0nhoo5-61n19gt1b8.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\a0q62j7a0a-49hvrsqvxt.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\4cykbb0owg-xtxxf3hu2r.gz
@@ -782,7 +781,6 @@ c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\zh-Hant\System
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\bin\Debug\net9.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\MAppBnB.MvcApplicationPartsAssemblyInfo.cs
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\le22icaqyj-uxghk2w4fo.gz
-C:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-g558le34mu.gz
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\appsettings.json
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\bin\Debug\net9.0\libman.json
@@ -1212,3 +1210,5 @@ C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\MAppBnB.genruntimeconf
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\ref\MAppBnB.dll
 C:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\m7utyh9kxb-xic47lkoos.gz
 C:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\1kv0l3t7ot-kj9nzq11q3.gz
+c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\hlvuidnl8f-tvredlciy0.gz
+c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-dlb4uuipn7.gz
