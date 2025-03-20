@@ -23,9 +23,14 @@ connectionCL.on("UpdateCalendar", function (bookings) {
             last = booking.checkoutDay;
 
         for (let i = first; i < (last + 1); i++) {
-            let option = document.createElement("p");
-            option.innerHTML = booking.room.name + " - " + booking.mainPerson.name + " " + booking.mainPerson.surname;
-            document.getElementById(i).appendChild(option);
+            let par = $("<p>");
+            let url = `/Booking/Edit/${booking.id}`;
+
+            let a = $("<a>")
+                .attr("href", url) 
+                .text(booking.room.name + " - " + booking.mainPerson.name + " " + booking.mainPerson.surname)
+            par.append(a);
+            $("#" + i).append(par);
         }
     });
 });

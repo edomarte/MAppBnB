@@ -367,7 +367,6 @@ public class DocumentProcessing
         double netBeforeFixedTax = grossTotalPlusExtra - (totalFees + ivaCommissioniValue);
         double fixedTaxValue = (grossTotalPlusExtra - ivaVenditeValue) * fixedTax;
 
-        //TODO: completare sotto
         row.Append(
             new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.CheckinDateTime.Value.Date.ToString("dd-MM-yyyy") ?? string.Empty) }, // Data arrivo
             new Cell() { DataType = CellValues.String, CellValue = new CellValue($"{mainPerson.Name} {mainPerson.Surname}") }, // Ospite
@@ -375,7 +374,7 @@ public class DocumentProcessing
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(Convert.ToDouble(b.Price - b.Discount) / nightsNum) }, // Importo per notte
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(nightsNum) }, //#notti
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(guestsNum) }, //#ospiti
-            new Cell() { DataType = CellValues.Number, CellValue = new CellValue("#ospiti esenti") }, // #ospiti esenti
+            new Cell() { DataType = CellValues.Number, CellValue = new CellValue("#ospiti esenti") }, // #ospiti esenti //TODO: aggiungere checkbox esente o no su Person
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(nightsNum) }, // #notti imponibili
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(b.Price.Value) }, //#lordo
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(b.Discount.Value / b.Price.Value) }, // sconto%

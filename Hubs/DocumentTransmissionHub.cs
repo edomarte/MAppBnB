@@ -67,7 +67,7 @@ namespace SignalRChat.Hubs
             var booking = _context.Booking.Where(x => x.id == int.Parse(bookingID)).ToList();
             List<Person> persons = GetPersonsDetails(personID);
             string transmissionResult=SOAPTransmission.SendDocsToRegionPolice(GetBookingDetails(bookingID), persons, GetDocumentDetails(persons.First()), GetConfiguration(),GetAWIDAppartamento(booking[0].AccommodationID));
-            await Clients.All.SendAsync("TransmissionResult", transmissionResult); //TODO: transmission message
+            await Clients.All.SendAsync("TransmissionResult", transmissionResult); 
         }
     }
 }

@@ -96,13 +96,5 @@ namespace MAppBnB.Controllers
             return View(fr);
         }
 
-        // GET: FinancialReport/DowloadFile
-        public async Task<IActionResult> DownloadFile(int? id)
-        {
-            //TODO:
-            var document = await _context.Document.FirstOrDefaultAsync(m => m.id == id);
-
-            return File(document.PdfCopy, "application/pdf", document.SerialNumber + ".pdf");
-        }
     }
 }

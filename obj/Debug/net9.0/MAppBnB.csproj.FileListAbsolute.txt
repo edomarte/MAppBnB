@@ -1121,9 +1121,7 @@ C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\MAppBnB.sourcelink.jso
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\scopedcss\bundle\MAppBnB.styles.css
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\scopedcss\projectbundle\MAppBnB.bundle.scp.css
-C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\hlvuidnl8f-b9sayid5wm.gz
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\fvvv0nhoo5-61n19gt1b8.gz
-C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-g558le34mu.gz
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\m7utyh9kxb-xic47lkoos.gz
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\x86lmv01z0-98t39orfpl.gz
 C:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\1kv0l3t7ot-kj9nzq11q3.gz
@@ -1212,3 +1210,5 @@ C:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\m7u
 C:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\1kv0l3t7ot-kj9nzq11q3.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\hlvuidnl8f-tvredlciy0.gz
 c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-dlb4uuipn7.gz
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\hlvuidnl8f-vq708yxl3e.gz
+c:\Users\edoma\Documents\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-xpnfmcqzse.gz

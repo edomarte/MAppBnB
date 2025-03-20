@@ -197,5 +197,3 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         }
     }
 }
-
-//TODO: what happens when  same person book two different times with two different roles?6

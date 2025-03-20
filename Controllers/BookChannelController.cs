@@ -19,8 +19,6 @@ namespace MAppBnB.Controllers
             _context = context;
         }
 
-//TODO: virgola e punto che non funzionano
-
         // GET: BookChannel
         public async Task<IActionResult> Index()
         {
