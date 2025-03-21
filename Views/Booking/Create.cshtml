@@ -91,6 +91,12 @@
                     value=false />
             </div>
             <div class="form-group">
+                @if(ViewBag.RoomAlreadyBooked){
+                    <p id="roomBlockedP">The room is already booked in that period.</p>
+                }
+                
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -109,6 +115,7 @@
             <label>Persons on the Booking</label>
         <ul id="PersonsOnBookingList"></ul>
         <input type="button" id="removeSelectedButton" value="Remove selected guests form booking" />
+        <p id="personsErrorAlert"></p>
         </p>
     </div>
 </div>

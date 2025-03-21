@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>xpnfmcqzse</Fingerprint>
-      <Integrity>1QutWdgNIuY4hBSMzjP3qmAU7wEeT6xfMn9TaPPzKWw=</Integrity>
+      <Fingerprint>gaerk3v9t2</Fingerprint>
+      <Integrity>6M6z3+/j71ysnrPeXqq8R0rZ4+iqv7tuG77EOJgwUZw=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\calendar.js'))</OriginalItemSpec>
@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>xic47lkoos</Fingerprint>
-      <Integrity>l8x+id6cDPnZZ1efCi5L0Fe67onE5GKH3Sa3jS5BBX4=</Integrity>
+      <Fingerprint>8xddezaayf</Fingerprint>
+      <Integrity>vOHXOlHGtlcHCe7cM6tkdqvVP+X3H3VX9U8g5UYnBhk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</OriginalItemSpec>
@@ -156,8 +156,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>v486xewcpi</Fingerprint>
-      <Integrity>ryflBGtD6RVZxvWWN4+l9ymZVcLLFf/5Fm86IxvYleg=</Integrity>
+      <Fingerprint>6oijr62st1</Fingerprint>
+      <Integrity>RthPDyKMTLoqhDG2tOUuRquDqWjUZkUZT0PNGGLO+P8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</OriginalItemSpec>
@@ -174,8 +174,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>cqu3aupeo3</Fingerprint>
-      <Integrity>rK9Zx8UOZ+yR2hZ9Ov8dBexROapvuO2mE9jAx7ZIquA=</Integrity>
+      <Fingerprint>49hvrsqvxt</Fingerprint>
+      <Integrity>6EuF7ZQ7IraO4mAyblsT5rUzaDbApiFXRumXSTfKTGQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\signalr\dist\browser\signalr.js'))</OriginalItemSpec>

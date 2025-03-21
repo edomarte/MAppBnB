@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MAppBnB;
 
 public class Person
-{
+{ //TODO: add requirements as per alloggiatiweb limitations (chars number)
     public int id { get; set; }
 
     [Required]
@@ -39,7 +39,7 @@ public class Person
     public string? Email { get; set; }
     [Required]
     [Display(Name = "Role/Relation")]
-    public string? RoleRelation { get; set; } 
+    public int? RoleRelation { get; set; } 
     [Display(Name = "Document Serial Number")]
     public int? DocumentID { get; set; }
     [Required]

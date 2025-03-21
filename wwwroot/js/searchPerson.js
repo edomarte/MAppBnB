@@ -6,18 +6,19 @@ var connectionS = new signalR.HubConnectionBuilder().withUrl("/personSearchHub")
 document.getElementById("searchPersonButton").disabled = true;
 
 connectionS.on("ResultList", function (persons) {
-    persons.forEach(person => {
-        var li = document.createElement("li");
-        var label = document.createElement("label");
-        label.innerText = person.name+", "+person.surname+","+person.birthDate;
-        var checkbox = document.createElement("input");
-        checkbox.id = person.id;
-        checkbox.name="selectedPersons";
-        checkbox.innerText = person.name;
-        checkbox.type = "checkbox";
-        label.appendChild(checkbox);
-        li.appendChild(label);
-        document.getElementById("ResultList").appendChild(li);
+    persons.forEach(personRole => {
+        var li = $("<li>");
+        var label = $("<label>")
+            .text(personRole.person.name + ", " + personRole.person.surname + ", " + personRole.person.birthDate + ", " + personRole.roleName);
+        var checkbox = $("<input>")
+            .attr("id", personRole.person.id)
+            .attr("data-roleCode", personRole.person.roleRelation)//TODO:test
+            .attr("type", "checkbox")
+            .attr("name", "selectedPersons")
+            .text(personRole.person.name)
+        label.append(checkbox);
+        li.append(label);
+        $("#ResultList").append(li);
     });
 });
 
@@ -30,58 +31,93 @@ connectionS.start().then(function () {
 document.getElementById("searchPersonButton").addEventListener("click", function (event) {
     document.getElementById("ResultList").innerHTML = "";
     var personName = document.getElementById("SearchPerson").value;
-    connectionS.invoke("SearchPerson", personName,getPersonsInBooking()).catch(function (err) {
+    connectionS.invoke("SearchPerson", personName, getPersonsInBooking()).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
 });
 
-function getPersonsInBooking(){
-    var list=document.getElementById("PersonsOnBookingList");
-    var persons=list.getElementsByTagName("li");
-    var personIds=[];
+function getPersonsInBooking() {
+    var list = document.getElementById("PersonsOnBookingList");
+    var persons = list.getElementsByTagName("li");
+    var personIds = [];
     for (var i = 0; i < persons.length; ++i) {
         let person = persons[i];
-        let checkbox=person.getElementsByTagName("input")[0];
+        let checkbox = person.getElementsByTagName("input")[0];
         personIds.push(checkbox.id);
-      }
+    }
     return personIds;
 }
 
 document.getElementById("addSelectedButton").addEventListener("click", function (event) {
-    var list=document.getElementById("ResultList");
-    var persons=list.getElementsByTagName("li");
-    for (var i = 0; i < persons.length; ++i) {
+    var persons = $("#ResultList li");
+    var personsLength = persons.length;
+    for (var i = 0; i < personsLength; i++) {
         let person = persons[i];
-        let checkbox=person.getElementsByTagName("input")[0];
-        if(checkbox.checked){
-            document.getElementById("PersonsOnBookingList").appendChild(person);
+        let checkbox = person.getElementsByTagName("input")[0];
+        if (checkbox.checked) {
+            $("#PersonsOnBookingList").append(person);
         }
-      }
+    }
 
     event.preventDefault();
 });
 
 document.getElementById("removeSelectedButton").addEventListener("click", function (event) {
-    var list=document.getElementById("PersonsOnBookingList");
-    var persons=list.getElementsByTagName("li");
-    for (var i = 0; i < persons.length; ++i) {
+    var persons = $("#PersonsOnBookingList li");
+    var personsLength = persons.length;
+    for (var i = 0; i < personsLength; i++) {
         let person = persons[i];
-        let checkbox=person.getElementsByTagName("input")[0];
-        if(checkbox.checked){
-            document.getElementById("ResultList").appendChild(person);
+        let checkbox = person.getElementsByTagName("input")[0];
+        if (checkbox.checked) {
+            $("#ResultList").append(person);
         }
-      }
+    }
 
     event.preventDefault();
 });
 
 document.getElementById("form").addEventListener("submit", function (event) {
-    var list=document.getElementById("PersonsOnBookingList");
-    var persons=list.getElementsByTagName("li");
+    $("#roomBlockedP").val("");
+    $("#personsErrorAlert").val("");
+    var persons = $("#PersonsOnBookingList li");
+    var mainPersonRole;
+    var groupComponentCount = 0;
+    var familyMemberCount = 0
+    var mainPersonCount = 0;
     for (var i = 0; i < persons.length; ++i) {
         let person = persons[i];
-        let checkbox=person.getElementsByTagName("input")[0];
-        document.getElementById("PersonIDs").value+=checkbox.id+",";
-      }
+        let checkbox = person.getElementsByTagName("input")[0];
+        $("#PersonIDs").val($("#PersonIDs").val()+checkbox.id + ",")
+        var rolecode = checkbox.getAttribute("data-roleCode");
+        if (rolecode == "16" || rolecode == "17" || rolecode == "18") { // If the selected person is a mainPerson role type.
+            mainPersonCount++;
+            mainPersonRole = rolecode;
+        } else {
+            if (rolecode == "19")
+                familyMemberCount++;
+            else
+                groupComponentCount++;
+        }
+    }
+
+    if (mainPersonCount != 1) {
+        $("#personsErrorAlert").text("Select just one main person")
+        event.preventDefault();
+    } else {
+        if (mainPersonRole == "16" && (familyMemberCount + groupComponentCount > 0)) {
+            $("#personsErrorAlert").text("A booking with a single guest cannot contain any other person.")
+            event.preventDefault();
+        } else {
+            if (mainPersonRole == "17" && ((familyMemberCount == 0) || (groupComponentCount > 0))) {
+                $("#personsErrorAlert").text("A booking with a family head must only contain one or more family members.")
+                event.preventDefault();
+            } else {
+                if (mainPersonRole == "18" && ((familyMemberCount > 0) || (groupComponentCount == 0))) {
+                    $("#personsErrorAlert").text("A booking with a group head must only contain one or more group members.")
+                    event.preventDefault();
+                }
+            }
+        }
+    }
 });

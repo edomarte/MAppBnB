@@ -1,15 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MAppBnB;
 using MAppBnB.Data;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Xml;
-
 namespace MAppBnB.Controllers
 {
     public class BookingController : Controller
@@ -62,6 +53,7 @@ namespace MAppBnB.Controllers
 
             ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
             ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
+            ViewBag.RoomAlreadyBooked = false;
             return View(viewModel);
         }
 
@@ -74,6 +66,17 @@ namespace MAppBnB.Controllers
         {
             if (ModelState.IsValid)
             {
+                var existingBooking = await _context.Booking.FirstOrDefaultAsync(x => x.RoomID == model.Booking.RoomID
+                                                                                && x.CheckinDateTime.Value.Date < model.Booking.CheckOutDateTime.Value.Date
+                                                                                && x.CheckOutDateTime.Value.Date > model.Booking.CheckinDateTime.Value.Date);
+                if (existingBooking != null)
+                {
+                    ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+                    ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
+                    ViewBag.RoomAlreadyBooked = true;
+                    return View(model);
+                }
+
                 _context.Add(model.Booking);
                 await _context.SaveChangesAsync();
                 var booking = await _context.Booking.FirstOrDefaultAsync(x => x.CheckinDateTime == model.Booking.CheckinDateTime && x.RoomID == model.Booking.RoomID);
@@ -95,9 +98,7 @@ namespace MAppBnB.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-
             return RedirectToAction(nameof(Index));
-
         }
 
         // GET: Booking/Edit/5
@@ -107,7 +108,7 @@ namespace MAppBnB.Controllers
             {
                 return NotFound();
             }
-
+//TODO: Add PersonRoleNames and pass it to the View as in PersonSearchHub.
             var viewModel = new PersonBookingViewModel
             {
                 Booking = new Booking(),
@@ -155,7 +156,7 @@ namespace MAppBnB.Controllers
                     // TODO: find a linq way to extract only the ids in the string that are not already in the model.
                     //var currentbookingPersons = await _context.BookingPerson.Where(x => x.BookingID == model.Booking.id).ToListAsync(); 
 
-                    var bpInList=new List<BookingPerson>();
+                    var bpInList = new List<BookingPerson>();
                     foreach (var personID in model.PersonIDs.Split(","))
                     {
                         if (personID == "") continue;
@@ -173,8 +174,8 @@ namespace MAppBnB.Controllers
                         }
 
                     }
-                    var allPersonInBooking=_context.BookingPerson.Where(x=>x.BookingID==id).ToList();
-                    var bp2beDeleted=allPersonInBooking.Except(bpInList, new BookingPersonComparer()).ToList();
+                    var allPersonInBooking = _context.BookingPerson.Where(x => x.BookingID == id).ToList();
+                    var bp2beDeleted = allPersonInBooking.Except(bpInList, new BookingPersonComparer()).ToList();
                     _context.BookingPerson.RemoveRange(bp2beDeleted);
                     await _context.SaveChangesAsync();
 
@@ -241,6 +242,6 @@ namespace MAppBnB.Controllers
             return _context.Booking.Any(e => e.id == id);
         }
 
-        
+
     }
 }

@@ -53,8 +53,8 @@ document.getElementById("provinceSelector").addEventListener("change", function 
 connection.start().then(function () {
 
     // No info in configuration yet
-    if ($("#hiddenBirthProvince").val() == "ES" || $("#hiddenBirthProvince").val() == undefined|| $("#hiddenBirthProvince").val() == "") {
-        // Default to ES (Afghanistan)
+    if ($("#hiddenBirthProvince").val() == "ES") {
+        // Default to Italy
         $("#provinceSelector").append(new Option("Estero", "ES"));
         $("#placeSelector").append(new Option("Estero", "ES"));
         $("#provinceSelector option[value='ES']").prop("selected", true);
@@ -67,7 +67,14 @@ connection.start().then(function () {
             $("#provinceSelector option[value='" + hbp + "']").prop("selected", true);
         })
 
-        connection.invoke("GetTowns", $("#hiddenBirthProvince").val()).catch(function (err) {
+        // If not yet selected default to the first in db AG (Agrigento)
+        var birthProvince;
+        if($("#hiddenBirthProvince").val()==undefined)
+            birthProvince="AG"
+        else
+            birthProvince=$("#hiddenBirthProvince").val()
+
+        connection.invoke("GetTowns", birthProvince).catch(function (err) {
             return console.error(err.toString());
         }).then(function () {
             let hbp = $("#hiddenBirthPlace").val();

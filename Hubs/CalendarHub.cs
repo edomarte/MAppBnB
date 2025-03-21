@@ -35,8 +35,8 @@ namespace SignalRChat.Hubs
           p => p.id,
           (bp, p) => new { bp, p })
     .Where(joined => bookingId==joined.bp.BookingID &&
-                     Convert.ToInt32(joined.p.RoleRelation) >= 16 &&
-                     Convert.ToInt32(joined.p.RoleRelation) <= 18)
+                     joined.p.RoleRelation >= 16 &&
+                     joined.p.RoleRelation <= 18)
     .Select(joined => joined.p)  // Selects the Person entity
     .ToList()[0]; // Change Host in tipoalloggiato in a number
 
