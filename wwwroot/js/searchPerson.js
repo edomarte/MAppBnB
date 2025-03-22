@@ -12,7 +12,7 @@ connectionS.on("ResultList", function (persons) {
             .text(personRole.person.name + ", " + personRole.person.surname + ", " + personRole.person.birthDate + ", " + personRole.roleName);
         var checkbox = $("<input>")
             .attr("id", personRole.person.id)
-            .attr("data-roleCode", personRole.person.roleRelation)//TODO:test
+            .attr("data-roleCode", personRole.person.roleRelation)
             .attr("type", "checkbox")
             .attr("name", "selectedPersons")
             .text(personRole.person.name)
@@ -24,6 +24,17 @@ connectionS.on("ResultList", function (persons) {
 
 connectionS.start().then(function () {
     document.getElementById("searchPersonButton").disabled = false;
+    $("#isSent2Police").prop("disabled",true);
+    $("#isSent2Region").prop("disabled",true);
+    $("#isSent2Town").prop("disabled",true);
+    $("#isContractPrinted").prop("disabled",true);
+
+    if($("#isPaidSelector").val()=="True"){
+        $("#paymentDateInput").attr("disabled", false);
+    }else{
+        $("#paymentDateInput").attr("disabled", true);
+    }
+
 }).catch(function (err) {
     return console.error(err.toString());
 });
@@ -80,6 +91,7 @@ document.getElementById("removeSelectedButton").addEventListener("click", functi
 document.getElementById("form").addEventListener("submit", function (event) {
     $("#roomBlockedP").val("");
     $("#personsErrorAlert").val("");
+    $("#PersonIDs").val("");
     var persons = $("#PersonsOnBookingList li");
     var mainPersonRole;
     var groupComponentCount = 0;
@@ -101,6 +113,10 @@ document.getElementById("form").addEventListener("submit", function (event) {
         }
     }
 
+    //TODO: max prenotabile: 30 gg; min prenotabile 1 gg; checkout date > checkin date; 
+    //TODO: stessa persona non può prenotare nello stesso periodo di un'altra prenotazione.
+
+
     if (mainPersonCount != 1) {
         $("#personsErrorAlert").text("Select just one main person")
         event.preventDefault();
@@ -120,4 +136,9 @@ document.getElementById("form").addEventListener("submit", function (event) {
             }
         }
     }
+// If disabled it does not send data to controller
+    $("#isSent2Police").prop("disabled",false);
+    $("#isSent2Region").prop("disabled",false);
+    $("#isSent2Town").prop("disabled",false);
+    $("#isContractPrinted").prop("disabled",false);
 });

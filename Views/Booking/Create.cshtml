@@ -28,17 +28,17 @@
                 <span asp-validation-for="Booking.CheckOutDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.PaymentDate" class="control-label"></label>
-                <input asp-for="Booking.PaymentDate" class="form-control" />
-                <span asp-validation-for="Booking.PaymentDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
-                <select asp-for="Booking.IsPaid" class="form-control">
+                <select asp-for="Booking.IsPaid" class="form-control" id="isPaidSelector">
                     <option value=@false>No</option>
                     <option value=@true>Yes</option>
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.PaymentDate" class="control-label"></label>
+                <input asp-for="Booking.PaymentDate" class="form-control" id="paymentDateInput" disabled="true"/>
+                <span asp-validation-for="Booking.PaymentDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.ChannelID" class="control-label"></label>
@@ -91,10 +91,11 @@
                     value=false />
             </div>
             <div class="form-group">
-                @if(ViewBag.RoomAlreadyBooked){
+                @if (ViewBag.RoomAlreadyBooked)
+                {
                     <p id="roomBlockedP">The room is already booked in that period.</p>
                 }
-                
+
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -127,6 +128,7 @@
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/getRooms.js" defer></script>
 <script src="~/js/searchPerson.js" defer></script>
+<script src="~/js/bookingScript.js" defer></script>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

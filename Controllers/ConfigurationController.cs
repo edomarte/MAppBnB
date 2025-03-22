@@ -26,7 +26,7 @@ namespace MAppBnB.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.Stati = _context.Stati.ToList();
-            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.Where(x => x.Codice.Equals(99)).ToList();
+            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.Where(x => x.Codice.Equals(99)).ToList();//99=host
             ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
 
             //Only one configuration; row manually added to the database Configuration table
@@ -86,7 +86,7 @@ namespace MAppBnB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(PersonDocumentConfigViewModel model)
         {
-            //TODO BirthPlace and BirthProvince are null;
+
             if (ModelState.IsValid)
             {
                 try
@@ -138,7 +138,7 @@ namespace MAppBnB.Controllers
             }
 
             ViewBag.Stati = _context.Stati.ToList();
-            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.Where(x => x.Codice.Equals(99)).ToList();
+            ViewBag.TipoAlloggiato = _context.TipoAlloggiato.Where(x => x.Codice.Equals(99)).ToList(); //99=host
             ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
             return View(model);
         }

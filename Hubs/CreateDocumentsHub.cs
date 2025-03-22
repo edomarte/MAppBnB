@@ -30,44 +30,37 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             return person[0];
         }
 
-        public List<Person> GetMainPersons(List<Booking> bookings)
+        public Person GetMainPerson(Booking booking)
         {
-            List<int> bookingIds = bookings.Select(b => b.id).ToList(); //Just the first one for each booking
-            List<Person> mainPersonList = _context.BookingPerson
+            int bookingId = booking.id;
+            Person mainPerson = _context.BookingPerson
     .Join(_context.Person,
           bp => bp.PersonID,
           p => p.id,
           (bp, p) => new { bp, p })
-    .Where(joined => bookingIds.Contains(joined.bp.BookingID) &&
+    .Where(joined => bookingId==joined.bp.BookingID &&
                      Convert.ToInt32(joined.p.RoleRelation) >= 16 &&
                      Convert.ToInt32(joined.p.RoleRelation) <= 18)
     .Select(joined => joined.p)  // Selects the Person entity
-    .ToList(); // Change Host in tipoalloggiato in a number
+    .ToList()[0]; // Change Host in tipoalloggiato in a number
 
-            return mainPersonList;
+            return mainPerson;
         }
 
-        public List<int> GetGuestNums(List<Booking> bookings)
+        public int GetGuestCount(Booking booking)
         {
-            List<int> bookingIds = bookings.Select(b => b.id).ToList();
-            List<int> guestsPerBooking = _context.BookingPerson
-                                        .Where(bp => bookingIds.Contains(bp.BookingID))
+            int bookingId = booking.id;
+            int guestsPerBooking = _context.BookingPerson
+                                        .Where(bp => bookingId==bp.BookingID)
                                         .GroupBy(bp => bp.BookingID)
-                                        .Select(g => g.Count())
-                                        .ToList();
-
+                                        .Select(g => g.Count()).ToList()[0];
             return guestsPerBooking;
         }
 
-        public List<Room> GetRooms(List<Booking> bookings)
+        public Room GetRoom(Booking booking)
         {
-            List<int> roomIds = bookings.Select(b => b.RoomID).ToList();
-            List<Room> roomsList = roomIds
-                        .Join(_context.Room,
-                            id => id,
-                            room => room.id,
-                            (id, room) => room)
-                        .ToList();
+            int roomId = booking.RoomID;
+            Room roomsList = _context.Room.First(x=>x.id==roomId);
 
             return roomsList;
         }
@@ -158,7 +151,10 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            if (contractPath.Contains("Error"))
+                await Clients.All.SendAsync("Error", "Generate a Contract first!");
+            else
+                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
 
@@ -168,7 +164,10 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            if (contractPath.Contains("Error"))
+                await Clients.All.SendAsync("Error", "Generate a PreCheckin Document first!");
+            else
+                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
 
@@ -186,8 +185,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         public async Task CreateReportExcel(string accommodationID, string channelID, string dateFrom, string dateTo)
         {
             List<Booking> bookings = GetBookingsForReport(accommodationID, channelID, dateFrom, dateTo);
-            //TODO: ensure the various arrays are linked (the first booking to its correspondent main person and room and number of guests)
-            string contractPath = DocumentProcessing.GenerateExcelFinancialReport(bookings, GetChannelDetailsS(channelID), GetMainPersons(bookings), GetRooms(bookings), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration(), GetGuestNums(bookings));
+            string contractPath = DocumentProcessing.GenerateExcelFinancialReport(getReportLines(bookings), GetChannelDetailsS(channelID), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration());
 
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
@@ -195,5 +193,22 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
 
         }
+
+        private List<FinancialReportLine> getReportLines(List<Booking> bookings){
+            List<FinancialReportLine> lfrl= new List<FinancialReportLine>();
+
+            foreach(Booking booking in bookings){
+                lfrl.Add(new FinancialReportLine(){Booking=booking, MainPerson=GetMainPerson(booking),Room=GetRoom(booking), GuestCount=GetGuestCount(booking)});
+            }
+
+            return lfrl;
+        }
+    }
+
+    public class FinancialReportLine{
+        public Booking Booking{get;set;}
+        public Person MainPerson{get;set;}
+        public Room Room{get;set;}
+        public int GuestCount{get;set;}
     }
 }

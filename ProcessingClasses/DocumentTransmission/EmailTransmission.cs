@@ -43,7 +43,9 @@ public class EmailTransmission
         try
         {
             var result = apiInstance.SendTransacEmail(sendSmtpEmail);
-            return result.ToString();
+            string temp=result.ToString();
+            //return result.ToString(); //TODO: verify the result
+            return "Email sent correctly.";
         }
         catch (Exception e)
         {

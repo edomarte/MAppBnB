@@ -3,13 +3,15 @@ using System.ComponentModel.DataAnnotations;
 namespace MAppBnB;
 
 public class Person
-{ //TODO: add requirements as per alloggiatiweb limitations (chars number)
+{ 
     public int id { get; set; }
 
     [Required]
     [DataType(DataType.Text)]
+    [MaxLength(30, ErrorMessage = "Name cannot exceed 30 characters")]
     public string? Name { get; set; }
     [Required]
+    [MaxLength(50, ErrorMessage = "Surname cannot exceed 50 characters")]
     [DataType(DataType.Text)]
     public string? Surname { get; set; }
     [Required]
@@ -27,7 +29,7 @@ public class Person
     [Display(Name = "Birth Country")]
     public string? BirthCountry { get; set; }
     [DataType(DataType.Text)]
-    [RegularExpression(@"^\+(?:[\d]{2,3})$")]
+    [RegularExpression(@"^\+(?:[\d]{2,3})$", ErrorMessage = "Prefix must start with + and 2-3 numbers")]
     [Display(Name = "Phone Prefix")]
     public string? PhonePrefix { get; set; }
 

@@ -103,10 +103,7 @@
                 <select asp-for="Document.DocumentType" class="form-control">
                     @foreach (var docType in ViewBag.TipoDocumento)
                     {
-                        @if (!docType.Codice.Equals(99))
-                        {
-                            <option value="@docType.Codice">@docType.Descrizione</option>
-                        }
+                        <option value="@docType.Codice">@docType.Descrizione</option>
                     }
                 </select>
                 <span asp-validation-for="Document.DocumentType" class="text-danger"></span>

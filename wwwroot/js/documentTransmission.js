@@ -8,8 +8,29 @@ connectionT.start().then(function () {
     return console.error(err.toString());
 });
 
-connectionT.on("TransmissionResult", function (rooms) {
-    //TODO: Display result
+connectionT.on("TransmissionResult", function (result) {
+    $("#resultPH").text(result);
+
+    //Change the correspondent boolean dropdown
+    if(result=="Schedine sent correctly."){
+        $("#isSent2Police").prop("disabled", false);
+        $("#isSent2Police option[value='False']").removeProp("selected");
+        $("#isSent2Police option[value='True']").prop("selected", true).attr("selected", "selected");
+        $("#isSent2Police").trigger("change");
+        $("#isSent2Police").prop("disabled", true);
+
+        $("#Sent2Region").prop("disabled", false);
+        $("#Sent2Region option[value='False']").removeProp("selected");
+        $("#Sent2Region option[value='True']").prop("selected", true).attr("selected", "selected");
+        $("#Sent2Region").trigger("change");
+        $("#Sent2Region").prop("disabled", true);
+    }else if(result=="Email sent correctly."){
+        $("#isSent2Town").prop("disabled", false);
+        $("#isSent2Town option[value='False']").removeProp("selected");
+        $("#isSent2Town option[value='True']").prop("selected", true).attr("selected", "selected");
+        $("#isSent2Town").trigger("change");
+        $("#isSent2Town").prop("disabled", true);
+    }
 });
 
 document.getElementById("TransmitToTown").addEventListener("click", function (event) {

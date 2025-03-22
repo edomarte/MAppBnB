@@ -86,7 +86,7 @@
             <div class="form-group">
                 <label asp-for="Person.RoleRelation" class="control-label"></label>
                 <select asp-for="Person.RoleRelation" class="form-control">
-                    <option value="@ViewBag.TipoAlloggiato[0].Codice">@ViewBag.TipoAlloggiato[0].Descrizione</option>
+                    <option value="@ViewBag.TipoAlloggiato[0].Codice">@ViewBag.TipoAlloggiato[0].Descrizione</option> 
                 </select>
                 <span asp-validation-for="Person.RoleRelation" class="text-danger"></span>
             </div>

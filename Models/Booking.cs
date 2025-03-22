@@ -17,7 +17,6 @@ public class Booking
     [Required]
     public DateTime? CheckOutDateTime { get; set; }
     [DataType(DataType.Date)]
-    [Required]
     public DateOnly? PaymentDate { get; set; }
     [DataType(DataType.Text)]
     [Required]

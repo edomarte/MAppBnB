@@ -30,7 +30,7 @@ namespace SignalRChat.Hubs
             await Clients.All.SendAsync("ResultList", createPersonRoleNamesList(personsL));
         }
 
-        private List<PersonRoleNames> createPersonRoleNamesList(List<Person> personsL)
+        public List<PersonRoleNames> createPersonRoleNamesList(List<Person> personsL)
         {
             List<PersonRoleNames> lprn = new List<PersonRoleNames>();
             foreach (Person person in personsL)

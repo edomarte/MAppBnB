@@ -217,10 +217,10 @@ namespace MAppBnB.Controllers
             var person = await _context.Person.FindAsync(id);
             if (person != null)
             {
+                var document=await _context.Document.FirstAsync(x=> x.id==person.DocumentID);
+                _context.Document.Remove(document);
                 _context.Person.Remove(person);
             }
-
-            //TODO: Delete document
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

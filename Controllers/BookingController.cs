@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MAppBnB.Data;
+using SignalRChat.Hubs;
 namespace MAppBnB.Controllers
 {
     public class BookingController : Controller
@@ -108,12 +109,12 @@ namespace MAppBnB.Controllers
             {
                 return NotFound();
             }
-//TODO: Add PersonRoleNames and pass it to the View as in PersonSearchHub.
+
             var viewModel = new PersonBookingViewModel
             {
                 Booking = new Booking(),
                 PersonIDs = "",
-                PeopleInBooking = new List<Person>()
+                PeopleInBooking = new List<PersonRoleNames>()
             };
 
             viewModel.Booking = await _context.Booking.FirstOrDefaultAsync(x => x.id == id);
@@ -121,7 +122,7 @@ namespace MAppBnB.Controllers
             foreach (var bookingPerson in bookingPersons)
             {
                 var person = await _context.Person.FirstOrDefaultAsync(x => x.id == bookingPerson.PersonID);
-                viewModel.PeopleInBooking.Add(person);
+                viewModel.PeopleInBooking.Add(new PersonRoleNames(){Person=person, RoleName=_context.TipoAlloggiato.FirstOrDefault(x => x.Codice == person.RoleRelation).Descrizione});
             }
 
             if (viewModel == null)
@@ -241,7 +242,5 @@ namespace MAppBnB.Controllers
         {
             return _context.Booking.Any(e => e.id == id);
         }
-
-
     }
 }

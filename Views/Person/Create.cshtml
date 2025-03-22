@@ -87,7 +87,7 @@
                 <select asp-for="Person.RoleRelation" class="form-control">
                     @foreach (var guestType in ViewBag.TipoAlloggiato)
                     {
-                        @if (!guestType.Codice.Equals("x"))
+                        @if (!guestType.Codice.Equals(99))
                         {
                             <option value="@guestType.Codice">@guestType.Descrizione</option>
                         }
@@ -100,10 +100,7 @@
                 <select asp-for="Document.DocumentType" class="form-control">
                     @foreach (var docType in ViewBag.TipoDocumento)
                     {
-                        @if (!docType.Codice.Equals(99))
-                        {
                             <option value="@docType.Codice">@docType.Descrizione</option>
-                        }
                     }
                 </select>
                 <span asp-validation-for="Document.DocumentType" class="text-danger"></span>

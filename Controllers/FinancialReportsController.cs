@@ -39,8 +39,6 @@ namespace MAppBnB.Controllers
                 ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
 
             }
-            //TODO: sistemare quando non ci sono accommodations ancora
-
 
             if (fr != null)
             {

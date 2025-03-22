@@ -29,18 +29,18 @@
                 <span asp-validation-for="Booking.CheckOutDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.PaymentDate" class="control-label"></label>
-                <input asp-for="Booking.PaymentDate" class="form-control" />
-                <span asp-validation-for="Booking.PaymentDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Booking.IsPaid" class="control-label"></label>
-                <select asp-for="Booking.IsPaid" class="form-control">
+                <select asp-for="Booking.IsPaid" class="form-control" id="isPaidSelector" >
                     <option value=@false>No</option>
                     <option value=@true>Yes</option>
                 </select>
                 <span asp-validation-for="Booking.IsPaid" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Booking.PaymentDate" class="control-label"></label>
+                <input asp-for="Booking.PaymentDate" class="form-control" id="paymentDateInput" disabled="true"/>
+                <span asp-validation-for="Booking.PaymentDate" class="text-danger"></span>
+            </div>           
             <div class="form-group">
                 <label asp-for="Booking.ChannelID" class="control-label"></label>
                 <select asp-for="Booking.ChannelID" class="form-control">
@@ -79,15 +79,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Booking.Sent2Police" class="control-label"></label>
-                <select asp-for="Booking.Sent2Police" class="form-control">
+                <select asp-for="Booking.Sent2Police" class="form-control" id="isSent2Police">
                     <option value=@false>No</option>
                     <option value=@true>Yes</option>
                 </select>
-                <span asp-validation-for="Booking.Sent2Police" class="text-danger"></span>
+                <span asp-validation-for="Booking.Sent2Police" id="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.Sent2Region" class="control-label"></label>
-                <select asp-for="Booking.Sent2Region" class="form-control">
+                <select asp-for="Booking.Sent2Region" class="form-control" id="isSent2Region">
                     <option value=@false>No</option>
                     <option value=@true>Yes</option>
                 </select>
@@ -95,7 +95,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Booking.Sent2Town" class="control-label"></label>
-                <select asp-for="Booking.Sent2Town" class="form-control">
+                <select asp-for="Booking.Sent2Town" class="form-control" id="isSent2Town">
                     <option value=@false>No</option>
                     <option value=@true>Yes</option>
                 </select>
@@ -103,7 +103,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Booking.ContractPrinted" class="control-label"></label>
-                <select asp-for="Booking.ContractPrinted" class="form-control">
+                <select asp-for="Booking.ContractPrinted" class="form-control" id="isContractPrinted">
                     <option value=@false>No</option>
                     <option value=@true>Yes</option>
                 </select>
@@ -130,9 +130,9 @@
         <p>
             <label>Persons on the Booking</label>
         <ul id="PersonsOnBookingList">
-            @foreach (var person in Model.PeopleInBooking)
+            @foreach (var pib in Model.PeopleInBooking)
             {
-                <li><input type="checkbox" id="@person.id">@($"{person.Name}, {person.Surname}, {person.BirthDate}")</li>
+                <li><input type="checkbox" data-roleCode="@pib.Person.RoleRelation" id="@pib.Person.id">@($"{pib.Person.Name}, {pib.Person.Surname}, {pib.Person.BirthDate}, {pib.RoleName}")</li>
             }
         </ul>
         <input type="button" id="removeSelectedButton" value="Remove selected guests form booking" />
@@ -161,6 +161,7 @@
         <p>
             <input type="button" id="TransmitToRegionPolice" value="Send Documents to Region/Police" />
         </p>
+        <p id="resultPH"></p>
     </div>
 
     <div>
@@ -172,6 +173,7 @@
     <script src="~/js/searchPerson.js" defer></script>
     <script src="~/js/documentCreation.js" defer></script>
     <script src="~/js/documentTransmission.js" defer></script>
+    <script src="~/js/bookingScript.js" defer></script>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

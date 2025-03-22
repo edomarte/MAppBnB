@@ -9,10 +9,10 @@ connectionD.start().then(function () {
 });
 
 document.getElementById("generateContract").addEventListener("click", function (event) {
-    var list=document.getElementById("PersonsOnBookingList");
-    var persons=list.getElementsByTagName("li");
-    // Assume the first person added to the booking is the main person
-    var mainPersonID=persons[0].getElementsByTagName("input")[0].id;
+    var persons=$("#PersonsOnBookingList li");
+    var mainPersonID = persons.toArray().map(li => li.querySelector("input")).find(input => {
+        return input && ["16", "17", "18"].includes(input.dataset.rolecode);
+    })?.id; // Extract the input's id
   
     var accommodationID=document.getElementById("AccommodationsList").value;
 
@@ -22,6 +22,13 @@ document.getElementById("generateContract").addEventListener("click", function (
     connectionD.invoke("CreateContract", mainPersonID,accommodationID,bookingID).catch(function (err) {
         return console.error(err.toString());
     });
+
+    $("#isContractPrinted").prop("disabled", false);
+    $("#isContractPrinted option[value='False']").removeProp("selected");
+    $("#isContractPrinted option[value='True']").prop("selected", true).attr("selected", "selected");
+    $("#isContractPrinted").trigger("change");
+    $("#isContractPrinted").prop("disabled", true);
+
 
     event.preventDefault();
 });
@@ -112,4 +119,8 @@ connectionD.on("DownloadFile", (fileName, base64Data) => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+});
+
+connectionD.on("Error", (error) => {
+    $("#resultPH").text(error);
 });
