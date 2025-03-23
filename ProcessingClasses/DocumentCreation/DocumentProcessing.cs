@@ -1,5 +1,4 @@
 using System.Data;
-using System.Threading.Channels;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -38,11 +37,25 @@ public class DocumentProcessing
         contractDt.Columns.Add("ContractDate");
         contractDt.Columns.Add("City");
         contractDt.Columns.Add("Address");
+
+        contractDt.Columns.Add("HName");
+        contractDt.Columns.Add("HSurname");
+        contractDt.Columns.Add("HBirthPlace");
+        contractDt.Columns.Add("HBirthProvince");
+        contractDt.Columns.Add("HBirthDate");
+        contractDt.Columns.Add("HDocType");
+        contractDt.Columns.Add("HDocSerialNum");
+        contractDt.Columns.Add("HIssuedBy");
+        contractDt.Columns.Add("HIssuedDate");
+        //contractDt.Columns.Add("HCodFisc");
+        contractDt.Columns.Add("HPhonePrefix");
+        contractDt.Columns.Add("HPhoneNumber");
+        contractDt.Columns.Add("HEmail");
     }
 
-    public static string GenerateContract(Person mainPerson, MAppBnB.Document document, Accommodation accommodation, Booking booking)
+    public static string GenerateContract(Person mainPerson, MAppBnB.Document document, Accommodation accommodation, Booking booking, Person host, MAppBnB.Document hostDocument)
     {
-        DataRow dr = addRowToContractDt(mainPerson, document, accommodation, booking);
+        DataRow dr = addRowToContractDt(mainPerson, document, accommodation, booking, host, hostDocument);
         string bookingId = booking.id.ToString();
 
         string contractPath = "..\\DocumentTemplates\\Contract" + bookingId + ".docx";
@@ -50,7 +63,6 @@ public class DocumentProcessing
         File.Copy("..\\DocumentTemplates\\ContractTemplate.docx", "..\\DocumentTemplates\\Contract" + bookingId + ".docx", true);
         using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\DocumentTemplates\\Contract" + bookingId + ".docx", true))
         {
-            //TODO: add info on host on the contract
             if (doc is null)
             {
                 throw new ArgumentNullException(nameof(doc));
@@ -76,7 +88,7 @@ public class DocumentProcessing
         return contractPath;
     }
 
-    private static DataRow addRowToContractDt(Person mainPerson, MAppBnB.Document document, Accommodation accommodation, Booking booking)
+    private static DataRow addRowToContractDt(Person mainPerson, MAppBnB.Document document, Accommodation accommodation, Booking booking, Person host, MAppBnB.Document hostDocument)
     {
         contractDt = new DataTable();
         addFieldstoContractDt();
@@ -96,12 +108,25 @@ public class DocumentProcessing
         dr["Price"] = booking.Price - booking.Discount;
         //dr["PriceInLetters"];
         dr["PaymentDate"] = booking.PaymentDate;
-        dr["BookingNightsNum"] = (booking.CheckOutDateTime.Value.Date - booking.CheckinDateTime.Value.Date).TotalDays;
-        dr["CheckinDate"] = booking.CheckinDateTime.Value.Date.ToString("dd/MM/yyyy");
-        dr["CheckoutDate"] = booking.CheckOutDateTime.Value.Date.ToString("dd/MM/yyyy");
+        dr["BookingNightsNum"] = (booking.CheckOutDateTime.Date - booking.CheckinDateTime.Date).TotalDays;
+        dr["CheckinDate"] = booking.CheckinDateTime.Date.ToString("dd/MM/yyyy");
+        dr["CheckoutDate"] = booking.CheckOutDateTime.Date.ToString("dd/MM/yyyy");
         dr["ContractDate"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
         dr["City"] = accommodation.City;
         dr["Address"] = accommodation.Address;
+
+        dr["HName"] = host.Name;
+        dr["HSurname"] = host.Surname;
+        dr["HBirthPlace"] = host.BirthPlace;
+        dr["HBirthProvince"] = host.BirthProvince;
+        dr["HBirthDate"] = host.BirthDate;
+        dr["HDocType"] = hostDocument.DocumentType;
+        dr["HDocSerialNum"] = hostDocument.SerialNumber;
+        //dr["HCodFisc"];
+        dr["HPhonePrefix"] = host.PhonePrefix;
+        dr["HPhoneNumber"] = host.PhoneNumber;
+        dr["HEmail"] = host.Email;
+
 
         contractDt.Rows.Add(dr);
         return dr;
@@ -279,7 +304,7 @@ public class DocumentProcessing
         dr["AccommodationName"] = accommodation.Name;
         dr["City"] = accommodation.City;
         dr["AccommodationWebsite"] = accommodation.Website;
-        dr["CheckinDate"] = booking.CheckinDateTime.Value.Date.ToString("dd-MM-yyyy");
+        dr["CheckinDate"] = booking.CheckinDateTime.Date.ToString("dd-MM-yyyy");
 
         preCheckinDt.Rows.Add(dr);
         return dr;
@@ -363,7 +388,7 @@ public class DocumentProcessing
     private static Row addCellsToRow(Row header, Booking b, int guestsNum, Person mainPerson, Room room, Accommodation accommodation)
     {
         Row row = new Row();
-        double nightsNum = (b.CheckOutDateTime.Value.Date - b.CheckinDateTime.Value.Date).TotalDays;
+        double nightsNum = (b.CheckOutDateTime.Date - b.CheckinDateTime.Date).TotalDays;
         double grossLessDiscount = Convert.ToDouble(b.Price.Value - b.Discount.Value);
         double TownFee = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "O1").CellValue.InnerText);
         double ivaVendite = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "Q1").CellValue.InnerText);
@@ -380,7 +405,7 @@ public class DocumentProcessing
         double fixedTaxValue = (grossTotalPlusExtra - ivaVenditeValue) * fixedTax;
 
         row.Append(
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.CheckinDateTime.Value.Date.ToString("dd-MM-yyyy") ?? string.Empty) }, // Data arrivo
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.CheckinDateTime.Date.ToString("dd-MM-yyyy")) }, // Data arrivo
             new Cell() { DataType = CellValues.String, CellValue = new CellValue($"{mainPerson.Name} {mainPerson.Surname}") }, // Ospite
             new Cell() { DataType = CellValues.String, CellValue = new CellValue(room.Name) }, // Camera
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(Convert.ToDouble(b.Price - b.Discount) / nightsNum) }, // Importo per notte

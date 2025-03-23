@@ -24,14 +24,14 @@ connectionS.on("ResultList", function (persons) {
 
 connectionS.start().then(function () {
     document.getElementById("searchPersonButton").disabled = false;
-    $("#isSent2Police").prop("disabled",true);
-    $("#isSent2Region").prop("disabled",true);
-    $("#isSent2Town").prop("disabled",true);
-    $("#isContractPrinted").prop("disabled",true);
+    $("#isSent2Police").prop("disabled", true);
+    $("#isSent2Region").prop("disabled", true);
+    $("#isSent2Town").prop("disabled", true);
+    $("#isContractPrinted").prop("disabled", true);
 
-    if($("#isPaidSelector").val()=="True"){
+    if ($("#isPaidSelector").val() == "True") {
         $("#paymentDateInput").attr("disabled", false);
-    }else{
+    } else {
         $("#paymentDateInput").attr("disabled", true);
     }
 
@@ -89,6 +89,12 @@ document.getElementById("removeSelectedButton").addEventListener("click", functi
 });
 
 document.getElementById("form").addEventListener("submit", function (event) {
+    checkPersonRolesAreCorrect(event);
+    // If disabled it does not send data to controller
+    enableBooleanPlaceholders();
+});
+
+function checkPersonRolesAreCorrect(event) {
     $("#roomBlockedP").val("");
     $("#personsErrorAlert").val("");
     $("#PersonIDs").val("");
@@ -99,8 +105,18 @@ document.getElementById("form").addEventListener("submit", function (event) {
     var mainPersonCount = 0;
     for (var i = 0; i < persons.length; ++i) {
         let person = persons[i];
+
         let checkbox = person.getElementsByTagName("input")[0];
-        $("#PersonIDs").val($("#PersonIDs").val()+checkbox.id + ",")
+        var personId = checkbox.id;
+
+        // Check if the person is already in another booking at the same time.
+        if (isPersonAlreadyInContemporaryBooking(personId)) {
+            event.preventDefault();
+            break;
+        }
+
+        $("#PersonIDs").val($("#PersonIDs").val() + personId + ",")
+
         var rolecode = checkbox.getAttribute("data-roleCode");
         if (rolecode == "16" || rolecode == "17" || rolecode == "18") { // If the selected person is a mainPerson role type.
             mainPersonCount++;
@@ -112,10 +128,6 @@ document.getElementById("form").addEventListener("submit", function (event) {
                 groupComponentCount++;
         }
     }
-
-    //TODO: max prenotabile: 30 gg; min prenotabile 1 gg; checkout date > checkin date; 
-    //TODO: stessa persona non può prenotare nello stesso periodo di un'altra prenotazione.
-
 
     if (mainPersonCount != 1) {
         $("#personsErrorAlert").text("Select just one main person")
@@ -136,9 +148,27 @@ document.getElementById("form").addEventListener("submit", function (event) {
             }
         }
     }
-// If disabled it does not send data to controller
-    $("#isSent2Police").prop("disabled",false);
-    $("#isSent2Region").prop("disabled",false);
-    $("#isSent2Town").prop("disabled",false);
-    $("#isContractPrinted").prop("disabled",false);
-});
+}
+
+function enableBooleanPlaceholders() {
+    $("#isSent2Police").prop("disabled", false);
+    $("#isSent2Region").prop("disabled", false);
+    $("#isSent2Town").prop("disabled", false);
+    $("#isContractPrinted").prop("disabled", false);
+}
+
+async function isPersonAlreadyInContemporaryBooking(personId) {
+    let dateFrom = $("#checkInDate").val();
+    let dateTo = $("#checkOutDate").val();
+
+    var result = await connectionS.invoke("IsPersonAlreadyInBooking", personId, dateFrom, dateTo)
+    if (result != null) {
+        let linkToFoundBooking=$("<a>")
+        .attr("href","/Booking/Edit/" + result[1])
+        .text("Booking where "+ result[0]+" is present.");
+        $("#personsErrorAlert").text(result[0] + " is already present in another booking at the same time.");
+        $("#personsErrorAlert").append(linkToFoundBooking);
+        return true;
+    }
+    return false;
+}

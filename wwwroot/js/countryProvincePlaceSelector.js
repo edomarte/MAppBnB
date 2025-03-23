@@ -51,7 +51,7 @@ document.getElementById("provinceSelector").addEventListener("change", function 
 });
 
 connection.start().then(function () {
-
+    enableDisableDocInputs();
     // No info in configuration yet
     if ($("#hiddenBirthProvince").val() == "ES") {
         // Default to Italy
@@ -104,3 +104,23 @@ connection.on("AllTownsList", function (towns) {
         $("#selectorIssuingCountry").append(new Option(town.descrizione, town.codice));
     });
 });
+
+
+document.getElementById("roleRelationSelector").addEventListener("change", function (event) {
+    enableDisableDocInputs();
+});
+
+function enableDisableDocInputs(){
+    var selectedRole = $("#roleRelationSelector").val();
+    if (selectedRole == "19" || selectedRole == "20") { // If not a main person, no need for document
+        $("#pdfInput").prop("disabled", true);
+        $("#serNumInput").prop("disabled", true);
+        $("#docTypeSelector").prop("disabled", true);
+        $("#selectorIssuingCountry").prop("disabled", true);
+    } else {// If a main person, need for document
+        $("#pdfInput").prop("disabled", false);
+        $("#serNumInput").prop("disabled", false);
+        $("#docTypeSelector").prop("disabled", false);
+        $("#selectorIssuingCountry").prop("disabled", false);
+    }
+}

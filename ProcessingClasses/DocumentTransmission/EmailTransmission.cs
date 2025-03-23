@@ -25,7 +25,7 @@ public class EmailTransmission
 
     private static string SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64, string subject)
     {
-        Configuration.Default.ApiKey.Add("api-key", ""); // Latest is on github repository secret
+        Configuration.Default.ApiKey.Add("api-key", ""); // TODO: Latest is on github repository secret
 
         var apiInstance = new TransactionalEmailsApi();
         var sendSmtpEmail = new SendSmtpEmail(

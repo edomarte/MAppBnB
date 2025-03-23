@@ -63,7 +63,7 @@ namespace MAppBnB.Controllers
                              .Select(g => new
                              {
                                  ChannelID = g.Key,
-                                 NightsBooked = g.Sum(x => (x.b.CheckOutDateTime - x.b.CheckinDateTime).Value.TotalDays),
+                                 NightsBooked = g.Sum(x => (x.b.CheckOutDateTime - x.b.CheckinDateTime).TotalDays),
                                  TotalBookings = g.Count(),
                                  TotalRevenue = g.Sum(x => x.b.Price - x.b.Discount),
                                  AfterFeeRevenue = g.Sum(x => (x.b.Price - x.b.Discount) - ((x.b.Price - x.b.Discount) * x.bc.Fee))

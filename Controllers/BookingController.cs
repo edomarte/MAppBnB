@@ -68,8 +68,8 @@ namespace MAppBnB.Controllers
             if (ModelState.IsValid)
             {
                 var existingBooking = await _context.Booking.FirstOrDefaultAsync(x => x.RoomID == model.Booking.RoomID
-                                                                                && x.CheckinDateTime.Value.Date < model.Booking.CheckOutDateTime.Value.Date
-                                                                                && x.CheckOutDateTime.Value.Date > model.Booking.CheckinDateTime.Value.Date);
+                                                                                && x.CheckinDateTime.Date < model.Booking.CheckOutDateTime.Date
+                                                                                && x.CheckOutDateTime.Date > model.Booking.CheckinDateTime.Date);
                 if (existingBooking != null)
                 {
                     ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
@@ -99,7 +99,10 @@ namespace MAppBnB.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            return RedirectToAction(nameof(Index));
+            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+            ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
+            ViewBag.RoomAlreadyBooked = false;
+            return View(model);
         }
 
         // GET: Booking/Edit/5
@@ -122,7 +125,7 @@ namespace MAppBnB.Controllers
             foreach (var bookingPerson in bookingPersons)
             {
                 var person = await _context.Person.FirstOrDefaultAsync(x => x.id == bookingPerson.PersonID);
-                viewModel.PeopleInBooking.Add(new PersonRoleNames(){Person=person, RoleName=_context.TipoAlloggiato.FirstOrDefault(x => x.Codice == person.RoleRelation).Descrizione});
+                viewModel.PeopleInBooking.Add(new PersonRoleNames() { Person = person, RoleName = _context.TipoAlloggiato.FirstOrDefault(x => x.Codice == person.RoleRelation).Descrizione });
             }
 
             if (viewModel == null)
@@ -153,9 +156,6 @@ namespace MAppBnB.Controllers
                 {
                     _context.Update(model.Booking);
                     await _context.SaveChangesAsync();
-
-                    // TODO: find a linq way to extract only the ids in the string that are not already in the model.
-                    //var currentbookingPersons = await _context.BookingPerson.Where(x => x.BookingID == model.Booking.id).ToListAsync(); 
 
                     var bpInList = new List<BookingPerson>();
                     foreach (var personID in model.PersonIDs.Split(","))

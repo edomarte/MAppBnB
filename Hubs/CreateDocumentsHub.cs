@@ -20,14 +20,14 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         public Accommodation GetAccommodationDetails(string accommodationID)
         {
-            var details = _context.Accommodation.Where(x => x.id == int.Parse(accommodationID)).ToList();
-            return details[0];
+            var details = _context.Accommodation.Find(Convert.ToInt32(accommodationID));
+            return details;
         }
 
         public Person GetPersonDetails(string personID)
         {
-            var person = _context.Person.Where(x => x.id == int.Parse(personID)).ToList();
-            return person[0];
+            var person = _context.Person.Find(Convert.ToInt32(personID));
+            return person;
         }
 
         public Person GetMainPerson(Booking booking)
@@ -75,44 +75,56 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         public Document GetDocumentDetails(Person person)
         {
-            var document = _context.Document.Where(x => x.id == person.DocumentID).ToList();
-            return document[0];
+            var document = _context.Document.Find(person.DocumentID);
+            // Substitute the code with the correspondent document description
+            document.DocumentType=_context.TipoDocumento.Find(document.DocumentType).Descrizione;
+            return document;
         }
 
         public Booking GetBookingDetails(string bookingID)
         {
-            var booking = _context.Booking.Where(x => x.id == int.Parse(bookingID)).ToList();
-            return booking[0];
+            var booking = _context.Booking.Find(Convert.ToInt32(bookingID));
+            return booking;
         }
 
         public Room GetRoomDetails(int? roomID)
         {
-            var room = _context.Room.Where(x => x.id == roomID).ToList();
-            return room[0];
+            var room = _context.Room.Find(roomID);
+            return room;
         }
 
         public BookChannel GetChannelDetailsS(string? channelId)
         {
-            var channel = _context.BookChannel.Where(x => x.id == Convert.ToInt32(channelId)).ToList();
-            return channel[0];
+            var channel = _context.BookChannel.Find(Convert.ToInt32(channelId));
+            return channel;
         }
 
         public Configuration GetConfiguration()
         {
-            var configurations = _context.Configuration.ToList();
-            return configurations[0];
+            var configurations = _context.Configuration.Find(1); // only one configuration exist
+            return configurations;
         }
         public BookChannel GetChannelDetails(int? channelId)
         {
-            var channel = _context.BookChannel.Where(x => x.id == channelId).ToList();
-            return channel[0];
+            var channel = _context.BookChannel.Find(channelId);
+            return channel;
+        }
+
+        private Person getBirthPlaceDescription(Person p){
+            if(p.BirthCountry.Equals("100000100")){ // If birthcountry is Italy
+                p.BirthPlace=_context.Comuni.Find(p.BirthPlace).Descrizione;
+            }else{
+                p.BirthPlace="Estero";
+            }
+            return p;
         }
 
         public async Task CreateContract(string mainPersonID, string accommodationID, string bookingId)
         {
-            Person mainPerson = GetPersonDetails(mainPersonID);
+            Person mainPerson = getBirthPlaceDescription(GetPersonDetails(mainPersonID));
+            Person host=getBirthPlaceDescription(GetPersonDetails(_context.Configuration.First().PersonID.ToString()));
             Accommodation accommodation = GetAccommodationDetails(accommodationID);
-            string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, GetBookingDetails(bookingId));
+            string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, GetBookingDetails(bookingId),host,GetDocumentDetails(host));
             byte[] file = await File.ReadAllBytesAsync(contractPath);
             string base64String = Convert.ToBase64String(file);
 
@@ -203,12 +215,5 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
             return lfrl;
         }
-    }
-
-    public class FinancialReportLine{
-        public Booking Booking{get;set;}
-        public Person MainPerson{get;set;}
-        public Room Room{get;set;}
-        public int GuestCount{get;set;}
     }
 }

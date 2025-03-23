@@ -52,8 +52,8 @@ public class SOAPTransmission
         {
             string schedina = "";
             schedina += person.RoleRelation
-                    + booking.CheckinDateTime.Value.ToShortDateString()
-                    + (booking.CheckOutDateTime.Value.Date - booking.CheckinDateTime.Value.Date).TotalDays
+                    + booking.CheckinDateTime.Date.ToString("dd/MM/yyyy")
+                    + (booking.CheckOutDateTime.Date - booking.CheckinDateTime.Date).TotalDays
                     + person.Surname.PadRight(50)
                     + person.Name.PadRight(30)
                     + person.Sex

@@ -84,7 +84,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Person.RoleRelation" class="control-label"></label>
-                <select asp-for="Person.RoleRelation" class="form-control">
+                <select asp-for="Person.RoleRelation" class="form-control" id="roleRelationSelector">
                     @foreach (var guestType in ViewBag.TipoAlloggiato)
                     {
                         @if (!guestType.Codice.Equals(99))
@@ -97,17 +97,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Document.DocumentType" class="control-label"></label>
-                <select asp-for="Document.DocumentType" class="form-control">
+                <select asp-for="Document.DocumentType" class="form-control" id="docTypeSelector">
                     @foreach (var docType in ViewBag.TipoDocumento)
                     {
-                            <option value="@docType.Codice">@docType.Descrizione</option>
+                        <option value="@docType.Codice">@docType.Descrizione</option>
                     }
                 </select>
                 <span asp-validation-for="Document.DocumentType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Document.SerialNumber" class="control-label"></label>
-                <input asp-for="Document.SerialNumber" class="form-control" />
+                <input asp-for="Document.SerialNumber" class="form-control" id="serNumInput"/>
                 <span asp-validation-for="Document.SerialNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -122,7 +122,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PdfCopyPath" class="control-label"></label>
-                <input type="file" accept="application/pdf" asp-for="PdfCopyPath" class="form-control" />
+                <input type="file" accept="application/pdf" asp-for="PdfCopyPath" class="form-control" id="pdfInput"/>
                 <span asp-validation-for="PdfCopyPath" class="text-danger"></span>
             </div>
             <div class="form-group">

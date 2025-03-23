@@ -77,27 +77,28 @@ namespace MAppBnB.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.PdfCopyPath != null && model.PdfCopyPath.Length > 0)
+                if (model.Document != null)
                 {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await model.PdfCopyPath.CopyToAsync(memoryStream);
-
-                        model.Document.PdfCopy = memoryStream.ToArray();
-                    }
+                    addPdfToDbAsync(model);
+                    _context.Add(model.Document);
+                    await _context.SaveChangesAsync();
+                    var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
+                    model.Person.DocumentID = document.id;
                 }
-                _context.Add(model.Document);
-                await _context.SaveChangesAsync();
-                var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
-                model.Person.DocumentID = document.id;
+
                 _context.Add(model.Person);
                 await _context.SaveChangesAsync();
-                model.Document.PersonID = model.Person.id;
-                _context.Update(model.Document);
-                await _context.SaveChangesAsync();
+
+                if (model.Document != null)
+                {
+                    model.Document.PersonID = model.Person.id;
+                    _context.Update(model.Document);
+                    await _context.SaveChangesAsync();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Create));
+            return View(model);
         }
 
         // GET: Person/Edit/5
@@ -122,7 +123,7 @@ namespace MAppBnB.Controllers
             };
 
             ViewBag.Stati = _context.Stati.ToList();
-            
+
             ViewBag.TipoAlloggiato = _context.TipoAlloggiato.ToList();
             ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
 
@@ -143,20 +144,12 @@ namespace MAppBnB.Controllers
 
             if (ModelState.IsValid)
             {
-                if (model.PdfCopyPath != null && model.PdfCopyPath.Length > 0)
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await model.PdfCopyPath.CopyToAsync(memoryStream);
-
-                        model.Document.PdfCopy = memoryStream.ToArray();
-                    }
-                }
                 try
                 {
                     if (model.Document.SerialNumber != null)
                         if (model.Document.id == null)
                         {
+                            addPdfToDbAsync(model);
                             model.Document.PersonID = model.Person.id;
                             _context.Add(model.Document);
                             await _context.SaveChangesAsync();
@@ -205,7 +198,6 @@ namespace MAppBnB.Controllers
             {
                 return NotFound();
             }
-            // TODO: Show document details
             return View(person);
         }
 
@@ -217,7 +209,7 @@ namespace MAppBnB.Controllers
             var person = await _context.Person.FindAsync(id);
             if (person != null)
             {
-                var document=await _context.Document.FirstAsync(x=> x.id==person.DocumentID);
+                var document = await _context.Document.FirstAsync(x => x.id == person.DocumentID);
                 _context.Document.Remove(document);
                 _context.Person.Remove(person);
             }
@@ -229,6 +221,19 @@ namespace MAppBnB.Controllers
         private bool PersonExists(int id)
         {
             return _context.Person.Any(e => e.id == id);
+        }
+
+        protected async Task addPdfToDbAsync(PersonDocumentViewModel model)
+        {
+            if (model.PdfCopyPath != null && model.PdfCopyPath.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await model.PdfCopyPath.CopyToAsync(memoryStream);
+
+                    model.Document.PdfCopy = memoryStream.ToArray();
+                }
+            }
         }
     }
 }

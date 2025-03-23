@@ -21,7 +21,7 @@ namespace SignalRChat.Hubs
             List<CalendarUpdateElement> lcue= new List<CalendarUpdateElement>();
 
             foreach(Booking b in bookings){
-                lcue.Add(new CalendarUpdateElement(b.id, b.CheckinDateTime.Value.DayOfYear,b.CheckOutDateTime.Value.DayOfYear, GetRoom(b), GetMainPerson(b)));
+                lcue.Add(new CalendarUpdateElement(b.id, b.CheckinDateTime.DayOfYear,b.CheckOutDateTime.DayOfYear, GetRoom(b), GetMainPerson(b)));
             }
             return lcue;
         }
@@ -62,31 +62,14 @@ namespace SignalRChat.Hubs
             int selectedMonth = int.Parse(monthYear.Split('-')[1]); // Extract month from "yyyy-MM"
 
             List<Booking> bookings = _context.Booking.Where(b => b.AccommodationID == Convert.ToInt32(accommodationId)
-            && ((b.CheckinDateTime.Value.Year == selectedYear
-            && b.CheckinDateTime.Value.Month == selectedMonth)
-            || (b.CheckOutDateTime.Value.Year == selectedYear
-            && b.CheckOutDateTime.Value.Month == selectedMonth))).ToList();
+            && ((b.CheckinDateTime.Year == selectedYear
+            && b.CheckinDateTime.Month == selectedMonth)
+            || (b.CheckOutDateTime.Year == selectedYear
+            && b.CheckOutDateTime.Month == selectedMonth))).ToList();
 
 
             await Clients.All.SendAsync("UpdateCalendar", getCalendarUpdateElements(bookings));
         }
     }
 
-}
-
-public class CalendarUpdateElement {
-    public int Id {get;set;}
-    public int CheckinDay {get;set;}
-    public int CheckoutDay{get;set;}
-    public Room Room{get;set;}
-    public Person MainPerson{get;set;}
-
-    public CalendarUpdateElement(int id, int checkinDay, int checkoutDay, Room room, Person mainPerson)
-    {
-        Id = id;
-        CheckinDay = checkinDay;
-        CheckoutDay = checkoutDay;
-        Room=room;
-        MainPerson = mainPerson;
-    }
 }

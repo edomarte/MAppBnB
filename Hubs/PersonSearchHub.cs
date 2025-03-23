@@ -1,8 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using MAppBnB;
 using MAppBnB.Controllers;
 using MAppBnB.Data;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using PdfSharp.Snippets;
 
 
 namespace SignalRChat.Hubs
@@ -39,11 +42,33 @@ namespace SignalRChat.Hubs
             }
             return lprn;
         }
-    }
 
-    public class PersonRoleNames
-    {
-        public Person Person { get; set; }
-        public string RoleName { get; set; }
+        private List<Booking> isPersonInContemporaryBooking(string personId, string dateFrom, string dateTo){
+            List<int> searchedPerson= _context.BookingPerson.Where(x=>x.PersonID== Convert.ToInt32(personId)).Select(x => x.BookingID).ToList();
+            List<Booking> contemporaryBookingFinded;
+            if(searchedPerson!=null){
+                contemporaryBookingFinded=_context.Booking.Where(x=>searchedPerson.Contains(x.id)
+                                              && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
+                                        && x.CheckinDateTime <= Convert.ToDateTime(dateTo)).ToList();   
+                return contemporaryBookingFinded;
+            }
+                
+
+            return null;
+        }
+
+        public string[] IsPersonAlreadyInBooking(string personId, string dateFrom, string dateTo){
+            List<Booking> contemporaryBookingFinded=isPersonInContemporaryBooking(personId, dateFrom, dateTo);
+            if(contemporaryBookingFinded.Count>0){
+                Person finded=GetPersonDetails(personId);
+                return [finded.Name+" "+finded.Surname,contemporaryBookingFinded[0].id.ToString()];
+            }
+            return null;
+        }
+        public Person GetPersonDetails(string personID)
+        {
+            var person = _context.Person.Find(int.Parse(personID));
+            return person;
+        }
     }
 }

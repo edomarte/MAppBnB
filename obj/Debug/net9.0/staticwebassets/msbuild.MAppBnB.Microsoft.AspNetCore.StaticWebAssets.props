@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>8xddezaayf</Fingerprint>
-      <Integrity>vOHXOlHGtlcHCe7cM6tkdqvVP+X3H3VX9U8g5UYnBhk=</Integrity>
+      <Fingerprint>srsxyzvi30</Fingerprint>
+      <Integrity>GLKlY/W7I5PkSeXPPnOP7JMsVlsJtZO+4X+3ZL9P2TI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</OriginalItemSpec>
@@ -174,8 +174,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>8vj18vx1du</Fingerprint>
-      <Integrity>1E5sbO7BI4s6u30O9NOgJOXK2EhvKYoWqFhOvWCsHTk=</Integrity>
+      <Fingerprint>d135fqncnz</Fingerprint>
+      <Integrity>oSXxv+gbXHoOdAvH24JWGB5uYA5oYVYN8z3TUQH1xmQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</OriginalItemSpec>

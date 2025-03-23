@@ -12,10 +12,11 @@ public class Booking
     public DateOnly? BookingDate { get; set; }
     [DataType(DataType.DateTime)]
     [Required]
-    public DateTime? CheckinDateTime { get; set; }
+    public DateTime CheckinDateTime { get; set; }
     [DataType(DataType.DateTime)]
+    [CheckOutDateValidator()]
     [Required]
-    public DateTime? CheckOutDateTime { get; set; }
+    public DateTime CheckOutDateTime { get; set; }
     [DataType(DataType.Date)]
     public DateOnly? PaymentDate { get; set; }
     [DataType(DataType.Text)]

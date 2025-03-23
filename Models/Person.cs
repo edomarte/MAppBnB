@@ -42,7 +42,7 @@ public class Person
     [Required]
     [Display(Name = "Role/Relation")]
     public int? RoleRelation { get; set; } 
-    [Display(Name = "Document Serial Number")]
+    [Display(Name = "Document ID")]
     public int? DocumentID { get; set; }
     [Required]
     public string? Citizenship{get;set;}
