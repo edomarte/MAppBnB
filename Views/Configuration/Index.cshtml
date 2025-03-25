@@ -11,7 +11,6 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Index">
-            <input type="hidden" asp-for="Configuration.PersonID" class="form-control" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Person.Name" class="control-label"></label>
@@ -85,8 +84,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Person.RoleRelation" class="control-label"></label>
-                <select asp-for="Person.RoleRelation" class="form-control">
-                    <option value="@ViewBag.TipoAlloggiato[0].Codice">@ViewBag.TipoAlloggiato[0].Descrizione</option> 
+                <select asp-for="Person.RoleRelation" class="form-control" id="roleRelationSelector">
+                    <option value="@ViewBag.TipoAlloggiato[0].Codice">@ViewBag.TipoAlloggiato[0].Descrizione</option>
                 </select>
                 <span asp-validation-for="Person.RoleRelation" class="text-danger"></span>
             </div>
@@ -118,6 +117,11 @@
             </div>
             <input type="hidden" asp-for="Document.PersonID" class="form-control" />
             <input type="hidden" asp-for="Configuration.DocumentID" class="form-control" />
+            <input type="hidden" asp-for="Document.id" class="form-control" />
+            <input type="hidden" asp-for="Person.BirthProvince" class="form-control" id="hiddenBirthProvince" />
+            <input type="hidden" asp-for="Person.BirthPlace" class="form-control" id="hiddenBirthPlace" />
+            <input type="hidden" asp-for="Configuration.PersonID" class="form-control" />
+            <input type="hidden" asp-for="Person.id" class="form-control" />
 
             <div class="form-group">
                 <label asp-for="Configuration.IVAVendite" class="control-label"></label>

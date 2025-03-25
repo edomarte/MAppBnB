@@ -33,6 +33,14 @@ namespace MAppBnB.Controllers
             int id = 1;
             var config = await _context.Configuration.FirstOrDefaultAsync(x => x.id == id);
 
+            if (config == null)
+            {
+                await _context.Configuration.AddAsync(new Configuration { id = id });
+                await _context.SaveChangesAsync();
+                config = await _context.Configuration.FirstOrDefaultAsync(x => x.id == id);
+            }
+
+
             var viewModel = new PersonDocumentConfigViewModel
             {
                 Person = new Person(),
