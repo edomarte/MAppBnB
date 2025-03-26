@@ -10,6 +10,8 @@ using MAppBnB.Data;
 
 namespace MAppBnB.Controllers
 {
+    //TODO: se host, non farlo vedere nella lista delle persone. Qui e nell'hub.
+    //TODO: se è capofamiglia, capogruppo, o ospite singolo, documento obbligatorio
     public class PersonController : Controller
     {
         private readonly MappBnBContext _context;
@@ -22,7 +24,6 @@ namespace MAppBnB.Controllers
         // GET: Person
         public async Task<IActionResult> Index()
         {
-            ViewData["DocumentList"] = await _context.Document.ToListAsync();
             return View(await _context.Person.ToListAsync());
         }
 
@@ -209,8 +210,11 @@ namespace MAppBnB.Controllers
             var person = await _context.Person.FindAsync(id);
             if (person != null)
             {
-                var document = await _context.Document.FirstAsync(x => x.id == person.DocumentID);
-                _context.Document.Remove(document);
+                if (person.DocumentID != null)
+                {
+                    var document = await _context.Document.FirstOrDefaultAsync(x => x.id == person.DocumentID);
+                    _context.Document.Remove(document);
+                }
                 _context.Person.Remove(person);
             }
 

@@ -26,9 +26,9 @@
             @Html.DisplayNameFor(model => model.AccommodationId)
         </dt>
         <dd class="col-sm-10">
-            @if (ViewBag.AccommodationList.Capacity>0)
+            @if (ViewBag.AccommodationName!=null)
             {
-                @ViewBag.AccommodationList.Name
+                @ViewBag.AccommodationName.Name
             }
         </dd>
         <dt class="col-sm-2">

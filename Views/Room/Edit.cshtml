@@ -26,9 +26,9 @@
             <div class="form-group">
                 <label asp-for="AccommodationId" class="control-label"></label>
                 <select asp-for="AccommodationId" class="form-control">
-                    @if (ViewBag.AccommodationLists != null)
+                    @if (ViewBag.AccommodationList != null)
                     {
-                        @foreach (var accommodation in ViewBag.AccommodationLists)
+                        @foreach (var accommodation in ViewBag.AccommodationList)
                         {
                             <option value="@accommodation.id">@accommodation.Name</option>
                         }

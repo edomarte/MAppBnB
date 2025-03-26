@@ -23,7 +23,6 @@ namespace MAppBnB.Controllers
         // GET: Room
         public async Task<IActionResult> Index()
         {
-            ViewData["AccommodationList"] = await _context.Accommodation.ToListAsync();
             return View(await _context.Room.ToListAsync());
         }
 
@@ -42,7 +41,7 @@ namespace MAppBnB.Controllers
                 return NotFound();
             }
 
-            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+            ViewBag.AccommodationName = _context.Accommodation.Find(room.AccommodationId);
 
 
             return View(room);
@@ -141,7 +140,7 @@ namespace MAppBnB.Controllers
                 return NotFound();
             }
 
-            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+            ViewBag.AccommodationName = _context.Accommodation.Find(room.AccommodationId);
 
             return View(room);
         }

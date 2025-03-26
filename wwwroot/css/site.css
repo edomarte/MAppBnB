@@ -52,3 +52,8 @@ body {
     left: 2px; /* Aligns it slightly from the left */
     font-weight: bold;
 }
+
+#personsErrorAlert{
+  color:red;
+  font-size: medium;
+}

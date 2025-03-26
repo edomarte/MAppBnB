@@ -13,7 +13,7 @@ namespace MAppBnB.Controllers
     public class AccommodationController : Controller
     {
         private readonly MappBnBContext _context;
-
+//TODO: Create and Edit, se non è appartamento AW in configuration disabilita id appartamento qui
         public AccommodationController(MappBnBContext context)
         {
             _context = context;

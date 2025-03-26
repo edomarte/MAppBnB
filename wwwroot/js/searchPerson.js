@@ -88,13 +88,16 @@ document.getElementById("removeSelectedButton").addEventListener("click", functi
     event.preventDefault();
 });
 
-document.getElementById("form").addEventListener("submit", function (event) {
-    checkPersonRolesAreCorrect(event);
+document.getElementById("form").addEventListener("submit", async function (event) {
+    await checkPersonRolesAreCorrect(event);
     // If disabled it does not send data to controller
     enableBooleanPlaceholders();
+    this.submit();
 });
 
-function checkPersonRolesAreCorrect(event) {
+async function checkPersonRolesAreCorrect(event) {
+    event.preventDefault();
+
     $("#roomBlockedP").val("");
     $("#personsErrorAlert").val("");
     $("#PersonIDs").val("");
@@ -110,8 +113,7 @@ function checkPersonRolesAreCorrect(event) {
         var personId = checkbox.id;
 
         // Check if the person is already in another booking at the same time.
-        if (isPersonAlreadyInContemporaryBooking(personId)) {
-            event.preventDefault();
+        if (await isPersonAlreadyInContemporaryBooking(personId)) {
             break;
         }
 
@@ -131,24 +133,22 @@ function checkPersonRolesAreCorrect(event) {
 
     if (mainPersonCount != 1) {
         $("#personsErrorAlert").text("Select just one main person")
-        event.preventDefault();
     } else {
         if (mainPersonRole == "16" && (familyMemberCount + groupComponentCount > 0)) {
             $("#personsErrorAlert").text("A booking with a single guest cannot contain any other person.")
-            event.preventDefault();
         } else {
             if (mainPersonRole == "17" && ((familyMemberCount == 0) || (groupComponentCount > 0))) {
                 $("#personsErrorAlert").text("A booking with a family head must only contain one or more family members.")
-                event.preventDefault();
             } else {
                 if (mainPersonRole == "18" && ((familyMemberCount > 0) || (groupComponentCount == 0))) {
                     $("#personsErrorAlert").text("A booking with a group head must only contain one or more group members.")
-                    event.preventDefault();
                 }
             }
         }
     }
 }
+
+//TODO: non più persone nella prenotazione di quante nella stanza
 
 function enableBooleanPlaceholders() {
     $("#isSent2Police").prop("disabled", false);
