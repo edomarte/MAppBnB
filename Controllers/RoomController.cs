@@ -23,7 +23,18 @@ namespace MAppBnB.Controllers
         // GET: Room
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Room.ToListAsync());
+            var query = _context.Room
+                        .Join(_context.Accommodation,
+                            r => r.AccommodationId,
+                            a => a.id,
+                            (r, a) => new RoomAccommodationViewModel
+                            {
+                                Room=r,  // Booking properties
+                                AccommodationName=a.Name,
+                            })
+                            .ToList();
+
+            return View(query);
         }
 
         // GET: Room/Details/5

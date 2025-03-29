@@ -1,4 +1,4 @@
-@model MAppBnB.Person
+@model PersonDocumentViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,82 +11,107 @@
     <h4>Person</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.Name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surname)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.Surname)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surname)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.Surname)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sex)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.Sex)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sex)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.Sex)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BirthDate)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.BirthDate)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BirthDate)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.BirthDate)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BirthPlace)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.BirthPlace)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BirthPlace)
+        <dd class="col-sm-10">
+            @ViewBag.BirthPlace
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BirthProvince)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.BirthProvince)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BirthProvince)
+        <dd class="col-sm-10">
+            @ViewBag.BirthProvince
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BirthCountry)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.BirthCountry)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BirthCountry)
+        <dd class="col-sm-10">
+            @ViewBag.BirthCountry
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhonePrefix)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.PhonePrefix)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhonePrefix)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.PhonePrefix)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.PhoneNumber)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.PhoneNumber)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.Email)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.Email)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.RoleRelation)
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.RoleRelation
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RoleRelation)
+        <p>ID Document</p>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document.DocumentType)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RoleRelation)
+        <dd class="col-sm-10">
+            @ViewBag.DocumentType
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DocumentID)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document.SerialNumber)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DocumentID)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Document.SerialNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document.IssuingCountry)
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.IssuingCountry
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document.PdfCopy)
+        </dt>
+        <dd class="col-sm-10">
+            @if (@Model.Document != null && @Model.Document.PdfCopy != null)
+            {
+                <a asp-action="DownloadFile" asp-controller="Document" asp-route-id="@Model?.Document.id">Download</a>
+            }
+            else
+            {
+                <p>Document not uploaded.</p>
+            }
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="id" />
+        <input type="hidden" asp-for="@Model.Person.id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

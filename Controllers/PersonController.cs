@@ -24,7 +24,18 @@ namespace MAppBnB.Controllers
         // GET: Person
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Person.ToListAsync());
+            var query = _context.Person
+                        .Join(_context.Document,
+                            p => p.DocumentID,
+                            d => d.id,
+                            (p, d) => new PersonDocumentViewModel
+                            {
+                                Person = p,  // Booking properties
+                                Document = d
+                            })
+                            .ToList();
+
+            return View(query);
         }
 
         // GET: Person/Details/5
@@ -49,6 +60,25 @@ namespace MAppBnB.Controllers
                 Person = person,
                 Document = document
             };
+
+            // Find description for the following fields depending on country.
+            string birthCountry = _context.Stati.FindAsync(person.BirthCountry).Result.Descrizione ?? "";
+            ViewBag.BirthCountry = birthCountry;
+            ViewBag.BirthProvince = person.BirthProvince ?? "";
+            ViewBag.DocumentType = _context.TipoDocumento.FindAsync(document.DocumentType).Result.Descrizione ?? "";
+            ViewBag.RoleRelation = _context.TipoAlloggiato.FindAsync(person.RoleRelation).Result.Descrizione ?? "";
+            if (birthCountry.Equals("ITALIA"))
+            {
+                ViewBag.BirthPlace = _context.Comuni.FindAsync(person.BirthPlace).Result.Descrizione ?? "";
+                ViewBag.IssuingCountry = _context.Comuni.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
+
+            }
+            else
+            {
+                ViewBag.BirthPlace = person.BirthPlace;
+                ViewBag.IssuingCountry = _context.Stati.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
+            }
+
 
             return View(viewModel);
         }
@@ -148,20 +178,20 @@ namespace MAppBnB.Controllers
                 try
                 {
                     if (model.Document.SerialNumber != null)
-                        if (model.Document.id == null)
-                        {
-                            addPdfToDbAsync(model);
-                            model.Document.PersonID = model.Person.id;
-                            _context.Add(model.Document);
-                            await _context.SaveChangesAsync();
-                            var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
-                            model.Person.DocumentID = document.id;
-                        }
-                        else
-                        {
-                            _context.Update(model.Document);
-                            await _context.SaveChangesAsync();
-                        }
+                        addPdfToDbAsync(model);
+                    if (model.Document.id == null)
+                    {
+                        model.Document.PersonID = model.Person.id;
+                        _context.Add(model.Document);
+                        await _context.SaveChangesAsync();
+                        var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
+                        model.Person.DocumentID = document.id;
+                    }
+                    else
+                    {
+                        _context.Update(model.Document);
+                        await _context.SaveChangesAsync();
+                    }
                     _context.Update(model.Person);
                     await _context.SaveChangesAsync();
                 }
@@ -199,7 +229,34 @@ namespace MAppBnB.Controllers
             {
                 return NotFound();
             }
-            return View(person);
+
+            var document = await _context.Document.FirstOrDefaultAsync(x => x.id == person.DocumentID);
+
+            var viewModel = new PersonDocumentViewModel
+            {
+                Person = person,
+                Document = document
+            };
+
+            // Find description for the following fields depending on country.
+            string birthCountry = _context.Stati.FindAsync(person.BirthCountry).Result.Descrizione ?? "";
+            if (birthCountry.Equals("ITALIA"))
+            {
+                ViewBag.BirthPlace = _context.Comuni.FindAsync(person.BirthPlace).Result.Descrizione ?? "";
+                ViewBag.IssuingCountry = _context.Comuni.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
+
+            }
+            else
+            {
+                ViewBag.BirthPlace = person.BirthPlace;
+                ViewBag.IssuingCountry = _context.Stati.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
+            }
+            ViewBag.BirthCountry = birthCountry;
+            ViewBag.BirthProvince = person.BirthProvince ?? "";
+            ViewBag.DocumentType = _context.TipoDocumento.FindAsync(document.DocumentType).Result.Descrizione ?? "";
+            ViewBag.RoleRelation = _context.TipoAlloggiato.FindAsync(person.RoleRelation).Result.Descrizione ?? "";
+
+            return View(viewModel);
         }
 
         // POST: Person/Delete/5

@@ -58,6 +58,7 @@ namespace SignalRChat.Hubs
                 await Clients.All.SendAsync("UpdateCalendar", null);
                 return;
             }
+            
             int selectedYear = int.Parse(monthYear.Split('-')[0]);  // Extract year from "yyyy-MM"
             int selectedMonth = int.Parse(monthYear.Split('-')[1]); // Extract month from "yyyy-MM"
 

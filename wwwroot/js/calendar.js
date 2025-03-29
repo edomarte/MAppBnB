@@ -8,8 +8,6 @@ var lastDayOnCalendar;
 
 connectionCL.on("UpdateCalendar", function (bookings) {
     bookings.forEach(booking => {
-
-
         var first = 0;
         if (firstDayOnCalendar - booking.checkinDay > 0)
             first = firstDayOnCalendar;
@@ -59,6 +57,10 @@ document.getElementById("AccommodationsList").addEventListener("change", functio
 });
 
 document.getElementById("monthYearPicker").addEventListener("change", function (event) {
+    // Manage the "cancel" button in the date picker
+    if ($("#monthYearPicker").val() == "") {
+        return;
+    }
     let $tbody = $("#tbody");
     $tbody.empty(); // Clear previous content
 

@@ -20,11 +20,10 @@ namespace SignalRChat.Hubs
             _context = context;
         }
 
-        public async Task SearchPerson(string personName, String[] personsInBooking)
+        public async Task SearchPerson(string personName, string[] personsInBooking)
         {
             int[] personsInBookingInt = personsInBooking.Select(int.Parse).ToArray();
-            //var persons = _context.Person.Where(p => p.Name.Contains(personName)).ToList();
-            var persons = _context.Person.Where(p => p.Name.Contains(personName));
+            var persons = _context.Person.Where(p => p.Surname.Contains(personName));
             var excluded = persons.Where(p => personsInBookingInt.Contains(p.id));
             var personsL = persons.ToList();
             var excludedL = excluded.ToList();

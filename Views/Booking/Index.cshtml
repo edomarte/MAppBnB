@@ -1,4 +1,4 @@
-@model IEnumerable<MAppBnB.Booking>
+@model IEnumerable<BookingAccommodationRoomChannelViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,71 +13,72 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CheckinDateTime)
+                @Html.DisplayNameFor(model => model.Booking.CheckinDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CheckOutDateTime)
+                @Html.DisplayNameFor(model => model.Booking.CheckOutDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PaymentDate)
+                @Html.DisplayNameFor(model => model.Booking.PaymentDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsPaid)
+                @Html.DisplayNameFor(model => model.Booking.IsPaid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ChannelID)
+                @Html.DisplayNameFor(model => model.BookChannelName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AccommodationID)
+                @Html.DisplayNameFor(model => model.AccommodationName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RoomID)
+                @Html.DisplayNameFor(model => model.RoomName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Booking.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Discount)
+                @Html.DisplayNameFor(model => model.Booking.Discount)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckinDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckOutDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChannelID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccommodationID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discount)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Booking.CheckinDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Booking.CheckOutDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Booking.PaymentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Booking.IsPaid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookChannelName);
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccommodationName);
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomName);
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Booking.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Booking.Discount)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Booking.id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Booking.id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Booking.id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

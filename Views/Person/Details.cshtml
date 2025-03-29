@@ -39,19 +39,19 @@
             @Html.DisplayNameFor(model => model.Person.BirthPlace)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Person.BirthPlace)
+            @ViewBag.BirthPlace
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Person.BirthProvince)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Person.BirthProvince)
+            @ViewBag.BirthProvince
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Person.BirthCountry)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Person.BirthCountry)
+            @ViewBag.BirthCountry
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Person.PhonePrefix)
@@ -74,14 +74,14 @@
             @Html.DisplayNameFor(model => model.Person.RoleRelation)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Person.RoleRelation)
+            @ViewBag.RoleRelation
         </dd>
         <p>ID Document</p>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Document.DocumentType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Document.DocumentType)
+            @ViewBag.DocumentType
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Document.SerialNumber)
@@ -93,7 +93,7 @@
             @Html.DisplayNameFor(model => model.Document.IssuingCountry)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Document.IssuingCountry)
+            @ViewBag.IssuingCountry
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Document.PdfCopy)

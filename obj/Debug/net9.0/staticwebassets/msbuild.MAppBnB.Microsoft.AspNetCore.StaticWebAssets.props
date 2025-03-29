@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>gaerk3v9t2</Fingerprint>
-      <Integrity>6M6z3+/j71ysnrPeXqq8R0rZ4+iqv7tuG77EOJgwUZw=</Integrity>
+      <Fingerprint>39ccx9z7rr</Fingerprint>
+      <Integrity>+cFfxtJlmFziS0LtQh0OoBC3jM18J2yW//zPKwDs/IM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\calendar.js'))</OriginalItemSpec>
@@ -174,8 +174,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>lyw3kl5rsv</Fingerprint>
-      <Integrity>Yx7poXQ6I7Djq5mee1kV2LhbMsXhoPjp94eWLZ7t1YM=</Integrity>
+      <Fingerprint>m9qazdp3s1</Fingerprint>
+      <Integrity>ekp2REBjf65SjbR42EZs0DynRpE/zBM907suVaKT1/I=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</OriginalItemSpec>

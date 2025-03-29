@@ -14,26 +14,20 @@ public class Person
     [MaxLength(50, ErrorMessage = "Surname cannot exceed 50 characters")]
     [DataType(DataType.Text)]
     public string? Surname { get; set; }
-    [Required]
     [DataType(DataType.Date)]
     [Display(Name = "Birth Date")]
     public DateOnly? BirthDate { get; set; }
     public int? Sex { get; set; }
-    [Required]
     [Display(Name = "Birth Place")]
     public string? BirthPlace { get; set; }
-    [Required]
     [Display(Name = "Birth Province")]
     public string? BirthProvince { get; set; }
-    [Required]
     [Display(Name = "Birth Country")]
     public string? BirthCountry { get; set; }
     [DataType(DataType.Text)]
     [RegularExpression(@"^\+(?:[\d]{2,3})$", ErrorMessage = "Prefix must start with + and 2-3 numbers")]
     [Display(Name = "Phone Prefix")]
     public string? PhonePrefix { get; set; }
-
-    //[RegularExpression(@"[\d]")]
     [DataType(DataType.PhoneNumber)]
     [Display(Name = "Phone Number")]
     public string? PhoneNumber { get; set; }

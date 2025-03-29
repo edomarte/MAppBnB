@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MAppBnB.Data;
 using SignalRChat.Hubs;
+using DocumentFormat.OpenXml.Office2010.Excel;
 namespace MAppBnB.Controllers
 {
     public class BookingController : Controller
@@ -16,7 +17,28 @@ namespace MAppBnB.Controllers
         // GET: Booking
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Booking.ToListAsync());
+            var query = _context.Booking
+                        .Join(_context.Accommodation,
+                            b => b.AccommodationID,
+                            a => a.id,
+                            (b, a) => new { b, AccommodationName = a.Name })
+                        .Join(_context.Room,
+                            ba => ba.b.RoomID,
+                            r => r.id,
+                            (ba, r) => new { ba.b, ba.AccommodationName, RoomName = r.Name })
+                        .Join(_context.BookChannel,
+                            bar => bar.b.ChannelID,
+                            bc => bc.id,
+                            (bar, bc) => new BookingAccommodationRoomChannelViewModel
+                            {
+                                Booking=bar.b,  // Booking properties
+                                AccommodationName=bar.AccommodationName,
+                                RoomName=bar.RoomName,
+                                BookChannelName = bc.Name
+                            })
+                            .ToList();
+
+            return View(query);
         }
 
         // GET: Booking/Details/5
@@ -39,6 +61,9 @@ namespace MAppBnB.Controllers
                 .Where(p => peopleOnBooking.Select(b => b.PersonID).Contains(p.id))
                 .ToListAsync();
             ViewBag.PeopleOnBooking = detailsPeopleOnBooking;
+            ViewBag.ChannelName = _context.BookChannel.Find(booking.ChannelID).Name;
+            ViewBag.AccommodationName = _context.Accommodation.Find(booking.AccommodationID).Name;
+            ViewBag.RoomName = _context.Room.Find(booking.RoomID).Name;
 
             return View(booking);
         }
@@ -99,6 +124,10 @@ namespace MAppBnB.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
+            else
+            {
+                model.PeopleInBooking = addPersonsToPeopleInBookingAsync(model, model.PersonIDs.Split(",")).Result;
+            }
             ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
             ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
             ViewBag.RoomAlreadyBooked = false;
@@ -157,24 +186,8 @@ namespace MAppBnB.Controllers
                     _context.Update(model.Booking);
                     await _context.SaveChangesAsync();
 
-                    var bpInList = new List<BookingPerson>();
-                    foreach (var personID in model.PersonIDs.Split(","))
-                    {
-                        if (personID == "") continue;
+                    var bpInList = addPersonsToPeopleInBooking(model.Booking.id, model.PersonIDs.Split(","));
 
-                        var personBooking = new BookingPerson
-                        {
-                            BookingID = model.Booking.id,
-                            PersonID = int.Parse(personID)
-                        };
-                        bpInList.Add(personBooking);
-
-                        if (!_context.BookingPerson.Any(x => x.BookingID == model.Booking.id && x.PersonID == int.Parse(personID)))
-                        {
-                            _context.BookingPerson.Add(personBooking);
-                        }
-
-                    }
                     var allPersonInBooking = _context.BookingPerson.Where(x => x.BookingID == id).ToList();
                     var bp2beDeleted = allPersonInBooking.Except(bpInList, new BookingPersonComparer()).ToList();
                     _context.BookingPerson.RemoveRange(bp2beDeleted);
@@ -192,9 +205,15 @@ namespace MAppBnB.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                model.PeopleInBooking = addPersonsToPeopleInBookingAsync(model, model.PersonIDs.Split(",")).Result;
+            }
+            ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
+            ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
+            ViewBag.RoomAlreadyBooked = false;
+            return View(model);
         }
 
         // GET: Booking/Delete/5
@@ -217,6 +236,10 @@ namespace MAppBnB.Controllers
                 .Where(p => peopleOnBooking.Select(b => b.PersonID).Contains(p.id))
                 .ToListAsync();
             ViewBag.PeopleOnBooking = detailsPeopleOnBooking;
+            
+            ViewBag.ChannelName = _context.BookChannel.Find(booking.ChannelID).Name;
+            ViewBag.AccommodationName = _context.Accommodation.Find(booking.AccommodationID).Name;
+            ViewBag.RoomName = _context.Room.Find(booking.RoomID).Name;
 
             return View(booking);
         }
@@ -241,6 +264,41 @@ namespace MAppBnB.Controllers
         private bool BookingExists(int id)
         {
             return _context.Booking.Any(e => e.id == id);
+        }
+
+        private List<BookingPerson> addPersonsToPeopleInBooking(int bookingId, string[] personIDs)
+        {
+            List<BookingPerson> bpInList = new List<BookingPerson>();
+            foreach (var personID in personIDs)
+            {
+                if (personID == "") continue;
+
+                var personBooking = new BookingPerson
+                {
+                    BookingID = bookingId,
+                    PersonID = int.Parse(personID)
+                };
+                bpInList.Add(personBooking);
+
+                if (!_context.BookingPerson.Any(x => x.BookingID == bookingId && x.PersonID == int.Parse(personID)))
+                {
+                    _context.BookingPerson.Add(personBooking);
+                }
+
+            }
+            return bpInList;
+        }
+
+        private async Task<List<PersonRoleNames>> addPersonsToPeopleInBookingAsync(PersonBookingViewModel model, string[] personIDs)
+        {
+            List<PersonRoleNames> lpib = new List<PersonRoleNames>();
+            foreach (string person in personIDs)
+            {
+                if (person == "") continue;
+                var personDetails = await _context.Person.FirstOrDefaultAsync(x => x.id == Convert.ToInt32(person));
+                lpib.Add(new PersonRoleNames() { Person = personDetails, RoleName = _context.TipoAlloggiato.Find(personDetails.RoleRelation).Descrizione });
+            }
+            return lpib;
         }
     }
 }

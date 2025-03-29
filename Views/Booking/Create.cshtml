@@ -114,7 +114,14 @@
         </p>
         <p>
             <label>Persons on the Booking</label>
-        <ul id="PersonsOnBookingList"></ul>
+        <ul id="PersonsOnBookingList">
+            @if(Model.PeopleInBooking!= null){
+                @foreach (var pib in Model.PeopleInBooking)
+                {
+                    <li><input type="checkbox" data-roleCode="@pib.Person.RoleRelation" id="@pib.Person.id">@($"{pib.Person.Name}, {pib.Person.Surname}, {pib.Person.BirthDate}, {pib.RoleName}")</li>
+                }
+            }
+        </ul>
         <input type="button" id="removeSelectedButton" value="Remove selected guests form booking" />
         <p id="personsErrorAlert"></p>
         </p>

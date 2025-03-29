@@ -89,14 +89,16 @@ document.getElementById("removeSelectedButton").addEventListener("click", functi
 });
 
 document.getElementById("form").addEventListener("submit", async function (event) {
-    await checkPersonRolesAreCorrect(event);
+    var isPersonSelectionValid = await checkPersonRolesAreCorrect(event);
     // If disabled it does not send data to controller
     enableBooleanPlaceholders();
-    this.submit();
+    if (isPersonSelectionValid)
+        this.submit();
 });
 
 async function checkPersonRolesAreCorrect(event) {
     event.preventDefault();
+    var isPersonSelectionValid = false;
 
     $("#roomBlockedP").val("");
     $("#personsErrorAlert").val("");
@@ -113,8 +115,9 @@ async function checkPersonRolesAreCorrect(event) {
         var personId = checkbox.id;
 
         // Check if the person is already in another booking at the same time.
-        if (await isPersonAlreadyInContemporaryBooking(personId)) {
-            break;
+        if ($(document).attr('title') == "Create") {
+            if (await isPersonAlreadyInContemporaryBooking(personId))
+                return isPersonSelectionValid;
         }
 
         $("#PersonIDs").val($("#PersonIDs").val() + personId + ",")
@@ -142,10 +145,14 @@ async function checkPersonRolesAreCorrect(event) {
             } else {
                 if (mainPersonRole == "18" && ((familyMemberCount > 0) || (groupComponentCount == 0))) {
                     $("#personsErrorAlert").text("A booking with a group head must only contain one or more group members.")
+                } else {
+                    isPersonSelectionValid = true;
+                    return isPersonSelectionValid;
                 }
             }
         }
     }
+    return isPersonSelectionValid;
 }
 
 //TODO: non più persone nella prenotazione di quante nella stanza
@@ -163,9 +170,9 @@ async function isPersonAlreadyInContemporaryBooking(personId) {
 
     var result = await connectionS.invoke("IsPersonAlreadyInBooking", personId, dateFrom, dateTo)
     if (result != null) {
-        let linkToFoundBooking=$("<a>")
-        .attr("href","/Booking/Edit/" + result[1])
-        .text("Booking where "+ result[0]+" is present.");
+        let linkToFoundBooking = $("<a>")
+            .attr("href", "/Booking/Edit/" + result[1])
+            .text("Booking where " + result[0] + " is present.");
         $("#personsErrorAlert").text(result[0] + " is already present in another booking at the same time.");
         $("#personsErrorAlert").append(linkToFoundBooking);
         return true;

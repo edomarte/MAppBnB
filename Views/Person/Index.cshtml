@@ -1,4 +1,4 @@
-@model IEnumerable<MAppBnB.Person>
+@model IEnumerable<PersonDocumentViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,40 +14,40 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Person.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Surname)
+                @Html.DisplayNameFor(model => model.Person.Surname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sex)
+                @Html.DisplayNameFor(model => model.Person.Sex)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
+                @Html.DisplayNameFor(model => model.Person.BirthDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthPlace)
+                @Html.DisplayNameFor(model => model.Person.BirthPlace)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthProvince)
+                @Html.DisplayNameFor(model => model.Person.BirthProvince)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthCountry)
+                @Html.DisplayNameFor(model => model.Person.BirthCountry)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhonePrefix)
+                @Html.DisplayNameFor(model => model.Person.PhonePrefix)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Html.DisplayNameFor(model => model.Person.PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Person.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RoleRelation)
+                @Html.DisplayNameFor(model => model.Person.RoleRelation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DocumentID)
+                @Html.DisplayNameFor(model => model.Document.SerialNumber)
             </th>
             <th></th>
         </tr>
@@ -57,47 +57,47 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.Person.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Surname)
+                    @Html.DisplayFor(modelItem => item.Person.Surname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
+                    @Html.DisplayFor(modelItem => item.Person.BirthDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sex)
+                    @Html.DisplayFor(modelItem => item.Person.Sex)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BirthPlace)
+                    @Html.DisplayFor(modelItem => item.Person.BirthPlace)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BirthProvince)
+                    @Html.DisplayFor(modelItem => item.Person.BirthProvince)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BirthCountry)
+                    @Html.DisplayFor(modelItem => item.Person.BirthCountry)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PhonePrefix)
+                    @Html.DisplayFor(modelItem => item.Person.PhonePrefix)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    @Html.DisplayFor(modelItem => item.Person.PhoneNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => item.Person.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RoleRelation)
+                    @Html.DisplayFor(modelItem => item.Person.RoleRelation)
                 </td>
                 <td>
                 <td>
-                    @Html.DisplayFor(modelItem => documents.Find(x => x.id == item.DocumentID).SerialNumber)
+                    @Html.DisplayFor(modelItem => item.Document.SerialNumber)
                 </td>
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Person.id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Person.id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Person.id">Delete</a>
                 </td>
             </tr>
         }
