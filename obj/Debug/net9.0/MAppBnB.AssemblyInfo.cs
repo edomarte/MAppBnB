@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MAppBnB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6425087ba390c5f95bd21671da78c5216fbd2e9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ff28aa275347040cac5a409b3c6ac2a137e9c34")]
 [assembly: System.Reflection.AssemblyProductAttribute("MAppBnB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MAppBnB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

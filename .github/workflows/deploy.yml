@@ -26,6 +26,6 @@ jobs:
 
       - name: Deploy (Example - Using Secret)
         env:
-          BREVO_API_KEY: ${{ secrets.BREVOAPIKEY }}  # Uses GitHub Secret
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}  # Uses GitHub Secret
         run: |
           echo "Deploying application with API Key: $BREVO_API_KEY"
