@@ -29,3 +29,5 @@ jobs:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}  # Uses GitHub Secret
         run: |
           echo "Deploying application with API Key: $BREVO_API_KEY"
+      - name: Debug Environment Variables
+        run: echo "BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}"
