@@ -3,7 +3,7 @@
 var connectionT = new signalR.HubConnectionBuilder().withUrl("/docsTransmissionHub").build();
 
 connectionT.start().then(function () {
-    
+
 }).catch(function (err) {
     return console.error(err.toString());
 });
@@ -12,7 +12,7 @@ connectionT.on("TransmissionResult", function (result) {
     $("#resultPH").text(result);
 
     //Change the correspondent boolean dropdown
-    if(result=="Schedine sent correctly."){
+    if (result == "Schedine sent correctly.") {
         $("#isSent2Police").prop("disabled", false);
         $("#isSent2Police option[value='False']").removeProp("selected");
         $("#isSent2Police option[value='True']").prop("selected", true).attr("selected", "selected");
@@ -24,7 +24,7 @@ connectionT.on("TransmissionResult", function (result) {
         $("#Sent2Region option[value='True']").prop("selected", true).attr("selected", "selected");
         $("#Sent2Region").trigger("change");
         $("#Sent2Region").prop("disabled", true);
-    }else if(result=="Email sent correctly."){
+    } else if (result == "Email sent correctly.") {
         $("#isSent2Town").prop("disabled", false);
         $("#isSent2Town option[value='False']").removeProp("selected");
         $("#isSent2Town option[value='True']").prop("selected", true).attr("selected", "selected");
@@ -33,13 +33,13 @@ connectionT.on("TransmissionResult", function (result) {
     }
 });
 
-document.getElementById("TransmitToTown").addEventListener("click", function (event) {
-    var bookingID=document.getElementById("bookingID").value;
+document.getElementById("SendContract").addEventListener("click", function (event) {
+    var bookingID = $("#bookingID").val();
 
-    var list=document.getElementById("PersonsOnBookingList");
-    var persons=list.getElementsByTagName("li");
-    var mainPersonID=persons[0].getElementsByTagName("input")[0].id;
-
+    var persons = $("#PersonsOnBookingList li");
+    var mainPersonID = persons.toArray().map(li => li.querySelector("input")).find(input => {
+        return input && ["16", "17", "18"].includes(input.dataset.rolecode);
+    })?.id;
     connectionT.invoke("SendContract", bookingID, mainPersonID).catch(function (err) {
         return console.error(err.toString());
     });
@@ -47,12 +47,12 @@ document.getElementById("TransmitToTown").addEventListener("click", function (ev
 });
 
 document.getElementById("TransmitToRegionPolice").addEventListener("click", function (event) {
-    var bookingID=document.getElementById("bookingID").value;
+    var bookingID = $("#bookingID").val();
 
-    var list=document.getElementById("PersonsOnBookingList");
-    var persons=list.getElementsByTagName("li");
-    var personsIds=[]
-    for(const person of Array.from(persons)) {
+    var persons = $("#PersonsOnBookingList li");
+
+    var personsIds = []
+    for (const person of Array.from(persons)) {
         let input = person.getElementsByTagName("input")[0]; // Get the first input inside <li>
         if (input) {
             personsIds.push(input.id); // Push input ID to array

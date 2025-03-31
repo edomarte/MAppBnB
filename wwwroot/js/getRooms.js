@@ -16,7 +16,7 @@ connectionR.on("RoomsList", function (rooms) {
 });
 
 function updateRoomList(){
-    var selectedAccommodation=document.getElementById("AccommodationsList").value;
+    var selectedAccommodation=$("#AccommodationsList").val();
     connectionR.invoke("RoomSelector", selectedAccommodation).catch(function (err) {
         return console.error(err.toString());
     });

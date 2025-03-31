@@ -38,7 +38,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
           bp => bp.PersonID,
           p => p.id,
           (bp, p) => new { bp, p })
-    .Where(joined => bookingId==joined.bp.BookingID &&
+    .Where(joined => bookingId == joined.bp.BookingID &&
                      Convert.ToInt32(joined.p.RoleRelation) >= 16 &&
                      Convert.ToInt32(joined.p.RoleRelation) <= 18)
     .Select(joined => joined.p)  // Selects the Person entity
@@ -51,7 +51,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             int bookingId = booking.id;
             int guestsPerBooking = _context.BookingPerson
-                                        .Where(bp => bookingId==bp.BookingID)
+                                        .Where(bp => bookingId == bp.BookingID)
                                         .GroupBy(bp => bp.BookingID)
                                         .Select(g => g.Count()).ToList()[0];
             return guestsPerBooking;
@@ -77,7 +77,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             var document = _context.Document.Find(person.DocumentID);
             // Substitute the code with the correspondent document description
-            document.DocumentType=_context.TipoDocumento.Find(document.DocumentType).Descrizione;
+            document.DocumentType = _context.TipoDocumento.Find(document.DocumentType).Descrizione;
             return document;
         }
 
@@ -110,26 +110,44 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             return channel;
         }
 
-        private Person getBirthPlaceDescription(Person p){
-            if(p.BirthCountry.Equals("100000100")){ // If birthcountry is Italy
-                p.BirthPlace=_context.Comuni.Find(p.BirthPlace).Descrizione;
-            }else{
-                p.BirthPlace="Estero";
+        private Person getBirthPlaceDescription(Person p)
+        {
+            if (p.BirthCountry.Equals("100000100"))
+            { // If birthcountry is Italy
+                p.BirthPlace = _context.Comuni.Find(p.BirthPlace).Descrizione;
+            }
+            else
+            {
+                p.BirthPlace = "Estero";
             }
             return p;
         }
 
+        private async Task updateIsContractPrintedAsync(Booking booking)
+        {
+            booking.ContractPrinted = true;
+            _context.Update(booking);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task CreateContract(string mainPersonID, string accommodationID, string bookingId)
         {
-            Person mainPerson = getBirthPlaceDescription(GetPersonDetails(mainPersonID));
-            Person host=getBirthPlaceDescription(GetPersonDetails(_context.Configuration.First().PersonID.ToString()));
-            Accommodation accommodation = GetAccommodationDetails(accommodationID);
-            string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, GetBookingDetails(bookingId),host,GetDocumentDetails(host));
-            byte[] file = await File.ReadAllBytesAsync(contractPath);
-            string base64String = Convert.ToBase64String(file);
-
-            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
-
+            try
+            {
+                Person mainPerson = getBirthPlaceDescription(GetPersonDetails(mainPersonID));
+                Person host = getBirthPlaceDescription(GetPersonDetails(_context.Configuration.First().PersonID.ToString()));
+                Accommodation accommodation = GetAccommodationDetails(accommodationID);
+                Booking booking = GetBookingDetails(bookingId);
+                string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, booking, host, GetDocumentDetails(host));
+                byte[] file = await File.ReadAllBytesAsync(contractPath);
+                string base64String = Convert.ToBase64String(file);
+                updateIsContractPrintedAsync(booking);
+                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            }
+            catch (Exception e)
+            {
+                await Clients.All.SendAsync("Error", e.Message);
+            }
         }
 
         public async Task CreateBookingDetails(string[] personsIDs, string accommodationID, string bookingId)
@@ -206,11 +224,13 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         }
 
-        private List<FinancialReportLine> getReportLines(List<Booking> bookings){
-            List<FinancialReportLine> lfrl= new List<FinancialReportLine>();
+        private List<FinancialReportLine> getReportLines(List<Booking> bookings)
+        {
+            List<FinancialReportLine> lfrl = new List<FinancialReportLine>();
 
-            foreach(Booking booking in bookings){
-                lfrl.Add(new FinancialReportLine(){Booking=booking, MainPerson=GetMainPerson(booking),Room=GetRoom(booking), GuestCount=GetGuestCount(booking)});
+            foreach (Booking booking in bookings)
+            {
+                lfrl.Add(new FinancialReportLine() { Booking = booking, MainPerson = GetMainPerson(booking), Room = GetRoom(booking), GuestCount = GetGuestCount(booking) });
             }
 
             return lfrl;

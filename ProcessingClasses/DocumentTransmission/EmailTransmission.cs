@@ -1,36 +1,34 @@
-using System.Net.Mail;
-using System.Net.Mime;
 using MAppBnB;
 using brevo_csharp.Api;
 using brevo_csharp.Client;
 using brevo_csharp.Model;
-using Newtonsoft.Json.Linq;
-using System.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
 
 public class EmailTransmission
 {
     static string message;
-    public static string SendDocsToTown(Booking booking, Person mainPerson, Document document, string accommodationName, string roomName)
+    public static string SendContract(Booking booking, Person mainPerson, string accommodationName, string roomName, byte[] contractFile)
     {
-        message = "Hi " + mainPerson.Name + " " + mainPerson.Surname + "!\n"
-        + "Regarding your booking at " + accommodationName + " in room " + roomName + " from " + booking.CheckinDateTime + " to " + booking.CheckOutDateTime + "\n"
-        + "Please see attached copy of the contract." + "\n"
+        message = "Hi " + mainPerson.Name + " " + mainPerson.Surname + "!<br>"
+        + "Regarding your booking at " + accommodationName + " in room " + roomName + " from " + booking.CheckinDateTime + " to " + booking.CheckOutDateTime + "<br>"
+        + "Please see attached copy of the contract." + "<br>"
         + "Kind regards";
 
-        return SendEmail("edomarte@gmail.com", message, document.PdfCopy, "Booking Documents");
+        return SendEmail("edomarte@gmail.com", message, contractFile, "Booking Documents");
     }
 
     private static string SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64, string subject)
     {
         // Read API Key from Environment Variable
-        string brevoApiKey = Environment.GetEnvironmentVariable("BREVO_API_KEY", EnvironmentVariableTarget.Process);
+        string brevoApiKey = Environment.GetEnvironmentVariable("BREVO_API_KEY");
 
         if (string.IsNullOrEmpty(brevoApiKey))
         {
             throw new Exception("Brevo API key is missing.");
         }
 
-        Configuration.Default.ApiKey.Add("api-key", brevoApiKey); // TODO: Latest is on github repository secret
+        if (Configuration.Default.ApiKey.IsNullOrEmpty())
+            Configuration.Default.ApiKey.Add("api-key", brevoApiKey); // System environment variable
 
         var apiInstance = new TransactionalEmailsApi();
         var sendSmtpEmail = new SendSmtpEmail(
@@ -49,7 +47,6 @@ public class EmailTransmission
         {
             var result = apiInstance.SendTransacEmail(sendSmtpEmail);
             string temp = result.ToString();
-            //return result.ToString(); //TODO: verify the result
             return "Email sent correctly.";
         }
         catch (Exception e)

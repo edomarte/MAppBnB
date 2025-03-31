@@ -210,6 +210,7 @@ public class DocumentProcessing
         dr["TownFee"] = accommodation.TownFee;
         dr["OTAFee"] = (booking.Price - booking.Discount) * channel.Fee;
         dr["MainGuest"] = persons[0].Name + " " + persons[0].Surname;
+        // Booking details Word template holds max 4 guests.
         if (persons.Count > 1)
         {
             dr["Guest1"] = persons[1].Name + " " + persons[1].Surname;

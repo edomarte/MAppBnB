@@ -14,10 +14,9 @@ document.getElementById("generateContract").addEventListener("click", function (
         return input && ["16", "17", "18"].includes(input.dataset.rolecode);
     })?.id; // Extract the input's id
   
-    var accommodationID=document.getElementById("AccommodationsList").value;
+    var accommodationID=$("#AccommodationsList").val();
 
-    var bookingID=document.getElementById("bookingID").value;
-   
+    var bookingID = $("#bookingID").val();
 
     connectionD.invoke("CreateContract", mainPersonID,accommodationID,bookingID).catch(function (err) {
         return console.error(err.toString());
@@ -35,19 +34,17 @@ document.getElementById("generateContract").addEventListener("click", function (
 
 document.getElementById("generateBookingDetails").addEventListener("click", function (event) {
        
-    var list=document.getElementById("PersonsOnBookingList");
-    var persons=list.getElementsByTagName("li");
+    var persons = $("#PersonsOnBookingList li");
     var personsIDs=[];
+
     for (var i = 0; i < persons.length; ++i) {
         let person = persons[i];
         let checkbox=person.getElementsByTagName("input")[0];
         personsIDs.push(checkbox.id);
       }
   
-    var accommodationID=document.getElementById("AccommodationsList").value;
-
-    var bookingID=document.getElementById("bookingID").value;
-   
+    var accommodationID=$("#AccommodationsList").val();
+    var bookingID = $("#bookingID").val();
 
     connectionD.invoke("CreateBookingDetails", personsIDs, accommodationID, bookingID).catch(function (err) {
         return console.error(err.toString());
@@ -58,14 +55,11 @@ document.getElementById("generateBookingDetails").addEventListener("click", func
 
 document.getElementById("generatePreCheckin").addEventListener("click", function (event) {
        
-    var list=document.getElementById("PersonsOnBookingList");
-    var persons=list.getElementsByTagName("li");
+    var persons = $("#PersonsOnBookingList li");
     var mainPersonID=persons[0].getElementsByTagName("input")[0].id;
 
-  
-    var accommodationID=document.getElementById("AccommodationsList").value;
-
-    var bookingID=document.getElementById("bookingID").value;
+    var accommodationID=$("#AccommodationsList").val();
+    var bookingID = $("#bookingID").val();
    
 
     connectionD.invoke("CreatePreCheckin", mainPersonID,accommodationID,bookingID).catch(function (err) {
@@ -77,7 +71,7 @@ document.getElementById("generatePreCheckin").addEventListener("click", function
 
 document.getElementById("generateContractPDF").addEventListener("click", function (event) {
        
-    var bookingID=document.getElementById("bookingID").value;
+    var bookingID = $("#bookingID").val();
    
     connectionD.invoke("CreateContractPDF", bookingID).catch(function (err) {
         return console.error(err.toString());
@@ -88,7 +82,7 @@ document.getElementById("generateContractPDF").addEventListener("click", functio
 
 document.getElementById("generatePreCheckinPDF").addEventListener("click", function (event) {
        
-    var bookingID=document.getElementById("bookingID").value;
+    var bookingID = $("#bookingID").val();
    
     connectionD.invoke("CreatePreCheckinPDF", bookingID).catch(function (err) {
         return console.error(err.toString());

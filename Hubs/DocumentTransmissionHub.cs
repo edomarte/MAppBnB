@@ -23,14 +23,14 @@ namespace SignalRChat.Hubs
         }
         private string GetAWIDAppartamento(int accommodationId)
         {
-            var accommodation = _context.Accommodation.Where(x => x.id == accommodationId).ToList();
-            return accommodation[0].AWIDAppartamento;
+            var accommodation = _context.Accommodation.Find(accommodationId);
+            return accommodation.AWIDAppartamento;
         }
 
         private Document GetDocumentDetails(Person person)
         {
-            var document = _context.Document.Where(x => x.id == person.DocumentID).ToList();
-            return document[0];
+            var document = _context.Document.Find(person.DocumentID);
+            return document;
         }
 
         private Booking GetBookingDetails(string bookingID)
@@ -65,21 +65,65 @@ namespace SignalRChat.Hubs
             var details = _context.Accommodation.Find(accommodationID);
             return details;
         }
+        
+        private async Task updateIsContractSentAsync(Booking booking)
+        {
+            booking.Sent2Town = true;
+            _context.Update(booking);
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task updateIsSentToPoliceRegionAsync(Booking booking)
+        {
+            booking.Sent2Region = true;
+            booking.Sent2Police = true;
+
+            _context.Update(booking);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task SendContract(string bookingID, string personID)
         {
             Person mainPerson = GetPersonDetails(personID);
-            Booking booking=GetBookingDetails(bookingID);
-            string transmissionResult = EmailTransmission.SendDocsToTown(booking, mainPerson, GetDocumentDetails(mainPerson), GetAccommodation(booking.AccommodationID).Name,GetRoom(booking.RoomID).Name);
-            await Clients.All.SendAsync("TransmissionResult", transmissionResult);
+            Booking booking = GetBookingDetails(bookingID);
+
+            string contractPath = "..\\DocumentTemplates\\Contract" + bookingID + ".pdf";
+            //string base64String = Convert.ToBase64String(contract);
+
+            if (File.Exists(contractPath))
+            {
+                try
+                {
+                    byte[] contractFile = await File.ReadAllBytesAsync(contractPath);
+                    string transmissionResult = EmailTransmission.SendContract(booking, mainPerson, GetAccommodation(booking.AccommodationID).Name, GetRoom(booking.RoomID).Name, contractFile);
+                    await updateIsContractSentAsync(booking);
+                    await Clients.All.SendAsync("TransmissionResult", transmissionResult);
+                }
+                catch (Exception e)
+                {
+                    await Clients.All.SendAsync("TransmissionResult", e.Message);
+                }
+            }
+            else
+            {
+                await Clients.All.SendAsync("TransmissionResult", "Generate a Contract PDF first!");
+            }
         }
 
         public async Task SendToRegionPolice(string bookingID, string[] personID)
         {
-            var booking = _context.Booking.Where(x => x.id == int.Parse(bookingID)).ToList();
+            var booking = GetBookingDetails(bookingID);
             List<Person> persons = GetPersonsDetails(personID);
-            string transmissionResult = SOAPTransmission.SendDocsToRegionPolice(GetBookingDetails(bookingID), persons, GetDocumentDetails(persons.First()), GetConfiguration(), GetAWIDAppartamento(booking[0].AccommodationID));
-            await Clients.All.SendAsync("TransmissionResult", transmissionResult);
+            try
+            {
+                string transmissionResult = SOAPTransmission.SendDocsToRegionPolice(booking, persons, GetDocumentDetails(persons.First()), GetConfiguration(), GetAWIDAppartamento(booking.AccommodationID));
+                await updateIsSentToPoliceRegionAsync(booking);
+                await Clients.All.SendAsync("TransmissionResult", transmissionResult);
+            }
+            catch (Exception e)
+            {
+                await Clients.All.SendAsync("TransmissionResult", e.Message);
+            }
         }
     }
 }
