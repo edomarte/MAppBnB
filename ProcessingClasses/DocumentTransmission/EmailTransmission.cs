@@ -23,7 +23,7 @@ public class EmailTransmission
     private static string SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64, string subject)
     {
         // Read API Key from Environment Variable
-        string brevoApiKey = Environment.GetEnvironmentVariable("BREVO_API_KEY");
+        string brevoApiKey = Environment.GetEnvironmentVariable("BREVO_API_KEY", EnvironmentVariableTarget.Process);
 
         if (string.IsNullOrEmpty(brevoApiKey))
         {
