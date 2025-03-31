@@ -10,14 +10,11 @@ using System.Diagnostics;
 public class EmailTransmission
 {
     static string message;
-    public static string SendDocsToTown(Booking booking, Person mainPerson, Document document)
+    public static string SendDocsToTown(Booking booking, Person mainPerson, Document document, string accommodationName, string roomName)
     {
-        message = "Main person on booking: " + mainPerson.Name + " " + mainPerson.Surname + "\n"
-        + "Booking from " + booking.CheckinDateTime + " to " + booking.CheckOutDateTime + "\n"
-        + "Document type: " + document.DocumentType + "\n"
-        + "Document number: " + document.SerialNumber + "\n"
-        + "Document from: " + document.IssuingCountry + "\n"
-        + "Please see attached copy of the document." + "\n"
+        message = "Hi " + mainPerson.Name + " " + mainPerson.Surname + "!\n"
+        + "Regarding your booking at "+accommodationName+" in room "+roomName+" from " + booking.CheckinDateTime + " to " + booking.CheckOutDateTime + "\n"
+        + "Please see attached copy of the contract." + "\n"
         + "Kind regards";
 
         return SendEmail("edomarte@gmail.com", message, document.PdfCopy, "Booking Documents");
@@ -29,13 +26,13 @@ public class EmailTransmission
 
         var apiInstance = new TransactionalEmailsApi();
         var sendSmtpEmail = new SendSmtpEmail(
-            sender: new SendSmtpEmailSender(email: "edomarte@gmail.com", name: "MAppBnB"),
-            to: new List<SendSmtpEmailTo> { new SendSmtpEmailTo(email: emailRecipient, name: "Town") },
+            sender: new SendSmtpEmailSender(email: "edomarte@gmail.com", name: "MAppBnB"), // Developer personal email used because an email for the app has not been setup yet.
+            to: new List<SendSmtpEmailTo> { new SendSmtpEmailTo(email: emailRecipient, name: "Guest") },
             subject: subject,
-            htmlContent: "<html><body><h1>Email Body</h1></body></html>",
+            htmlContent: "<html><body>"+emailContent+"</body></html>",
             attachment: new List<SendSmtpEmailAttachment>{
                 new SendSmtpEmailAttachment(content: attachmentBase64,
-                name: "Document.pdf"
+                name: "Contract.pdf"
             )}
 
         );

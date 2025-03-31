@@ -1,0 +1,31 @@
+name: Deploy Application
+
+on: 
+  push:
+    branches:
+      - main  # Runs on push to the 'main' branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0'  # Change to your version
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build Project
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Deploy (Example - Using Secret)
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVOAPIKEY }}  # Uses GitHub Secret
+        run: |
+          echo "Deploying application with API Key: $BREVO_API_KEY"

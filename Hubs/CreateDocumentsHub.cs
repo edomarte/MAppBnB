@@ -60,7 +60,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         public Room GetRoom(Booking booking)
         {
             int roomId = booking.RoomID;
-            Room roomsList = _context.Room.FirstOrDefault(x=>x.id==roomId);
+            Room roomsList = _context.Room.Find(roomId);
 
             return roomsList;
         }

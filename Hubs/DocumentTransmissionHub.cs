@@ -54,11 +54,23 @@ namespace SignalRChat.Hubs
             return configuration[0];
         }
 
-        public async Task SendToTown(string bookingID, string personID)
+        public Room GetRoom(int roomID)
         {
-            var booking = _context.Booking.Where(x => x.id == int.Parse(bookingID)).ToList();
+            Room roomsList = _context.Room.Find(roomID);
+
+            return roomsList;
+        }
+        public Accommodation GetAccommodation(int accommodationID)
+        {
+            var details = _context.Accommodation.Find(accommodationID);
+            return details;
+        }
+
+        public async Task SendContract(string bookingID, string personID)
+        {
             Person mainPerson = GetPersonDetails(personID);
-            string transmissionResult=EmailTransmission.SendDocsToTown(GetBookingDetails(bookingID), mainPerson, GetDocumentDetails(mainPerson));
+            Booking booking=GetBookingDetails(bookingID);
+            string transmissionResult = EmailTransmission.SendDocsToTown(booking, mainPerson, GetDocumentDetails(mainPerson), GetAccommodation(booking.AccommodationID).Name,GetRoom(booking.RoomID).Name);
             await Clients.All.SendAsync("TransmissionResult", transmissionResult);
         }
 
@@ -66,8 +78,8 @@ namespace SignalRChat.Hubs
         {
             var booking = _context.Booking.Where(x => x.id == int.Parse(bookingID)).ToList();
             List<Person> persons = GetPersonsDetails(personID);
-            string transmissionResult=SOAPTransmission.SendDocsToRegionPolice(GetBookingDetails(bookingID), persons, GetDocumentDetails(persons.First()), GetConfiguration(),GetAWIDAppartamento(booking[0].AccommodationID));
-            await Clients.All.SendAsync("TransmissionResult", transmissionResult); 
+            string transmissionResult = SOAPTransmission.SendDocsToRegionPolice(GetBookingDetails(bookingID), persons, GetDocumentDetails(persons.First()), GetConfiguration(), GetAWIDAppartamento(booking[0].AccommodationID));
+            await Clients.All.SendAsync("TransmissionResult", transmissionResult);
         }
     }
 }

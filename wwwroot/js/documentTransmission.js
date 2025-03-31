@@ -40,7 +40,7 @@ document.getElementById("TransmitToTown").addEventListener("click", function (ev
     var persons=list.getElementsByTagName("li");
     var mainPersonID=persons[0].getElementsByTagName("input")[0].id;
 
-    connectionT.invoke("SendToTown", bookingID, mainPersonID).catch(function (err) {
+    connectionT.invoke("SendContract", bookingID, mainPersonID).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
