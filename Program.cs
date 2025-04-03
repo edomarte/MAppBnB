@@ -6,17 +6,20 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MappBnBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MappBnBContext") ?? throw new InvalidOperationException("Connection string 'MappBnBContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'MappBnBContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
+
 
 // Imposta la cultura globale come InvariantCulture
 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -44,4 +47,5 @@ app.MapHub<CreateDocumentsHub>("/createDocumentsHub");
 app.MapHub<DocumentTransmissionHub>("/docsTransmissionHub");
 app.MapHub<CalendarHub>("/calendarHub");
 app.MapHub<CountryProvincePlaceSelectorHub>("/countryProvincePlaceSelectorHub");
+
 app.Run();

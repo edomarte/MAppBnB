@@ -30,14 +30,13 @@ namespace MAppBnB.Controllers
             ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
 
             //Only one configuration; row manually added to the database Configuration table
-            int id = 1;
-            var config = await _context.Configuration.FirstOrDefaultAsync(x => x.id == id);
+            var config = await _context.Configuration.FirstOrDefaultAsync();
 
             if (config == null)
             {
-                await _context.Configuration.AddAsync(new Configuration { id = id });
+                await _context.Configuration.AddAsync(new Configuration());
                 await _context.SaveChangesAsync();
-                config = await _context.Configuration.FirstOrDefaultAsync(x => x.id == id);
+                config = await _context.Configuration.FirstOrDefaultAsync();
             }
 
 
