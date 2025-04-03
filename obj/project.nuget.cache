@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wjBNemILKK4=",
+  "dgSpecHash": "tyTJnQfku4Q=",
   "success": true,
-  "projectFilePath": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
+  "projectFilePath": "C:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\edoma\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\edoma\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
@@ -126,7 +126,7 @@
     "C:\\Users\\edoma\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.templating\\9.0.0\\microsoft.visualstudio.web.codegeneration.templating.9.0.0.nupkg.sha512",
     "C:\\Users\\edoma\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.utils\\9.0.0\\microsoft.visualstudio.web.codegeneration.utils.9.0.0.nupkg.sha512",
     "C:\\Users\\edoma\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\9.0.0\\microsoft.visualstudio.web.codegenerators.mvc.9.0.0.nupkg.sha512",
-    "C:\\Users\\edoma\\.nuget\\packages\\microsoft.win32.primitives\\4.0.1\\microsoft.win32.primitives.4.0.1.nupkg.sha512",
+    "C:\\Users\\edoma\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\edoma\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
     "C:\\Users\\edoma\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
     "C:\\Users\\edoma\\.nuget\\packages\\netstandard.library\\1.6.0\\netstandard.library.1.6.0.nupkg.sha512",

@@ -58,10 +58,10 @@ public class DocumentProcessing
         DataRow dr = addRowToContractDt(mainPerson, document, accommodation, booking, host, hostDocument);
         string bookingId = booking.id.ToString();
 
-        string contractPath = "..\\DocumentTemplates\\Contract" + bookingId + ".docx";
+        string contractPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".docx";
 
-        File.Copy("..\\DocumentTemplates\\ContractTemplate.docx", "..\\DocumentTemplates\\Contract" + bookingId + ".docx", true);
-        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\DocumentTemplates\\Contract" + bookingId + ".docx", true))
+        File.Copy("..\\MAppBnB\\DocumentTemplates\\ContractTemplate.docx", "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".docx", true);
+        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".docx", true))
         {
             if (doc is null)
             {
@@ -134,8 +134,8 @@ public class DocumentProcessing
 
     public static string GenerateContractPDF(string bookingId)
     {
-        string docPath = "..\\DocumentTemplates\\Contract" + bookingId + ".docx";
-        string pdfPath = "..\\DocumentTemplates\\Contract" + bookingId + ".pdf";
+        string docPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".docx";
+        string pdfPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".pdf";
 
         if(!File.Exists(docPath)){
             return "Error: Generate a Contract first!";
@@ -147,8 +147,8 @@ public class DocumentProcessing
 
     public static string GeneratePreCheckinPDF(string bookingId)
     {
-        string docPath = "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
-        string pdfPath = "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".pdf";
+        string docPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
+        string pdfPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".pdf";
 
         if(!File.Exists(docPath)){
             return "Error: Generate a Pre Checkin Document first!";
@@ -162,10 +162,10 @@ public class DocumentProcessing
         DataRow dr = addRowTobookingDetailsDt(persons, booking, accommodation, room, channel);
         string bookingId = booking.id.ToString();
 
-        string bookingDetailsPath = "..\\DocumentTemplates\\BookingDetails" + bookingId + ".docx";
+        string bookingDetailsPath = "..\\MAppBnB\\DocumentTemplates\\BookingDetails" + bookingId + ".docx";
 
-        File.Copy("..\\DocumentTemplates\\BookingDetailsTemplate.docx", "..\\DocumentTemplates\\BookingDetails" + bookingId + ".docx", true);
-        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\DocumentTemplates\\BookingDetails" + bookingId + ".docx", true))
+        File.Copy("..\\MAppBnB\\DocumentTemplates\\BookingDetailsTemplate.docx", "..\\MAppBnB\\DocumentTemplates\\BookingDetails" + bookingId + ".docx", true);
+        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\MAppBnB\\DocumentTemplates\\BookingDetails" + bookingId + ".docx", true))
         {
 
             if (doc is null)
@@ -267,10 +267,10 @@ public class DocumentProcessing
         DataRow dr = addRowToPreCheckinDt(mainPerson, accommodation, booking);
         string bookingId = booking.id.ToString();
 
-        string preCheckinPath = "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
+        string preCheckinPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
 
-        File.Copy("..\\DocumentTemplates\\Pre-CheckinTemplate.docx", "..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx", true);
-        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx", true))
+        File.Copy("..\\MAppBnB\\DocumentTemplates\\Pre-CheckinTemplate.docx", "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx", true);
+        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx", true))
         {
 
             if (doc is null)
@@ -323,10 +323,10 @@ public class DocumentProcessing
     public static string GenerateExcelFinancialReport(List<FinancialReportLine> frlines, BookChannel channel, Accommodation accommodation, string dateFrom, string dateTo, Configuration configuration)
     {
         string fileName = accommodation.Name + "_" + channel.Name + "_" + dateFrom + "_" + dateTo;
-        string reportPath = "..\\DocumentTemplates\\Report_" + fileName + ".xlsx";
+        string reportPath = "..\\MAppBnB\\DocumentTemplates\\Report_" + fileName + ".xlsx";
 
-        File.Copy("..\\DocumentTemplates\\Report.xlsx", "..\\DocumentTemplates\\" + reportPath, true);
-        using (SpreadsheetDocument doc = SpreadsheetDocument.Open("..\\DocumentTemplates\\" + reportPath, true))
+        File.Copy("..\\MAppBnB\\DocumentTemplates\\Report.xlsx", "..\\MAppBnB\\DocumentTemplates\\" + reportPath, true);
+        using (SpreadsheetDocument doc = SpreadsheetDocument.Open("..\\MAppBnB\\DocumentTemplates\\" + reportPath, true))
         {
 
             if (doc is null)

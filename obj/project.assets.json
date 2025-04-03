@@ -2273,12 +2273,12 @@
           }
         }
       },
-      "Microsoft.Win32.Primitives/4.0.1": {
+      "Microsoft.Win32.Primitives/4.3.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.0.1",
-          "Microsoft.NETCore.Targets": "1.0.1",
-          "System.Runtime": "4.1.0"
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "Microsoft.NETCore.Targets": "1.1.0",
+          "System.Runtime": "4.3.0"
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {
@@ -8364,10 +8364,10 @@
         "microsoft.visualstudio.web.codegenerators.mvc.nuspec"
       ]
     },
-    "Microsoft.Win32.Primitives/4.0.1": {
-      "sha512": "fQnBHO9DgcmkC9dYSJoBqo6sH1VJwJprUHh8F3hbcRlxiQiBUuTntdk8tUwV490OqC2kQUrinGwZyQHTieuXRA==",
+    "Microsoft.Win32.Primitives/4.3.0": {
+      "sha512": "9ZQKCWxH7Ijp9BfahvL2Zyf1cJIk8XYLF6Yjzr2yi0b2cOut/HQ31qf1ThHAgCc3WiZMdnWcfJCgN82/0UunxA==",
       "type": "package",
-      "path": "microsoft.win32.primitives/4.0.1",
+      "path": "microsoft.win32.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8380,7 +8380,7 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "microsoft.win32.primitives.4.0.1.nupkg.sha512",
+        "microsoft.win32.primitives.4.3.0.nupkg.sha512",
         "microsoft.win32.primitives.nuspec",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
@@ -13388,6 +13388,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 9.0.0",
+      "Microsoft.Win32.Primitives >= 4.3.0",
       "PDFsharp-MigraDoc >= 6.1.1",
       "brevo_csharp >= 1.0.0",
       "soapcore >= 1.2.0"
@@ -13399,11 +13400,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
+      "projectUniqueName": "C:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
       "projectName": "MAppBnB",
-      "projectPath": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
+      "projectPath": "C:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
       "packagesPath": "C:\\Users\\edoma\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\",
+      "outputPath": "C:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\edoma\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -13463,6 +13464,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[9.0.0, )"
+          },
+          "Microsoft.Win32.Primitives": {
+            "target": "Package",
+            "version": "[4.3.0, )"
           },
           "PDFsharp-MigraDoc": {
             "target": "Package",
