@@ -45,3 +45,7 @@ connection.on("DownloadFile", (fileName, base64Data) => {
     link.click();
     document.body.removeChild(link);
 });
+
+connectionD.on("Error", (error) => {
+    $("#errorMessage").text(error);
+});

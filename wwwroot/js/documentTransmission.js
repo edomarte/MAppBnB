@@ -46,6 +46,19 @@ document.getElementById("SendContract").addEventListener("click", function (even
     event.preventDefault();
 });
 
+document.getElementById("SendPreCheckIn").addEventListener("click", function (event) {
+    var bookingID = $("#bookingID").val();
+
+    var persons = $("#PersonsOnBookingList li");
+    var mainPersonID = persons.toArray().map(li => li.querySelector("input")).find(input => {
+        return input && ["16", "17", "18"].includes(input.dataset.rolecode);
+    })?.id;
+    connectionT.invoke("SendPreCheckIn", bookingID, mainPersonID).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
+
 document.getElementById("TransmitToRegionPolice").addEventListener("click", function (event) {
     var bookingID = $("#bookingID").val();
 

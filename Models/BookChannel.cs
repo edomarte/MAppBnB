@@ -12,6 +12,7 @@ public class BookChannel
     [DataType(DataType.Text)]
     public string? Name { get; set; }
     [Required]
+    [DisplayFormat(DataFormatString = "{0:P2}")]
     [Precision(18,2)]
     public decimal? Fee { get; set; }
 }

@@ -41,6 +41,8 @@ public class SOAPTransmission
 
     internal static string SendDocsToRegionPolice(Booking booking, List<Person> persons, Document document, Configuration configuration, string AWIDAppartamento)
     {
+        if (configuration.AlloggiatiWebUsername == null || configuration.AlloggiatiWebPassword == null || configuration.AlloggiatiWebWSKey == null)
+            throw new Exception("Missing credentials for AlloggiatiWeb. Please check the configuration.");
         List<string> soapString = prepareSOAPstring(booking, persons, document, configuration, AWIDAppartamento);
         return SendBookingToSOAP(configuration.AlloggiatiWebUsername, configuration.AlloggiatiWebPassword, configuration.AlloggiatiWebWSKey, soapString, configuration.IsGestioneAppartamenti ? AWIDAppartamento : "").ToString();
     }

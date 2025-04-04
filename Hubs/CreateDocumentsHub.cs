@@ -135,7 +135,11 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             try
             {
                 Person mainPerson = getBirthPlaceDescription(GetPersonDetails(mainPersonID));
-                Person host = getBirthPlaceDescription(GetPersonDetails(_context.Configuration.First().PersonID.ToString()));
+                if (_context.Configuration.FirstOrDefault().PersonID.ToString().Equals(""))
+                {
+                    throw new Exception("Host not set in configuration!");
+                }
+                Person host = getBirthPlaceDescription(GetPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString()));
                 Accommodation accommodation = GetAccommodationDetails(accommodationID);
                 Booking booking = GetBookingDetails(bookingId);
                 string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, booking, host, GetDocumentDetails(host));
@@ -152,53 +156,71 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         public async Task CreateBookingDetails(string[] personsIDs, string accommodationID, string bookingId)
         {
-            List<Person> persons = GetPersonsDetails(personsIDs);
-            Accommodation accommodation = GetAccommodationDetails(accommodationID);
-            Booking booking = GetBookingDetails(bookingId);
-            string contractPath = DocumentProcessing.GenerateBookingDetails(persons, booking, accommodation, GetRoomDetails(booking.RoomID), GetChannelDetails(booking.ChannelID));
-            byte[] file = await File.ReadAllBytesAsync(contractPath);
-            string base64String = Convert.ToBase64String(file);
+            try
+            {
+                List<Person> persons = GetPersonsDetails(personsIDs);
+                Accommodation accommodation = GetAccommodationDetails(accommodationID);
+                Booking booking = GetBookingDetails(bookingId);
+                string contractPath = DocumentProcessing.GenerateBookingDetails(persons, booking, accommodation, GetRoomDetails(booking.RoomID), GetChannelDetails(booking.ChannelID));
+                byte[] file = await File.ReadAllBytesAsync(contractPath);
+                string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            }
+            catch (Exception e)
+            {
+                await Clients.All.SendAsync("Error", e.Message);
 
+            }
         }
 
         public async Task CreatePreCheckin(string mainPersonID, string accommodationID, string bookingId)
         {
-            Person mainPerson = GetPersonDetails(mainPersonID);
-            Accommodation accommodation = GetAccommodationDetails(accommodationID);
-            string contractPath = DocumentProcessing.GeneratePreCheckIn(mainPerson, accommodation, GetBookingDetails(bookingId));
-            byte[] file = await File.ReadAllBytesAsync(contractPath);
-            string base64String = Convert.ToBase64String(file);
+            try
+            {
+                Person mainPerson = GetPersonDetails(mainPersonID);
+                Accommodation accommodation = GetAccommodationDetails(accommodationID);
+                string contractPath = DocumentProcessing.GeneratePreCheckIn(mainPerson, accommodation, GetBookingDetails(bookingId));
+                byte[] file = await File.ReadAllBytesAsync(contractPath);
+                string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            }
+            catch (Exception e)
+            {
+                await Clients.All.SendAsync("Error", e.Message);
 
+            }
         }
 
         public async Task CreateContractPDF(string bookingId)
         {
-            string contractPath = DocumentProcessing.GenerateContractPDF(bookingId);
-            byte[] file = await File.ReadAllBytesAsync(contractPath);
-            string base64String = Convert.ToBase64String(file);
-
-            if (contractPath.Contains("Error"))
-                await Clients.All.SendAsync("Error", "Generate a Contract first!");
-            else
+            try
+            {
+                string contractPath = DocumentProcessing.GenerateContractPDF(bookingId);
+                byte[] file = await File.ReadAllBytesAsync(contractPath);
+                string base64String = Convert.ToBase64String(file);
                 await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
-
+            }
+            catch (Exception e)
+            {
+                await Clients.All.SendAsync("Error", e.Message);
+            }
         }
 
         public async Task CreatePreCheckinPDF(string bookingId)
         {
-            string contractPath = DocumentProcessing.GeneratePreCheckinPDF(bookingId);
-            byte[] file = await File.ReadAllBytesAsync(contractPath);
-            string base64String = Convert.ToBase64String(file);
-
-            if (contractPath.Contains("Error"))
-                await Clients.All.SendAsync("Error", "Generate a PreCheckin Document first!");
-            else
+            try
+            {
+                string contractPath = DocumentProcessing.GeneratePreCheckinPDF(bookingId);
+                byte[] file = await File.ReadAllBytesAsync(contractPath);
+                string base64String = Convert.ToBase64String(file);
                 await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
-
+            }
+            catch (Exception e)
+            {
+                await Clients.All.SendAsync("Error", e.Message);
+            }
         }
 
         private List<Booking> GetBookingsForReport(string accommodationID, string channelID, string dateFrom, string dateTo)
@@ -214,14 +236,20 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         public async Task CreateReportExcel(string accommodationID, string channelID, string dateFrom, string dateTo)
         {
-            List<Booking> bookings = GetBookingsForReport(accommodationID, channelID, dateFrom, dateTo);
-            string contractPath = DocumentProcessing.GenerateExcelFinancialReport(getReportLines(bookings), GetChannelDetailsS(channelID), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration());
+            try
+            {
+                List<Booking> bookings = GetBookingsForReport(accommodationID, channelID, dateFrom, dateTo);
+                string contractPath = DocumentProcessing.GenerateExcelFinancialReport(getReportLines(bookings), GetChannelDetailsS(channelID), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration());
 
-            byte[] file = await File.ReadAllBytesAsync(contractPath);
-            string base64String = Convert.ToBase64String(file);
+                byte[] file = await File.ReadAllBytesAsync(contractPath);
+                string base64String = Convert.ToBase64String(file);
 
-            await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
-
+                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+            }
+            catch (Exception e)
+            {
+                await Clients.All.SendAsync("Error", e.Message);
+            }
         }
 
         private List<FinancialReportLine> getReportLines(List<Booking> bookings)

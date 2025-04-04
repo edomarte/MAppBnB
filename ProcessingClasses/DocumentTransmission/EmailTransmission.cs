@@ -14,10 +14,20 @@ public class EmailTransmission
         + "Please see attached copy of the contract." + "<br>"
         + "Kind regards";
 
-        return SendEmail("edomarte@gmail.com", message, contractFile, "Booking Documents");
+        return SendEmail("edomarte@gmail.com", message, contractFile, "Contract Document", "Contract.pdf");
     }
 
-    private static string SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64, string subject)
+    public static string SendPreCheckIn(Booking booking, Person mainPerson, string accommodationName, string roomName, byte[] contractFile)
+    {
+        message = "Hi " + mainPerson.Name + " " + mainPerson.Surname + "!<br>"
+        + "Regarding your booking at " + accommodationName + " in room " + roomName + " from " + booking.CheckinDateTime + " to " + booking.CheckOutDateTime + "<br>"
+        + "Please see attached copy of the pre-checkin information." + "<br>"
+        + "Kind regards";
+
+        return SendEmail("edomarte@gmail.com", message, contractFile, "Pre-CheckIn Document", "Pre-CheckIn.pdf");
+    }
+
+    private static string SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64, string subject, string attachmentName)
     {
         // Read API Key from Environment Variable
         string brevoApiKey = Environment.GetEnvironmentVariable("BREVO_API_KEY");
@@ -38,7 +48,7 @@ public class EmailTransmission
             htmlContent: "<html><body>" + emailContent + "</body></html>",
             attachment: new List<SendSmtpEmailAttachment>{
                 new SendSmtpEmailAttachment(content: attachmentBase64,
-                name: "Contract.pdf"
+                name: attachmentName
             )}
 
         );

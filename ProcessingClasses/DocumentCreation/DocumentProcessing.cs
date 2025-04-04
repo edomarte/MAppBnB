@@ -138,7 +138,7 @@ public class DocumentProcessing
         string pdfPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".pdf";
 
         if(!File.Exists(docPath)){
-            return "Error: Generate a Contract first!";
+            throw new FileNotFoundException("Error: Generate a Contract Document first!");
         }
 
         MigraDocPDF.ConvertWordToPdf(docPath, pdfPath);
@@ -151,7 +151,7 @@ public class DocumentProcessing
         string pdfPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".pdf";
 
         if(!File.Exists(docPath)){
-            return "Error: Generate a Pre Checkin Document first!";
+            throw new FileNotFoundException("Error: Generate a Pre Checkin Document first!");
         }
         MigraDocPDF.ConvertWordToPdf(docPath, pdfPath);
         return pdfPath;

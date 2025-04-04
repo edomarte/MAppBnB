@@ -68,8 +68,8 @@ connection.start().then(function () {
         })
 
         // If not yet selected default to the first in db AG (Agrigento)
-        var birthProvince;
-        if($("#hiddenBirthProvince").val()==undefined)
+        var birthProvince=$("#hiddenBirthProvince").val();
+        if(birthProvince==undefined || birthProvince=="" || birthProvince==null)
             birthProvince="AG"
         else
             birthProvince=$("#hiddenBirthProvince").val()

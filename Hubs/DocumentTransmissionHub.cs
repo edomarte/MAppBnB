@@ -87,7 +87,7 @@ namespace SignalRChat.Hubs
             Person mainPerson = GetPersonDetails(personID);
             Booking booking = GetBookingDetails(bookingID);
 
-            string contractPath = "..\\DocumentTemplates\\Contract" + bookingID + ".pdf";
+            string contractPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingID + ".pdf";
             //string base64String = Convert.ToBase64String(contract);
 
             if (File.Exists(contractPath))
@@ -107,6 +107,34 @@ namespace SignalRChat.Hubs
             else
             {
                 await Clients.All.SendAsync("TransmissionResult", "Generate a Contract PDF first!");
+            }
+        }
+
+        public async Task SendPreCheckIn(string bookingID, string personID)
+        {
+            Person mainPerson = GetPersonDetails(personID);
+            Booking booking = GetBookingDetails(bookingID);
+
+            string contractPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingID + ".pdf";
+            //string base64String = Convert.ToBase64String(contract);
+
+            if (File.Exists(contractPath))
+            {
+                try
+                {
+                    byte[] contractFile = await File.ReadAllBytesAsync(contractPath);
+                    string transmissionResult = EmailTransmission.SendPreCheckIn(booking, mainPerson, GetAccommodation(booking.AccommodationID).Name, GetRoom(booking.RoomID).Name, contractFile);
+                    await updateIsContractSentAsync(booking);
+                    await Clients.All.SendAsync("TransmissionResult", transmissionResult);
+                }
+                catch (Exception e)
+                {
+                    await Clients.All.SendAsync("TransmissionResult", e.Message);
+                }
+            }
+            else
+            {
+                await Clients.All.SendAsync("TransmissionResult", "Generate a Pre-CheckIn PDF first!");
             }
         }
 

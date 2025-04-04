@@ -8,12 +8,18 @@ public class Configuration
 
     public int? PersonID { get; set; }
     public int? DocumentID { get; set; }
-
+    [DisplayFormat(DataFormatString = "{0:P2}")]
     public decimal IVAVendite { get; set; }
+    [DisplayFormat(DataFormatString = "{0:P2}")]
+
     public decimal IVACommissioni { get; set; }
+    [DisplayFormat(DataFormatString = "{0:P2}")]
+
     public decimal CommissioneBancaria { get; set; }
+    [DisplayFormat(DataFormatString = "{0:P2}")]
+
     public decimal CedolareSecca { get; set; } //flat rate tax
-    
+
     [DataType(DataType.Text)]
     public string? AlloggiatiWebUsername { get; set; } // Username to be adequately handled for future deployment (Hashing, etc.)
     [DataType(DataType.Password)]
