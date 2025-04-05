@@ -19,17 +19,23 @@ connectionT.on("TransmissionResult", function (result) {
         $("#isSent2Police").trigger("change");
         $("#isSent2Police").prop("disabled", true);
 
-        $("#Sent2Region").prop("disabled", false);
-        $("#Sent2Region option[value='False']").removeProp("selected");
-        $("#Sent2Region option[value='True']").prop("selected", true).attr("selected", "selected");
-        $("#Sent2Region").trigger("change");
-        $("#Sent2Region").prop("disabled", true);
-    } else if (result == "Email sent correctly.") {
-        $("#isSent2Town").prop("disabled", false);
-        $("#isSent2Town option[value='False']").removeProp("selected");
-        $("#isSent2Town option[value='True']").prop("selected", true).attr("selected", "selected");
-        $("#isSent2Town").trigger("change");
-        $("#isSent2Town").prop("disabled", true);
+        $("#PreCheckinSent").prop("disabled", false);
+        $("#PreCheckinSent option[value='False']").removeProp("selected");
+        $("#PreCheckinSent option[value='True']").prop("selected", true).attr("selected", "selected");
+        $("#PreCheckinSent").trigger("change");
+        $("#PreCheckinSent").prop("disabled", true);
+    } else if (result == "Contract sent correctly.") {
+        $("#isContractSent").prop("disabled", false);
+        $("#isContractSent option[value='False']").removeProp("selected");
+        $("#isContractSent option[value='True']").prop("selected", true).attr("selected", "selected");
+        $("#isContractSent").trigger("change");
+        $("#isContractSent").prop("disabled", true);
+    }else if (result == "Pre-Checkin sent correctly.") {
+        $("#isContractSent").prop("disabled", false);
+        $("#isContractSent option[value='False']").removeProp("selected");
+        $("#isContractSent option[value='True']").prop("selected", true).attr("selected", "selected");
+        $("#isContractSent").trigger("change");
+        $("#isContractSent").prop("disabled", true);
     }
 });
 

@@ -35,22 +35,49 @@ namespace MAppBnB.Controllers
                             })
                             .ToList();
 
-            return View(query);
+            var personList=await getFieldsNamesAsync(query);
+            return View(personList);
+        }
+
+        private async Task<List<PersonDocumentViewModel>> getFieldsNamesAsync(List<PersonDocumentViewModel> query)
+        {
+            foreach(PersonDocumentViewModel pdv in query){
+                pdv.BirthCountryName= _context.Stati.Find(pdv.Person.BirthCountry).Descrizione;
+                pdv.RoleName= _context.TipoAlloggiato.Find(pdv.Person.RoleRelation).Descrizione;
+                if(pdv.BirthCountryName.Equals("ITALIA")){
+                    pdv.BirthPlaceName= _context.Comuni.Find(pdv.Person.BirthPlace).Descrizione;
+                }else{
+                    pdv.BirthPlaceName= pdv.Person.BirthPlace;
+                }
+
+            }
+            return query;
         }
 
         // GET: Person/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            PersonDocumentViewModel viewModel = await showIndividualPersonAsync(id);
+
+            if (viewModel == null)
             {
                 return NotFound();
+            }
+            return View(viewModel);
+        }
+
+        private async Task<PersonDocumentViewModel> showIndividualPersonAsync(int? id)
+        {
+            if (id == null)
+            {
+                return null;
             }
 
             var person = await _context.Person
                 .FirstOrDefaultAsync(m => m.id == id);
             if (person == null)
             {
-                return NotFound();
+                return null;
             }
 
             var document = await _context.Document.FirstOrDefaultAsync(x => x.id == person.DocumentID);
@@ -79,8 +106,8 @@ namespace MAppBnB.Controllers
                 ViewBag.IssuingCountry = _context.Stati.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
             }
 
-
-            return View(viewModel);
+            ViewBag.Sex=Enum.GetName(typeof(Sex),person.Sex) ?? "";
+            return viewModel;
         }
 
         // GET: Person/Create
@@ -218,44 +245,12 @@ namespace MAppBnB.Controllers
         // GET: Person/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+           PersonDocumentViewModel viewModel = await showIndividualPersonAsync(id);
+
+            if (viewModel == null)
             {
                 return NotFound();
             }
-
-            var person = await _context.Person
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (person == null)
-            {
-                return NotFound();
-            }
-
-            var document = await _context.Document.FirstOrDefaultAsync(x => x.id == person.DocumentID);
-
-            var viewModel = new PersonDocumentViewModel
-            {
-                Person = person,
-                Document = document
-            };
-
-            // Find description for the following fields depending on country.
-            string birthCountry = _context.Stati.FindAsync(person.BirthCountry).Result.Descrizione ?? "";
-            if (birthCountry.Equals("ITALIA"))
-            {
-                ViewBag.BirthPlace = _context.Comuni.FindAsync(person.BirthPlace).Result.Descrizione ?? "";
-                ViewBag.IssuingCountry = _context.Comuni.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
-
-            }
-            else
-            {
-                ViewBag.BirthPlace = person.BirthPlace;
-                ViewBag.IssuingCountry = _context.Stati.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
-            }
-            ViewBag.BirthCountry = birthCountry;
-            ViewBag.BirthProvince = person.BirthProvince ?? "";
-            ViewBag.DocumentType = _context.TipoDocumento.FindAsync(document.DocumentType).Result.Descrizione ?? "";
-            ViewBag.RoleRelation = _context.TipoAlloggiato.FindAsync(person.RoleRelation).Result.Descrizione ?? "";
-
             return View(viewModel);
         }
 

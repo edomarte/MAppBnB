@@ -70,8 +70,8 @@ namespace MAppBnB.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Sent2Police = table.Column<bool>(type: "bit", nullable: false),
-                    Sent2Region = table.Column<bool>(type: "bit", nullable: false),
-                    Sent2Town = table.Column<bool>(type: "bit", nullable: false),
+                    PreCheckinSent = table.Column<bool>(type: "bit", nullable: false),
+                    ContractSent = table.Column<bool>(type: "bit", nullable: false),
                     ContractPrinted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

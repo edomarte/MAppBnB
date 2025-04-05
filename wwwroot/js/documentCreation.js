@@ -56,8 +56,10 @@ document.getElementById("generateBookingDetails").addEventListener("click", func
 document.getElementById("generatePreCheckin").addEventListener("click", function (event) {
        
     var persons = $("#PersonsOnBookingList li");
-    var mainPersonID=persons[0].getElementsByTagName("input")[0].id;
-
+    var mainPersonID = persons.toArray().map(li => li.querySelector("input")).find(input => {
+        return input && ["16", "17", "18"].includes(input.dataset.rolecode);
+    })?.id; // Extract the input's id
+    
     var accommodationID=$("#AccommodationsList").val();
     var bookingID = $("#bookingID").val();
    

@@ -86,20 +86,20 @@
                 <span asp-validation-for="Booking.Sent2Police" id="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.Sent2Region" class="control-label"></label>
-                <select asp-for="Booking.Sent2Region" class="form-control" id="isSent2Region">
+                <label asp-for="Booking.PreCheckinSent" class="control-label"></label>
+                <select asp-for="Booking.PreCheckinSent" class="form-control" id="isPreCheckinSent">
                     <option value=@false>No</option>
                     <option value=@true>Yes</option>
                 </select>
-                <span asp-validation-for="Booking.Sent2Region" class="text-danger"></span>
+                <span asp-validation-for="Booking.PreCheckinSent" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.Sent2Town" class="control-label"></label>
-                <select asp-for="Booking.Sent2Town" class="form-control" id="isSent2Town">
+                <label asp-for="Booking.ContractSent" class="control-label"></label>
+                <select asp-for="Booking.ContractSent" class="form-control" id="isContractSent">
                     <option value=@false>No</option>
                     <option value=@true>Yes</option>
                 </select>
-                <span asp-validation-for="Booking.Sent2Town" class="text-danger"></span>
+                <span asp-validation-for="Booking.ContractSent" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.ContractPrinted" class="control-label"></label>

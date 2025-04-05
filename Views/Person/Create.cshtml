@@ -115,7 +115,10 @@
                 <select asp-for="Document.IssuingCountry" class="form-control" id="selectorIssuingCountry">
                     @foreach (var stato in ViewBag.Stati)
                     {
-                        <option value=@stato.Codice>@stato.Descrizione</option>
+                        @if (!stato.Codice.Equals("100000100"))
+                        {
+                            <option value=@stato.Codice>@stato.Descrizione</option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="Document.IssuingCountry" class="text-danger"></span>

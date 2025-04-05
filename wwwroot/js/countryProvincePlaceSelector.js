@@ -64,7 +64,12 @@ connection.start().then(function () {
             return console.error(err.toString());
         }).then(function () {
             let hbp = $("#hiddenBirthProvince").val();
-            $("#provinceSelector option[value='" + hbp + "']").prop("selected", true);
+            if(hbp == undefined || hbp == "" || hbp == null){
+                $("#provinceSelector option[value='AG']").prop("selected", true);
+
+            }else{
+                $("#provinceSelector option[value='" + hbp + "']").prop("selected", true);
+            }
         })
 
         // If not yet selected default to the first in db AG (Agrigento)
@@ -78,8 +83,12 @@ connection.start().then(function () {
             return console.error(err.toString());
         }).then(function () {
             let hbp = $("#hiddenBirthPlace").val();
-            $("#placeSelector option[value='" + hbp + "']").prop("selected", true);
-
+            if(hbp == undefined || hbp == "" || hbp == null){
+                // Default to Agrigento
+                $("#placeSelector option[value='419084001']").prop("selected", true);
+            }else{
+                $("#placeSelector option[value='" + hbp + "']").prop("selected", true);
+            }
         })
     }
 }).catch(function (err) {

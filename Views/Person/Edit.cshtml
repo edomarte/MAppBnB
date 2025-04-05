@@ -107,7 +107,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Document.SerialNumber" class="control-label"></label>
-                <input asp-for="Document.SerialNumber" class="form-control" id="serNumInput"/>
+                <input asp-for="Document.SerialNumber" class="form-control" id="serNumInput" />
                 <span asp-validation-for="Document.SerialNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -115,14 +115,17 @@
                 <select asp-for="Document.IssuingCountry" class="form-control" id="selectorIssuingCountry">
                     @foreach (var stato in ViewBag.Stati)
                     {
-                        <option value=@stato.Codice>@stato.Descrizione</option>
+                        @if (!stato.Codice.Equals("100000100"))
+                        {
+                            <option value=@stato.Codice>@stato.Descrizione</option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="Document.IssuingCountry" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PdfCopyPath" class="control-label"></label>
-                <input type="file" accept="application/pdf" asp-for="PdfCopyPath" class="form-control" id="pdfInput"/>
+                <input type="file" accept="application/pdf" asp-for="PdfCopyPath" class="form-control" id="pdfInput" />
                 <span asp-validation-for="PdfCopyPath" class="text-danger"></span>
             </div>
             <div class="form-group">

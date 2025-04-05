@@ -26,13 +26,13 @@
                 @Html.DisplayNameFor(model => model.Person.BirthDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Person.BirthPlace)
+                @Html.DisplayNameFor(model => model.BirthPlaceName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Person.BirthProvince)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Person.BirthCountry)
+                @Html.DisplayNameFor(model => model.BirthCountryName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Person.PhonePrefix)
@@ -44,7 +44,7 @@
                 @Html.DisplayNameFor(model => model.Person.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Person.RoleRelation)
+                @Html.DisplayNameFor(model => model.RoleName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Document.SerialNumber)
@@ -66,16 +66,16 @@
                     @Html.DisplayFor(modelItem => item.Person.BirthDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Person.Sex)
+                    @ViewBag.Sex
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Person.BirthPlace)
+                    @Html.DisplayFor(modelItem => item.BirthPlaceName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Person.BirthProvince)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Person.BirthCountry)
+                    @Html.DisplayFor(modelItem => item.BirthCountryName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Person.PhonePrefix)
@@ -87,7 +87,7 @@
                     @Html.DisplayFor(modelItem => item.Person.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Person.RoleRelation)
+                    @Html.DisplayFor(modelItem => item.RoleName)
                 </td>
                 <td>
                 <td>

@@ -25,8 +25,8 @@ connectionS.on("ResultList", function (persons) {
 connectionS.start().then(function () {
     document.getElementById("searchPersonButton").disabled = false;
     $("#isSent2Police").prop("disabled", true);
-    $("#isSent2Region").prop("disabled", true);
-    $("#isSent2Town").prop("disabled", true);
+    $("#isPreCheckinSent").prop("disabled", true);
+    $("#isContractSent").prop("disabled", true);
     $("#isContractPrinted").prop("disabled", true);
 
     if ($("#isPaidSelector").val() == "True") {
@@ -159,8 +159,8 @@ async function checkPersonRolesAreCorrect(event) {
 
 function enableBooleanPlaceholders() {
     $("#isSent2Police").prop("disabled", false);
-    $("#isSent2Region").prop("disabled", false);
-    $("#isSent2Town").prop("disabled", false);
+    $("#isPreCheckinSent").prop("disabled", false);
+    $("#isContractSent").prop("disabled", false);
     $("#isContractPrinted").prop("disabled", false);
 }
 

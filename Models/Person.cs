@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MAppBnB;
 
 public class Person
-{ 
+{
     public int id { get; set; }
 
     [Required]
@@ -32,13 +32,14 @@ public class Person
     [Display(Name = "Phone Number")]
     public string? PhoneNumber { get; set; }
     [DataType(DataType.EmailAddress)]
+    [Required]
     public string? Email { get; set; }
     [Required]
     [Display(Name = "Role/Relation")]
-    public int? RoleRelation { get; set; } 
+    public int? RoleRelation { get; set; }
     [Display(Name = "Document ID")]
     public int? DocumentID { get; set; }
     [Required]
-    public string? Citizenship{get;set;}
+    public string? Citizenship { get; set; }
 
 }

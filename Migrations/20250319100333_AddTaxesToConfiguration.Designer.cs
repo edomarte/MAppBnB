@@ -168,10 +168,10 @@ namespace MAppBnB.Migrations
                     b.Property<bool>("Sent2Police")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Sent2Region")
+                    b.Property<bool>("PreCheckinSent")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Sent2Town")
+                    b.Property<bool>("ContractSent")
                         .HasColumnType("bit");
 
                     b.HasKey("id");

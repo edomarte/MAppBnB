@@ -14,7 +14,7 @@ public class EmailTransmission
         + "Please see attached copy of the contract." + "<br>"
         + "Kind regards";
 
-        return SendEmail("edomarte@gmail.com", message, contractFile, "Contract Document", "Contract.pdf");
+        return SendEmail("edomarte@gmail.com", message, contractFile, "Contract Document", "Contract");
     }
 
     public static string SendPreCheckIn(Booking booking, Person mainPerson, string accommodationName, string roomName, byte[] contractFile)
@@ -24,7 +24,7 @@ public class EmailTransmission
         + "Please see attached copy of the pre-checkin information." + "<br>"
         + "Kind regards";
 
-        return SendEmail("edomarte@gmail.com", message, contractFile, "Pre-CheckIn Document", "Pre-CheckIn.pdf");
+        return SendEmail("edomarte@gmail.com", message, contractFile, "Pre-Checkin Document", "Pre-Checkin");
     }
 
     private static string SendEmail(string emailRecipient, string emailContent, byte[] attachmentBase64, string subject, string attachmentName)
@@ -48,7 +48,7 @@ public class EmailTransmission
             htmlContent: "<html><body>" + emailContent + "</body></html>",
             attachment: new List<SendSmtpEmailAttachment>{
                 new SendSmtpEmailAttachment(content: attachmentBase64,
-                name: attachmentName
+                name: attachmentName+".pdf"
             )}
 
         );
@@ -57,7 +57,7 @@ public class EmailTransmission
         {
             var result = apiInstance.SendTransacEmail(sendSmtpEmail);
             string temp = result.ToString();
-            return "Email sent correctly.";
+            return attachmentName +" sent correctly.";
         }
         catch (Exception e)
         {

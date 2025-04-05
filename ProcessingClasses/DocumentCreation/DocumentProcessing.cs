@@ -228,8 +228,8 @@ public class DocumentProcessing
             }
         }
         dr["Sent2Police"] = booking.Sent2Police;
-        dr["Sent2Region"] = booking.Sent2Region;
-        dr["Sent2Town"] = booking.Sent2Town;
+        dr["PreCheckinSent"] = booking.PreCheckinSent;
+        dr["ContractSent"] = booking.ContractSent;
         dr["ContractPrinted"] = booking.ContractPrinted;
 
         bookingDetailsDt.Rows.Add(dr);
@@ -257,8 +257,8 @@ public class DocumentProcessing
         bookingDetailsDt.Columns.Add("Guest3");
         bookingDetailsDt.Columns.Add("Guest4");
         bookingDetailsDt.Columns.Add("Sent2Police");
-        bookingDetailsDt.Columns.Add("Sent2Region");
-        bookingDetailsDt.Columns.Add("Sent2Town");
+        bookingDetailsDt.Columns.Add("PreCheckinSent");
+        bookingDetailsDt.Columns.Add("ContractSent");
         bookingDetailsDt.Columns.Add("ContractPrinted");
     }
 

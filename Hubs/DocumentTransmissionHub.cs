@@ -65,17 +65,23 @@ namespace SignalRChat.Hubs
             var details = _context.Accommodation.Find(accommodationID);
             return details;
         }
-        
+
         private async Task updateIsContractSentAsync(Booking booking)
         {
-            booking.Sent2Town = true;
+            booking.ContractSent = true;
             _context.Update(booking);
             await _context.SaveChangesAsync();
         }
 
-        private async Task updateIsSentToPoliceRegionAsync(Booking booking)
+        private async Task updateIsPreCheckinSentAsync(Booking booking)
         {
-            booking.Sent2Region = true;
+            booking.PreCheckinSent = true;
+            _context.Update(booking);
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task updateIsSentToPoliceAsync(Booking booking)
+        {
             booking.Sent2Police = true;
 
             _context.Update(booking);
@@ -124,7 +130,7 @@ namespace SignalRChat.Hubs
                 {
                     byte[] contractFile = await File.ReadAllBytesAsync(contractPath);
                     string transmissionResult = EmailTransmission.SendPreCheckIn(booking, mainPerson, GetAccommodation(booking.AccommodationID).Name, GetRoom(booking.RoomID).Name, contractFile);
-                    await updateIsContractSentAsync(booking);
+                    await updateIsPreCheckinSentAsync(booking);
                     await Clients.All.SendAsync("TransmissionResult", transmissionResult);
                 }
                 catch (Exception e)
@@ -145,7 +151,7 @@ namespace SignalRChat.Hubs
             try
             {
                 string transmissionResult = SOAPTransmission.SendDocsToRegionPolice(booking, persons, GetDocumentDetails(persons.First()), GetConfiguration(), GetAWIDAppartamento(booking.AccommodationID));
-                await updateIsSentToPoliceRegionAsync(booking);
+                await updateIsSentToPoliceAsync(booking);
                 await Clients.All.SendAsync("TransmissionResult", transmissionResult);
             }
             catch (Exception e)

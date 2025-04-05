@@ -42,10 +42,10 @@ public class Booking
     public bool? Sent2Police { get; set; }
     [DataType(DataType.Text)]
     [Required]
-    public bool? Sent2Region { get; set; }
+    public bool? ContractSent { get; set; }
     [DataType(DataType.Text)]
     [Required]
-    public bool? Sent2Town { get; set; }
+    public bool? PreCheckinSent { get; set; }
     [DataType(DataType.Text)]
     [Required]
     public bool? ContractPrinted { get; set; }

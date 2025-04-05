@@ -139,7 +139,8 @@ namespace SignalRChat.Hubs //TODO: Change namespace
                 {
                     throw new Exception("Host not set in configuration!");
                 }
-                Person host = getBirthPlaceDescription(GetPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString()));
+                //Person host = getBirthPlaceDescription(GetPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString()));
+                Person host = GetPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString());
                 Accommodation accommodation = GetAccommodationDetails(accommodationID);
                 Booking booking = GetBookingDetails(bookingId);
                 string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, booking, host, GetDocumentDetails(host));
