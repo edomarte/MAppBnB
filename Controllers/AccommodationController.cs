@@ -46,6 +46,11 @@ namespace MAppBnB.Controllers
         // GET: Accommodation/Create
         public IActionResult Create()
         {
+            if(_context.Configuration.FirstOrDefault()!=null)
+                ViewBag.IsGestioneAppartamenti=_context.Configuration.FirstOrDefault().IsGestioneAppartamenti;
+            else
+                ViewBag.IsGestioneAppartamenti=false;
+                
             return View();
         }
 
@@ -62,6 +67,8 @@ namespace MAppBnB.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            // Check if the host has multiple apartments -> is gestione appartamenti for the police webservice.
+            ViewBag.IsGestioneAppartamenti=_context.Configuration.FirstOrDefault().IsGestioneAppartamenti;
             return View(accommodation);
         }
 
@@ -78,6 +85,12 @@ namespace MAppBnB.Controllers
             {
                 return NotFound();
             }
+
+            if(_context.Configuration.FirstOrDefault()!=null)
+                ViewBag.IsGestioneAppartamenti=_context.Configuration.FirstOrDefault().IsGestioneAppartamenti;
+            else
+                ViewBag.IsGestioneAppartamenti=false;
+
             return View(accommodation);
         }
 

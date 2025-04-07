@@ -77,6 +77,8 @@ namespace MAppBnB.Controllers
                 PersonIDs = ""
             };
 
+            viewModel.Booking.Discount=0;
+
             ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
             ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
             ViewBag.RoomAlreadyBooked = false;

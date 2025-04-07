@@ -31,7 +31,8 @@ namespace MAppBnB.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("AWIDAppartamento")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -145,6 +146,9 @@ namespace MAppBnB.Migrations
                     b.Property<bool>("ContractPrinted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("ContractSent")
+                        .HasColumnType("bit");
+
                     b.Property<decimal>("Discount")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
@@ -152,8 +156,11 @@ namespace MAppBnB.Migrations
                     b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
 
-                    b.Property<DateOnly>("PaymentDate")
+                    b.Property<DateOnly?>("PaymentDate")
                         .HasColumnType("date");
+
+                    b.Property<bool>("PreCheckinSent")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
@@ -163,12 +170,6 @@ namespace MAppBnB.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Sent2Police")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("PreCheckinSent")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ContractSent")
                         .HasColumnType("bit");
 
                     b.HasKey("id");
@@ -204,18 +205,21 @@ namespace MAppBnB.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("DocumentType")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IssuingCountry")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PdfCopy")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int?>("PersonID")
+                    b.Property<int>("PersonID")
                         .HasColumnType("int");
 
                     b.Property<string>("SerialNumber")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -320,8 +324,11 @@ namespace MAppBnB.Migrations
 
             modelBuilder.Entity("MAppBnB.Models.TipoAlloggiato", b =>
                 {
-                    b.Property<string>("Codice")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Codice")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Codice"));
 
                     b.Property<string>("Descrizione")
                         .HasColumnType("nvarchar(max)");
@@ -353,18 +360,15 @@ namespace MAppBnB.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("BirthCountry")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("BirthDate")
+                    b.Property<DateOnly?>("BirthDate")
                         .HasColumnType("date");
 
                     b.Property<string>("BirthPlace")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BirthProvince")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Citizenship")
@@ -375,11 +379,13 @@ namespace MAppBnB.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -387,16 +393,16 @@ namespace MAppBnB.Migrations
                     b.Property<string>("PhonePrefix")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleRelation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("RoleRelation")
+                        .HasColumnType("int");
 
                     b.Property<int?>("Sex")
                         .HasColumnType("int");
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("id");
 

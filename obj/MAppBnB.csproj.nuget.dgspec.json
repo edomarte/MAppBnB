@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\edoma\\Documents\\MAppBnB_All\\MAppBnB\\MAppBnB\\MAppBnB.csproj": {}
+    "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj": {}
   },
   "projects": {
-    "c:\\Users\\edoma\\Documents\\MAppBnB_All\\MAppBnB\\MAppBnB\\MAppBnB.csproj": {
+    "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\edoma\\Documents\\MAppBnB_All\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
+        "projectUniqueName": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
         "projectName": "MAppBnB",
-        "projectPath": "c:\\Users\\edoma\\Documents\\MAppBnB_All\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
+        "projectPath": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\MAppBnB.csproj",
         "packagesPath": "C:\\Users\\edoma\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\edoma\\Documents\\MAppBnB_All\\MAppBnB\\MAppBnB\\obj\\",
+        "outputPath": "c:\\Users\\edoma\\OneDrive\\Desktop\\MAppBnB_\\MAppBnB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\edoma\\AppData\\Roaming\\NuGet\\NuGet.Config"

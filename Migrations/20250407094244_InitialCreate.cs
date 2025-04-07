@@ -32,7 +32,8 @@ namespace MAppBnB.Migrations
                     CIN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CIR = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CleaningFee = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    TownFee = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
+                    TownFee = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    AWIDAppartamento = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,7 +63,7 @@ namespace MAppBnB.Migrations
                     BookingDate = table.Column<DateOnly>(type: "date", nullable: false),
                     CheckinDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CheckOutDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PaymentDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    PaymentDate = table.Column<DateOnly>(type: "date", nullable: true),
                     IsPaid = table.Column<bool>(type: "bit", nullable: false),
                     ChannelID = table.Column<int>(type: "int", nullable: false),
                     AccommodationID = table.Column<int>(type: "int", nullable: false),
@@ -70,8 +71,8 @@ namespace MAppBnB.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Sent2Police = table.Column<bool>(type: "bit", nullable: false),
-                    PreCheckinSent = table.Column<bool>(type: "bit", nullable: false),
                     ContractSent = table.Column<bool>(type: "bit", nullable: false),
+                    PreCheckinSent = table.Column<bool>(type: "bit", nullable: false),
                     ContractPrinted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -94,18 +95,52 @@ namespace MAppBnB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comuni",
+                columns: table => new
+                {
+                    Codice = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Provincia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataFineVal = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comuni", x => x.Codice);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Configuration",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PersonID = table.Column<int>(type: "int", nullable: true),
+                    DocumentID = table.Column<int>(type: "int", nullable: true),
+                    IVAVendite = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IVACommissioni = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CommissioneBancaria = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CedolareSecca = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AlloggiatiWebUsername = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AlloggiatiWebPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AlloggiatiWebWSKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsGestioneAppartamenti = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Configuration", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Document",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DocumentType = table.Column<int>(type: "int", nullable: true),
-                    SerialNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    IssuedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IssuedDate = table.Column<DateOnly>(type: "date", nullable: true),
-                    IssuingCountry = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DocumentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SerialNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    IssuingCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PdfCopy = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    PersonID = table.Column<int>(type: "int", nullable: true)
+                    PersonID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,21 +153,35 @@ namespace MAppBnB.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthProvince = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    BirthDate = table.Column<DateOnly>(type: "date", nullable: true),
+                    Sex = table.Column<int>(type: "int", nullable: true),
+                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthProvince = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthCountry = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhonePrefix = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoleRelation = table.Column<int>(type: "int", nullable: false),
-                    DocumentID = table.Column<int>(type: "int", nullable: true)
+                    DocumentID = table.Column<int>(type: "int", nullable: true),
+                    Citizenship = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Person", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Province",
+                columns: table => new
+                {
+                    Codice = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Province", x => x.Codice);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,6 +198,45 @@ namespace MAppBnB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Room", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stati",
+                columns: table => new
+                {
+                    Codice = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Provincia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataFineVal = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stati", x => x.Codice);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TipoAlloggiato",
+                columns: table => new
+                {
+                    Codice = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoAlloggiato", x => x.Codice);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TipoDocumento",
+                columns: table => new
+                {
+                    Codice = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoDocumento", x => x.Codice);
                 });
         }
 
@@ -168,13 +256,31 @@ namespace MAppBnB.Migrations
                 name: "BookingPerson");
 
             migrationBuilder.DropTable(
+                name: "Comuni");
+
+            migrationBuilder.DropTable(
+                name: "Configuration");
+
+            migrationBuilder.DropTable(
                 name: "Document");
 
             migrationBuilder.DropTable(
                 name: "Person");
 
             migrationBuilder.DropTable(
+                name: "Province");
+
+            migrationBuilder.DropTable(
                 name: "Room");
+
+            migrationBuilder.DropTable(
+                name: "Stati");
+
+            migrationBuilder.DropTable(
+                name: "TipoAlloggiato");
+
+            migrationBuilder.DropTable(
+                name: "TipoDocumento");
         }
     }
 }

@@ -33,7 +33,7 @@ namespace MAppBnB.Controllers
                                 Person = p,  // Booking properties
                                 Document = d
                             })
-                            .ToList();
+                            .ToList().Where(x=> x.Person.RoleRelation != 99).ToList(); // Host is not shown in the list.
 
             var personList=await getFieldsNamesAsync(query);
             return View(personList);

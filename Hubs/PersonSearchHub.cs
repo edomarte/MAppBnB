@@ -27,6 +27,9 @@ namespace SignalRChat.Hubs
             var excluded = persons.Where(p => personsInBookingInt.Contains(p.id));
             var personsL = persons.ToList();
             var excludedL = excluded.ToList();
+            // The host must not be searchable for adding it into a booking.
+            var host= _context.Person.FirstOrDefault(x=>x.RoleRelation==99);
+            excludedL.Add(host);
             personsL = personsL.Except(excludedL, new PersonComparer()).ToList();
 
             await Clients.All.SendAsync("ResultList", createPersonRoleNamesList(personsL));
