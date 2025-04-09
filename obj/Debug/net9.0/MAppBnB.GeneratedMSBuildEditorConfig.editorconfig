@@ -17,189 +17,189 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MAppBnB
 build_property.RootNamespace = MAppBnB
-build_property.ProjectDir = c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB\
+build_property.ProjectDir = C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\edoma\OneDrive\Desktop\MAppBnB_\MAppBnB
+build_property.MSBuildProjectDirectory = C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Accommodation/Create.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Accommodation/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb21tb2RhdGlvblxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Accommodation/Delete.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Accommodation/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb21tb2RhdGlvblxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Accommodation/Details.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Accommodation/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb21tb2RhdGlvblxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Accommodation/Edit.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Accommodation/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb21tb2RhdGlvblxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Accommodation/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Accommodation/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb21tb2RhdGlvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookChannel/Create.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookChannel/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0NoYW5uZWxcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookChannel/Delete.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookChannel/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0NoYW5uZWxcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookChannel/Details.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookChannel/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0NoYW5uZWxcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookChannel/Edit.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookChannel/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0NoYW5uZWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookChannel/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookChannel/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0NoYW5uZWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookingPerson/Create.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookingPerson/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1BlcnNvblxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookingPerson/Delete.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookingPerson/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1BlcnNvblxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookingPerson/Details.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookingPerson/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1BlcnNvblxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookingPerson/Edit.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookingPerson/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1BlcnNvblxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/BookingPerson/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/BookingPerson/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1BlcnNvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Booking/Create.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Booking/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Booking/Delete.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Booking/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Booking/Details.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Booking/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Booking/Edit.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Booking/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Booking/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Booking/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Configuration/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Configuration/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Document/Create.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Document/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Document/Delete.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Document/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Document/Details.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Document/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Document/Edit.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Document/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Document/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Document/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/FinancialReports/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/FinancialReports/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmluYW5jaWFsUmVwb3J0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Home/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Home/Privacy.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Person/Create.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Person/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Person/Delete.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Person/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Person/Details.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Person/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Person/Edit.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Person/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Person/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Person/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Room/Create.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Room/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Room/Delete.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Room/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Room/Details.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Room/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Room/Edit.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Room/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Room/Index.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Room/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Shared/Error.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/_ViewImports.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/_ViewStart.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/edoma/OneDrive/Desktop/MAppBnB_/MAppBnB/Views/Shared/_Layout.cshtml]
+[C:/Users/edoma/Documents/MAppBnB_All/MAppBnB/MAppBnB/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-4vvma0xm66

@@ -22,13 +22,13 @@ namespace SignalRChat.Hubs
 
         public async Task GetTowns(string province)
         {
-            var towns = _context.Comuni.Where(x => x.Provincia.Equals(province)).ToList();
+            var towns = _context.Comuni.Where(x => x.Provincia.Equals(province)).OrderBy(x=>x.Descrizione).ToList();
             await Clients.All.SendAsync("TownsList", towns);
         }
 
         public async Task GetAllTowns()
         {
-            var towns = _context.Comuni.ToList();
+            var towns = _context.Comuni.OrderBy(x=>x.Descrizione).ToList();
             await Clients.All.SendAsync("AllTownsList", towns);
         }
 

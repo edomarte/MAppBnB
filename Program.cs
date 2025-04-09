@@ -3,6 +3,7 @@ using MAppBnB.Data;
 using SignalRChat.Hubs;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MappBnBContext>(options =>
@@ -13,6 +14,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
+// Make keys persistent to work on different Docker containers
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo("/var/dpkeys"))
+    .SetApplicationName("MAppBnB");
 
 // Imposta la cultura globale come InvariantCulture
 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;

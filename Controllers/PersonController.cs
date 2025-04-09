@@ -25,29 +25,41 @@ namespace MAppBnB.Controllers
         public async Task<IActionResult> Index()
         {
             var query = _context.Person
-                        .Join(_context.Document,
+                        .GroupJoin(
+                            _context.Document,
                             p => p.DocumentID,
                             d => d.id,
-                            (p, d) => new PersonDocumentViewModel
+                            (p, docs) => new { Person = p, Documents = docs.DefaultIfEmpty() }
+                        )
+                        .SelectMany(
+                            x => x.Documents,
+                            (x, d) => new PersonDocumentViewModel
                             {
-                                Person = p,  // Booking properties
+                                Person = x.Person,
                                 Document = d
-                            })
-                            .ToList().Where(x=> x.Person.RoleRelation != 99).ToList(); // Host is not shown in the list.
+                            }
+                        )
+                        .Where(x => x.Person.RoleRelation != 99)
+                        .ToList();
 
-            var personList=await getFieldsNamesAsync(query);
+
+            var personList = await getFieldsNamesAsync(query);
             return View(personList);
         }
 
         private async Task<List<PersonDocumentViewModel>> getFieldsNamesAsync(List<PersonDocumentViewModel> query)
         {
-            foreach(PersonDocumentViewModel pdv in query){
-                pdv.BirthCountryName= _context.Stati.Find(pdv.Person.BirthCountry).Descrizione;
-                pdv.RoleName= _context.TipoAlloggiato.Find(pdv.Person.RoleRelation).Descrizione;
-                if(pdv.BirthCountryName.Equals("ITALIA")){
-                    pdv.BirthPlaceName= _context.Comuni.Find(pdv.Person.BirthPlace).Descrizione;
-                }else{
-                    pdv.BirthPlaceName= pdv.Person.BirthPlace;
+            foreach (PersonDocumentViewModel pdv in query)
+            {
+                pdv.BirthCountryName = _context.Stati.Find(pdv.Person.BirthCountry).Descrizione;
+                pdv.RoleName = _context.TipoAlloggiato.Find(pdv.Person.RoleRelation).Descrizione;
+                if (pdv.BirthCountryName.Equals("ITALIA"))
+                {
+                    pdv.BirthPlaceName = _context.Comuni.Find(pdv.Person.BirthPlace).Descrizione;
+                }
+                else
+                {
+                    pdv.BirthPlaceName = pdv.Person.BirthPlace;
                 }
 
             }
@@ -97,16 +109,22 @@ namespace MAppBnB.Controllers
             if (birthCountry.Equals("ITALIA"))
             {
                 ViewBag.BirthPlace = _context.Comuni.FindAsync(person.BirthPlace).Result.Descrizione ?? "";
-                ViewBag.IssuingCountry = _context.Comuni.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
-
             }
             else
             {
                 ViewBag.BirthPlace = person.BirthPlace;
+            }
+
+            if (document.IssuingCountry.ElementAt(0).Equals("4"))
+            { // All Towns id starts with 4.
+                ViewBag.IssuingCountry = _context.Comuni.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
+            }
+            else
+            {
                 ViewBag.IssuingCountry = _context.Stati.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
             }
 
-            ViewBag.Sex=Enum.GetName(typeof(Sex),person.Sex) ?? "";
+            ViewBag.Sex = Enum.GetName(typeof(Sex), person.Sex) ?? "";
             return viewModel;
         }
 
@@ -204,23 +222,38 @@ namespace MAppBnB.Controllers
             {
                 try
                 {
-                    if (model.Document.SerialNumber != null)
-                        addPdfToDbAsync(model);
-                    if (model.Document.id == null)
+                    if (model.Document != null)
                     {
-                        model.Document.PersonID = model.Person.id;
-                        _context.Add(model.Document);
+                        if (model.Person.RoleRelation == 19 || model.Person.RoleRelation == 20) // Secondary guest (FAMILIARE, MEMBRO GRUPPO)
+                        {
+                            model.Person.DocumentID = null;
+                            _context.Remove(model.Document);
+                            await _context.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            if (model.Document.SerialNumber != null)
+                                addPdfToDbAsync(model); 
+                            else{
+                                //TODO: send warning if serial is null and pdf is not null. ModelState?
+                            }
+                            if (model.Document.id == null)
+                            {
+                                model.Document.PersonID = model.Person.id;
+                                _context.Add(model.Document);
+                                await _context.SaveChangesAsync();
+                                var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
+                                model.Person.DocumentID = document.id;
+                            }
+                            else
+                            {
+                                _context.Update(model.Document);
+                                await _context.SaveChangesAsync();
+                            }
+                        }
+                        _context.Update(model.Person);
                         await _context.SaveChangesAsync();
-                        var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
-                        model.Person.DocumentID = document.id;
                     }
-                    else
-                    {
-                        _context.Update(model.Document);
-                        await _context.SaveChangesAsync();
-                    }
-                    _context.Update(model.Person);
-                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -245,7 +278,7 @@ namespace MAppBnB.Controllers
         // GET: Person/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-           PersonDocumentViewModel viewModel = await showIndividualPersonAsync(id);
+            PersonDocumentViewModel viewModel = await showIndividualPersonAsync(id);
 
             if (viewModel == null)
             {

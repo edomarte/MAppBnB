@@ -31,9 +31,9 @@ namespace MAppBnB.Controllers
                             bc => bc.id,
                             (bar, bc) => new BookingAccommodationRoomChannelViewModel
                             {
-                                Booking=bar.b,  // Booking properties
-                                AccommodationName=bar.AccommodationName,
-                                RoomName=bar.RoomName,
+                                Booking = bar.b,  // Booking properties
+                                AccommodationName = bar.AccommodationName,
+                                RoomName = bar.RoomName,
                                 BookChannelName = bc.Name
                             })
                             .ToList();
@@ -77,7 +77,7 @@ namespace MAppBnB.Controllers
                 PersonIDs = ""
             };
 
-            viewModel.Booking.Discount=0;
+            viewModel.Booking.Discount = 0;
 
             ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
             ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
@@ -128,7 +128,7 @@ namespace MAppBnB.Controllers
             }
             else
             {
-                model.PeopleInBooking = addPersonsToPeopleInBookingAsync(model, model.PersonIDs.Split(",")).Result;
+                model.PeopleInBooking = addPersonsToPeopleInBookingAsync(model.PersonIDs.Split(",")).Result;
             }
             ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
             ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
@@ -152,11 +152,13 @@ namespace MAppBnB.Controllers
             };
 
             viewModel.Booking = await _context.Booking.FirstOrDefaultAsync(x => x.id == id);
+
             var bookingPersons = await _context.BookingPerson.Where(x => x.BookingID == id).ToListAsync();
             foreach (var bookingPerson in bookingPersons)
             {
                 var person = await _context.Person.FirstOrDefaultAsync(x => x.id == bookingPerson.PersonID);
                 viewModel.PeopleInBooking.Add(new PersonRoleNames() { Person = person, RoleName = _context.TipoAlloggiato.FirstOrDefault(x => x.Codice == person.RoleRelation).Descrizione });
+                viewModel.PersonIDs += bookingPerson.PersonID + ",";
             }
 
             if (viewModel == null)
@@ -168,6 +170,8 @@ namespace MAppBnB.Controllers
             ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
             return View(viewModel);
         }
+
+
 
         // POST: Booking/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -189,7 +193,6 @@ namespace MAppBnB.Controllers
                     await _context.SaveChangesAsync();
 
                     var bpInList = addPersonsToPeopleInBooking(model.Booking.id, model.PersonIDs.Split(","));
-
                     var allPersonInBooking = _context.BookingPerson.Where(x => x.BookingID == id).ToList();
                     var bp2beDeleted = allPersonInBooking.Except(bpInList, new BookingPersonComparer()).ToList();
                     _context.BookingPerson.RemoveRange(bp2beDeleted);
@@ -208,10 +211,9 @@ namespace MAppBnB.Controllers
                     }
                 }
             }
-            else
-            {
-                model.PeopleInBooking = addPersonsToPeopleInBookingAsync(model, model.PersonIDs.Split(",")).Result;
-            }
+
+            model.PeopleInBooking = addPersonsToPeopleInBookingAsync(model.PersonIDs.Split(",")).Result;
+
             ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
             ViewBag.ChannelList = await _context.BookChannel.ToListAsync();
             ViewBag.RoomAlreadyBooked = false;
@@ -238,7 +240,7 @@ namespace MAppBnB.Controllers
                 .Where(p => peopleOnBooking.Select(b => b.PersonID).Contains(p.id))
                 .ToListAsync();
             ViewBag.PeopleOnBooking = detailsPeopleOnBooking;
-            
+
             ViewBag.ChannelName = _context.BookChannel.Find(booking.ChannelID).Name;
             ViewBag.AccommodationName = _context.Accommodation.Find(booking.AccommodationID).Name;
             ViewBag.RoomName = _context.Room.Find(booking.RoomID).Name;
@@ -291,7 +293,7 @@ namespace MAppBnB.Controllers
             return bpInList;
         }
 
-        private async Task<List<PersonRoleNames>> addPersonsToPeopleInBookingAsync(PersonBookingViewModel model, string[] personIDs)
+        private async Task<List<PersonRoleNames>> addPersonsToPeopleInBookingAsync(string[] personIDs)
         {
             List<PersonRoleNames> lpib = new List<PersonRoleNames>();
             foreach (string person in personIDs)

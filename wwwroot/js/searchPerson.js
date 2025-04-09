@@ -135,16 +135,16 @@ async function checkPersonRolesAreCorrect(event) {
     }
 
     if (mainPersonCount != 1) {
-        $("#personsErrorAlert").text("Select just one main person")
+        $("#personsErrorAlert").text("Select just one OSPITE SINGOLO")
     } else {
         if (mainPersonRole == "16" && (familyMemberCount + groupComponentCount > 0)) {
-            $("#personsErrorAlert").text("A booking with a single guest cannot contain any other person.")
+            $("#personsErrorAlert").text("A booking with a OSPITE SINGOLO cannot contain any other person.")
         } else {
             if (mainPersonRole == "17" && ((familyMemberCount == 0) || (groupComponentCount > 0))) {
-                $("#personsErrorAlert").text("A booking with a family head must only contain one or more family members.")
+                $("#personsErrorAlert").text("A booking with a CAPOFAMIGLIA must only contain one or more FAMILIARE.")
             } else {
                 if (mainPersonRole == "18" && ((familyMemberCount > 0) || (groupComponentCount == 0))) {
-                    $("#personsErrorAlert").text("A booking with a group head must only contain one or more group members.")
+                    $("#personsErrorAlert").text("A booking with a CAPOGRUPPO must only contain one or more MEMBRO GRUPPO.")
                 } else {
                     isPersonSelectionValid = true;
                     return isPersonSelectionValid;

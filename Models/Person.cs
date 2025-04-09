@@ -32,7 +32,6 @@ public class Person
     [Display(Name = "Phone Number")]
     public string? PhoneNumber { get; set; }
     [DataType(DataType.EmailAddress)]
-    [Required]
     public string? Email { get; set; }
     [Required]
     [Display(Name = "Role/Relation")]
