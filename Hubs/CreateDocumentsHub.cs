@@ -101,7 +101,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         public Configuration GetConfiguration()
         {
-            var configurations = _context.Configuration.Find(1); // only one configuration exist
+            var configurations = _context.Configuration.FirstOrDefault(); // only one configuration exist
             return configurations;
         }
         public BookChannel GetChannelDetails(int? channelId)

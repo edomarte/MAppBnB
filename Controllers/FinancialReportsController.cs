@@ -34,11 +34,34 @@ namespace MAppBnB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(FinancialReportsDetailsViewModel fr)
         {
-            if (!_context.Accommodation.IsNullOrEmpty())
+            if (_context.Accommodation.IsNullOrEmpty())
+            {
+                ModelState.AddModelError("", "No accommodation found. Please add accommodation first.");
+                return View(new FinancialReportsDetailsViewModel()); //TODO: to test
+            }
+            else
             {
                 ViewBag.AccommodationList = await _context.Accommodation.ToListAsync();
-
             }
+
+            if (!fr.DateFrom.HasValue)
+            {
+                ModelState.AddModelError("DateFrom", "Date From must have a value.");
+                return View(new FinancialReportsDetailsViewModel());
+            }
+
+            if (!fr.DateTo.HasValue)
+            {
+                ModelState.AddModelError("DateTo", "Date To must have a value.");
+                return View(new FinancialReportsDetailsViewModel());
+            }
+
+            if (fr.DateFrom.Value.Date > fr.DateTo.Value.Date)
+            {
+                ModelState.AddModelError("DateFrom", "Date From must be earlier than Date To.");
+                return View(new FinancialReportsDetailsViewModel());
+            }
+
 
             if (fr != null)
             {
@@ -71,11 +94,12 @@ namespace MAppBnB.Controllers
                              .ToList(); // Materialize the result
 
 
-                if (result == null)
+                if (result.Count == 0)
                 {
-                    return NotFound();
+                    ModelState.AddModelError("", "No bookings found for the selected accommodation and date range.");
+                    return View(new FinancialReportsDetailsViewModel());
                 }
-
+                
                 fr.FinancialsByChannels = new List<FinancialsByChannel>();
 
                 foreach (var chanl in result)

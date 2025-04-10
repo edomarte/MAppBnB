@@ -100,13 +100,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\reportCreation.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-7D2yQAatO8RbYbRy3brZag2QZWiLa2EaZFB4ekeodds="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1766"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u00227D2yQAatO8RbYbRy3brZag2QZWiLa2EaZFB4ekeodds=\u0022"},{"Name":"Last-Modified","Value":"Fri, 04 Apr 2025 16:16:45 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1766"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u00227D2yQAatO8RbYbRy3brZag2QZWiLa2EaZFB4ekeodds=\u0022"},{"Name":"Last-Modified","Value":"Thu, 10 Apr 2025 21:39:44 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/reportCreation.wf712g6qjx.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\reportCreation.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"wf712g6qjx"},{"Name":"integrity","Value":"sha256-7D2yQAatO8RbYbRy3brZag2QZWiLa2EaZFB4ekeodds="},{"Name":"label","Value":"_content/MAppBnB/js/reportCreation.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1766"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u00227D2yQAatO8RbYbRy3brZag2QZWiLa2EaZFB4ekeodds=\u0022"},{"Name":"Last-Modified","Value":"Fri, 04 Apr 2025 16:16:45 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1766"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u00227D2yQAatO8RbYbRy3brZag2QZWiLa2EaZFB4ekeodds=\u0022"},{"Name":"Last-Modified","Value":"Thu, 10 Apr 2025 21:39:44 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/searchPerson.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</AssetFile>

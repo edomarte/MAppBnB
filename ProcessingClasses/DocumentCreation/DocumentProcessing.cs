@@ -325,8 +325,8 @@ public class DocumentProcessing
         string fileName = accommodation.Name + "_" + channel.Name + "_" + dateFrom + "_" + dateTo;
         string reportPath = "..\\MAppBnB\\DocumentTemplates\\Report_" + fileName + ".xlsx";
 
-        File.Copy("..\\MAppBnB\\DocumentTemplates\\Report.xlsx", "..\\MAppBnB\\DocumentTemplates\\" + reportPath, true);
-        using (SpreadsheetDocument doc = SpreadsheetDocument.Open("..\\MAppBnB\\DocumentTemplates\\" + reportPath, true))
+        File.Copy("..\\MAppBnB\\DocumentTemplates\\Report.xlsx", reportPath, true);
+        using (SpreadsheetDocument doc = SpreadsheetDocument.Open(reportPath, true))
         {
 
             if (doc is null)
@@ -433,8 +433,7 @@ public class DocumentProcessing
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(netBeforeFixedTax - fixedTaxValue) },
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(0) },//Fattura costi TODO: add eventually
             new Cell() { DataType = CellValues.String, CellValue = new CellValue("ID Pagamento") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.PaymentDate.Value.ToString("dd-MM-yyyy")) }
-
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.PaymentDate.HasValue ? b.PaymentDate.Value.ToString("dd-MM-yyyy") : "N/A") } //Data pagamento
         );
         return row;
     }

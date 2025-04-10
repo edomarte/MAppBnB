@@ -2,13 +2,19 @@
 
 @{
     ViewData["Title"] = "Index";
-    var documents = ViewData["DocumentList"] as List<Document>;
 }
 
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
+</p>
+<p>
+    @if(TempData["Error"]!=null){
+        <div class="alert alert-danger" role="alert">
+            @TempData["Error"]
+        </div>
+    }
 </p>
 <table class="table">
     <thead>

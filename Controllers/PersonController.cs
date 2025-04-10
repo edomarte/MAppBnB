@@ -104,7 +104,6 @@ namespace MAppBnB.Controllers
             string birthCountry = _context.Stati.FindAsync(person.BirthCountry).Result.Descrizione ?? "";
             ViewBag.BirthCountry = birthCountry;
             ViewBag.BirthProvince = person.BirthProvince ?? "";
-            ViewBag.DocumentType = _context.TipoDocumento.FindAsync(document.DocumentType).Result.Descrizione ?? "";
             ViewBag.RoleRelation = _context.TipoAlloggiato.FindAsync(person.RoleRelation).Result.Descrizione ?? "";
             if (birthCountry.Equals("ITALIA"))
             {
@@ -115,14 +114,26 @@ namespace MAppBnB.Controllers
                 ViewBag.BirthPlace = person.BirthPlace;
             }
 
-            if (document.IssuingCountry.ElementAt(0).Equals("4"))
-            { // All Towns id starts with 4.
-                ViewBag.IssuingCountry = _context.Comuni.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
+            // If document is null, set default values for DocumentType and IssuingCountry.
+            if (document == null)
+            {
+                ViewBag.DocumentType = "";
+                ViewBag.IssuingCountry = "";
             }
             else
             {
-                ViewBag.IssuingCountry = _context.Stati.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
+                ViewBag.DocumentType = _context.TipoDocumento.FindAsync(document.DocumentType).Result.Descrizione ?? "";
+
+                if (document.IssuingCountry[0]=='4')
+                { // All Towns id starts with 4.
+                    ViewBag.IssuingCountry = _context.Comuni.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
+                }
+                else
+                {
+                    ViewBag.IssuingCountry = _context.Stati.FindAsync(document.IssuingCountry).Result.Descrizione ?? "";
+                }
             }
+
 
             ViewBag.Sex = Enum.GetName(typeof(Sex), person.Sex) ?? "";
             return viewModel;
@@ -155,11 +166,22 @@ namespace MAppBnB.Controllers
             {
                 if (model.Document != null)
                 {
-                    addPdfToDbAsync(model);
-                    _context.Add(model.Document);
-                    await _context.SaveChangesAsync();
-                    var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
-                    model.Person.DocumentID = document.id;
+                    if (model.Document.SerialNumber != null && model.Document.DocumentType != null && model.Document.IssuingCountry != null)
+                    {
+                        addPdfToDbAsync(model);
+                        _context.Add(model.Document);
+                        await _context.SaveChangesAsync();
+                        var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
+                        model.Person.DocumentID = document.id;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "All document fields are required.");
+                        ViewBag.Stati = _context.Stati.ToList();
+                        ViewBag.TipoAlloggiato = _context.TipoAlloggiato.ToList();
+                        ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
+                        return View(model);
+                    }
                 }
 
                 _context.Add(model.Person);
@@ -232,28 +254,39 @@ namespace MAppBnB.Controllers
                         }
                         else
                         {
-                            if (model.Document.SerialNumber != null)
-                                addPdfToDbAsync(model); 
-                            else{
-                                //TODO: send warning if serial is null and pdf is not null. ModelState?
-                            }
-                            if (model.Document.id == null)
+                            if (model.Document.SerialNumber != null && model.Document.DocumentType != null && model.Document.IssuingCountry != null)
                             {
-                                model.Document.PersonID = model.Person.id;
-                                _context.Add(model.Document);
-                                await _context.SaveChangesAsync();
-                                var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
-                                model.Person.DocumentID = document.id;
+                                addPdfToDbAsync(model);
+                                if (model.Document.id == null)
+                                {
+                                    model.Document.PersonID = model.Person.id;
+                                    _context.Add(model.Document);
+                                    await _context.SaveChangesAsync();
+                                    var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
+                                    model.Person.DocumentID = document.id;
+                                }
+                                else
+                                {
+                                    _context.Update(model.Document);
+                                    await _context.SaveChangesAsync();
+                                }
+
                             }
                             else
                             {
-                                _context.Update(model.Document);
-                                await _context.SaveChangesAsync();
+                                ModelState.AddModelError("", "All document fields are required.");
+                                ViewBag.Stati = _context.Stati.ToList();
+                                ViewBag.TipoAlloggiato = _context.TipoAlloggiato.ToList();
+                                ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
+                                return View(model);
                             }
+
                         }
-                        _context.Update(model.Person);
-                        await _context.SaveChangesAsync();
+
                     }
+                    // Update person even if document is null.
+                    _context.Update(model.Person);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -278,6 +311,14 @@ namespace MAppBnB.Controllers
         // GET: Person/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            bool isPersonInBooking=_context.BookingPerson.Any(x => x.PersonID == id);
+            Person person = await _context.Person.FindAsync(id);
+            if (isPersonInBooking)
+            {
+                TempData["Error"]=person.Name+" "+person.Surname+" is already in a booking. You cannot delete it.";
+                return RedirectToAction(nameof(Index));
+            }
+
             PersonDocumentViewModel viewModel = await showIndividualPersonAsync(id);
 
             if (viewModel == null)
