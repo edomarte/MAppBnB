@@ -53,7 +53,7 @@ public class DocumentProcessing
         contractDt.Columns.Add("HEmail");
     }
 
-    public static string GenerateContract(Person mainPerson, MAppBnB.Document document, Accommodation accommodation, Booking booking, Person host, MAppBnB.Document hostDocument)
+    public static string GenerateContract(PersonBirthPlace mainPerson, DocumentDocumentType document, Accommodation accommodation, Booking booking, Person host, DocumentDocumentType hostDocument)
     {
         DataRow dr = addRowToContractDt(mainPerson, document, accommodation, booking, host, hostDocument);
         string bookingId = booking.id.ToString();
@@ -88,23 +88,23 @@ public class DocumentProcessing
         return contractPath;
     }
 
-    private static DataRow addRowToContractDt(Person mainPerson, MAppBnB.Document document, Accommodation accommodation, Booking booking, Person host, MAppBnB.Document hostDocument)
+    private static DataRow addRowToContractDt(PersonBirthPlace mainPerson, DocumentDocumentType document, Accommodation accommodation, Booking booking, Person host, DocumentDocumentType hostDocument)
     {
         contractDt = new DataTable();
         addFieldstoContractDt();
         DataRow dr = contractDt.NewRow();
 
-        dr["Name"] = mainPerson.Name;
-        dr["Surname"] = mainPerson.Surname;
+        dr["Name"] = mainPerson.Person.Name;
+        dr["Surname"] = mainPerson.Person.Surname;
         dr["BirthPlace"] = mainPerson.BirthPlace;
-        dr["BirthProvince"] = mainPerson.BirthProvince;
-        dr["BirthDate"] = mainPerson.BirthDate;
+        dr["BirthProvince"] = mainPerson.Person.BirthProvince;
+        dr["BirthDate"] = mainPerson.Person.BirthDate;
         dr["DocumentType"] = document.DocumentType;
-        dr["SerialNumber"] = document.SerialNumber;
+        dr["SerialNumber"] = document.Document.SerialNumber;
         //dr["CodFisc"];
-        dr["PhonePrefix"] = mainPerson.PhonePrefix;
-        dr["PhoneNumber"] = mainPerson.PhoneNumber;
-        dr["Email"] = mainPerson.Email;
+        dr["PhonePrefix"] = mainPerson.Person.PhonePrefix;
+        dr["PhoneNumber"] = mainPerson.Person.PhoneNumber;
+        dr["Email"] = mainPerson.Person.Email;
         dr["Price"] = booking.Price - booking.Discount;
         //dr["PriceInLetters"];
         dr["PaymentDate"] = booking.PaymentDate;
@@ -121,7 +121,7 @@ public class DocumentProcessing
         dr["HBirthProvince"] = host.BirthProvince;
         dr["HBirthDate"] = host.BirthDate;
         dr["HDocType"] = hostDocument.DocumentType;
-        dr["HDocSerialNum"] = hostDocument.SerialNumber;
+        dr["HDocSerialNum"] = hostDocument.Document.SerialNumber;
         //dr["HCodFisc"];
         dr["HPhonePrefix"] = host.PhonePrefix;
         dr["HPhoneNumber"] = host.PhoneNumber;
@@ -325,15 +325,13 @@ public class DocumentProcessing
     public static string GenerateExcelFinancialReport(List<FinancialReportLine> frlines, BookChannel channel, Accommodation accommodation, string dateFrom, string dateTo, Configuration configuration)
     {
         string fileName = "";
+        // If channel is null, set it to the All Channels.
         if (channel is null)
         {
-            fileName = accommodation.Name + "_AllChannels_" + dateFrom + "_" + dateTo;
+            channel = new BookChannel(){id=-1, Name="All_Channels"};
+        }
 
-        }
-        else
-        {
-            fileName = accommodation.Name + "_" + channel.Name + "_" + dateFrom + "_" + dateTo;
-        }
+        fileName = accommodation.Name + "_" + channel.Name + "_" + dateFrom + "_" + dateTo;
 
         string reportPath = "..\\MAppBnB\\DocumentTemplates\\Report_" + fileName + ".xlsx";
 
@@ -361,7 +359,7 @@ public class DocumentProcessing
                     foreach (FinancialReportLine line in frlines)
                     {
 
-                        sheetData.Append(addCellsToRow(firstRow, line.Booking, line.GuestCount, line.MainPerson, line.Room, accommodation));
+                        sheetData.Append(addCellsToRow(firstRow, line.Booking, line.GuestCount, line.MainPerson, line.Room, line.Channel, accommodation,configuration));
                     }
 
                     sheetData.Append(addLastSumCellsToRow(3 + frlines.Count - 1)); // skip the header (3 rows) and select only the data rows*/
@@ -389,9 +387,9 @@ public class DocumentProcessing
         // Update cell values with null checks and explicit data types
         updateCellValue("A1", channel.Name, CellValues.String);
         updateCellValue("B1", accommodation.Name, CellValues.String);
-        updateCellValue("O1", accommodation.TownFee.Value.ToString(), CellValues.Number);
+        updateCellValue("O1", accommodation.TownFee.HasValue?accommodation.TownFee.Value.ToString():"0", CellValues.Number);
         updateCellValue("Q1", configuration.IVAVendite.ToString(), CellValues.Number);
-        updateCellValue("R1", channel.Fee.Value.ToString(), CellValues.Number);
+        updateCellValue("R1", channel.Fee.ToString(), CellValues.Number);
         updateCellValue("S1", configuration.CommissioneBancaria.ToString(), CellValues.Number);
         updateCellValue("U1", configuration.IVACommissioni.ToString(), CellValues.Number);
         updateCellValue("X1", configuration.CedolareSecca.ToString(), CellValues.Number);
@@ -399,17 +397,17 @@ public class DocumentProcessing
         return firstRow;
     }
 
-    private static Row addCellsToRow(Row header, Booking b, int guestsNum, Person mainPerson, Room room, Accommodation accommodation)
+    private static Row addCellsToRow(Row header, Booking b, int guestsNum, Person mainPerson, Room room, BookChannel channel, Accommodation accommodation,Configuration configuration)
     {
         Row row = new Row();
         double nightsNum = (b.CheckOutDateTime.Date - b.CheckinDateTime.Date).TotalDays;
         double grossLessDiscount = Convert.ToDouble(b.Price.Value - b.Discount.Value);
-        double TownFee = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "O1").CellValue.InnerText);
-        double ivaVendite = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "Q1").CellValue.InnerText);
-        double ivaCommissioni = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "U1").CellValue.InnerText);
-        double channelFee = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "R1").CellValue.InnerText);
-        double bankCommission = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "S1").CellValue.InnerText);
-        double fixedTax = Convert.ToDouble(header.Elements<Cell>().FirstOrDefault(c => c.CellReference == "X1").CellValue.InnerText);//Cedolare secca
+        double TownFee = Convert.ToDouble(accommodation.TownFee.HasValue?accommodation.TownFee.Value:0) * nightsNum;
+        double ivaVendite = Convert.ToDouble(configuration.IVAVendite);
+        double ivaCommissioni = Convert.ToDouble(configuration.IVACommissioni);
+        double channelFee = Convert.ToDouble(channel.Fee);
+        double bankCommission = Convert.ToDouble(configuration.CommissioneBancaria);
+        double fixedTax = Convert.ToDouble(configuration.CedolareSecca);//Cedolare secca
 
         double totalFees = (channelFee * nightsNum) + (bankCommission * grossLessDiscount);
         double ivaCommissioniValue = totalFees * ivaCommissioni;
@@ -446,7 +444,8 @@ public class DocumentProcessing
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(netBeforeFixedTax - fixedTaxValue) },
             new Cell() { DataType = CellValues.Number, CellValue = new CellValue(0) },//Fattura costi TODO: add eventually
             new Cell() { DataType = CellValues.String, CellValue = new CellValue("ID Pagamento") },
-            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.PaymentDate.HasValue ? b.PaymentDate.Value.ToString("dd-MM-yyyy") : "N/A") } //Data pagamento
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue(b.PaymentDate.HasValue ? b.PaymentDate.Value.ToString("dd-MM-yyyy") : "Not paid") }, //Data pagamento
+            new Cell() { DataType = CellValues.String, CellValue = new CellValue(channel.Name) } //Booking Channel (Canale)
         );
         return row;
     }
@@ -484,4 +483,14 @@ public class DocumentProcessing
         return row;
     }
 
+    public static void DeleteDocument(string filePath){
+        try{
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
+        }catch(Exception e){
+            throw new Exception("Error deleting file: " + e.Message);
+        }
+    }
 }

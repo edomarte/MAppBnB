@@ -23,7 +23,7 @@ namespace SignalRChat.Hubs
         }
         private string GetAWIDAppartamento(int accommodationId)
         {
-            var accommodation = _context.Accommodation.Find(accommodationId);
+            var accommodation = _context.Accommodation.FirstOrDefault(x => x.id == accommodationId);
             return accommodation.AWIDAppartamento;
         }
 
@@ -148,9 +148,20 @@ namespace SignalRChat.Hubs
         {
             var booking = GetBookingDetails(bookingID);
             List<Person> persons = GetPersonsDetails(personID);
+            Configuration configuration = GetConfiguration();
+
+            if (configuration is null || configuration.AlloggiatiWebUsername == null || configuration.AlloggiatiWebPassword == null || configuration.AlloggiatiWebWSKey == null)
+            {
+                await Clients.All.SendAsync("TransmissionResult", "Alloggiati Web fields in Configuration not set. Please check the configuration.");
+                return;
+            }
             try
             {
-                string transmissionResult = SOAPTransmission.SendDocsToRegionPolice(booking, persons, GetDocumentDetails(persons.First()), GetConfiguration(), GetAWIDAppartamento(booking.AccommodationID));
+                string AWIDAppartamento = GetAWIDAppartamento(booking.AccommodationID);
+                if (configuration.IsGestioneAppartamenti && AWIDAppartamento is null)
+                    await Clients.All.SendAsync("TransmissionResult", "Missing AW IDAppartamento for AlloggiatiWeb. Please check the accommodation details.");
+
+                string transmissionResult = SOAPTransmission.SendDocsToPolice(booking, persons, GetDocumentDetails(persons.First()), configuration, AWIDAppartamento);
                 await updateIsSentToPoliceAsync(booking);
                 await Clients.All.SendAsync("TransmissionResult", transmissionResult);
             }

@@ -73,11 +73,16 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             return persons;
         }
 
-        public Document GetDocumentDetails(Person person)
+        public DocumentDocumentType GetDocumentDetails(Person person)
         {
-            var document = _context.Document.Find(person.DocumentID);
+            DocumentDocumentType document = new DocumentDocumentType();
+            document.Document= _context.Document.Find(person.DocumentID);
+            if (document.Document == null)
+            {
+                return null;
+            }
             // Substitute the code with the correspondent document description
-            document.DocumentType = _context.TipoDocumento.Find(document.DocumentType).Descrizione;
+            document.DocumentType = _context.TipoDocumento.FirstOrDefault(x=>x.Codice.Equals(document.Document.DocumentType)).Descrizione;
             return document;
         }
 
@@ -110,17 +115,16 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             return channel;
         }
 
-        private Person getBirthPlaceDescription(Person p)
+        private string getBirthPlaceDescription(Person p)
         {
             if (p.BirthCountry.Equals("100000100"))
             { // If birthcountry is Italy
-                p.BirthPlace = _context.Comuni.Find(p.BirthPlace).Descrizione;
+                return _context.Comuni.Find(p.BirthPlace).Descrizione;
             }
             else
             {
-                p.BirthPlace = "Estero";
+                return "Estero";
             }
-            return p;
         }
 
         private async Task updateIsContractPrintedAsync(Booking booking)
@@ -134,20 +138,30 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             try
             {
-                Person mainPerson = getBirthPlaceDescription(GetPersonDetails(mainPersonID));
-                if (_context.Configuration.FirstOrDefault().PersonID.ToString().Equals(""))
+                PersonBirthPlace mainPerson = new PersonBirthPlace(){Person=GetPersonDetails(mainPersonID)}; 
+                
+                mainPerson.BirthPlace=getBirthPlaceDescription(mainPerson.Person);
+                Configuration configuration = GetConfiguration();
+                if (configuration is null || configuration.PersonID is null || configuration.PersonID.ToString().Equals(""))
                 {
                     throw new Exception("Host not set in configuration!");
                 }
                 //Person host = getBirthPlaceDescription(GetPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString()));
                 Person host = GetPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString());
+                
+                DocumentDocumentType hostDocument = GetDocumentDetails(host);
+                if(hostDocument is null)
+                {
+                    throw new Exception("Host document not set in configuration!");
+                }
+
                 Accommodation accommodation = GetAccommodationDetails(accommodationID);
                 Booking booking = GetBookingDetails(bookingId);
-                string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson), accommodation, booking, host, GetDocumentDetails(host));
-                byte[] file = await File.ReadAllBytesAsync(contractPath);
-                string base64String = Convert.ToBase64String(file);
+                string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson.Person), accommodation, booking, host, hostDocument);
+                
+                await startFileDownloadAsync(contractPath);
+                // Update the booking to set ContractPrinted to true
                 updateIsContractPrintedAsync(booking);
-                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
             }
             catch (Exception e)
             {
@@ -162,11 +176,9 @@ namespace SignalRChat.Hubs //TODO: Change namespace
                 List<Person> persons = GetPersonsDetails(personsIDs);
                 Accommodation accommodation = GetAccommodationDetails(accommodationID);
                 Booking booking = GetBookingDetails(bookingId);
-                string contractPath = DocumentProcessing.GenerateBookingDetails(persons, booking, accommodation, GetRoomDetails(booking.RoomID), GetChannelDetails(booking.ChannelID));
-                byte[] file = await File.ReadAllBytesAsync(contractPath);
-                string base64String = Convert.ToBase64String(file);
-
-                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+                string bdPath = DocumentProcessing.GenerateBookingDetails(persons, booking, accommodation, GetRoomDetails(booking.RoomID), GetChannelDetails(booking.ChannelID));
+                await startFileDownloadAsync(bdPath);  
+                DocumentProcessing.DeleteDocument(bdPath); // Delete the document after download
             }
             catch (Exception e)
             {
@@ -181,11 +193,8 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             {
                 Person mainPerson = GetPersonDetails(mainPersonID);
                 Accommodation accommodation = GetAccommodationDetails(accommodationID);
-                string contractPath = DocumentProcessing.GeneratePreCheckIn(mainPerson, accommodation, GetBookingDetails(bookingId));
-                byte[] file = await File.ReadAllBytesAsync(contractPath);
-                string base64String = Convert.ToBase64String(file);
-
-                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+                string preCheckinPath = DocumentProcessing.GeneratePreCheckIn(mainPerson, accommodation, GetBookingDetails(bookingId));
+                await startFileDownloadAsync(preCheckinPath);
             }
             catch (Exception e)
             {
@@ -199,9 +208,8 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             try
             {
                 string contractPath = DocumentProcessing.GenerateContractPDF(bookingId);
-                byte[] file = await File.ReadAllBytesAsync(contractPath);
-                string base64String = Convert.ToBase64String(file);
-                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+                await startFileDownloadAsync(contractPath);
+                DocumentProcessing.DeleteDocument(contractPath); // Delete the contract after download
             }
             catch (Exception e)
             {
@@ -213,10 +221,9 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             try
             {
-                string contractPath = DocumentProcessing.GeneratePreCheckinPDF(bookingId);
-                byte[] file = await File.ReadAllBytesAsync(contractPath);
-                string base64String = Convert.ToBase64String(file);
-                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+                string preCheckinPath = DocumentProcessing.GeneratePreCheckinPDF(bookingId);
+                await startFileDownloadAsync(preCheckinPath);
+                DocumentProcessing.DeleteDocument(preCheckinPath); // Delete the document after download
             }
             catch (Exception e)
             {
@@ -226,28 +233,20 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         private List<Booking> GetBookingsForReport(string accommodationID, string channelID, string dateFrom, string dateTo)
         {
-
-            //If all channels
-            if (channelID.Equals("0"))
-            {
+            //If all channels selected, do not search for channelID between the bookings
+            if(channelID.Equals("-1")){
                 return _context.Booking
-                                             .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
-                                                        && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
-                                                        && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
-                                             .ToList(); // Fetches data into memory
+                             .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
+                                        && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
+                                        && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
+                             .ToList();
             }
-            else
-            {
-                return _context.Booking
-                                             .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
-                                                        && x.ChannelID == Convert.ToInt32(channelID)
-                                                        && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
-                                                        && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
-                                             .ToList(); // Fetches data into memory
-            }
-
-            // First, fetch the necessary data into memory
-
+            return _context.Booking
+                             .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
+                                        && x.ChannelID == Convert.ToInt32(channelID)
+                                        && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
+                                        && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
+                             .ToList(); // Fetches data into memory
         }
 
         public async Task CreateReportExcel(string accommodationID, string channelID, string dateFrom, string dateTo)
@@ -255,17 +254,22 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             try
             {
                 List<Booking> bookings = GetBookingsForReport(accommodationID, channelID, dateFrom, dateTo);
-                string contractPath = DocumentProcessing.GenerateExcelFinancialReport(getReportLines(bookings), GetChannelDetailsS(channelID), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration());
+                string reportPath = DocumentProcessing.GenerateExcelFinancialReport(getReportLines(bookings), GetChannelDetailsS(channelID), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration());
 
-                byte[] file = await File.ReadAllBytesAsync(contractPath);
-                string base64String = Convert.ToBase64String(file);
-
-                await Clients.All.SendAsync("DownloadFile", contractPath.Substring(contractPath.LastIndexOf("\\") + 1), base64String);
+                await startFileDownloadAsync(reportPath);
+                DocumentProcessing.DeleteDocument(reportPath); // Delete the document after download
             }
             catch (Exception e)
             {
                 await Clients.All.SendAsync("Error", e.Message);
             }
+        }
+
+        private async Task startFileDownloadAsync(string filePath){
+            byte[] file = await File.ReadAllBytesAsync(filePath);
+                string base64String = Convert.ToBase64String(file);
+
+                await Clients.All.SendAsync("DownloadFile", filePath.Substring(filePath.LastIndexOf("\\") + 1), base64String);
         }
 
         private List<FinancialReportLine> getReportLines(List<Booking> bookings)
@@ -274,7 +278,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
             foreach (Booking booking in bookings)
             {
-                lfrl.Add(new FinancialReportLine() { Booking = booking, MainPerson = GetMainPerson(booking), Room = GetRoom(booking), GuestCount = GetGuestCount(booking) });
+                lfrl.Add(new FinancialReportLine() { Booking = booking, MainPerson = GetMainPerson(booking), Room = GetRoom(booking), Channel=GetChannelDetails(booking.ChannelID),GuestCount = GetGuestCount(booking) });
             }
 
             return lfrl;

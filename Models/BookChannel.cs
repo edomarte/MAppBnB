@@ -10,9 +10,9 @@ public class BookChannel
     [StringLength(30, MinimumLength = 3)]
     [Required]
     [DataType(DataType.Text)]
-    public string? Name { get; set; }
+    public string Name { get; set; }
     [Required]
     [DisplayFormat(DataFormatString = "{0:P2}")]
     [Precision(18,2)]
-    public decimal? Fee { get; set; }
+    public decimal Fee { get; set; }
 }
