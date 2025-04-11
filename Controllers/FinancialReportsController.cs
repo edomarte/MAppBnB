@@ -102,17 +102,31 @@ namespace MAppBnB.Controllers
                 
                 fr.FinancialsByChannels = new List<FinancialsByChannel>();
 
+                // Create a new instance of FinancialsByChannel for the total
+                FinancialsByChannel allChannels= new FinancialsByChannel();
+                allChannels.id = 0;
+                allChannels.ChannelName = "All Channels";
+                allChannels.TotNights = 0;
+                allChannels.TotBookings = 0;
+                allChannels.GrossRevenue = 0;
+                allChannels.NetRevenue = 0;
+
                 foreach (var chanl in result)
                 {
                     FinancialsByChannel fbc = new FinancialsByChannel();
                     fbc.id = _context.BookChannel.FirstOrDefault(x => x.id == chanl.ChannelID).id;
                     fbc.ChannelName = _context.BookChannel.FirstOrDefault(x => x.id == chanl.ChannelID).Name;
                     fbc.TotNights = Convert.ToInt32(chanl.NightsBooked);
+                    allChannels.TotNights += Convert.ToInt32(chanl.NightsBooked);
                     fbc.TotBookings = chanl.TotalBookings;
+                    allChannels.TotBookings += chanl.TotalBookings;
                     fbc.GrossRevenue = chanl.TotalRevenue;
+                    allChannels.GrossRevenue += chanl.TotalRevenue;
                     fbc.NetRevenue = chanl.AfterFeeRevenue;
+                    allChannels.NetRevenue += chanl.AfterFeeRevenue;
                     fr.FinancialsByChannels.Add(fbc);
                 }
+                fr.FinancialsByChannels.Add(allChannels);
             }
 
             return View(fr);

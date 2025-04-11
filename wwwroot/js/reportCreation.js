@@ -8,7 +8,7 @@ connection.start().then(function () {
     return console.error(err.toString());
 });
 
-document.getElementById("DownloadReportA").addEventListener("click", function (event) {
+$('.DownloadReportA').on("click", function (event) {
     var accommodationID=document.getElementById("AccommodationsList").value;   
 
     let row = this.closest("tr");
@@ -46,6 +46,6 @@ connection.on("DownloadFile", (fileName, base64Data) => {
     document.body.removeChild(link);
 });
 
-connectionD.on("Error", (error) => {
+connection.on("Error", (error) => {
     $("#errorMessage").text(error);
 });

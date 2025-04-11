@@ -137,7 +137,8 @@ public class DocumentProcessing
         string docPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".docx";
         string pdfPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".pdf";
 
-        if(!File.Exists(docPath)){
+        if (!File.Exists(docPath))
+        {
             throw new FileNotFoundException("Error: Generate a Contract Document first!");
         }
 
@@ -150,7 +151,8 @@ public class DocumentProcessing
         string docPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
         string pdfPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".pdf";
 
-        if(!File.Exists(docPath)){
+        if (!File.Exists(docPath))
+        {
             throw new FileNotFoundException("Error: Generate a Pre Checkin Document first!");
         }
         MigraDocPDF.ConvertWordToPdf(docPath, pdfPath);
@@ -322,7 +324,17 @@ public class DocumentProcessing
 
     public static string GenerateExcelFinancialReport(List<FinancialReportLine> frlines, BookChannel channel, Accommodation accommodation, string dateFrom, string dateTo, Configuration configuration)
     {
-        string fileName = accommodation.Name + "_" + channel.Name + "_" + dateFrom + "_" + dateTo;
+        string fileName = "";
+        if (channel is null)
+        {
+            fileName = accommodation.Name + "_AllChannels_" + dateFrom + "_" + dateTo;
+
+        }
+        else
+        {
+            fileName = accommodation.Name + "_" + channel.Name + "_" + dateFrom + "_" + dateTo;
+        }
+
         string reportPath = "..\\MAppBnB\\DocumentTemplates\\Report_" + fileName + ".xlsx";
 
         File.Copy("..\\MAppBnB\\DocumentTemplates\\Report.xlsx", reportPath, true);
@@ -346,7 +358,8 @@ public class DocumentProcessing
                     Row firstRow = sheetData.Elements<Row>().FirstOrDefault(r => r.RowIndex == 1);
                     firstRow = addCellsToHeaderRow(firstRow, accommodation, channel, configuration);
 
-                    foreach(FinancialReportLine line in frlines){
+                    foreach (FinancialReportLine line in frlines)
+                    {
 
                         sheetData.Append(addCellsToRow(firstRow, line.Booking, line.GuestCount, line.MainPerson, line.Room, accommodation));
                     }

@@ -226,13 +226,28 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
         private List<Booking> GetBookingsForReport(string accommodationID, string channelID, string dateFrom, string dateTo)
         {
+
+            //If all channels
+            if (channelID.Equals("0"))
+            {
+                return _context.Booking
+                                             .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
+                                                        && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
+                                                        && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
+                                             .ToList(); // Fetches data into memory
+            }
+            else
+            {
+                return _context.Booking
+                                             .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
+                                                        && x.ChannelID == Convert.ToInt32(channelID)
+                                                        && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
+                                                        && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
+                                             .ToList(); // Fetches data into memory
+            }
+
             // First, fetch the necessary data into memory
-            return _context.Booking
-                             .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
-                                        && x.ChannelID == Convert.ToInt32(channelID)
-                                        && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
-                                        && x.CheckinDateTime <= Convert.ToDateTime(dateTo))
-                             .ToList(); // Fetches data into memory
+
         }
 
         public async Task CreateReportExcel(string accommodationID, string channelID, string dateFrom, string dateTo)

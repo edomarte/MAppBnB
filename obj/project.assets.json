@@ -13400,11 +13400,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\edoma\\Documents\\MAppBnB_All\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
+      "projectUniqueName": "C:\\tmp\\MAppBnB\\MAppBnB.csproj",
       "projectName": "MAppBnB",
-      "projectPath": "C:\\Users\\edoma\\Documents\\MAppBnB_All\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
+      "projectPath": "C:\\tmp\\MAppBnB\\MAppBnB.csproj",
       "packagesPath": "C:\\Users\\edoma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\edoma\\Documents\\MAppBnB_All\\MAppBnB\\MAppBnB\\obj\\",
+      "outputPath": "C:\\tmp\\MAppBnB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\edoma\\AppData\\Roaming\\NuGet\\NuGet.Config"
