@@ -119,7 +119,7 @@ namespace MAppBnB.Controllers
 
                 // Create a new instance of FinancialsByChannel for the allChannels line and populate it.
                 FinancialsByChannel allChannels= new FinancialsByChannel();
-                allChannels.id = 0;
+                allChannels.id = -1;
                 allChannels.ChannelName = "All Channels";
                 allChannels.TotNights = 0;
                 allChannels.TotBookings = 0;

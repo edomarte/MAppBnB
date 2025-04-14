@@ -241,7 +241,7 @@ namespace MAppBnB.Controllers
             {
                 try
                 {
-                    if (model.Document != null)
+                    if (model.Document.id != null)
                     {
                         if (model.Person.RoleRelation == 19 || model.Person.RoleRelation == 20) // Secondary guest (FAMILIARE, MEMBRO GRUPPO)
                         {

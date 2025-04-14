@@ -21,6 +21,7 @@ public class SOAPTransmission
         ArrayOfString aos = [.. bookings];
         ElencoSchedineEsito result = new ElencoSchedineEsito();
 
+        // Check if the accommodation is registered as an apartment for the Italian Police or not.
         if (accommodationId.Equals(""))
             await ssc.SendAsync(username, tokenInfo.token, aos, result); // Check and send lines.
             //await ssc.TestAsync(username, tokenInfo.token, aos, ref result); Only check if lines valid.
@@ -39,10 +40,8 @@ public class SOAPTransmission
         return "Schedine sent correctly.";
     }
 
-    internal static string SendDocsToRegionPolice(Booking booking, List<Person> persons, Document document, Configuration configuration, string AWIDAppartamento)
+    internal static string SendDocsToPolice(Booking booking, List<Person> persons, Document document, Configuration configuration, string AWIDAppartamento)
     {
-        if (configuration.AlloggiatiWebUsername == null || configuration.AlloggiatiWebPassword == null || configuration.AlloggiatiWebWSKey == null)
-            throw new Exception("Missing credentials for AlloggiatiWeb. Please check the configuration.");
         List<string> soapString = prepareSOAPstring(booking, persons, document, configuration, AWIDAppartamento);
         return SendBookingToSOAP(configuration.AlloggiatiWebUsername, configuration.AlloggiatiWebPassword, configuration.AlloggiatiWebWSKey, soapString, configuration.IsGestioneAppartamenti ? AWIDAppartamento : "").ToString();
     }
