@@ -93,8 +93,7 @@ namespace SignalRChat.Hubs
             Person mainPerson = GetPersonDetails(personID);
             Booking booking = GetBookingDetails(bookingID);
 
-            string contractPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingID + ".pdf";
-            //string base64String = Convert.ToBase64String(contract);
+            string contractPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Contract" + bookingID + ".pdf");
 
             if (File.Exists(contractPath))
             {
@@ -121,8 +120,7 @@ namespace SignalRChat.Hubs
             Person mainPerson = GetPersonDetails(personID);
             Booking booking = GetBookingDetails(bookingID);
 
-            string contractPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingID + ".pdf";
-            //string base64String = Convert.ToBase64String(contract);
+            string contractPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Pre-Checkin" + bookingID + ".pdf");
 
             if (File.Exists(contractPath))
             {
