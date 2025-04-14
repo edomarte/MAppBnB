@@ -58,10 +58,11 @@ public class DocumentProcessing
         DataRow dr = addRowToContractDt(mainPerson, document, accommodation, booking, host, hostDocument);
         string bookingId = booking.id.ToString();
 
-        string contractPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".docx";
+        string templateContractPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","ContractTemplate.docx");
+        string contractPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Contract" + bookingId + ".docx");
 
-        File.Copy("..\\MAppBnB\\DocumentTemplates\\ContractTemplate.docx", "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".docx", true);
-        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".docx", true))
+        File.Copy(templateContractPath, contractPath, true);
+        using (WordprocessingDocument doc = WordprocessingDocument.Open(contractPath, true))
         {
             if (doc is null)
             {
@@ -134,8 +135,8 @@ public class DocumentProcessing
 
     public static string GenerateContractPDF(string bookingId)
     {
-        string docPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".docx";
-        string pdfPath = "..\\MAppBnB\\DocumentTemplates\\Contract" + bookingId + ".pdf";
+        string docPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Contract" + bookingId + ".docx");
+        string pdfPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Contract" + bookingId + ".pdf");
 
         if (!File.Exists(docPath))
         {
@@ -148,8 +149,8 @@ public class DocumentProcessing
 
     public static string GeneratePreCheckinPDF(string bookingId)
     {
-        string docPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
-        string pdfPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".pdf";
+        string docPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Pre-Checkin" + bookingId + ".docx");
+        string pdfPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Pre-Checkin" + bookingId + ".pdf");
 
         if (!File.Exists(docPath))
         {
@@ -164,10 +165,11 @@ public class DocumentProcessing
         DataRow dr = addRowTobookingDetailsDt(persons, booking, accommodation, room, channel);
         string bookingId = booking.id.ToString();
 
-        string bookingDetailsPath = "..\\MAppBnB\\DocumentTemplates\\BookingDetails" + bookingId + ".docx";
+        string templateBookingDetailsPath =Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","BookingDetailsTemplate.docx");
+        string bookingDetailsPath =Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","BookingDetails" + bookingId + ".docx");
 
-        File.Copy("..\\MAppBnB\\DocumentTemplates\\BookingDetailsTemplate.docx", "..\\MAppBnB\\DocumentTemplates\\BookingDetails" + bookingId + ".docx", true);
-        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\MAppBnB\\DocumentTemplates\\BookingDetails" + bookingId + ".docx", true))
+        File.Copy(templateBookingDetailsPath, bookingDetailsPath, true);
+        using (WordprocessingDocument doc = WordprocessingDocument.Open(bookingDetailsPath, true))
         {
 
             if (doc is null)
@@ -269,10 +271,11 @@ public class DocumentProcessing
         DataRow dr = addRowToPreCheckinDt(mainPerson, accommodation, booking);
         string bookingId = booking.id.ToString();
 
-        string preCheckinPath = "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx";
+        string templatePreCheckinPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Pre-CheckinTemplate.docx");
+        string preCheckinPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Pre-Checkin" + bookingId + ".docx");
 
-        File.Copy("..\\MAppBnB\\DocumentTemplates\\Pre-CheckinTemplate.docx", "..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx", true);
-        using (WordprocessingDocument doc = WordprocessingDocument.Open("..\\MAppBnB\\DocumentTemplates\\Pre-Checkin" + bookingId + ".docx", true))
+        File.Copy(templatePreCheckinPath, preCheckinPath, true);
+        using (WordprocessingDocument doc = WordprocessingDocument.Open(preCheckinPath, true))
         {
 
             if (doc is null)
@@ -333,9 +336,10 @@ public class DocumentProcessing
 
         fileName = accommodation.Name + "_" + channel.Name + "_" + dateFrom + "_" + dateTo;
 
-        string reportPath = "..\\MAppBnB\\DocumentTemplates\\Report_" + fileName + ".xlsx";
+        string templateReportPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","ReportTemplate.xlsx");
+        string reportPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Report_" + fileName + ".xlsx");
 
-        File.Copy("..\\MAppBnB\\DocumentTemplates\\Report.xlsx", reportPath, true);
+        File.Copy(templateReportPath, reportPath, true);
         using (SpreadsheetDocument doc = SpreadsheetDocument.Open(reportPath, true))
         {
 

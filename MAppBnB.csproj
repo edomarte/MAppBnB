@@ -23,6 +23,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
     <PackageReference Include="PDFsharp-MigraDoc" Version="6.1.1" />
     <PackageReference Include="soapcore" Version="1.2.0" />
+     <Content Include="DocumentTemplates\**\*.*">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </Content>
   </ItemGroup>
 
 </Project>

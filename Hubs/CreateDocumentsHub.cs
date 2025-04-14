@@ -269,7 +269,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             byte[] file = await File.ReadAllBytesAsync(filePath);
                 string base64String = Convert.ToBase64String(file);
 
-                await Clients.All.SendAsync("DownloadFile", filePath.Substring(filePath.LastIndexOf("\\") + 1), base64String);
+                await Clients.All.SendAsync("DownloadFile", Path.GetFileName(filePath), base64String);
         }
 
         private List<FinancialReportLine> getReportLines(List<Booking> bookings)
