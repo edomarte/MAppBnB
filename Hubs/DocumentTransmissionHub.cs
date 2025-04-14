@@ -16,6 +16,91 @@ namespace SignalRChat.Hubs
             _context = context;
         }
 
+
+        #region SignalR Methods
+        public async Task SendContract(string bookingID, string personID)
+        {
+            Person mainPerson = GetPersonDetails(personID);
+            Booking booking = GetBookingDetails(bookingID);
+
+            string contractPath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentTemplates", "Contract" + bookingID + ".pdf");
+
+            if (File.Exists(contractPath))
+            {
+                try
+                {
+                    byte[] contractFile = await File.ReadAllBytesAsync(contractPath);
+                    string transmissionResult = EmailTransmission.SendContract(booking, mainPerson, GetAccommodation(booking.AccommodationID).Name, GetRoom(booking.RoomID).Name, contractFile);
+                    await updateIsContractSentAsync(booking);
+                    await Clients.All.SendAsync("TransmissionResult", transmissionResult);
+                }
+                catch (Exception e)
+                {
+                    await Clients.All.SendAsync("TransmissionResult", e.Message);
+                }
+            }
+            else
+            {
+                await Clients.All.SendAsync("TransmissionResult", "Generate a Contract PDF first!");
+            }
+        }
+
+        public async Task SendPreCheckIn(string bookingID, string personID)
+        {
+            Person mainPerson = GetPersonDetails(personID);
+            Booking booking = GetBookingDetails(bookingID);
+
+            string contractPath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentTemplates", "Pre-Checkin" + bookingID + ".pdf");
+
+            if (File.Exists(contractPath))
+            {
+                try
+                {
+                    byte[] contractFile = await File.ReadAllBytesAsync(contractPath);
+                    string transmissionResult = EmailTransmission.SendPreCheckIn(booking, mainPerson, GetAccommodation(booking.AccommodationID).Name, GetRoom(booking.RoomID).Name, contractFile);
+                    await updateIsPreCheckinSentAsync(booking);
+                    await Clients.All.SendAsync("TransmissionResult", transmissionResult);
+                }
+                catch (Exception e)
+                {
+                    await Clients.All.SendAsync("TransmissionResult", e.Message);
+                }
+            }
+            else
+            {
+                await Clients.All.SendAsync("TransmissionResult", "Generate a Pre-CheckIn PDF first!");
+            }
+        }
+
+        public async Task SendToRegionPolice(string bookingID, string[] personID)
+        {
+            var booking = GetBookingDetails(bookingID);
+            List<Person> persons = GetPersonsDetails(personID);
+            Configuration configuration = GetConfiguration();
+
+            if (configuration is null || configuration.AlloggiatiWebUsername == null || configuration.AlloggiatiWebPassword == null || configuration.AlloggiatiWebWSKey == null)
+            {
+                await Clients.All.SendAsync("TransmissionResult", "Alloggiati Web fields in Configuration not set. Please check the configuration.");
+                return;
+            }
+            try
+            {
+                string AWIDAppartamento = GetAWIDAppartamento(booking.AccommodationID);
+                if (configuration.IsGestioneAppartamenti && AWIDAppartamento is null)
+                    await Clients.All.SendAsync("TransmissionResult", "Missing AW IDAppartamento for AlloggiatiWeb. Please check the accommodation details.");
+
+                string transmissionResult = SOAPTransmission.SendDocsToPolice(booking, persons, GetDocumentDetails(persons.First()), configuration, AWIDAppartamento);
+                await updateIsSentToPoliceAsync(booking);
+                await Clients.All.SendAsync("TransmissionResult", transmissionResult);
+            }
+            catch (Exception e)
+            {
+                await Clients.All.SendAsync("TransmissionResult", e.Message);
+            }
+        }
+        #endregion
+
+        #region  Helper Methods
         private Person GetPersonDetails(string personID)
         {
             var person = _context.Person.Where(x => x.id == int.Parse(personID)).ToList();
@@ -87,86 +172,6 @@ namespace SignalRChat.Hubs
             _context.Update(booking);
             await _context.SaveChangesAsync();
         }
-
-        public async Task SendContract(string bookingID, string personID)
-        {
-            Person mainPerson = GetPersonDetails(personID);
-            Booking booking = GetBookingDetails(bookingID);
-
-            string contractPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Contract" + bookingID + ".pdf");
-
-            if (File.Exists(contractPath))
-            {
-                try
-                {
-                    byte[] contractFile = await File.ReadAllBytesAsync(contractPath);
-                    string transmissionResult = EmailTransmission.SendContract(booking, mainPerson, GetAccommodation(booking.AccommodationID).Name, GetRoom(booking.RoomID).Name, contractFile);
-                    await updateIsContractSentAsync(booking);
-                    await Clients.All.SendAsync("TransmissionResult", transmissionResult);
-                }
-                catch (Exception e)
-                {
-                    await Clients.All.SendAsync("TransmissionResult", e.Message);
-                }
-            }
-            else
-            {
-                await Clients.All.SendAsync("TransmissionResult", "Generate a Contract PDF first!");
-            }
-        }
-
-        public async Task SendPreCheckIn(string bookingID, string personID)
-        {
-            Person mainPerson = GetPersonDetails(personID);
-            Booking booking = GetBookingDetails(bookingID);
-
-            string contractPath = Path.Combine(Directory.GetCurrentDirectory(),"DocumentTemplates","Pre-Checkin" + bookingID + ".pdf");
-
-            if (File.Exists(contractPath))
-            {
-                try
-                {
-                    byte[] contractFile = await File.ReadAllBytesAsync(contractPath);
-                    string transmissionResult = EmailTransmission.SendPreCheckIn(booking, mainPerson, GetAccommodation(booking.AccommodationID).Name, GetRoom(booking.RoomID).Name, contractFile);
-                    await updateIsPreCheckinSentAsync(booking);
-                    await Clients.All.SendAsync("TransmissionResult", transmissionResult);
-                }
-                catch (Exception e)
-                {
-                    await Clients.All.SendAsync("TransmissionResult", e.Message);
-                }
-            }
-            else
-            {
-                await Clients.All.SendAsync("TransmissionResult", "Generate a Pre-CheckIn PDF first!");
-            }
-        }
-
-        public async Task SendToRegionPolice(string bookingID, string[] personID)
-        {
-            var booking = GetBookingDetails(bookingID);
-            List<Person> persons = GetPersonsDetails(personID);
-            Configuration configuration = GetConfiguration();
-
-            if (configuration is null || configuration.AlloggiatiWebUsername == null || configuration.AlloggiatiWebPassword == null || configuration.AlloggiatiWebWSKey == null)
-            {
-                await Clients.All.SendAsync("TransmissionResult", "Alloggiati Web fields in Configuration not set. Please check the configuration.");
-                return;
-            }
-            try
-            {
-                string AWIDAppartamento = GetAWIDAppartamento(booking.AccommodationID);
-                if (configuration.IsGestioneAppartamenti && AWIDAppartamento is null)
-                    await Clients.All.SendAsync("TransmissionResult", "Missing AW IDAppartamento for AlloggiatiWeb. Please check the accommodation details.");
-
-                string transmissionResult = SOAPTransmission.SendDocsToPolice(booking, persons, GetDocumentDetails(persons.First()), configuration, AWIDAppartamento);
-                await updateIsSentToPoliceAsync(booking);
-                await Clients.All.SendAsync("TransmissionResult", transmissionResult);
-            }
-            catch (Exception e)
-            {
-                await Clients.All.SendAsync("TransmissionResult", e.Message);
-            }
-        }
+        #endregion
     }
 }

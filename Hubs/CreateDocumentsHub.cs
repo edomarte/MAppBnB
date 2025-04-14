@@ -18,147 +18,32 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             _context = context;
         }
 
-        public Accommodation GetAccommodationDetails(string accommodationID)
-        {
-            var details = _context.Accommodation.Find(Convert.ToInt32(accommodationID));
-            return details;
-        }
-
-        public Person GetPersonDetails(string personID)
-        {
-            var person = _context.Person.Find(Convert.ToInt32(personID));
-            return person;
-        }
-
-        public Person GetMainPerson(Booking booking)
-        {
-            int bookingId = booking.id;
-            Person mainPerson = _context.BookingPerson
-    .Join(_context.Person,
-          bp => bp.PersonID,
-          p => p.id,
-          (bp, p) => new { bp, p })
-    .Where(joined => bookingId == joined.bp.BookingID &&
-                     Convert.ToInt32(joined.p.RoleRelation) >= 16 &&
-                     Convert.ToInt32(joined.p.RoleRelation) <= 18)
-    .Select(joined => joined.p)  // Selects the Person entity
-    .ToList()[0]; // Change Host in tipoalloggiato in a number
-
-            return mainPerson;
-        }
-
-        public int GetGuestCount(Booking booking)
-        {
-            int bookingId = booking.id;
-            int guestsPerBooking = _context.BookingPerson
-                                        .Where(bp => bookingId == bp.BookingID)
-                                        .GroupBy(bp => bp.BookingID)
-                                        .Select(g => g.Count()).ToList()[0];
-            return guestsPerBooking;
-        }
-
-        public Room GetRoom(Booking booking)
-        {
-            int roomId = booking.RoomID;
-            Room roomsList = _context.Room.Find(roomId);
-
-            return roomsList;
-        }
-
-
-        public List<Person> GetPersonsDetails(string[] personIDs)
-        {
-            int[] iPersonIDs = Array.ConvertAll(personIDs, int.Parse);
-            var persons = _context.Person.Where(x => iPersonIDs.Contains(x.id)).ToList();
-            return persons;
-        }
-
-        public DocumentDocumentType GetDocumentDetails(Person person)
-        {
-            DocumentDocumentType document = new DocumentDocumentType();
-            document.Document= _context.Document.Find(person.DocumentID);
-            if (document.Document == null)
-            {
-                return null;
-            }
-            // Substitute the code with the correspondent document description
-            document.DocumentType = _context.TipoDocumento.FirstOrDefault(x=>x.Codice.Equals(document.Document.DocumentType)).Descrizione;
-            return document;
-        }
-
-        public Booking GetBookingDetails(string bookingID)
-        {
-            var booking = _context.Booking.Find(Convert.ToInt32(bookingID));
-            return booking;
-        }
-
-        public Room GetRoomDetails(int? roomID)
-        {
-            var room = _context.Room.Find(roomID);
-            return room;
-        }
-
-        public BookChannel GetChannelDetailsS(string? channelId)
-        {
-            var channel = _context.BookChannel.Find(Convert.ToInt32(channelId));
-            return channel;
-        }
-
-        public Configuration GetConfiguration()
-        {
-            var configurations = _context.Configuration.FirstOrDefault(); // only one configuration exist
-            return configurations;
-        }
-        public BookChannel GetChannelDetails(int? channelId)
-        {
-            var channel = _context.BookChannel.Find(channelId);
-            return channel;
-        }
-
-        private string getBirthPlaceDescription(Person p)
-        {
-            if (p.BirthCountry.Equals("100000100"))
-            { // If birthcountry is Italy
-                return _context.Comuni.Find(p.BirthPlace).Descrizione;
-            }
-            else
-            {
-                return "Estero";
-            }
-        }
-
-        private async Task updateIsContractPrintedAsync(Booking booking)
-        {
-            booking.ContractPrinted = true;
-            _context.Update(booking);
-            await _context.SaveChangesAsync();
-        }
-
+#region SignalR Methods
         public async Task CreateContract(string mainPersonID, string accommodationID, string bookingId)
         {
             try
             {
-                PersonBirthPlace mainPerson = new PersonBirthPlace(){Person=GetPersonDetails(mainPersonID)}; 
-                
-                mainPerson.BirthPlace=getBirthPlaceDescription(mainPerson.Person);
-                Configuration configuration = GetConfiguration();
+                PersonBirthPlace mainPerson = new PersonBirthPlace() { Person = getPersonDetails(mainPersonID) };
+
+                mainPerson.BirthPlace = getBirthPlaceDescription(mainPerson.Person);
+                Configuration configuration = getConfiguration();
                 if (configuration is null || configuration.PersonID is null || configuration.PersonID.ToString().Equals(""))
                 {
                     throw new Exception("Host not set in configuration!");
                 }
                 //Person host = getBirthPlaceDescription(GetPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString()));
-                Person host = GetPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString());
-                
-                DocumentDocumentType hostDocument = GetDocumentDetails(host);
-                if(hostDocument is null)
+                Person host = getPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString());
+
+                DocumentDocumentType hostDocument = getDocumentDetails(host);
+                if (hostDocument is null)
                 {
                     throw new Exception("Host document not set in configuration!");
                 }
 
-                Accommodation accommodation = GetAccommodationDetails(accommodationID);
-                Booking booking = GetBookingDetails(bookingId);
-                string contractPath = DocumentProcessing.GenerateContract(mainPerson, GetDocumentDetails(mainPerson.Person), accommodation, booking, host, hostDocument);
-                
+                Accommodation accommodation = getAccommodationDetails(accommodationID);
+                Booking booking = getBookingDetails(bookingId);
+                string contractPath = DocumentProcessing.GenerateContract(mainPerson, getDocumentDetails(mainPerson.Person), accommodation, booking, host, hostDocument);
+
                 await startFileDownloadAsync(contractPath);
                 // Update the booking to set ContractPrinted to true
                 updateIsContractPrintedAsync(booking);
@@ -173,11 +58,11 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             try
             {
-                List<Person> persons = GetPersonsDetails(personsIDs);
-                Accommodation accommodation = GetAccommodationDetails(accommodationID);
-                Booking booking = GetBookingDetails(bookingId);
-                string bdPath = DocumentProcessing.GenerateBookingDetails(persons, booking, accommodation, GetRoomDetails(booking.RoomID), GetChannelDetails(booking.ChannelID));
-                await startFileDownloadAsync(bdPath);  
+                List<Person> persons = getPersonsDetails(personsIDs);
+                Accommodation accommodation = getAccommodationDetails(accommodationID);
+                Booking booking = getBookingDetails(bookingId);
+                string bdPath = DocumentProcessing.GenerateBookingDetails(persons, booking, accommodation, getRoomDetails(booking.RoomID), getChannelDetails(booking.ChannelID));
+                await startFileDownloadAsync(bdPath);
                 DocumentProcessing.DeleteDocument(bdPath); // Delete the document after download
             }
             catch (Exception e)
@@ -191,9 +76,9 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             try
             {
-                Person mainPerson = GetPersonDetails(mainPersonID);
-                Accommodation accommodation = GetAccommodationDetails(accommodationID);
-                string preCheckinPath = DocumentProcessing.GeneratePreCheckIn(mainPerson, accommodation, GetBookingDetails(bookingId));
+                Person mainPerson = getPersonDetails(mainPersonID);
+                Accommodation accommodation = getAccommodationDetails(accommodationID);
+                string preCheckinPath = DocumentProcessing.GeneratePreCheckIn(mainPerson, accommodation, getBookingDetails(bookingId));
                 await startFileDownloadAsync(preCheckinPath);
             }
             catch (Exception e)
@@ -234,7 +119,8 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         private List<Booking> GetBookingsForReport(string accommodationID, string channelID, string dateFrom, string dateTo)
         {
             //If all channels selected, do not search for channelID between the bookings
-            if(channelID.Equals("-1")){
+            if (channelID.Equals("-1"))
+            {
                 return _context.Booking
                              .Where(x => x.AccommodationID == Convert.ToInt32(accommodationID)
                                         && x.CheckinDateTime >= Convert.ToDateTime(dateFrom)
@@ -254,7 +140,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             try
             {
                 List<Booking> bookings = GetBookingsForReport(accommodationID, channelID, dateFrom, dateTo);
-                string reportPath = DocumentProcessing.GenerateExcelFinancialReport(getReportLines(bookings), GetChannelDetailsS(channelID), GetAccommodationDetails(accommodationID), dateFrom, dateTo, GetConfiguration());
+                string reportPath = DocumentProcessing.GenerateExcelFinancialReport(getReportLines(bookings), getChannelDetailsS(channelID), getAccommodationDetails(accommodationID), dateFrom, dateTo, getConfiguration());
 
                 await startFileDownloadAsync(reportPath);
                 DocumentProcessing.DeleteDocument(reportPath); // Delete the document after download
@@ -265,23 +151,143 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             }
         }
 
-        private async Task startFileDownloadAsync(string filePath){
+        #endregion
+
+        #region Helper methods
+        private async Task startFileDownloadAsync(string filePath)
+        {
             byte[] file = await File.ReadAllBytesAsync(filePath);
-                string base64String = Convert.ToBase64String(file);
+            string base64String = Convert.ToBase64String(file);
 
-                await Clients.All.SendAsync("DownloadFile", Path.GetFileName(filePath), base64String);
+            await Clients.All.SendAsync("DownloadFile", Path.GetFileName(filePath), base64String);
         }
-
         private List<FinancialReportLine> getReportLines(List<Booking> bookings)
         {
             List<FinancialReportLine> lfrl = new List<FinancialReportLine>();
 
             foreach (Booking booking in bookings)
             {
-                lfrl.Add(new FinancialReportLine() { Booking = booking, MainPerson = GetMainPerson(booking), Room = GetRoom(booking), Channel=GetChannelDetails(booking.ChannelID),GuestCount = GetGuestCount(booking) });
+                lfrl.Add(new FinancialReportLine() { Booking = booking, MainPerson = getMainPerson(booking), Room = getRoom(booking), Channel = getChannelDetails(booking.ChannelID), GuestCount = getGuestCount(booking) });
             }
 
             return lfrl;
         }
+
+        private Accommodation getAccommodationDetails(string accommodationID)
+        {
+            var details = _context.Accommodation.Find(Convert.ToInt32(accommodationID));
+            return details;
+        }
+
+        private Person getPersonDetails(string personID)
+        {
+            var person = _context.Person.Find(Convert.ToInt32(personID));
+            return person;
+        }
+
+        private Person getMainPerson(Booking booking)
+        {
+            int bookingId = booking.id;
+            Person mainPerson = _context.BookingPerson
+    .Join(_context.Person,
+          bp => bp.PersonID,
+          p => p.id,
+          (bp, p) => new { bp, p })
+    .Where(joined => bookingId == joined.bp.BookingID &&
+                     Convert.ToInt32(joined.p.RoleRelation) >= 16 &&
+                     Convert.ToInt32(joined.p.RoleRelation) <= 18)
+    .Select(joined => joined.p)  // Selects the Person entity
+    .ToList()[0]; // Change Host in tipoalloggiato in a number
+
+            return mainPerson;
+        }
+
+        private int getGuestCount(Booking booking)
+        {
+            int bookingId = booking.id;
+            int guestsPerBooking = _context.BookingPerson
+                                        .Where(bp => bookingId == bp.BookingID)
+                                        .GroupBy(bp => bp.BookingID)
+                                        .Select(g => g.Count()).ToList()[0];
+            return guestsPerBooking;
+        }
+
+        private Room getRoom(Booking booking)
+        {
+            int roomId = booking.RoomID;
+            Room roomsList = _context.Room.Find(roomId);
+
+            return roomsList;
+        }
+
+
+        private List<Person> getPersonsDetails(string[] personIDs)
+        {
+            int[] iPersonIDs = Array.ConvertAll(personIDs, int.Parse);
+            var persons = _context.Person.Where(x => iPersonIDs.Contains(x.id)).ToList();
+            return persons;
+        }
+
+        private DocumentDocumentType getDocumentDetails(Person person)
+        {
+            DocumentDocumentType document = new DocumentDocumentType();
+            document.Document = _context.Document.Find(person.DocumentID);
+            if (document.Document == null)
+            {
+                return null;
+            }
+            // Substitute the code with the correspondent document description
+            document.DocumentType = _context.TipoDocumento.FirstOrDefault(x => x.Codice.Equals(document.Document.DocumentType)).Descrizione;
+            return document;
+        }
+
+        private Booking getBookingDetails(string bookingID)
+        {
+            var booking = _context.Booking.Find(Convert.ToInt32(bookingID));
+            return booking;
+        }
+
+        private Room getRoomDetails(int? roomID)
+        {
+            var room = _context.Room.Find(roomID);
+            return room;
+        }
+
+        private BookChannel getChannelDetailsS(string? channelId)
+        {
+            var channel = _context.BookChannel.Find(Convert.ToInt32(channelId));
+            return channel;
+        }
+
+        private Configuration getConfiguration()
+        {
+            var configurations = _context.Configuration.FirstOrDefault(); // only one configuration exist
+            return configurations;
+        }
+        private BookChannel getChannelDetails(int? channelId)
+        {
+            var channel = _context.BookChannel.Find(channelId);
+            return channel;
+        }
+
+        private string getBirthPlaceDescription(Person p)
+        {
+            if (p.BirthCountry.Equals("100000100"))
+            { // If birthcountry is Italy
+                return _context.Comuni.Find(p.BirthPlace).Descrizione;
+            }
+            else
+            {
+                return "Estero";
+            }
+        }
+
+        private async Task updateIsContractPrintedAsync(Booking booking)
+        {
+            booking.ContractPrinted = true;
+            _context.Update(booking);
+            await _context.SaveChangesAsync();
+        }
+        #endregion
     }
 }

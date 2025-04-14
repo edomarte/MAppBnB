@@ -17,5 +17,4 @@ public class Document
     public string? IssuingCountry { get; set; }
     [DataType(DataType.Upload)]
     public byte[]? PdfCopy { get; set; }
-    public int ?PersonID { get; set; }
 }

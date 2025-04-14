@@ -114,8 +114,6 @@ namespace MAppBnB.Controllers
                         // If there is no document in the configuration, add the document from the viewmodel to the database.
                         if (model.Configuration.DocumentID == null)
                         {
-                            // Link the person in the configuration to the document.
-                            model.Document.PersonID = model.Person.id;
                             // Add the document to the database.
                             _context.Add(model.Document);
                             await _context.SaveChangesAsync();

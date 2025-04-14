@@ -2070,3 +2070,9 @@ c:\tmp\MAppBnB\obj\Debug\net9.0\compressed\hlvuidnl8f-7dt7cbox19.gz
 c:\tmp\MAppBnB\obj\Debug\net9.0\compressed\le22icaqyj-gii2biuzs8.gz
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\hlvuidnl8f-7dt7cbox19.gz
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\le22icaqyj-gii2biuzs8.gz
+C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\BookingDetailsTemplate.docx
+C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Contract25.docx
+C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\ContractTemplate.docx
+C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-Checkin25.docx
+C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-CheckinTemplate.docx
+C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\ReportTemplate.xlsx
