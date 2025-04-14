@@ -10,8 +10,6 @@ using MAppBnB.Data;
 
 namespace MAppBnB.Controllers
 {
-    //TODO: se host, non farlo vedere nella lista delle persone. Qui e nell'hub.
-    //TODO: se è capofamiglia, capogruppo, o ospite singolo, documento obbligatorio
     public class PersonController : Controller
     {
         private readonly MappBnBContext _context;
@@ -171,8 +169,7 @@ namespace MAppBnB.Controllers
                         addPdfToDbAsync(model);
                         _context.Add(model.Document);
                         await _context.SaveChangesAsync();
-                        var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
-                        model.Person.DocumentID = document.id;
+                        model.Person.DocumentID = model.Document.id;
                     }
                     else
                     {
@@ -262,8 +259,7 @@ namespace MAppBnB.Controllers
                                     model.Document.PersonID = model.Person.id;
                                     _context.Add(model.Document);
                                     await _context.SaveChangesAsync();
-                                    var document = await _context.Document.FirstOrDefaultAsync(x => x.SerialNumber == model.Document.SerialNumber && x.IssuingCountry == model.Document.IssuingCountry);
-                                    model.Person.DocumentID = document.id;
+                                    model.Person.DocumentID = model.Document.id;
                                 }
                                 else
                                 {

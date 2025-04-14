@@ -112,7 +112,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Document.IssuingCountry" class="control-label"></label>
-                <select asp-for="Document.IssuingCountry" class="form-control" id="selectorIssuingCountry">
+                <select asp-for="Document.IssuingCountry" class="form-control" id="selectorIssuingCountry"> //TODO: non aggiunge i comuni nonostante lo script.
                     @foreach (var stato in ViewBag.Stati)
                     {
                         @if (!stato.Codice.Equals("100000100"))
@@ -160,8 +160,6 @@
 </div>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/countryProvincePlaceSelector.js" defer></script>
-<script src="~/js/personEdit.js" defer></script>
-
 
 @section Scripts {
     @{
