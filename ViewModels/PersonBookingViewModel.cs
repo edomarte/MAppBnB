@@ -1,5 +1,4 @@
 using MAppBnB;
-using SignalRChat.Hubs;
 
 public class PersonBookingViewModel
 {

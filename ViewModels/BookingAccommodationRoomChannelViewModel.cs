@@ -1,5 +1,4 @@
 using MAppBnB;
-using MAppBnB.Models;
 
 public class BookingAccommodationRoomChannelViewModel
     {

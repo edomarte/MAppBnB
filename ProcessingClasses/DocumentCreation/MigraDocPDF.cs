@@ -2,52 +2,55 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.Rendering;
-using MigraDoc.Rendering.Extensions;
-using PdfSharp.Pdf;
-
 
 public class MigraDocPDF
 {
-
+    // Converts a Word document (.docx) to a MigraDoc Document and saves it as a PDF
     public static MigraDoc.DocumentObjectModel.Document ConvertWordToPdf(string docPath, string pdfPath)
     {
         var doc = new MigraDoc.DocumentObjectModel.Document();
         var section = doc.AddSection();
         section.PageSetup.PageFormat = PageFormat.A4; //A4 page
 
-
+        // Open the Word document in read-only mode
         using (var wordDoc = WordprocessingDocument.Open(docPath, false))
         {
             var body = wordDoc.MainDocumentPart.Document.Body;
-            ApplyPageSetup(wordDoc, section);
+            ApplyPageSetup(wordDoc, section); // Apply page margins from Word to MigraDoc
 
+            // Process each paragraph in the Word document
             foreach (var para in body.Elements<DocumentFormat.OpenXml.Wordprocessing.Paragraph>())
             {
+                // Add a paragraph
                 var migraPara = section.AddParagraph();
-                ApplyParagraphFormatting(para, migraPara, section);
+                ApplyParagraphFormatting(para, migraPara, section); // Apply paragraph-level formatting
 
+                // Process each run (text span) within the paragraph
                 foreach (var run in para.Elements<Run>())
                 {
+                    // Skip MERGEFIELD placeholders (Avoid duplication)
                     if (!run.InnerText.Contains("MERGEFIELD"))
                     {
+                        // Add formatted text
                         var text = migraPara.AddFormattedText(run.InnerText);
-                        ApplyTextFormatting(run, text);
+                        ApplyTextFormatting(run, text); // Apply text-level formatting
                     }
-
                 }
             }
         }
 
+        // Render the PDF from the MigraDoc document
         PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true);
         pdfRenderer.Document = doc;
         pdfRenderer.RenderDocument();
 
         // Save the generated PDF
         pdfRenderer.PdfDocument.Save(pdfPath);
-
+        // Return the file.
         return doc;
     }
 
+    // Applies page margins from the Word document to the MigraDoc section
     static void ApplyPageSetup(WordprocessingDocument wordDoc, Section section)
     {
         // Set margins to 1 inch by default, or use the values from Word if available
@@ -68,8 +71,10 @@ public class MigraDocPDF
         }
     }
 
+    // Applies formatting from a Word paragraph to a MigraDoc paragraph
     static void ApplyParagraphFormatting(DocumentFormat.OpenXml.Wordprocessing.Paragraph para, MigraDoc.DocumentObjectModel.Paragraph migraPara, Section section)
     {
+        // Get the paragraph properties.
         var props = para.ParagraphProperties;
         if (props != null)
         {
@@ -92,7 +97,6 @@ public class MigraDocPDF
                 {
                     migraPara.Format.Alignment = ParagraphAlignment.Left;
                 }
-
             }
 
             // Apply spacing (before, after, and line spacing)
@@ -106,11 +110,9 @@ public class MigraDocPDF
             // Apply indentation (respect page width and margins)
             if (props.Indentation != null)
             {
-                double leftIndent = props.Indentation.Left != null ? Convert.ToDouble(props.Indentation.Left) : 0;
-                double rightIndent = props.Indentation.Right != null ? Convert.ToDouble(props.Indentation.Right) : 0;
-                double firstLineIndent = props.Indentation.FirstLine != null ? Convert.ToDouble(props.Indentation.FirstLine) : 0;
+                 double firstLineIndent = props.Indentation.FirstLine != null ? Convert.ToDouble(props.Indentation.FirstLine) : 0;
 
-                // Ensure the left indent doesn't exceed the available space (page width - margins)
+                // Ensure the left indent doesn't exceed the available space (set to 0 because indentation is already applied at document level apart from first line).
                 migraPara.Format.LeftIndent = Unit.FromPoint(0);
                 migraPara.Format.RightIndent = Unit.FromPoint(0);
                 migraPara.Format.FirstLineIndent = Unit.FromPoint(firstLineIndent);
@@ -121,6 +123,7 @@ public class MigraDocPDF
             {
                 foreach (var tab in props.Tabs.Elements<DocumentFormat.OpenXml.Wordprocessing.TabStop>())
                 {
+                    // For each tab, align according to its property.
                     TabAlignment align;
                     if (tab.Val == TabStopValues.Center)
                     {
@@ -134,6 +137,7 @@ public class MigraDocPDF
                     {
                         align = TabAlignment.Left;
                     }
+                    // Add a tab stop.
                     migraPara.Format.TabStops.AddTabStop(Unit.FromPoint(tab.Position), align);
                 }
             }
@@ -156,9 +160,7 @@ public class MigraDocPDF
         }
     }
 
-
-
-
+    // Applies character formatting from a Word Run to a MigraDoc FormattedText object
     static void ApplyTextFormatting(Run run, FormattedText text)
     {
         var props = run.RunProperties;
@@ -174,7 +176,6 @@ public class MigraDocPDF
                 text.Color = ConvertHexToColor(props.Color.Val);
             }
 
-
             if (props.RunFonts != null && props.RunFonts.Ascii != null)
             {
                 text.Font.Name = props.RunFonts.Ascii?.Value ?? "Times New Roman";
@@ -182,6 +183,7 @@ public class MigraDocPDF
         }
     }
 
+    // Converts a hex color code (e.g., "FF0000") to a MigraDoc Color
     static MigraDoc.DocumentObjectModel.Color ConvertHexToColor(string hex)
     {
         if (hex.Length == 6)
