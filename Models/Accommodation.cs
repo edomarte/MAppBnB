@@ -57,6 +57,6 @@ public class Accommodation
     public decimal? TownFee { get; set; }
     [DataType(DataType.Text)]
     [MaxLength(6, ErrorMessage = "AW ID Appartamento must be max 6 chars")]
-
+    [Display(Name = "Alloggiati Web ID Appartamento")]
     public string? AWIDAppartamento { get; set; }
 }

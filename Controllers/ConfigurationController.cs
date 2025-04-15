@@ -92,24 +92,8 @@ namespace MAppBnB.Controllers
             {
                 try
                 {
-                    // If there is no person in the configuration
-                    if (model.Configuration.PersonID == null)
-                    {
-                        // Add person to the database.
-                        _context.Add(model.Person);
-                        await _context.SaveChangesAsync();
-                        // Add the person id to the configuration
-                        model.Configuration.PersonID = model.Person.id;
-                    }
-                    else
-                    {
-                        // If there is already a person in the configuration, update it.
-                        _context.Update(model.Person);
-                        await _context.SaveChangesAsync();
-                    }
-
-                    // if there is a document in the viewmodel.
-                    if (model.Document.SerialNumber != null)
+                    // If there is a document in the viewmodel.
+                    if (model.Document!=null && model.Document.SerialNumber != null)
                     {
                         // If there is no document in the configuration, add the document from the viewmodel to the database.
                         if (model.Configuration.DocumentID == null)
@@ -128,6 +112,23 @@ namespace MAppBnB.Controllers
                             await _context.SaveChangesAsync();
                         }
                     }
+
+                    // If there is no person in the configuration
+                    if (model.Configuration.PersonID == null)
+                    {
+                        // Add person to the database.
+                        _context.Add(model.Person);
+                        await _context.SaveChangesAsync();
+                        // Add the person id to the configuration
+                        model.Configuration.PersonID = model.Person.id;
+                    }
+                    else
+                    {
+                        // If there is already a person in the configuration, update it.
+                        _context.Update(model.Person);
+                        await _context.SaveChangesAsync();
+                    }
+                   
                     // Update the fields of the configuration not related to person or document in the database.
                     _context.Update(model.Configuration);
                     await _context.SaveChangesAsync();

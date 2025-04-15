@@ -2076,3 +2076,11 @@ C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTe
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-Checkin25.docx
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-CheckinTemplate.docx
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\ReportTemplate.xlsx
+c:\tmp\MAppBnB\bin\Debug\net9.0\DocumentTemplates\BookingDetailsTemplate.docx
+c:\tmp\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Contract25.docx
+c:\tmp\MAppBnB\bin\Debug\net9.0\DocumentTemplates\ContractTemplate.docx
+c:\tmp\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-Checkin25.docx
+c:\tmp\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-CheckinTemplate.docx
+c:\tmp\MAppBnB\bin\Debug\net9.0\DocumentTemplates\ReportTemplate.xlsx
+c:\tmp\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Contract1.docx
+c:\tmp\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-Checkin1.docx

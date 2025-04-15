@@ -19,6 +19,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         }
 
 #region SignalR Methods
+        // Method called by the client to create a contract.
         public async Task CreateContract(string mainPersonID, string accommodationID, string bookingId)
         {
             try
@@ -31,7 +32,6 @@ namespace SignalRChat.Hubs //TODO: Change namespace
                 {
                     throw new Exception("Host not set in configuration!");
                 }
-                //Person host = getBirthPlaceDescription(GetPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString()));
                 Person host = getPersonDetails(_context.Configuration.FirstOrDefault().PersonID.ToString());
 
                 DocumentDocumentType hostDocument = getDocumentDetails(host);
@@ -92,7 +92,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             try
             {
-                string contractPath = DocumentProcessing.GenerateContractPDF(bookingId);
+                string contractPath = DocumentProcessing.GeneratePDFDocument(bookingId,"Contract");
                 await startFileDownloadAsync(contractPath);
                 DocumentProcessing.DeleteDocument(contractPath); // Delete the contract after download
             }
@@ -106,7 +106,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         {
             try
             {
-                string preCheckinPath = DocumentProcessing.GeneratePreCheckinPDF(bookingId);
+                string preCheckinPath = DocumentProcessing.GeneratePDFDocument(bookingId,"Pre-Checkin");
                 await startFileDownloadAsync(preCheckinPath);
                 DocumentProcessing.DeleteDocument(preCheckinPath); // Delete the document after download
             }
