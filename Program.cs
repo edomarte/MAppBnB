@@ -1,51 +1,64 @@
 using Microsoft.EntityFrameworkCore;
 using MAppBnB.Data;
 using SignalRChat.Hubs;
-using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<MappBnBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'MappBnBContext' not found.")));
 
-// Add services to the container.
+// Configura il contesto DbContext utilizzando SQL Server e la stringa di connessione definita in appsettings.json
+builder.Services.AddDbContext<MappBnBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") 
+        ?? throw new InvalidOperationException("Connection string 'MappBnBContext' not found.")));
+
+// Aggiunge i servizi MVC (controller + views) all'app
 builder.Services.AddControllersWithViews();
+
+// Aggiunge il supporto per SignalR per la comunicazione in tempo reale
 builder.Services.AddSignalR();
+
+// Imposta l'host per ascoltare tutte le interfacce sulla porta 5000
 builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
-// Make keys persistent to work on different Docker containers
+// Configura la protezione dei dati per rendere le chiavi persistenti tra container Docker diversi
 builder.Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo("/var/dpkeys"))
-    .SetApplicationName("MAppBnB");
+    .PersistKeysToFileSystem(new DirectoryInfo("/var/dpkeys")) // Percorso in cui salvare le chiavi
+    .SetApplicationName("MAppBnB"); // Nome dell'app usato per isolare le chiavi
 
-// Imposta la cultura globale come InvariantCulture
+// Imposta la cultura globale predefinita su InvariantCulture (utile per formattazioni consistenti)
 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 var app = builder.Build();
 
-
-// Configure the HTTP request pipeline.
+// Configura la pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
+    // In produzione, usa un gestore di errori generico
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // Abilita HSTS per migliorare la sicurezza HTTPS
     app.UseHsts();
 }
 
+// Forza il reindirizzamento da HTTP a HTTPS
 app.UseHttpsRedirection();
+
+// Abilita il routing per le richieste HTTP
 app.UseRouting();
 
+// Abilita l'autorizzazione (anche se non viene specificata autenticazione in questo file)
 app.UseAuthorization();
 
+// Mappa eventuali asset statici (metodo personalizzato, presumibilmente definito altrove)
 app.MapStaticAssets();
 
+// Definisce la route predefinita per i controller MVC
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+    .WithStaticAssets(); // Includi asset statici nella route MVC (metodo custom)
 
+// Mappa gli hub SignalR alle rispettive rotte WebSocket
 app.MapHub<PersonSearchHub>("/personSearchHub");
 app.MapHub<RoomSelectorHub>("/roomSelectorHub");
 app.MapHub<CreateDocumentsHub>("/createDocumentsHub");
@@ -53,4 +66,5 @@ app.MapHub<DocumentTransmissionHub>("/docsTransmissionHub");
 app.MapHub<CalendarHub>("/calendarHub");
 app.MapHub<CountryProvincePlaceSelectorHub>("/countryProvincePlaceSelectorHub");
 
+// Avvia l'applicazione
 app.Run();

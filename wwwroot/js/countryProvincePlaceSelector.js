@@ -1,132 +1,158 @@
 "use strict";
+
+// Establish SignalR connection to the country-province-place selector hub
 var connection = new signalR.HubConnectionBuilder().withUrl("/countryProvincePlaceSelectorHub").build();
 
+// When the server sends the list of provinces
 connection.on("ProvinceList", function (provinces) {
     provinces.forEach(province => {
+        // Add each province to the selector as an <option>
         provinceSelector.append(new Option(province.descrizione, province.codice));
     });
+    // Enable the province selector after population
     $("#provinceSelector").prop('disabled', false);
 });
 
+// Event listener for when the country is changed
 document.getElementById("countrySelector").addEventListener("change", function (event) {
-
+    // Clear province and place dropdowns
     $("#provinceSelector").empty();
     $("#placeSelector").empty();
 
-    if ($("#countrySelector").val() != "100000100") {//If not Italia --> province and place are Estero (Foreign)
+    // If the selected country is not Italy
+    if ($("#countrySelector").val() != "100000100") {
+        // Set "Estero" (Foreign) for both province and place
         $("#provinceSelector").append(new Option("ES", "ES"));
         $("#placeSelector").append(new Option("ES", "ES"));
-        
+
+        // Select the "ES" option for both selectors
         $("#provinceSelector option[value='ES']").prop("selected", true);
         $("#placeSelector option[value='ES']").prop("selected", true);
     } else {
+        // If Italy is selected, request provinces from the server
         connection.invoke("GetProvinces").catch(function (err) {
             return console.error(err.toString());
         }).then(function () {
+            // Once provinces are retrieved, get towns for the selected province
             connection.invoke("GetTowns", $("#provinceSelector").val()).catch(function (err) {
                 return console.error(err.toString());
-            })
-        })
+            });
+        });
     }
-
 });
 
+// When the server sends the list of towns for a province
 connection.on("TownsList", function (towns) {
     towns.forEach(town => {
+        // Add each town to the place selector as an <option>
         $("#placeSelector").append(new Option(town.descrizione, town.codice));
     });
+    // Enable the place selector after population
     $("#placeSelector").prop('disabled', false);
 });
 
+// Event listener for when the province is changed
 document.getElementById("provinceSelector").addEventListener("change", function (event) {
-
+    // Clear and disable the place selector while it is loading
     $("#placeSelector").empty();
     $("#placeSelector").prop('disabled', true);
 
+    // Request towns for the selected province
     connection.invoke("GetTowns", $("#provinceSelector").val()).catch(function (err) {
         return console.error(err.toString());
     });
 
+    // Enable the place selector (will be populated via the "TownsList" handler)
     $("#placeSelector").prop('disabled', false);
 });
 
+// Start the SignalR connection
 connection.start().then(function () {
+    // Enable or disable document input fields based on role selection
     enableDisableDocInputs();
-    // No info in configuration yet
+
+    // If no province is preselected and ES (foreign) is stored
     if ($("#hiddenBirthProvince").val() == "ES") {
-        // Default to Italy
+        // Default to "Estero" for province and place
         $("#provinceSelector").append(new Option("Estero", "ES"));
         $("#placeSelector").append(new Option("Estero", "ES"));
         $("#provinceSelector option[value='ES']").prop("selected", true);
         $("#placeSelector option[value='ES']").prop("selected", true);
     } else {
+        // Otherwise, load provinces
         connection.invoke("GetProvinces").catch(function (err) {
             return console.error(err.toString());
         }).then(function () {
             let hbp = $("#hiddenBirthProvince").val();
-            if(hbp == undefined || hbp == "" || hbp == null){
+            // If no stored province, default to Agrigento (AG)
+            if (hbp == undefined || hbp == "" || hbp == null) {
                 $("#provinceSelector option[value='AG']").prop("selected", true);
-
-            }else{
+            } else {
                 $("#provinceSelector option[value='" + hbp + "']").prop("selected", true);
             }
-        })
+        });
 
-        // If not yet selected default to the first in db AG (Agrigento)
-        var birthProvince=$("#hiddenBirthProvince").val();
-        if(birthProvince==undefined || birthProvince=="" || birthProvince==null)
-            birthProvince="AG"
+        // Determine which province to use for towns
+        var birthProvince = $("#hiddenBirthProvince").val();
+        if (birthProvince == undefined || birthProvince == "" || birthProvince == null)
+            birthProvince = "AG";
         else
-            birthProvince=$("#hiddenBirthProvince").val()
+            birthProvince = $("#hiddenBirthProvince").val();
 
+        // Request towns for the determined province
         connection.invoke("GetTowns", birthProvince).catch(function (err) {
             return console.error(err.toString());
         }).then(function () {
             let hbp = $("#hiddenBirthPlace").val();
-            if(hbp == undefined || hbp == "" || hbp == null){
-                // Default to Agrigento
+            // If no town is preselected, default to Agrigento
+            if (hbp == undefined || hbp == "" || hbp == null) {
                 $("#placeSelector option[value='419084001']").prop("selected", true);
-            }else{
+            } else {
                 $("#placeSelector option[value='" + hbp + "']").prop("selected", true);
             }
-        })
+        });
     }
 }).catch(function (err) {
     return console.error(err.toString());
 });
 
+// Flag to prevent duplicate loading of all towns
 let isLoaded = false;
 
+// Load all towns when the issuing country selector gains focus (for document section)
 document.getElementById("selectorIssuingCountry").addEventListener("focus", function (event) {
-
     if (!isLoaded) {
         isLoaded = true;
         connection.invoke("GetAllTowns").catch(function (err) {
             return console.error(err.toString());
         });
     }
-
 });
 
+// When the server sends the full list of towns (used for document issuing country)
 connection.on("AllTownsList", function (towns) {
     towns.forEach(town => {
+        // Add each town to the issuing country selector
         $("#selectorIssuingCountry").append(new Option(town.descrizione, town.codice));
     });
 });
 
-
+// When the role selector is changed, toggle document input fields accordingly
 document.getElementById("roleRelationSelector").addEventListener("change", function (event) {
     enableDisableDocInputs();
 });
 
-function enableDisableDocInputs(){
+// Enable or disable document-related inputs based on selected role
+function enableDisableDocInputs() {
     var selectedRole = $("#roleRelationSelector").val();
-    if (selectedRole == "19" || selectedRole == "20") { // If not a main person, no need for document
+    if (selectedRole == "19" || selectedRole == "20") {
+        // If role is not a primary person, disable document inputs
         $("#pdfInput").prop("disabled", true);
         $("#serNumInput").prop("disabled", true);
         $("#docTypeSelector").prop("disabled", true);
         $("#selectorIssuingCountry").prop("disabled", true);
-    } else {// If a main person, need for document
+    } else {
+        // If role is a primary person, enable document inputs
         $("#pdfInput").prop("disabled", false);
         $("#serNumInput").prop("disabled", false);
         $("#docTypeSelector").prop("disabled", false);
