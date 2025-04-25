@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+SOSSguF1+0=",
+  "dgSpecHash": "roP8+txooX8=",
   "success": true,
-  "projectFilePath": "C:\\tmp\\MAppBnB\\MAppBnB.csproj",
+  "projectFilePath": "C:\\Users\\edoma\\Documents\\MAppBnB_All\\MAppBnB\\MAppBnB\\MAppBnB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\edoma\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\edoma\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

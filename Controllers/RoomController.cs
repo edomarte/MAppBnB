@@ -163,6 +163,17 @@ namespace MAppBnB.Controllers
             {
                 return NotFound();
             }
+
+            // Check if the room is already in a booking (junction table BookingPerson).
+            bool isRoomInBooking = _context.Booking.Any(x => x.RoomID == id);
+            // If the room is in a booking, show an error message and redirect to the index page (cannot be deleted).
+            if (isRoomInBooking)
+            {
+                // TempData is used to store data that can be accessed in the next request.
+                TempData["Error"] = room.Name + " is already in a booking. You cannot delete it.";
+                return RedirectToAction(nameof(Index));
+            }
+
             // Include the accommodation list in the Viewbag for the dropdown.
             ViewBag.AccommodationName = _context.Accommodation.Find(room.AccommodationId);
             // Return the view with the room object.

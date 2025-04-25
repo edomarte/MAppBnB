@@ -31,10 +31,8 @@ public class Accommodation
     [DataType(DataType.Text)]
     public string? UnitApartment { get; set; }
     [DataType(DataType.Text)]
-    [RegularExpression(@"^\+(?:[\d]{2,3})$")]
+    [RegularExpression(@"^\+(?:[\d]{2,3})$", ErrorMessage = "Phone prefix must start with + and be followed by 2 or 3 digits")]
     public string? PhonePrefix { get; set; }
-
-    //[RegularExpression(@"[\d]")]
     [DataType(DataType.PhoneNumber)]
     public string? PhoneNumber { get; set; }
     [DataType(DataType.EmailAddress)]

@@ -378,7 +378,7 @@ namespace MAppBnB.Controllers
             // Find description for the following fields depending on country. Add them to the ViewBag to show in the view.
             string birthCountry = _context.Stati.FindAsync(person.BirthCountry).Result.Descrizione ?? "";
             ViewBag.BirthCountry = birthCountry;
-            ViewBag.BirthProvince = person.BirthProvince ?? "";
+            ViewBag.BirthProvince = _context.Province.FindAsync(person.BirthProvince).Result.Descrizione ?? "";
             ViewBag.RoleRelation = _context.TipoAlloggiato.FindAsync(person.RoleRelation).Result.Descrizione ?? "";
 
             // If the birth country is Italy, get the description from the towns table (Comuni).

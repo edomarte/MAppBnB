@@ -94,7 +94,7 @@ namespace MAppBnB.Controllers
                                  NightsBooked = g.Sum(x => (x.b.CheckOutDateTime - x.b.CheckinDateTime).TotalDays),
                                  TotalBookings = g.Count(),
                                  TotalRevenue = g.Sum(x => x.b.Price - x.b.Discount),
-                                 AfterFeeRevenue = g.Sum(x => x.b.Price - x.b.Discount - ((x.b.Price - x.b.Discount) * x.bc.Fee))
+                                 AfterFeeRevenue = g.Sum(x => (x.b.Price ?? 0m) - (x.b.Discount ?? 0m) - (((x.b.Price ?? 0m) - (x.b.Discount ?? 0m)) * x.bc.Fee)) // Nullable types
                              })
                              .ToList(); // Materialize the result
 
@@ -138,8 +138,8 @@ namespace MAppBnB.Controllers
                     allChannels.TotBookings += chanl.TotalBookings;
                     fbc.GrossRevenue = chanl.TotalRevenue;
                     allChannels.GrossRevenue += chanl.TotalRevenue;
-                    fbc.NetRevenue = chanl.AfterFeeRevenue;
-                    allChannels.NetRevenue += chanl.AfterFeeRevenue;
+                    fbc.NetRevenue = Math.Round(chanl.AfterFeeRevenue,2);
+                    allChannels.NetRevenue += Math.Round(chanl.AfterFeeRevenue,2);
                     fr.FinancialsByChannels.Add(fbc);
                 }
                 // Add the allChannel object at the end of the field FinancialsByChannels.
@@ -160,6 +160,6 @@ namespace MAppBnB.Controllers
         public double NightsBooked { get; set; }
         public int TotalBookings { get; set; }
         public decimal? TotalRevenue { get; set; }
-        public decimal? AfterFeeRevenue { get; set; }
+        public decimal AfterFeeRevenue { get; set; }
     }
 }

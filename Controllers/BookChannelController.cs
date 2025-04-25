@@ -142,6 +142,15 @@ namespace MAppBnB.Controllers
             {
                 return NotFound(); // 404 if not found
             }
+            // Check if the channel is already in a booking.
+            bool isChannelInBooking = _context.Booking.Any(x => x.ChannelID == id);
+            // If the channel is in a booking, show an error message and redirect to the index page (cannot be deleted).
+            if (isChannelInBooking)
+            {
+                // TempData is used to store data that can be accessed in the next request.
+                TempData["Error"] = bookChannel.Name + " is already in a booking. You cannot delete it.";
+                return RedirectToAction(nameof(Index));
+            }
 
             return View(bookChannel); // Show confirmation view
         }

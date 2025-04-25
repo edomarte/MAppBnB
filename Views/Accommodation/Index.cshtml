@@ -1,4 +1,4 @@
-@model IEnumerable<MAppBnB.Accommodation>
+@model IEnumerable<AccommodationAccommodationNames>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,59 +9,66 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<p>
+    @if(TempData["Error"]!=null){
+        <div class="alert alert-danger" role="alert">
+            @TempData["Error"]
+        </div>
+    }
+</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Accommodation.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.Accommodation.Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostCode)
+                @Html.DisplayNameFor(model => model.Accommodation.PostCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                @Html.DisplayNameFor(model => model.Accommodation.City)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Province)
+                @Html.DisplayNameFor(model => model.Accommodation.Province)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                @Html.DisplayNameFor(model => model.Accommodation.Country)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Floor)
+                @Html.DisplayNameFor(model => model.Accommodation.Floor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UnitApartment)
+                @Html.DisplayNameFor(model => model.Accommodation.UnitApartment)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhonePrefix)
+                @Html.DisplayNameFor(model => model.Accommodation.PhonePrefix)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Html.DisplayNameFor(model => model.Accommodation.PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Accommodation.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Website)
+                @Html.DisplayNameFor(model => model.Accommodation.Website)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CIN)
+                @Html.DisplayNameFor(model => model.Accommodation.CIN)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CIR)
+                @Html.DisplayNameFor(model => model.Accommodation.CIR)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TownFee)
+                @Html.DisplayNameFor(model => model.Accommodation.TownFee)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CleaningFee)
+                @Html.DisplayNameFor(model => model.Accommodation.CleaningFee)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AWIDAppartamento)
+                @Html.DisplayNameFor(model => model.Accommodation.AWIDAppartamento)
             </th>
             <th></th>
         </tr>
@@ -70,60 +77,60 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Accommodation.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address)
+                @Html.DisplayFor(modelItem => item.Accommodation.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PostCode)
+                @Html.DisplayFor(modelItem => item.Accommodation.PostCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City)
+                @Html.DisplayFor(modelItem => item.CityName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Province)
+                @Html.DisplayFor(modelItem => item.ProvinceName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Country)
+                @Html.DisplayFor(modelItem => item.CountryName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Floor)
+                @Html.DisplayFor(modelItem => item.Accommodation.Floor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UnitApartment)
+                @Html.DisplayFor(modelItem => item.Accommodation.UnitApartment)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhonePrefix)
+                @Html.DisplayFor(modelItem => item.Accommodation.PhonePrefix)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                @Html.DisplayFor(modelItem => item.Accommodation.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.Accommodation.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Website)
+                @Html.DisplayFor(modelItem => item.Accommodation.Website)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CIN)
+                @Html.DisplayFor(modelItem => item.Accommodation.CIN)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CIR)
+                @Html.DisplayFor(modelItem => item.Accommodation.CIR)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AWIDAppartamento)
+                @Html.DisplayFor(modelItem => item.Accommodation.AWIDAppartamento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TownFee)
+                @Html.DisplayFor(modelItem => item.Accommodation.TownFee)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CleaningFee)
+                @Html.DisplayFor(modelItem => item.Accommodation.CleaningFee)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Accommodation.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Accommodation.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Accommodation.id">Delete</a>
             </td>
         </tr>
 }

@@ -26,8 +26,30 @@ namespace MAppBnB.Controllers
         // GET: Accommodation
         // Returns a view with the list of all accommodations
         public async Task<IActionResult> Index()
+        {   
+            var accommodations=await _context.Accommodation.ToListAsync();
+            var accommodationNames= getCountryProvinceCityNames(accommodations);
+            return View(accommodationNames);
+        }
+
+        private List<AccommodationAccommodationNames>  getCountryProvinceCityNames(List<Accommodation> accommodations)
         {
-            return View(await _context.Accommodation.ToListAsync());
+            List<AccommodationAccommodationNames> accommodationNames = new List<AccommodationAccommodationNames>();
+            foreach (var accommodation in accommodations)
+            {
+                var country = _context.Stati.FindAsync(accommodation.Country).Result.Descrizione ?? "";
+                var province = _context.Province.FindAsync(accommodation.Province).Result.Descrizione ?? "";
+                var city = country.Equals("ITALIA") ? _context.Comuni.FindAsync(accommodation.City).Result.Descrizione ?? "" : "ESTERO";
+
+                accommodationNames.Add(new AccommodationAccommodationNames
+                {
+                    Accommodation = accommodation,
+                    CountryName = country,
+                    ProvinceName = province,
+                    CityName = city
+                });
+            }
+            return accommodationNames;
         }
 
         // GET: Accommodation/Details/5
@@ -47,7 +69,28 @@ namespace MAppBnB.Controllers
                 return NotFound(); // Return 404 if not found
             }
 
+            showIndividualAccommodation(accommodation);
+
+            
             return View(accommodation); // Display details view
+        }
+
+        private void showIndividualAccommodation(Accommodation accommodation)
+        {
+            string country = _context.Stati.FindAsync(accommodation.Country).Result.Descrizione ?? "";
+            ViewBag.Country = country;
+            ViewBag.Province = _context.Province.FindAsync(accommodation.Province).Result.Descrizione ?? "";
+
+            // If the country is Italy, get the description from the towns table (Comuni).
+            if (country.Equals("ITALIA"))
+            {
+                ViewBag.City = _context.Comuni.FindAsync(accommodation.City).Result.Descrizione ?? "";
+            }
+            else
+            {
+                // If the country is not Italy, assign the City "ES".
+                ViewBag.City = "ESTERO";
+            }
         }
 
         // GET: Accommodation/Create
@@ -59,7 +102,9 @@ namespace MAppBnB.Controllers
                 ViewBag.IsGestioneAppartamenti = _context.Configuration.FirstOrDefault().IsGestioneAppartamenti;
             else
                 ViewBag.IsGestioneAppartamenti = false;
-
+            
+            // Populate the ViewBag with the necessary data for the dropdowns in the view.
+            ViewBag.Stati = _context.Stati.Where(x=> x.Descrizione == "Italia").ToList(); // Get the ID of the Italian state
             return View();
         }
 
@@ -102,6 +147,7 @@ namespace MAppBnB.Controllers
             else
                 ViewBag.IsGestioneAppartamenti = false;
 
+            ViewBag.Stati = _context.Stati.Where(x=> x.Descrizione=="ITALIA").ToList(); // Get the ID of the Italian state
             return View(accommodation); // Return the edit form
         }
 
@@ -156,6 +202,27 @@ namespace MAppBnB.Controllers
                 return NotFound(); // Return 404 if not found
             }
 
+            // Check if the accommodation is already in a booking.
+            bool isAccommodationInBooking = _context.Booking.Any(x => x.AccommodationID == id);
+            // If the person is in a booking, show an error message and redirect to the index page (cannot be deleted).
+            if (isAccommodationInBooking)
+            {
+                // TempData is used to store data that can be accessed in the next request.
+                TempData["Error"] = accommodation.Name + " is already in a booking. You cannot delete it.";
+                return RedirectToAction(nameof(Index));
+            }
+
+             // Check if the accommodation is already associated to a room.
+            bool isAccommodationInRoom = _context.Room.Any(x => x.AccommodationId == id);
+            // If the accommodation is is already associated to a room, show an error message and redirect to the index page (cannot be deleted).
+            if (isAccommodationInRoom)
+            {
+                // TempData is used to store data that can be accessed in the next request.
+                TempData["Error"] = accommodation.Name + " is already associated to a room. You cannot delete it.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            showIndividualAccommodation(accommodation); // Show individual accommodation details
             return View(accommodation); // Show delete confirmation
         }
 

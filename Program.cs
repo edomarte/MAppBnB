@@ -25,9 +25,22 @@ builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo("/var/dpkeys")) // Percorso in cui salvare le chiavi
     .SetApplicationName("MAppBnB"); // Nome dell'app usato per isolare le chiavi
 
-// Imposta la cultura globale predefinita su InvariantCulture (utile per formattazioni consistenti)
-CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+// Clone the InvariantCulture to create a custom culture
+var customCulture = (CultureInfo)CultureInfo.InvariantCulture.Clone();
+
+// Set date format
+customCulture.DateTimeFormat.ShortDatePattern = "dd-MM-yyyy";
+customCulture.DateTimeFormat.LongDatePattern = "dd-MM-yyyy"; // Optional, for long format too
+
+// Set currency symbol to Euro
+customCulture.NumberFormat.CurrencySymbol = "€";
+customCulture.NumberFormat.CurrencyDecimalDigits = 2;
+customCulture.NumberFormat.CurrencyDecimalSeparator = ",";
+customCulture.NumberFormat.CurrencyGroupSeparator = ".";
+
+// Apply globally
+CultureInfo.DefaultThreadCurrentCulture = customCulture;
+CultureInfo.DefaultThreadCurrentUICulture = customCulture;
 
 var app = builder.Build();
 

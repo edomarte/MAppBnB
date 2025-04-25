@@ -9,6 +9,13 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<p>
+    @if(TempData["Error"]!=null){
+        <div class="alert alert-danger" role="alert">
+            @TempData["Error"]
+        </div>
+    }
+</p>
 <table class="table">
     <thead>
         <tr>

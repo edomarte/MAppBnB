@@ -12,10 +12,13 @@ namespace SignalRChat.Hubs //TODO: Change namespace
     {
 
         private readonly MappBnBContext _context;
+        private readonly IHubContext<CreateDocumentsHub> _hubContext;
 
-        public CreateDocumentsHub(MappBnBContext context)
+        public CreateDocumentsHub(MappBnBContext context,IHubContext<CreateDocumentsHub>hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
+
         }
 
         #region SignalR Methods
@@ -181,12 +184,17 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         // Method for creating a PDF copy of an existing Microsoft word document (doc)
         private async void createPDFCopy(string bookingID, string documentType)
         {
-            // Generate the document and get its path.
-            string preCheckinPath = DocumentProcessing.GeneratePDFDocument(bookingID, documentType);
-            // Start file Download.
-            await startFileDownloadAsync(preCheckinPath);
-            // Delete the document after download (it will have to be recreated anyways next time).
-            DocumentProcessing.DeleteDocument(preCheckinPath); // Delete the document after download
+            try
+            {
+                // Generate the document and get its path.
+                string preCheckinPath = DocumentProcessing.GeneratePDFDocument(bookingID, documentType);
+                // Start file Download.
+                await startFileDownloadAsync(preCheckinPath);
+            }
+            catch (Exception e)
+            {
+                await Clients.All.SendAsync("Error", e.Message);
+            }
         }
 
         // Method for sending to the client the file to be downloaded.
@@ -197,8 +205,9 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             // Convert the array of byte in a base64 string.
             string base64String = Convert.ToBase64String(file);
             // Send the filename and the file to the client.
-            await Clients.All.SendAsync("DownloadFile", Path.GetFileName(filePath), base64String);
+            await _hubContext.Clients.All.SendAsync("DownloadFile", Path.GetFileName(filePath), base64String);
         }
+
 
         // Method for getting the report lines out of a list of bookings.
         private List<FinancialReportLine> getReportLines(List<Booking> bookings)
