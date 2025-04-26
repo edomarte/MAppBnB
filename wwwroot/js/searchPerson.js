@@ -159,7 +159,7 @@ async function checkPersonRolesAreCorrect(event) {
 
     // Validate according to booking rules
     if (mainPersonCount != 1) {
-        $("#personsErrorAlert").text("Select just one OSPITE SINGOLO")
+        $("#personsErrorAlert").text("Select one and only one main person (OSPITE SINGOLO, CAPOFAMIGLIA or CAPOGRUPPO).")
     } else {
         if (mainPersonRole == "16" && (familyMemberCount + groupComponentCount > 0)) {
             $("#personsErrorAlert").text("A booking with a OSPITE SINGOLO cannot contain any other person.")

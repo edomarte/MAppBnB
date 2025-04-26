@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>gbih301yn7</Fingerprint>
-      <Integrity>/Om/N/quGCAjCjgVkOa1oPmLTqzHKZJm8wYK2dAKUak=</Integrity>
+      <Fingerprint>l4scukxrui</Fingerprint>
+      <Integrity>ZZcW/zY3BEgVE8XBg0FtFUr9KfZ/1Lgdo2xRrGqJr7g=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</OriginalItemSpec>
@@ -156,8 +156,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>zbsxk76qm4</Fingerprint>
-      <Integrity>UQKKPqJS0J2gBz7gSRKAumyr+djibRpQGx5pyCJrq3g=</Integrity>
+      <Fingerprint>suerg0i2r0</Fingerprint>
+      <Integrity>DMx7tRQrvIzQilBo03xhTZvQn8YVqwfKN1CdZSENEMw=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\getRooms.js'))</OriginalItemSpec>
@@ -192,8 +192,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>biezt8cq0n</Fingerprint>
-      <Integrity>M9EoCTJ96JJYOznMf2NFcpmOfKAQkJZ0Dp+al5rjwXQ=</Integrity>
+      <Fingerprint>y2m3vmc2ar</Fingerprint>
+      <Integrity>iml+VRj7AU4G7sq0VZIo4DyIHy24wrT+bL1iqnuZgYU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</OriginalItemSpec>

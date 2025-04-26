@@ -51,6 +51,13 @@ connection.on("TownsList", function (towns) {
     $("#placeSelector").prop('disabled', false);
 });
 
+connection.on("GetTownOrCountry", function (town) {
+    $("#selectorIssuingCountry").append(new Option(town.descrizione, town.codice)); // Add the town to the issuing country selector
+    var docIssCountry = $("#DocumentIssuingCountryph").val(); // Get the currently selected room ID
+    $("#selectorIssuingCountry option[value='" + docIssCountry + "']").prop("selected", true); // Select the room that was previously selected in the form
+
+})
+
 // Event listener for when the province is changed
 document.getElementById("provinceSelector").addEventListener("change", function (event) {
     // Clear and disable the place selector while it is loading
@@ -70,6 +77,8 @@ document.getElementById("provinceSelector").addEventListener("change", function 
 connection.start().then(function () {
     // Enable or disable document input fields based on role selection
     enableDisableDocInputs();
+
+    addSelectedOption(); // Add the selected option in the issuing country selector
 
     // If no province is preselected and ES (foreign) is stored
     if ($("#hiddenBirthProvince").val() == "ES") {
@@ -116,6 +125,18 @@ connection.start().then(function () {
     return console.error(err.toString());
 });
 
+function addSelectedOption() {
+    var docIssCountry = $("#DocumentIssuingCountryph").val(); // Get the currently selected room ID
+
+    if (docIssCountry != undefined && docIssCountry != "" && docIssCountry != null) {
+        connection.invoke("GetTownOrCountry", docIssCountry).catch(function (err) {
+            return console.error(err.toString());
+        })
+    }
+
+
+}
+
 // Flag to prevent duplicate loading of all towns
 let isLoaded = false;
 
@@ -129,12 +150,27 @@ document.getElementById("selectorIssuingCountry").addEventListener("focus", func
     }
 });
 
+function loadAllTowns() {
+    if (!isLoaded) {
+        isLoaded = true;
+        connection.invoke("GetAllTowns").catch(function (err) {
+            return console.error(err.toString());
+        });
+    }
+}
+
 // When the server sends the full list of towns (used for document issuing country)
 connection.on("AllTownsList", function (towns) {
+    var docIssCountry = $("#DocumentIssuingCountryph").val(); // Get the currently selected room ID
+    $("#selectorIssuingCountry option[value='"+docIssCountry+"']").remove();
+    let options = "";
     towns.forEach(town => {
         // Add each town to the issuing country selector
-        $("#selectorIssuingCountry").append(new Option(town.descrizione, town.codice));
+        options += `<option value="${town.codice}">${town.descrizione}</option>`;
     });
+    $("#selectorIssuingCountry").append(options);
+
+    $("#selectorIssuingCountry option[value='" + docIssCountry + "']").prop("selected", true); // Select the room that was previously selected in the form
 });
 
 // When the role selector is changed, toggle document input fields accordingly

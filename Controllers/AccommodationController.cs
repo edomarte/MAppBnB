@@ -155,7 +155,7 @@ namespace MAppBnB.Controllers
         // Handles the submission of the edit form
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Name,Address,PostCode,City,Province,Country,Floor,UnitApartment,phone_prefix,phone_number,email,Website,CIN,CIR,CleaningFee,TownFee")] Accommodation accommodation)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Name,Address,PostCode,City,Province,Country,Floor,UnitApartment,phone_prefix,phone_number,email,Website,CIN,CIR,CleaningFee,TownFee,AWIDAppartamento")] Accommodation accommodation)
         {
             if (id != accommodation.id)
             {

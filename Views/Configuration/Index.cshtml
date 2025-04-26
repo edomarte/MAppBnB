@@ -122,8 +122,12 @@
             <input type="hidden" asp-for="Document.id" class="form-control" />
             <input type="hidden" asp-for="Person.BirthProvince" class="form-control" id="hiddenBirthProvince" />
             <input type="hidden" asp-for="Person.BirthPlace" class="form-control" id="hiddenBirthPlace" />
+            <input type="hidden" asp-for="Document.IssuingCountry" class="form-control" id="DocumentIssuingCountryph"/>
             <input type="hidden" asp-for="Configuration.PersonID" class="form-control" />
             <input type="hidden" asp-for="Person.id" class="form-control" />
+            <input type="hidden" asp-for="Person.DocumentID" class="form-control" />
+            <input type="hidden" asp-for="Configuration.id" class="form-control" />
+            <input type="hidden" asp-for="Configuration.DocumentID" class="form-control" />
 
             <div class="form-group">
                 <label asp-for="Configuration.IVAVendite" class="control-label"></label>
@@ -169,7 +173,6 @@
                 <span asp-validation-for="Configuration.IsGestioneAppartamenti" class="text-danger"></span>
             </div>
 
-            <input type="hidden" asp-for="Configuration.id" class="form-control" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

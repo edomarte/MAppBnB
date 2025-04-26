@@ -133,8 +133,9 @@
                 @if (@Model.Document != null && @Model.Document.PdfCopy != null)
                 {
                     <p>Yes</p>
-                    <a onclick="return confirm('Are you sure you want to delete this document?');" asp-controller="Document"
-                        asp-action="DeletePDFCopy" asp-route-id="@Model.Document.id">Delete PDF Copy</a>
+                    <a onclick="return confirm('Are you sure you want to delete this document?');" asp-controller="Person"
+                        asp-action="DeletePDFCopy" asp-route-docID="@Model.Document.id"
+                        asp-route-personID="@Model.Person.id">Delete PDF Copy</a>
                 }
                 else
                 {
@@ -147,6 +148,7 @@
             <input type="hidden" asp-for="Document.PdfCopy" class="form-control" />
             <input type="hidden" asp-for="Document.id" class="form-control" />
             <input type="hidden" asp-for="Person.DocumentID" class="form-control" />
+            <input type="hidden" asp-for="Document.IssuingCountry" class="form-control" id="DocumentIssuingCountryph"/>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

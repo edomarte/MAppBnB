@@ -48,17 +48,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"lnal7t1uvp"},{"Name":"integrity","Value":"sha256-z0vrrVgnjuaibvoTewNme8paE2MF4wFETU\u002BVIvQ5WV8="},{"Name":"label","Value":"_content/MAppBnB/js/calendar.js"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5849"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022z0vrrVgnjuaibvoTewNme8paE2MF4wFETU\u002BVIvQ5WV8=\u0022"},{"Name":"Last-Modified","Value":"Wed, 23 Apr 2025 18:36:40 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/countryProvincePlaceSelector.gbih301yn7.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"gbih301yn7"},{"Name":"integrity","Value":"sha256-/Om/N/quGCAjCjgVkOa1oPmLTqzHKZJm8wYK2dAKUak="},{"Name":"label","Value":"_content/MAppBnB/js/countryProvincePlaceSelector.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"6955"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022/Om/N/quGCAjCjgVkOa1oPmLTqzHKZJm8wYK2dAKUak=\u0022"},{"Name":"Last-Modified","Value":"Fri, 25 Apr 2025 20:25:27 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/countryProvincePlaceSelector.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-/Om/N/quGCAjCjgVkOa1oPmLTqzHKZJm8wYK2dAKUak="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"6955"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022/Om/N/quGCAjCjgVkOa1oPmLTqzHKZJm8wYK2dAKUak=\u0022"},{"Name":"Last-Modified","Value":"Fri, 25 Apr 2025 20:25:27 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ZZcW/zY3BEgVE8XBg0FtFUr9KfZ/1Lgdo2xRrGqJr7g="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8500"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022ZZcW/zY3BEgVE8XBg0FtFUr9KfZ/1Lgdo2xRrGqJr7g=\u0022"},{"Name":"Last-Modified","Value":"Sat, 26 Apr 2025 15:02:52 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/countryProvincePlaceSelector.l4scukxrui.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelector.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"l4scukxrui"},{"Name":"integrity","Value":"sha256-ZZcW/zY3BEgVE8XBg0FtFUr9KfZ/1Lgdo2xRrGqJr7g="},{"Name":"label","Value":"_content/MAppBnB/js/countryProvincePlaceSelector.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8500"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022ZZcW/zY3BEgVE8XBg0FtFUr9KfZ/1Lgdo2xRrGqJr7g=\u0022"},{"Name":"Last-Modified","Value":"Sat, 26 Apr 2025 15:02:52 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/countryProvincePlaceSelectorAccom.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\countryProvincePlaceSelectorAccom.js'))</AssetFile>
@@ -99,14 +99,14 @@
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/getRooms.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\getRooms.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-UQKKPqJS0J2gBz7gSRKAumyr\u002BdjibRpQGx5pyCJrq3g="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1890"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022UQKKPqJS0J2gBz7gSRKAumyr\u002BdjibRpQGx5pyCJrq3g=\u0022"},{"Name":"Last-Modified","Value":"Wed, 23 Apr 2025 18:36:40 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-DMx7tRQrvIzQilBo03xhTZvQn8YVqwfKN1CdZSENEMw="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2120"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022DMx7tRQrvIzQilBo03xhTZvQn8YVqwfKN1CdZSENEMw=\u0022"},{"Name":"Last-Modified","Value":"Sat, 26 Apr 2025 12:34:13 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/getRooms.zbsxk76qm4.js">
+    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/getRooms.suerg0i2r0.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\getRooms.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"zbsxk76qm4"},{"Name":"integrity","Value":"sha256-UQKKPqJS0J2gBz7gSRKAumyr\u002BdjibRpQGx5pyCJrq3g="},{"Name":"label","Value":"_content/MAppBnB/js/getRooms.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1890"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022UQKKPqJS0J2gBz7gSRKAumyr\u002BdjibRpQGx5pyCJrq3g=\u0022"},{"Name":"Last-Modified","Value":"Wed, 23 Apr 2025 18:36:40 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"suerg0i2r0"},{"Name":"integrity","Value":"sha256-DMx7tRQrvIzQilBo03xhTZvQn8YVqwfKN1CdZSENEMw="},{"Name":"label","Value":"_content/MAppBnB/js/getRooms.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2120"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022DMx7tRQrvIzQilBo03xhTZvQn8YVqwfKN1CdZSENEMw=\u0022"},{"Name":"Last-Modified","Value":"Sat, 26 Apr 2025 12:34:13 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/reportCreation.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\reportCreation.js'))</AssetFile>
@@ -120,17 +120,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"rs9t3uahi4"},{"Name":"integrity","Value":"sha256-JS7U8psuV4/CTwzi1wp9YCVY//DSEwrLMMaPIQ3fviY="},{"Name":"label","Value":"_content/MAppBnB/js/reportCreation.js"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2757"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022JS7U8psuV4/CTwzi1wp9YCVY//DSEwrLMMaPIQ3fviY=\u0022"},{"Name":"Last-Modified","Value":"Wed, 23 Apr 2025 18:36:40 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/searchPerson.biezt8cq0n.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"biezt8cq0n"},{"Name":"integrity","Value":"sha256-M9EoCTJ96JJYOznMf2NFcpmOfKAQkJZ0Dp\u002Bal5rjwXQ="},{"Name":"label","Value":"_content/MAppBnB/js/searchPerson.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8665"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022M9EoCTJ96JJYOznMf2NFcpmOfKAQkJZ0Dp\u002Bal5rjwXQ=\u0022"},{"Name":"Last-Modified","Value":"Wed, 23 Apr 2025 18:36:40 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/searchPerson.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-M9EoCTJ96JJYOznMf2NFcpmOfKAQkJZ0Dp\u002Bal5rjwXQ="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8665"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022M9EoCTJ96JJYOznMf2NFcpmOfKAQkJZ0Dp\u002Bal5rjwXQ=\u0022"},{"Name":"Last-Modified","Value":"Wed, 23 Apr 2025 18:36:40 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-iml\u002BVRj7AU4G7sq0VZIo4DyIHy24wrT\u002BbL1iqnuZgYU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8716"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022iml\u002BVRj7AU4G7sq0VZIo4DyIHy24wrT\u002BbL1iqnuZgYU=\u0022"},{"Name":"Last-Modified","Value":"Sat, 26 Apr 2025 14:28:29 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/MAppBnB/js/searchPerson.y2m3vmc2ar.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\searchPerson.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"y2m3vmc2ar"},{"Name":"integrity","Value":"sha256-iml\u002BVRj7AU4G7sq0VZIo4DyIHy24wrT\u002BbL1iqnuZgYU="},{"Name":"label","Value":"_content/MAppBnB/js/searchPerson.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8716"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022iml\u002BVRj7AU4G7sq0VZIo4DyIHy24wrT\u002BbL1iqnuZgYU=\u0022"},{"Name":"Last-Modified","Value":"Sat, 26 Apr 2025 14:28:29 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MAppBnB/js/signalr/dist/browser/signalr.cqu3aupeo3.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\signalr\dist\browser\signalr.js'))</AssetFile>

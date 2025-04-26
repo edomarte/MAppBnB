@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using AlloggiatiService;
 using MAppBnB;
 using MAppBnB.Models;
@@ -17,7 +18,7 @@ public class SOAPTransmission
         // If esito (retult) of the autentication is false (fails), return the error.
         if (!esito.esito)
         {
-            return esito.ErroreCod + "; " + esito.ErroreDes + ": " + esito.ErroreDettaglio;// If error found, return
+            return "Error during transmission: " + esito.ErroreCod + "; " + esito.ErroreDes + ": " + esito.ErroreDettaglio;// If error found, return
         }
 
         // Create the array of strings adding the formatted string list of bookings.
@@ -28,17 +29,17 @@ public class SOAPTransmission
         // Check if the accommodation is registered as an apartment for the Italian Police or not.
         if (accommodationId.Equals(""))
             await ssc.SendAsync(username, tokenInfo.token, aos, result); // Check and send lines.
-            // For TESTS: await ssc.TestAsync(username, tokenInfo.token, aos, ref result); Only check if lines valid.
+                                                                         // For TESTS: await ssc.TestAsync(username, tokenInfo.token, aos, ref result); Only check if lines valid.
         else
             // For TESTS: await ssc.GestioneAppartamenti_TestAsync(username, tokenInfo.token, aos, accommodationId, result); // Only check if lines for users with category "Gestione Appartamenti".
             await ssc.GestioneAppartamenti_SendAsync(username, tokenInfo.token, aos, Convert.ToInt32(accommodationId), result); // Check and send lines for users with category "Gestione Appartamenti".
-        
+
         foreach (EsitoOperazioneServizio booking in result.Dettaglio)
-        {   
+        {
             // For each schedina (booking) check if esito (result) fails return the error.
             if (!booking.esito)
             {
-                return booking.ErroreCod + "; " + booking.ErroreDes + ": " + booking.ErroreDettaglio;
+                return "Error during transmission: " + booking.ErroreCod + "; " + booking.ErroreDes + ": " + booking.ErroreDettaglio;
             }
         }
 
@@ -47,12 +48,12 @@ public class SOAPTransmission
     }
 
     // Method to send the docs to the police.
-    public static string SendDocsToPolice(Booking booking, List<Person> persons, Document document, Configuration configuration, string AWIDAppartamento)
+    public static async Task<string> SendDocsToPolice(Booking booking, List<Person> persons, Document document, Configuration configuration, string AWIDAppartamento)
     {
         // Prepare the Schedine (formatted list of bookings)
         List<string> soapString = prepareSOAPstring(booking, persons, document, configuration, AWIDAppartamento);
         // Return the result of the data transmission.
-        return SendBookingToSOAP(configuration.AlloggiatiWebUsername, configuration.AlloggiatiWebPassword, configuration.AlloggiatiWebWSKey, soapString, configuration.IsGestioneAppartamenti ? AWIDAppartamento : "").ToString();
+        return await SendBookingToSOAP(configuration.AlloggiatiWebUsername, configuration.AlloggiatiWebPassword, configuration.AlloggiatiWebWSKey, soapString, configuration.IsGestioneAppartamenti ? AWIDAppartamento : "");
     }
 
     // Method to prepare the list of strings with the bookings (schedine) as per Alloggiati Web documentation.

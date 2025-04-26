@@ -39,10 +39,19 @@ namespace SignalRChat.Hubs
         }
 
         // Method to get a town given its codice (id) and send it to all connected clients.
-        public async Task GetTown(string codice)
+        public async Task GetTownOrCountry(string codice)
         {
-            var town = _context.Comuni.FirstOrDefault(x => x.Codice.Equals(codice));
-            await Clients.All.SendAsync("Town", town);
+            if (codice[0] == '4')
+            {
+                var result = _context.Comuni.FirstOrDefault(x => x.Codice.Equals(codice));
+                await Clients.All.SendAsync("GetTownOrCountry", result);
+            }
+            else
+            {
+                var result = _context.Stati.FirstOrDefault(x => x.Codice.Equals(codice));
+                await Clients.All.SendAsync("GetTownOrCountry", result);
+            }
+
         }
     }
 

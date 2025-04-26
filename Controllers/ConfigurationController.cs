@@ -93,7 +93,7 @@ namespace MAppBnB.Controllers
                 try
                 {
                     // If there is a document in the viewmodel.
-                    if (model.Document!=null && model.Document.SerialNumber != null)
+                    if (model.Document != null && model.Document.SerialNumber != null)
                     {
                         // If there is no document in the configuration, add the document from the viewmodel to the database.
                         if (model.Configuration.DocumentID == null)
@@ -128,9 +128,16 @@ namespace MAppBnB.Controllers
                         _context.Update(model.Person);
                         await _context.SaveChangesAsync();
                     }
-                   
-                    // Update the fields of the configuration not related to person or document in the database.
-                    _context.Update(model.Configuration);
+
+                    var configFromDb = await _context.Configuration.FirstOrDefaultAsync(x => x.id == model.Configuration.id);
+                    _context.Entry(configFromDb).CurrentValues.SetValues(model.Configuration);
+
+                    // If the password is empty, set it to the previous value from the database.
+                    if (string.IsNullOrWhiteSpace(model.Configuration.AlloggiatiWebPassword))
+                    {
+                        _context.Entry(configFromDb).Property(x => x.AlloggiatiWebPassword).IsModified = false;
+                    }
+
                     await _context.SaveChangesAsync();
                 }
                 // Catch any concurrency exceptions that may occur during the update process.

@@ -101,7 +101,8 @@ namespace SignalRChat.Hubs
             Booking booking = getBookingDetails(bookingID);
 
             // If the flag Sent2Police is true, return the message that the data has already been sent to the police and it cannot be sent twice..
-            if(booking.Sent2Police==true){
+            if (booking.Sent2Police == true)
+            {
                 await Clients.All.SendAsync("TransmissionResult", "The data has been already sent to the police. It cannot be sent twice.");
             }
 
@@ -124,9 +125,12 @@ namespace SignalRChat.Hubs
                     await Clients.All.SendAsync("TransmissionResult", "Missing AW IDAppartamento for AlloggiatiWeb. Please check the accommodation details.");
 
                 // Send the required information to the method that send the data to the police webservice.
-                string transmissionResult = SOAPTransmission.SendDocsToPolice(booking, persons, getDocumentDetails(persons.First()), configuration, AWIDAppartamento);
-                // Update the flag on the view.
-                await updateSent2PoliceAsync(booking);
+                string transmissionResult = await SOAPTransmission.SendDocsToPolice(booking, persons, getDocumentDetails(persons.First()), configuration, AWIDAppartamento);
+                if (transmissionResult.Contains("Schedine sent correctly."))
+                {
+                    // Update the flag on the view.
+                    await updateSent2PoliceAsync(booking);
+                }
                 // Send the transmission result to the clients.
                 await Clients.All.SendAsync("TransmissionResult", transmissionResult);
             }

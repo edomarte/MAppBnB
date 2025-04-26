@@ -101,7 +101,7 @@
         <dd class="col-sm-10">
             @if (@Model.Document != null && @Model.Document.PdfCopy != null)
             {
-                <a asp-action="DownloadFile" asp-controller="Document" asp-route-id="@Model?.Document.id">Download</a>
+                <a asp-action="DownloadFile" asp-controller="Person" asp-route-id="@Model?.Document.id">Download</a>
             }
             else
             {

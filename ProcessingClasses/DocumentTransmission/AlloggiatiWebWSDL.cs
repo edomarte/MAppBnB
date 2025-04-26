@@ -9,6 +9,7 @@
 
 namespace AlloggiatiService
 {
+    using System;
     using System.Runtime.Serialization;
     
     
@@ -136,6 +137,11 @@ namespace AlloggiatiService
             {
                 this.tokenField = value;
             }
+        }
+
+        public static implicit operator TokenInfo(GenerateTokenResponse v)
+        {
+            throw new NotImplementedException();
         }
     }
     

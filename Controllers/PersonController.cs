@@ -151,6 +151,7 @@ namespace MAppBnB.Controllers
 
             // Populate the ViewBag with the necessary data for the dropdowns in the view.
             ViewBag.Stati = _context.Stati.ToList();
+            ViewBag.Comuni = _context.Comuni.ToList();
             ViewBag.TipoAlloggiato = _context.TipoAlloggiato.ToList();
             ViewBag.TipoDocumento = _context.TipoDocumento.ToList();
 
@@ -174,7 +175,7 @@ namespace MAppBnB.Controllers
                 try
                 {
                     // Check if the modelview contains a document.
-                    if (model.Document.id != null)
+                    if (model.Document.SerialNumber != null)
                     {
                         // Check if the person is a secondary guest (FAMILIARE, MEMBRO GRUPPO).
                         if (model.Person.RoleRelation == 19 || model.Person.RoleRelation == 20) // Secondary guest (FAMILIARE, MEMBRO GRUPPO)
@@ -219,6 +220,13 @@ namespace MAppBnB.Controllers
 
                         }
 
+                    }else{
+                        if(model.Document.id != null){
+                            // If the document is not null, remove the document from the database (Secondary guests have no document); they were created as main guests first.
+                            model.Person.DocumentID = null;
+                            _context.Remove(model.Document);
+                            await _context.SaveChangesAsync();
+                        }
                     }
                     // Update the person.
                     _context.Update(model.Person);
@@ -299,6 +307,23 @@ namespace MAppBnB.Controllers
             // Redirect to the index page after deleting the person.
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult>DeletePDFCopy(int? docID, int? personID)
+        {
+            var document = await _context.Document.FirstOrDefaultAsync(m => m.id == docID);
+            document.PdfCopy = null;
+            _context.Update(document);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Edit), "Person", new { id = personID });
+        }
+
+        public async Task<IActionResult> DownloadFile(int? id)
+        {
+            var document = await _context.Document.FirstOrDefaultAsync(m => m.id == id);
+
+            return File(document.PdfCopy, "application/pdf", document.SerialNumber+".pdf");
+        }
+
         #endregion
 
 

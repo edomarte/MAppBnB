@@ -18,6 +18,8 @@ connectionR.on("RoomsList", function (rooms) {
         option.innerHTML = room.name;     // Set display text to room name
         document.getElementById("RoomsSelector").appendChild(option);
     });
+    var roomSelected = $("#RoomIDph").val(); // Get the currently selected room ID
+    $("#RoomsSelector option[value='" + roomSelected + "']").prop("selected", true); // Select the room that was previously selected in the form
 });
 
 // Function to request updated room list based on selected accommodation

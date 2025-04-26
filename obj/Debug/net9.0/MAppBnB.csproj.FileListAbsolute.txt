@@ -2078,12 +2078,9 @@ C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTe
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-Checkin1.docx
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\fxoyjqexj7-bussgrwzmm.gz
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\hxhlsgt62l-lnal7t1uvp.gz
-C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\m7utyh9kxb-gbih301yn7.gz
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\x86lmv01z0-x6q9zpi8bh.gz
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\1kv0l3t7ot-t1p758lray.gz
-C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\o2pr4r91m7-zbsxk76qm4.gz
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\le22icaqyj-rs9t3uahi4.gz
-C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\2kv4t9g0ij-biezt8cq0n.gz
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Contract25.docx
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-Checkin25.docx
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Contract25.pdf
@@ -2093,3 +2090,6 @@ C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTe
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-Checkin28.docx
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\bin\Debug\net9.0\DocumentTemplates\Pre-Checkin28.pdf
 C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\f5213ukuhj-xfr0thrhlz.gz
+C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\o2pr4r91m7-suerg0i2r0.gz
+C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\2kv4t9g0ij-y2m3vmc2ar.gz
+C:\Users\edoma\Documents\MAppBnB_All\MAppBnB\MAppBnB\obj\Debug\net9.0\compressed\m7utyh9kxb-l4scukxrui.gz
