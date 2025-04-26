@@ -1,12 +1,10 @@
-using System.Configuration;
-using DocumentFormat.OpenXml.Math;
 using MAppBnB;
 using MAppBnB.Data;
 using Microsoft.AspNetCore.SignalR;
 using Configuration = MAppBnB.Models.Configuration;
 
 
-namespace SignalRChat.Hubs //TODO: Change namespace
+namespace SignalRChat.Hubs 
 {
     public class CreateDocumentsHub : Hub
     {
@@ -33,6 +31,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
                 mainPerson.BirthPlace = getBirthPlaceDescription(mainPerson.Person);
                 // Get the configuration.
                 Configuration configuration = getConfiguration();
+                string hostBirthPlace = getBirthPlaceDescription(getPersonDetails(configuration.PersonID.ToString()));
                 // If the configuration is null or there is no person associated, return exception.
                 if (configuration is null || configuration.PersonID is null || configuration.PersonID.ToString().Equals(""))
                 {
@@ -50,10 +49,12 @@ namespace SignalRChat.Hubs //TODO: Change namespace
 
                 // Get accommodation details.
                 Accommodation accommodation = getAccommodationDetails(accommodationID);
+                // Get Accommodation names.
+                AccommodationAccommodationNames accommodationNames = getAccommodationNames(accommodation);
                 // Get booking details.
                 Booking booking = getBookingDetails(bookingId);
                 // Generate the contract document and get its path.
-                string contractPath = DocumentProcessing.GenerateContract(mainPerson, getDocumentDetails(mainPerson.Person), accommodation, booking, host, hostDocument);
+                string contractPath = DocumentProcessing.GenerateContract(mainPerson, getDocumentDetails(mainPerson.Person), accommodationNames, booking, host, hostDocument,hostBirthPlace);
                 // Start file Download.
                 await startFileDownloadAsync(contractPath);
                 // Update the booking to set ContractPrinted to true.
@@ -76,10 +77,12 @@ namespace SignalRChat.Hubs //TODO: Change namespace
                 List<Person> persons = getPersonsDetails(personsIDs);
                 // Get accommodation details.
                 Accommodation accommodation = getAccommodationDetails(accommodationID);
+                // Get Accommodation names.
+                AccommodationAccommodationNames accommodationNames = getAccommodationNames(accommodation);
                 // Get booking details.
                 Booking booking = getBookingDetails(bookingId);
                 // Generate the document and get its path.
-                string bdPath = DocumentProcessing.GenerateBookingDetails(persons, booking, accommodation, getRoomDetails(booking.RoomID), getChannelDetails(booking.ChannelID));
+                string bdPath = DocumentProcessing.GenerateBookingDetails(persons, booking, accommodationNames, getRoomDetails(booking.RoomID), getChannelDetails(booking.ChannelID));
                 // Start file Download.
                 await startFileDownloadAsync(bdPath);
                 // Delete the document after download (it will have to be recreated anyways next time).
@@ -101,8 +104,10 @@ namespace SignalRChat.Hubs //TODO: Change namespace
                 Person mainPerson = getPersonDetails(mainPersonID);
                 // Get accommodation details.
                 Accommodation accommodation = getAccommodationDetails(accommodationID);
+                // Get Accommodation names.
+                AccommodationAccommodationNames accommodationNames = getAccommodationNames(accommodation);
                 // Generate the document and get its path.
-                string preCheckinPath = DocumentProcessing.GeneratePreCheckIn(mainPerson, accommodation, getBookingDetails(bookingId));
+                string preCheckinPath = DocumentProcessing.GeneratePreCheckIn(mainPerson, accommodationNames, getBookingDetails(bookingId));
                 // Start file Download.
                 await startFileDownloadAsync(preCheckinPath);
                 // No delete file because it is needed to generate the PDF copy.
@@ -180,6 +185,27 @@ namespace SignalRChat.Hubs //TODO: Change namespace
         #endregion
 
         #region Helper methods
+
+        private AccommodationAccommodationNames getAccommodationNames(Accommodation accommodation)
+        {
+            AccommodationAccommodationNames accommodationNames = new AccommodationAccommodationNames();
+            accommodationNames.Accommodation = accommodation;
+            accommodationNames.CountryName= _context.Stati.FindAsync(accommodation.Country).Result.Descrizione ?? "";
+            accommodationNames.ProvinceName = _context.Province.FindAsync(accommodation.Province).Result.Descrizione ?? "";
+
+            // If the country is Italy, get the description from the towns table (Comuni).
+            if (accommodationNames.CountryName.Equals("ITALIA"))
+            {
+                accommodationNames.CityName = _context.Comuni.FindAsync(accommodation.City).Result.Descrizione ?? "";
+            }
+            else
+            {
+                // If the country is not Italy, assign the City "ES".
+                accommodationNames.CityName = "ESTERO";
+            }
+
+            return accommodationNames;
+        }
 
         // Method for creating a PDF copy of an existing Microsoft word document (doc)
         private async void createPDFCopy(string bookingID, string documentType)
@@ -346,7 +372,7 @@ namespace SignalRChat.Hubs //TODO: Change namespace
             }
             else
             {
-                // Else return Foreign (Esteroo)
+                // Else return Foreign (Estero)
                 return "Estero";
             }
         }

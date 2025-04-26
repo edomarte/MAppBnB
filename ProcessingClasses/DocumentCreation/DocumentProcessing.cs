@@ -33,10 +33,10 @@ public class DocumentProcessing
     }
 
     // Method for generating the Microsoft Word contract.
-    public static string GenerateContract(PersonBirthPlace mainPerson, DocumentDocumentType document, Accommodation accommodation, Booking booking, Person host, DocumentDocumentType hostDocument)
+    public static string GenerateContract(PersonBirthPlace mainPerson, DocumentDocumentType document, AccommodationAccommodationNames accommodation, Booking booking, Person host, DocumentDocumentType hostDocument,string hostBirthPlace)
     {
         // Add a datarow to the contract datatable.
-        DataRow dr = addRowToContractDt(mainPerson, document, accommodation, booking, host, hostDocument);
+        DataRow dr = addRowToContractDt(mainPerson, document, accommodation, booking, host, hostDocument,hostBirthPlace);
         // Populate fields in the word template
         string contractPath = populateFieldsInWordTemplate(booking.id, "Contract", dr);
         // Return the new contract path.
@@ -44,7 +44,7 @@ public class DocumentProcessing
     }
 
     // Method for generating the Microsoft Word booking details document.
-    public static string GenerateBookingDetails(List<Person> persons, Booking booking, Accommodation accommodation, Room room, BookChannel channel)
+    public static string GenerateBookingDetails(List<Person> persons, Booking booking, AccommodationAccommodationNames accommodation, Room room, BookChannel channel)
     {
         // Add a datarow to the booking details datatable.
         DataRow dr = addRowTobookingDetailsDt(persons, booking, accommodation, room, channel);
@@ -56,7 +56,7 @@ public class DocumentProcessing
 
 
     // Method for generating the Microsoft Word pre-check-in details document.
-    public static string GeneratePreCheckIn(Person mainPerson, Accommodation accommodation, Booking booking)
+    public static string GeneratePreCheckIn(Person mainPerson, AccommodationAccommodationNames accommodation, Booking booking)
     {
         // Add a datarow to the booking details datatable.
         DataRow dr = addRowToPreCheckinDt(mainPerson, accommodation, booking);
@@ -414,7 +414,7 @@ public class DocumentProcessing
     }
 
     // Method to add the row to the contract data table.
-    private static DataRow addRowToContractDt(PersonBirthPlace mainPerson, DocumentDocumentType document, Accommodation accommodation, Booking booking, Person host, DocumentDocumentType hostDocument)
+    private static DataRow addRowToContractDt(PersonBirthPlace mainPerson, DocumentDocumentType document, AccommodationAccommodationNames accommodationNames, Booking booking, Person host, DocumentDocumentType hostDocument, string hostBirthPlace)
     {
         // Create a new data table object.
         contractDt = new DataTable();
@@ -442,12 +442,12 @@ public class DocumentProcessing
         dr["CheckinDate"] = booking.CheckinDateTime.Date.ToString("dd/MM/yyyy");
         dr["CheckoutDate"] = booking.CheckOutDateTime.Date.ToString("dd/MM/yyyy");
         dr["ContractDate"] = DateTime.Now.Date.ToString("dd/MM/yyyy");
-        dr["City"] = accommodation.City;
-        dr["Address"] = accommodation.Address;
+        dr["City"] = accommodationNames.CityName;
+        dr["Address"] = accommodationNames.Accommodation.Address;
 
         dr["HName"] = host.Name;
         dr["HSurname"] = host.Surname;
-        dr["HBirthPlace"] = host.BirthPlace;
+        dr["HBirthPlace"] = hostBirthPlace;
         dr["HBirthProvince"] = host.BirthProvince;
         dr["HBirthDate"] = host.BirthDate;
         dr["HDocType"] = hostDocument.DocumentType;
@@ -464,7 +464,7 @@ public class DocumentProcessing
     }
 
     // Method to add the row to the booking details data table.
-    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking, Accommodation accommodation, Room room, BookChannel channel)
+    private static DataRow addRowTobookingDetailsDt(List<Person> persons, Booking booking, AccommodationAccommodationNames accommodationNames, Room room, BookChannel channel)
     {
         // Create a new data table object.
         bookingDetailsDt = new DataTable();
@@ -484,8 +484,8 @@ public class DocumentProcessing
         dr["CheckinDate"] = booking.CheckinDateTime;
         dr["CheckOutDate"] = booking.CheckOutDateTime;
         dr["Price"] = booking.Price - booking.Discount;
-        dr["CleaningFee"] = accommodation.CleaningFee;
-        dr["TownFee"] = accommodation.TownFee;
+        dr["CleaningFee"] = accommodationNames.Accommodation.CleaningFee;
+        dr["TownFee"] = accommodationNames.Accommodation.TownFee;
         dr["OTAFee"] = (booking.Price - booking.Discount) * channel.Fee;
         dr["MainGuest"] = persons[0].Name + " " + persons[0].Surname;
         // Booking details Word template holds max 4 guests.
@@ -545,7 +545,7 @@ public class DocumentProcessing
     }
 
     // Method to add the row to the pre-checkin data table.
-    private static DataRow addRowToPreCheckinDt(Person mainPerson, Accommodation accommodation, Booking booking)
+    private static DataRow addRowToPreCheckinDt(Person mainPerson, AccommodationAccommodationNames accommodationNames, Booking booking)
     {
         // Create a new data table object.
         preCheckinDt = new DataTable();
@@ -556,9 +556,9 @@ public class DocumentProcessing
 
         // Populate all the field created with the appropriate data.
         dr["Name"] = mainPerson.Name;
-        dr["AccommodationName"] = accommodation.Name;
-        dr["City"] = accommodation.City;
-        dr["AccommodationWebsite"] = accommodation.Website;
+        dr["AccommodationName"] = accommodationNames.Accommodation.Name;
+        dr["City"] = accommodationNames.CityName;
+        dr["AccommodationWebsite"] = accommodationNames.Accommodation.Website;
         dr["CheckinDate"] = booking.CheckinDateTime.Date.ToString("dd-MM-yyyy");
 
         // Add the populated row to the contract data table.

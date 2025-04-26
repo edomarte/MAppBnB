@@ -11,6 +11,7 @@ public class MigraDocPDF
         var doc = new MigraDoc.DocumentObjectModel.Document();
         var section = doc.AddSection();
         section.PageSetup.PageFormat = PageFormat.A4; //A4 page
+        doc.Styles["Normal"].Font.Name = "DejaVu Sans"; // <- Add this!
 
         // Open the Word document in read-only mode
         using (var wordDoc = WordprocessingDocument.Open(docPath, false))
